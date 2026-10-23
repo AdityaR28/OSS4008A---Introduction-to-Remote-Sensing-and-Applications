@@ -1,0 +1,15 @@
+# One student per line: Last, First [| github_username]
+# The GitHub username is optional. Add it later and re-run setup_students.sh to enable per-folder CODEOWNERS.
+Arab, Hamza
+Clermont-Gauer, Devon
+Eyito, Oritse-Tsegbemi
+Foster, Nicholas
+Fujikawa, Kento
+Guibert, Jeremy
+Joshi, Aarya
+Kanaan, Seif
+Mahveen, Rawiya
+Ogunmeru, Nifemi
+Saravanan, Supparna
+Triboi, Marius
+Udobi, Chidubem

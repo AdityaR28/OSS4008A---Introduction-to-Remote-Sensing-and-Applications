@@ -1,0 +1,23 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Secrets
+.env
+*.key
+*.pem
+
+# Large raw remote sensing data (share links or download scripts instead)
+*.hdf
+*.he5
+*.SAFE/
+*.zip
+*.tar.gz
+*.nc
