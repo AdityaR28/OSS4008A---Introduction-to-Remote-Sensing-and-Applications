@@ -1,0 +1,6 @@
+earthengine-api==1.7.19
+numpy==2.2.6
+rasterio==1.4.3
+Pillow==12.3.0
+requests==2.34.2
+jsonschema==4.25.1

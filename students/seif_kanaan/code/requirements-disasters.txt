@@ -1,0 +1,5 @@
+# Keep the frozen wildfire notebook requirements byte-identical.
+-r requirements.txt
+geographiclib==2.1
+shapely==2.1.2
+pyproj==3.7.2

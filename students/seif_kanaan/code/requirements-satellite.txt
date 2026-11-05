@@ -1,0 +1,3 @@
+# Keep the original wildfire notebook dependencies unchanged.
+-r requirements.txt
+pytest==9.0.3
