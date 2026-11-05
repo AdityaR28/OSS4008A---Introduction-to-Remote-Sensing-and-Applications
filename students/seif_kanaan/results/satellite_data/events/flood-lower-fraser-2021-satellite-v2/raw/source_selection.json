@@ -1,0 +1,540 @@
+{
+  "event": {
+    "id": "flood-lower-fraser-2021-satellite-v2",
+    "hazard": "flood",
+    "title": "Lower Fraser 2021 — Sentinel-1 candidate inundation v2",
+    "event_date": "2021-11-14",
+    "location": "Sumas Prairie / Lower Fraser Valley, British Columbia",
+    "method": "Same-track Sentinel-1 VV backscatter change; independently observed pre-event land-cover support, conservative permanent-water union and terrain exclusions",
+    "sources": [
+      {
+        "label": "Copernicus Sentinel-1 GRD; Earth Engine catalogue",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD",
+        "attribution": "Contains modified Copernicus Sentinel data (2021), processed by Google Earth Engine",
+        "license": "Copernicus Sentinel data terms"
+      },
+      {
+        "label": "Earth Engine Sentinel-1 preprocessing and filtering",
+        "url": "https://developers.google.com/earth-engine/guides/sentinel1",
+        "attribution": "Google Earth Engine",
+        "license": "Documentation"
+      },
+      {
+        "label": "JRC Yearly Water Classification History v1.4",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/JRC_GSW1_4_YearlyHistory",
+        "attribution": "Source: EC JRC/Google; Pekel et al. (2016), Nature 540, 418–422, doi:10.1038/nature20584",
+        "license": "Copernicus Programme; acknowledgement required"
+      },
+      {
+        "label": "ESA WorldCover 2020 v100 global land cover",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/ESA_WorldCover_v100",
+        "attribution": "© ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium; Zanaga et al. (2021), doi:10.5281/zenodo.5571936",
+        "license": "CC BY 4.0"
+      },
+      {
+        "label": "ESA WorldCover product documentation and validation",
+        "url": "https://esa-worldcover.org/en/data-access",
+        "attribution": "ESA WorldCover Consortium",
+        "license": "Documentation; global validation does not establish local flood accuracy"
+      },
+      {
+        "label": "NASA SAR scattering mechanisms",
+        "url": "https://science.nasa.gov/mission/nisar/get-to-know-sar/",
+        "attribution": "NASA; strong point and corner-reflector returns can be bright",
+        "license": "Method reference"
+      },
+      {
+        "label": "NASA SRTM 30 m elevation v3",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003",
+        "attribution": "NASA/USGS/JPL-Caltech; Farr et al. (2007), doi:10.1029/2005RG000183",
+        "license": "NASA/JPL data terms"
+      },
+      {
+        "label": "UN-SPIDER SAR flood-mapping recommended practice",
+        "url": "https://un-spider.org/advisory-support/recommended-practices/recommended-practice-google-earth-engine-flood-mapping/in-detail",
+        "attribution": "UNOOSA/UN-SPIDER",
+        "license": "Method reference; this implementation is an independent exploratory adaptation"
+      },
+      {
+        "label": "2021 atmospheric-river event context",
+        "url": "https://www.publicsafety.gc.ca/cnt/trnsprnc/brfng-mtrls/prlmntry-bndrs/20211207/02-en.aspx?wbdisable=true",
+        "attribution": "Public Safety Canada; atmospheric-river rainfall began 14 November 2021",
+        "license": "Government of Canada information terms"
+      }
+    ],
+    "limitations": [
+      "Exploratory candidate open-water inundation, not independently validated flood extent, water depth, damage, exposure, or an emergency warning.",
+      "The −16 dB post-event and 3 dB decrease thresholds are predeclared exploratory choices, not locally calibrated universal water thresholds or an accuracy guarantee.",
+      "Same relative orbit and pass reduce viewing-geometry differences. Earth Engine GRD is terrain-corrected, but is not radiometrically terrain-flattened; a <5° slope filter is not a layover/shadow correction.",
+      "Wet bare soil, smooth fields, land management, freeze/thaw, wind, SAR noise and changing incidence geometry can mimic or hide inundation. Urban or vegetation-covered flooding can increase backscatter or remain undetected.",
+      "Temporal medians and 30 m-radius spatial smoothing suppress speckle and also erase narrow, short-lived or heterogeneous flood signals. The 20 m export grid is not a claim of 20 m independent resolving power.",
+      "The post window is an event-period composite, not a simultaneous or peak flood snapshot. The pre window may already contain wet or flooded locations; no change is not proof of no flooding.",
+      "Baseline support comes from observed, documented ESA WorldCover 2020 land-cover classes, not from filling JRC no-data as dry land. Any contributing WorldCover permanent-water class 80, plus observed JRC2020 class 3, is excluded. Both baseline products can misclassify boundaries and miss changes before the event; seasonal water remains eligible.",
+      "WorldCover class 80 is aggregated conservatively: any native permanent-water overlap excludes the full 20 m analysis cell, widening water exclusions along boundaries. WorldCover2020 is a land-cover model, not independent field truth or proof of dry conditions in November 2021.",
+      "No-data, missing baseline/DEM, high slope, insufficient observations and permanent water are excluded from candidate evaluation; blank map pixels are not confirmed dry land.",
+      "The fixed bounding box covers a Lower Fraser case study. Results must not be extrapolated to the whole British Columbia event. No SAR coherence or earthquake/tornado damage inference is performed by this module."
+    ]
+  },
+  "provenance": {
+    "method": "Sentinel-1 VV candidate open-water inundation; direct authenticated satellite processing",
+    "status": "awaiting_authenticated_pixel_computation_and_returned_export_audit",
+    "method_version": "2.0.0",
+    "revision": {
+      "previous_event_id": "flood-lower-fraser-2021-satellite",
+      "previous_source_archive_sha256": "9ce9d4c042f31427e12e58658fe1de5b496f9950f32582f06c27a29db0092d02",
+      "reason": "Returned v1 run had JRC2020 no-data at 2,371,570 of 2,534,825 domain cells (93.56%); it could not support an AOI-wide candidate interpretation. A separate observed WorldCover2020 baseline and full-domain known-baseline gate replace the assumption that JRC yearly support defines eligible land. Source JRC no-data remains unchanged.",
+      "range_guard_revision": "Six post pixels exceeded the arbitrary+20dB screening value (maximum21.9404dB); none was v1 eligible. V2 retains and flags finite strong returns for review rather than clipping/rejecting them by an unsupported universalphysicalceiling.",
+      "unchanged": "AOI, analysisgrid, pre/postdates, orbitcoverage-selectioncriterion, smoothing, incidencefilter, observationcountthresholds, slope and centralSARcandidate thresholds"
+    },
+    "parameters": {
+      "aoi_bbox": [
+        -122.4,
+        49.0,
+        -121.9,
+        49.25
+      ],
+      "analysis_crs": "EPSG:32610",
+      "analysis_transform": [
+        20,
+        0,
+        0,
+        0,
+        -20,
+        10000000
+      ],
+      "pre_start": "2021-10-15",
+      "pre_end_exclusive": "2021-11-13",
+      "post_start": "2021-11-16",
+      "post_end_exclusive": "2021-11-22",
+      "post_vv_max_db": -16.0,
+      "decrease_min_db": 3.0,
+      "slope_max_degrees": 5.0,
+      "smoothing_radius_m": 30,
+      "incidence_min_degrees": 30.0,
+      "incidence_max_degrees": 45.0,
+      "permanent_water_year": 2020,
+      "min_pre_observations": 2,
+      "min_post_observations": 1,
+      "min_valid_fraction": 0.8,
+      "min_baseline_fraction": 0.8,
+      "max_scenes_per_window": 128,
+      "max_orbit_candidates": 16
+    },
+    "datasets": {
+      "sentinel1": "COPERNICUS/S1_GRD",
+      "jrc_water_context": "JRC/GSW1_4/YearlyHistory",
+      "known_baseline": "ESA/WorldCover/v100",
+      "dem": "USGS/SRTMGL1_003"
+    },
+    "coverage_gates": [
+      {
+        "population": "domain",
+        "valid": "shared_valid",
+        "min_fraction": 0.8
+      },
+      {
+        "population": "domain",
+        "valid": "baseline_valid",
+        "min_fraction": 0.8
+      }
+    ],
+    "selection": {
+      "criterion": "Largest shared SAR valid area only, before examining flood candidate values; ties by pass then relative orbit",
+      "track_inventory": [
+        {
+          "id": "ascending-64",
+          "pass": "ASCENDING",
+          "relative_orbit": 64,
+          "pre_source_scene_count": 3,
+          "pre_acquisition_count": 3,
+          "post_source_scene_count": 1,
+          "post_acquisition_count": 1,
+          "eligible_for_coverage_evaluation": true,
+          "reason": "Enough same-track independent acquisitions; evaluate shared coverage"
+        },
+        {
+          "id": "ascending-137",
+          "pass": "ASCENDING",
+          "relative_orbit": 137,
+          "pre_source_scene_count": 2,
+          "pre_acquisition_count": 2,
+          "post_source_scene_count": 0,
+          "post_acquisition_count": 0,
+          "eligible_for_coverage_evaluation": false,
+          "reason": "Missing or insufficient independent acquisitions in one or both windows; never mixed with another track"
+        },
+        {
+          "id": "descending-13",
+          "pass": "DESCENDING",
+          "relative_orbit": 13,
+          "pre_source_scene_count": 2,
+          "pre_acquisition_count": 2,
+          "post_source_scene_count": 1,
+          "post_acquisition_count": 1,
+          "eligible_for_coverage_evaluation": true,
+          "reason": "Enough same-track independent acquisitions; evaluate shared coverage"
+        },
+        {
+          "id": "descending-115",
+          "pass": "DESCENDING",
+          "relative_orbit": 115,
+          "pre_source_scene_count": 3,
+          "pre_acquisition_count": 3,
+          "post_source_scene_count": 0,
+          "post_acquisition_count": 0,
+          "eligible_for_coverage_evaluation": false,
+          "reason": "Missing or insufficient independent acquisitions in one or both windows; never mixed with another track"
+        }
+      ],
+      "catalogue_pre": [
+        {
+          "id": "COPERNICUS/S1_GRD/S1B_IW_GRDH_1SDV_20211015T015402_20211015T015427_029140_037A37_D0C2",
+          "index": "S1B_IW_GRDH_1SDV_20211015T015402_20211015T015427_029140_037A37_D0C2",
+          "timestamp": 1634262842000,
+          "acquired_at": "2021-10-15T01:54:02Z",
+          "pass": "ASCENDING",
+          "relative_orbit": 64,
+          "absolute_orbit": 29140,
+          "platform": "B"
+        },
+        {
+          "id": "COPERNICUS/S1_GRD/S1B_IW_GRDH_1SDV_20211018T141241_20211018T141306_029191_037BD6_CAB7",
+          "index": "S1B_IW_GRDH_1SDV_20211018T141241_20211018T141306_029191_037BD6_CAB7",
+          "timestamp": 1634566361000,
+          "acquired_at": "2021-10-18T14:12:41Z",
+          "pass": "DESCENDING",
+          "relative_orbit": 115,
+          "absolute_orbit": 29191,
+          "platform": "B"
+        },
+        {
+          "id": "COPERNICUS/S1_GRD/S1B_IW_GRDH_1SDV_20211020T020159_20211020T020224_029213_037C80_48E6",
+          "index": "S1B_IW_GRDH_1SDV_20211020T020159_20211020T020224_029213_037C80_48E6",
+          "timestamp": 1634695319000,
+          "acquired_at": "2021-10-20T02:01:59Z",
+          "pass": "ASCENDING",
+          "relative_orbit": 137,
+          "absolute_orbit": 29213,
+          "platform": "B"
+        },
+        {
+          "id": "COPERNICUS/S1_GRD/S1B_IW_GRDH_1SDV_20211023T142032_20211023T142057_029264_037E08_68B1",
+          "index": "S1B_IW_GRDH_1SDV_20211023T142032_20211023T142057_029264_037E08_68B1",
+          "timestamp": 1634998832000,
+          "acquired_at": "2021-10-23T14:20:32Z",
+          "pass": "DESCENDING",
+          "relative_orbit": 13,
+          "absolute_orbit": 29264,
+          "platform": "B"
+        },
+        {
+          "id": "COPERNICUS/S1_GRD/S1B_IW_GRDH_1SDV_20211027T015402_20211027T015427_029315_037FA6_A93C",
+          "index": "S1B_IW_GRDH_1SDV_20211027T015402_20211027T015427_029315_037FA6_A93C",
+          "timestamp": 1635299642000,
+          "acquired_at": "2021-10-27T01:54:02Z",
+          "pass": "ASCENDING",
+          "relative_orbit": 64,
+          "absolute_orbit": 29315,
+          "platform": "B"
+        },
+        {
+          "id": "COPERNICUS/S1_GRD/S1B_IW_GRDH_1SDV_20211030T141241_20211030T141306_029366_038131_9F0A",
+          "index": "S1B_IW_GRDH_1SDV_20211030T141241_20211030T141306_029366_038131_9F0A",
+          "timestamp": 1635603161000,
+          "acquired_at": "2021-10-30T14:12:41Z",
+          "pass": "DESCENDING",
+          "relative_orbit": 115,
+          "absolute_orbit": 29366,
+          "platform": "B"
+        },
+        {
+          "id": "COPERNICUS/S1_GRD/S1B_IW_GRDH_1SDV_20211101T020159_20211101T020224_029388_0381DB_7032",
+          "index": "S1B_IW_GRDH_1SDV_20211101T020159_20211101T020224_029388_0381DB_7032",
+          "timestamp": 1635732119000,
+          "acquired_at": "2021-11-01T02:01:59Z",
+          "pass": "ASCENDING",
+          "relative_orbit": 137,
+          "absolute_orbit": 29388,
+          "platform": "B"
+        },
+        {
+          "id": "COPERNICUS/S1_GRD/S1B_IW_GRDH_1SDV_20211104T142031_20211104T142056_029439_038363_58D6",
+          "index": "S1B_IW_GRDH_1SDV_20211104T142031_20211104T142056_029439_038363_58D6",
+          "timestamp": 1636035631000,
+          "acquired_at": "2021-11-04T14:20:31Z",
+          "pass": "DESCENDING",
+          "relative_orbit": 13,
+          "absolute_orbit": 29439,
+          "platform": "B"
+        },
+        {
+          "id": "COPERNICUS/S1_GRD/S1B_IW_GRDH_1SDV_20211108T015401_20211108T015426_029490_0384FB_3255",
+          "index": "S1B_IW_GRDH_1SDV_20211108T015401_20211108T015426_029490_0384FB_3255",
+          "timestamp": 1636336441000,
+          "acquired_at": "2021-11-08T01:54:01Z",
+          "pass": "ASCENDING",
+          "relative_orbit": 64,
+          "absolute_orbit": 29490,
+          "platform": "B"
+        },
+        {
+          "id": "COPERNICUS/S1_GRD/S1B_IW_GRDH_1SDV_20211111T141240_20211111T141305_029541_03868E_5296",
+          "index": "S1B_IW_GRDH_1SDV_20211111T141240_20211111T141305_029541_03868E_5296",
+          "timestamp": 1636639960000,
+          "acquired_at": "2021-11-11T14:12:40Z",
+          "pass": "DESCENDING",
+          "relative_orbit": 115,
+          "absolute_orbit": 29541,
+          "platform": "B"
+        }
+      ],
+      "catalogue_post": [
+        {
+          "id": "COPERNICUS/S1_GRD/S1B_IW_GRDH_1SDV_20211116T142031_20211116T142056_029614_0388BC_62A4",
+          "index": "S1B_IW_GRDH_1SDV_20211116T142031_20211116T142056_029614_0388BC_62A4",
+          "timestamp": 1637072431000,
+          "acquired_at": "2021-11-16T14:20:31Z",
+          "pass": "DESCENDING",
+          "relative_orbit": 13,
+          "absolute_orbit": 29614,
+          "platform": "B"
+        },
+        {
+          "id": "COPERNICUS/S1_GRD/S1B_IW_GRDH_1SDV_20211120T015401_20211120T015426_029665_038A5E_B324",
+          "index": "S1B_IW_GRDH_1SDV_20211120T015401_20211120T015426_029665_038A5E_B324",
+          "timestamp": 1637373241000,
+          "acquired_at": "2021-11-20T01:54:01Z",
+          "pass": "ASCENDING",
+          "relative_orbit": 64,
+          "absolute_orbit": 29665,
+          "platform": "B"
+        }
+      ],
+      "evaluated_tracks": [
+        {
+          "id": "ascending-64",
+          "pass": "ASCENDING",
+          "relative_orbit": 64,
+          "pre_acquisition_count": 3,
+          "post_acquisition_count": 1,
+          "coverage": {
+            "aoi_area_m2": 1014642953.1808167,
+            "post_area_m2": 1014642953.1808167,
+            "pre_area_m2": 1014642953.1808167,
+            "shared_area_m2": 1014642953.1808167,
+            "shared_fraction": 1.0
+          }
+        },
+        {
+          "id": "descending-13",
+          "pass": "DESCENDING",
+          "relative_orbit": 13,
+          "pre_acquisition_count": 2,
+          "post_acquisition_count": 1,
+          "coverage": {
+            "aoi_area_m2": 1014642953.1802673,
+            "post_area_m2": 1014642953.1802673,
+            "pre_area_m2": 1014642953.1802673,
+            "shared_area_m2": 1014642953.1802673,
+            "shared_fraction": 1.0
+          }
+        }
+      ],
+      "selected_track": {
+        "id": "ascending-64",
+        "pass": "ASCENDING",
+        "relative_orbit": 64,
+        "pre_acquisition_count": 3,
+        "post_acquisition_count": 1,
+        "coverage": {
+          "aoi_area_m2": 1014642953.1808167,
+          "post_area_m2": 1014642953.1808167,
+          "pre_area_m2": 1014642953.1808167,
+          "shared_area_m2": 1014642953.1808167,
+          "shared_fraction": 1.0
+        }
+      }
+    },
+    "pre": {
+      "start": "2021-10-15",
+      "end_exclusive": "2021-11-13",
+      "source_images": [
+        {
+          "id": "COPERNICUS/S1_GRD/S1B_IW_GRDH_1SDV_20211015T015402_20211015T015427_029140_037A37_D0C2",
+          "index": "S1B_IW_GRDH_1SDV_20211015T015402_20211015T015427_029140_037A37_D0C2",
+          "timestamp": 1634262842000,
+          "acquired_at": "2021-10-15T01:54:02Z",
+          "pass": "ASCENDING",
+          "relative_orbit": 64,
+          "absolute_orbit": 29140,
+          "platform": "B"
+        },
+        {
+          "id": "COPERNICUS/S1_GRD/S1B_IW_GRDH_1SDV_20211027T015402_20211027T015427_029315_037FA6_A93C",
+          "index": "S1B_IW_GRDH_1SDV_20211027T015402_20211027T015427_029315_037FA6_A93C",
+          "timestamp": 1635299642000,
+          "acquired_at": "2021-10-27T01:54:02Z",
+          "pass": "ASCENDING",
+          "relative_orbit": 64,
+          "absolute_orbit": 29315,
+          "platform": "B"
+        },
+        {
+          "id": "COPERNICUS/S1_GRD/S1B_IW_GRDH_1SDV_20211108T015401_20211108T015426_029490_0384FB_3255",
+          "index": "S1B_IW_GRDH_1SDV_20211108T015401_20211108T015426_029490_0384FB_3255",
+          "timestamp": 1636336441000,
+          "acquired_at": "2021-11-08T01:54:01Z",
+          "pass": "ASCENDING",
+          "relative_orbit": 64,
+          "absolute_orbit": 29490,
+          "platform": "B"
+        }
+      ],
+      "acquisition_count": 3
+    },
+    "post": {
+      "start": "2021-11-16",
+      "end_exclusive": "2021-11-22",
+      "source_images": [
+        {
+          "id": "COPERNICUS/S1_GRD/S1B_IW_GRDH_1SDV_20211120T015401_20211120T015426_029665_038A5E_B324",
+          "index": "S1B_IW_GRDH_1SDV_20211120T015401_20211120T015426_029665_038A5E_B324",
+          "timestamp": 1637373241000,
+          "acquired_at": "2021-11-20T01:54:01Z",
+          "pass": "ASCENDING",
+          "relative_orbit": 64,
+          "absolute_orbit": 29665,
+          "platform": "B"
+        }
+      ],
+      "acquisition_count": 1
+    },
+    "compositing": "Deterministic mosaic of slices per platform+absolute orbit; native VV dB converted to linear power; circular mean speckle smoothing; mean to fixed 20 m grid with full neighborhood/child-pixel support; temporal median linear power; convert to dB",
+    "candidate_definition": "post_vv_db <= post_vv_max_db AND delta_vv_db <= -decrease_min_db, within eligible support only",
+    "coverage_definition": "Full physical pixel areas for cells with centres inside the declared WGS84 box, on the anchored 20 m grid, exactly as the common exporter. Shared SAR support has sufficient independent observations in both windows. Independent WorldCover2020 known baseline must also cover at least80% domain. Eligible additionally requires valid low slope and no native WorldCover80 overlap or observed JRC2020class3. JRC no-data remains unknown contextual information and never establishes dry land.",
+    "baseline_aggregation": "WorldCover2020 documented categories remapped to known support; minimum support across all contributing native10m cells. Permanent-water fraction is the area-weighted mean of nativeclass80 flags; any positive fraction excludes whole20m cell. Mode land-cover class is context only, not used to exclude water. Raw JRC2020 classifications remain separate.",
+    "backscatter_range_policy": "Preserve all finite positive-power representable observations. Returns outside exploratory[-60,+20]dB screening range are retained unchanged and flagged with counts/locations/eligible involvement for review; the range is not a physicalbound and never clips pixels or relaxes flood thresholds.",
+    "sources": [
+      {
+        "label": "Copernicus Sentinel-1 GRD; Earth Engine catalogue",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD",
+        "attribution": "Contains modified Copernicus Sentinel data (2021), processed by Google Earth Engine",
+        "license": "Copernicus Sentinel data terms"
+      },
+      {
+        "label": "Earth Engine Sentinel-1 preprocessing and filtering",
+        "url": "https://developers.google.com/earth-engine/guides/sentinel1",
+        "attribution": "Google Earth Engine",
+        "license": "Documentation"
+      },
+      {
+        "label": "JRC Yearly Water Classification History v1.4",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/JRC_GSW1_4_YearlyHistory",
+        "attribution": "Source: EC JRC/Google; Pekel et al. (2016), Nature 540, 418–422, doi:10.1038/nature20584",
+        "license": "Copernicus Programme; acknowledgement required"
+      },
+      {
+        "label": "ESA WorldCover 2020 v100 global land cover",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/ESA_WorldCover_v100",
+        "attribution": "© ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium; Zanaga et al. (2021), doi:10.5281/zenodo.5571936",
+        "license": "CC BY 4.0"
+      },
+      {
+        "label": "ESA WorldCover product documentation and validation",
+        "url": "https://esa-worldcover.org/en/data-access",
+        "attribution": "ESA WorldCover Consortium",
+        "license": "Documentation; global validation does not establish local flood accuracy"
+      },
+      {
+        "label": "NASA SAR scattering mechanisms",
+        "url": "https://science.nasa.gov/mission/nisar/get-to-know-sar/",
+        "attribution": "NASA; strong point and corner-reflector returns can be bright",
+        "license": "Method reference"
+      },
+      {
+        "label": "NASA SRTM 30 m elevation v3",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003",
+        "attribution": "NASA/USGS/JPL-Caltech; Farr et al. (2007), doi:10.1029/2005RG000183",
+        "license": "NASA/JPL data terms"
+      },
+      {
+        "label": "UN-SPIDER SAR flood-mapping recommended practice",
+        "url": "https://un-spider.org/advisory-support/recommended-practices/recommended-practice-google-earth-engine-flood-mapping/in-detail",
+        "attribution": "UNOOSA/UN-SPIDER",
+        "license": "Method reference; this implementation is an independent exploratory adaptation"
+      },
+      {
+        "label": "2021 atmospheric-river event context",
+        "url": "https://www.publicsafety.gc.ca/cnt/trnsprnc/brfng-mtrls/prlmntry-bndrs/20211207/02-en.aspx?wbdisable=true",
+        "attribution": "Public Safety Canada; atmospheric-river rainfall began 14 November 2021",
+        "license": "Government of Canada information terms"
+      }
+    ],
+    "limitations": [
+      "Exploratory candidate open-water inundation, not independently validated flood extent, water depth, damage, exposure, or an emergency warning.",
+      "The −16 dB post-event and 3 dB decrease thresholds are predeclared exploratory choices, not locally calibrated universal water thresholds or an accuracy guarantee.",
+      "Same relative orbit and pass reduce viewing-geometry differences. Earth Engine GRD is terrain-corrected, but is not radiometrically terrain-flattened; a <5° slope filter is not a layover/shadow correction.",
+      "Wet bare soil, smooth fields, land management, freeze/thaw, wind, SAR noise and changing incidence geometry can mimic or hide inundation. Urban or vegetation-covered flooding can increase backscatter or remain undetected.",
+      "Temporal medians and 30 m-radius spatial smoothing suppress speckle and also erase narrow, short-lived or heterogeneous flood signals. The 20 m export grid is not a claim of 20 m independent resolving power.",
+      "The post window is an event-period composite, not a simultaneous or peak flood snapshot. The pre window may already contain wet or flooded locations; no change is not proof of no flooding.",
+      "Baseline support comes from observed, documented ESA WorldCover 2020 land-cover classes, not from filling JRC no-data as dry land. Any contributing WorldCover permanent-water class 80, plus observed JRC2020 class 3, is excluded. Both baseline products can misclassify boundaries and miss changes before the event; seasonal water remains eligible.",
+      "WorldCover class 80 is aggregated conservatively: any native permanent-water overlap excludes the full 20 m analysis cell, widening water exclusions along boundaries. WorldCover2020 is a land-cover model, not independent field truth or proof of dry conditions in November 2021.",
+      "No-data, missing baseline/DEM, high slope, insufficient observations and permanent water are excluded from candidate evaluation; blank map pixels are not confirmed dry land.",
+      "The fixed bounding box covers a Lower Fraser case study. Results must not be extrapolated to the whole British Columbia event. No SAR coherence or earthquake/tornado damage inference is performed by this module."
+    ]
+  },
+  "audit_recipe": {
+    "formula": "delta_vv_db=post_vv_db-pre_vv_db; candidate=(post_vv_db<=post_vv_max_db)&(delta_vv_db<=-decrease_min_db), masked to eligible",
+    "parameters": {
+      "aoi_bbox": [
+        -122.4,
+        49.0,
+        -121.9,
+        49.25
+      ],
+      "analysis_crs": "EPSG:32610",
+      "analysis_transform": [
+        20,
+        0,
+        0,
+        0,
+        -20,
+        10000000
+      ],
+      "pre_start": "2021-10-15",
+      "pre_end_exclusive": "2021-11-13",
+      "post_start": "2021-11-16",
+      "post_end_exclusive": "2021-11-22",
+      "post_vv_max_db": -16.0,
+      "decrease_min_db": 3.0,
+      "slope_max_degrees": 5.0,
+      "smoothing_radius_m": 30,
+      "incidence_min_degrees": 30.0,
+      "incidence_max_degrees": 45.0,
+      "permanent_water_year": 2020,
+      "min_pre_observations": 2,
+      "min_post_observations": 1,
+      "min_valid_fraction": 0.8,
+      "min_baseline_fraction": 0.8,
+      "max_scenes_per_window": 128,
+      "max_orbit_candidates": 16
+    },
+    "module": "processing.satellite_flood",
+    "function": "audit_arrays",
+    "threshold_sensitivity": {
+      "post_vv_max_db": [
+        -14,
+        -16,
+        -18
+      ],
+      "decrease_min_db": [
+        2,
+        3,
+        4
+      ],
+      "interpretation": "Threshold stability only, not accuracy or a confidence interval"
+    }
+  },
+  "source_archive_sha256": "194ab532732ef38c2934dff52a1d15a3fad4aee7ea439c8732996ef0de74293d",
+  "selection_frozen_at": "2026-10-22T16:56:17.350070Z"
+}

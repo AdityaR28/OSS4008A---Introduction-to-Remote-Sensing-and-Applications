@@ -1,0 +1,474 @@
+{
+  "schema_version": "1.0",
+  "id": "satellite-earthquake-hubbard-2025",
+  "hazard": "earthquake",
+  "title": "2025 Hubbard Glacier earthquake — Mount King George radar surface change",
+  "location": "Mount King George, Kluane region, Yukon, Canada",
+  "event_date": "2025-12-06",
+  "event_date_label": "Documented event date",
+  "analysis_kind": "exploratory_satellite_backscatter_change",
+  "summary": "Real Sentinel-1A images show surface-backscatter change around Mount King George following the December 2025 Hubbard Glacier earthquake. Coherent increases are visible on accepted low-slope glacier/deposit support; snowfall, wetness and glacier dynamics remain competing causes. No landslide or damage area is classified.",
+  "bbox": [
+    -139.97,
+    60.45,
+    -139.6,
+    60.65
+  ],
+  "temporal": [
+    {
+      "label": "Baseline",
+      "start": "2025-11-28",
+      "end": "2025-11-28",
+      "description": "Actual catalogue acquisition dates: 2025-11-28. 1 matched source frames. UTC start 2025-11-28T02:55:32Z; Sentinel-1A ascending relative orbit 50."
+    },
+    {
+      "label": "Comparison",
+      "start": "2025-12-10",
+      "end": "2025-12-10",
+      "description": "Actual catalogue acquisition dates: 2025-12-10. 1 matched source frames. UTC start 2025-12-10T02:55:31Z; Sentinel-1A ascending relative orbit 50."
+    },
+    {
+      "label": "Earlier repeat control",
+      "start": "2025-11-16",
+      "end": "2025-11-16",
+      "description": "Actual catalogue acquisition dates: 2025-11-16. 1 matched source frames. UTC start 2025-11-16T02:55:33Z; Sentinel-1A ascending relative orbit 50."
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Accepted common support",
+      "value": 298.7775595477295,
+      "unit": "km²",
+      "precision": 2,
+      "description": "Low-slope observation population, not landslide or damage area; 298.78 km² of the 452.43 km² box."
+    },
+    {
+      "label": "Full-domain coverage",
+      "value": 66.03854153990521,
+      "unit": "% of box",
+      "precision": 2,
+      "description": "Excluded slopes and unknown radar visibility remain outside the accepted observations."
+    },
+    {
+      "label": "Event-interval median VV",
+      "value": 2.2365498542785645,
+      "unit": "dB",
+      "precision": 2,
+      "description": "10 December minus 28 November on common support; a signed backscatter diagnostic, not attributed impact."
+    },
+    {
+      "label": "Earlier-repeat median VV",
+      "value": 1.1860517263412476,
+      "unit": "dB",
+      "precision": 2,
+      "description": "28 November minus 16 November, same 12-day interval and common support. Positive background change prevents attributing all event change to the quake."
+    },
+    {
+      "label": "Landslide / damage area",
+      "value": null,
+      "unit": "ha",
+      "precision": 0,
+      "description": "Not estimated: amplitude change does not uniquely classify landslides or structural damage."
+    }
+  ],
+  "layers": [
+    {
+      "id": "delta_vv_db",
+      "label": "VV backscatter difference (comparison − baseline)",
+      "kind": "image",
+      "url": "layers/delta_vv_db.png",
+      "description": "Actual returned satellite display: VV backscatter difference (comparison − baseline). Units: dB. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected. Signed comparison-minus-baseline dB; ±7 dB colour limits clip stronger changes. Snow, moisture and glacier effects remain alternative causes.",
+      "bounds": [
+        [
+          60.44975999206617,
+          -139.9700976797991
+        ],
+        [
+          60.650100805284495,
+          -139.59981211968505
+        ]
+      ],
+      "units": "dB",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#305b9b",
+          "label": "Decrease ≤−7 dB (display clipped)"
+        },
+        {
+          "color": "#f1f0e8",
+          "label": "Near-zero change"
+        },
+        {
+          "color": "#b94b30",
+          "label": "Increase ≥+7 dB (display clipped)"
+        }
+      ]
+    },
+    {
+      "id": "pre_vv_db",
+      "label": "Baseline VV backscatter",
+      "kind": "image",
+      "url": "layers/pre_vv_db.png",
+      "description": "Actual returned satellite display: Baseline VV backscatter. Units: dB. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          60.44975999206617,
+          -139.9700976797991
+        ],
+        [
+          60.650100805284495,
+          -139.59981211968505
+        ]
+      ],
+      "units": "dB",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#111111",
+          "label": "Lower backscatter"
+        },
+        {
+          "color": "#eeeeee",
+          "label": "Higher backscatter"
+        }
+      ]
+    },
+    {
+      "id": "post_vv_db",
+      "label": "Comparison VV backscatter",
+      "kind": "image",
+      "url": "layers/post_vv_db.png",
+      "description": "Actual returned satellite display: Comparison VV backscatter. Units: dB. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          60.44975999206617,
+          -139.9700976797991
+        ],
+        [
+          60.650100805284495,
+          -139.59981211968505
+        ]
+      ],
+      "units": "dB",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#111111",
+          "label": "Lower backscatter"
+        },
+        {
+          "color": "#eeeeee",
+          "label": "Higher backscatter"
+        }
+      ]
+    },
+    {
+      "id": "pre_vh_db",
+      "label": "Baseline VH backscatter",
+      "kind": "image",
+      "url": "layers/pre_vh_db.png",
+      "description": "Actual returned satellite display: Baseline VH backscatter. Units: dB. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          60.44975999206617,
+          -139.9700976797991
+        ],
+        [
+          60.650100805284495,
+          -139.59981211968505
+        ]
+      ],
+      "units": "dB",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#111111",
+          "label": "Lower backscatter"
+        },
+        {
+          "color": "#eeeeee",
+          "label": "Higher backscatter"
+        }
+      ]
+    },
+    {
+      "id": "post_vh_db",
+      "label": "Comparison VH backscatter",
+      "kind": "image",
+      "url": "layers/post_vh_db.png",
+      "description": "Actual returned satellite display: Comparison VH backscatter. Units: dB. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          60.44975999206617,
+          -139.9700976797991
+        ],
+        [
+          60.650100805284495,
+          -139.59981211968505
+        ]
+      ],
+      "units": "dB",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#111111",
+          "label": "Lower backscatter"
+        },
+        {
+          "color": "#eeeeee",
+          "label": "Higher backscatter"
+        }
+      ]
+    },
+    {
+      "id": "delta_vh_db",
+      "label": "VH backscatter difference (comparison − baseline)",
+      "kind": "image",
+      "url": "layers/delta_vh_db.png",
+      "description": "Actual returned satellite display: VH backscatter difference (comparison − baseline). Units: dB. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected. Signed comparison-minus-baseline dB; ±7 dB colour limits clip stronger changes. Snow, moisture and glacier effects remain alternative causes.",
+      "bounds": [
+        [
+          60.44975999206617,
+          -139.9700976797991
+        ],
+        [
+          60.650100805284495,
+          -139.59981211968505
+        ]
+      ],
+      "units": "dB",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#305b9b",
+          "label": "Decrease ≤−7 dB (display clipped)"
+        },
+        {
+          "color": "#f1f0e8",
+          "label": "Near-zero change"
+        },
+        {
+          "color": "#b94b30",
+          "label": "Increase ≥+7 dB (display clipped)"
+        }
+      ]
+    },
+    {
+      "id": "control_delta_vv_db",
+      "label": "Pre-event VV repeat difference (28 − 16 November)",
+      "kind": "image",
+      "url": "layers/control_delta_vv_db.png",
+      "description": "Actual returned satellite display: Pre-event VV repeat difference (28 − 16 November). Units: dB. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected. Signed comparison-minus-baseline dB; ±7 dB colour limits clip stronger changes. Snow, moisture and glacier effects remain alternative causes.",
+      "bounds": [
+        [
+          60.44975999206617,
+          -139.9700976797991
+        ],
+        [
+          60.650100805284495,
+          -139.59981211968505
+        ]
+      ],
+      "units": "dB",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#305b9b",
+          "label": "Decrease ≤−7 dB (display clipped)"
+        },
+        {
+          "color": "#f1f0e8",
+          "label": "Near-zero change"
+        },
+        {
+          "color": "#b94b30",
+          "label": "Increase ≥+7 dB (display clipped)"
+        }
+      ]
+    },
+    {
+      "id": "shared_valid",
+      "label": "Accepted common observation support",
+      "kind": "image",
+      "url": "layers/shared_valid.png",
+      "description": "Actual returned satellite display: Accepted common observation support. Units: 0/1. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          60.44975999206617,
+          -139.9700976797991
+        ],
+        [
+          60.650100805284495,
+          -139.59981211968505
+        ]
+      ],
+      "units": "0/1",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#567c6b",
+          "label": "Accepted low-slope common support"
+        }
+      ]
+    }
+  ],
+  "methods": [
+    {
+      "title": "Same-platform satellite change",
+      "description": "Sentinel-1A VV/VH, ascending relative orbit 50; exact UTC acquisitions 16 November control, 28 November baseline and 10 December comparison. Mean native linear power on the anchored 30 m UTM grid, then convert to dB. Signed difference is comparison minus baseline. This is amplitude analysis, not InSAR or displacement."
+    },
+    {
+      "title": "Conservative deposit-observation support",
+      "description": "Require complete VV/VH native support, incidence 30–45°, pairwise mean-angle difference ≤0.5°, and GLO30 slope ≤20°. Common and control eligible coverage gates pass; full-box coverage remains 66.04%. Low slopes and close angles do not establish complete local/distant shadow or layover freedom. No radiometric terrain flattening is claimed."
+    },
+    {
+      "title": "Control, ambiguity and display limits",
+      "description": "Inspect the earlier 12-day repeat alongside event differences. Both contain positive regional background change; coherent event patches alone do not prove pixel-level attribution. Snow, ice, moisture and glacier movement remain confounders. ±7 dB display clipping affects strong patches while numerical rasters preserve the range."
+    },
+    {
+      "title": "Frozen export and independent audit",
+      "description": "Original Colab selection, numerical manifest, processing receipt and provider audit remain byte-identical with unapproved history. Independent local checks rerun full numerical TIFFs. The portable source package retains those inputs; the website ships durable PNGs and hashed records. No credentials or live Earth Engine tile URLs are used."
+    }
+  ],
+  "limitations": [
+    "Exploratory satellite observations, not independently validated damage, an official affected-area total or an emergency warning. Blank/excluded pixels are unknown, not unchanged.",
+    "Accepted common observations cover 66.04% of the full box (298.78 km²), despite 100% coverage of the deliberately low-slope eligible support. The remaining terrain is excluded/unknown; no complete earthquake footprint is claimed.",
+    "Earlier repeat medians are already positive: VV +1.19 dB and VH +1.29 dB, versus event-interval +2.24/+2.65 dB. Equal 12-day timing does not make this a calibrated counterfactual or significance test.",
+    "Difference colours saturate beyond ±7 dB: 11.59% of accepted VV and 15.04% of VH samples exceed +7 dB. Full numerical values are retained; saturation is not a landslide threshold.",
+    "This is measured radar-amplitude/backscatter change, not InSAR displacement, earthquake shaking, confirmed landslides, building damage or losses. GRD contains no phase information for interferometry.",
+    "Snowfall, wetness, melt/freeze, glacier motion and viewing/processing effects can change backscatter. Timing and documented regional landslides do not establish the cause of every changed pixel.",
+    "Only low-slope support (Copernicus GLO30 slope ≤20°) with matched same-platform ascending orbit, accepted incidence angles and complete source support is admitted. This omits steep landslide source/transport areas and is not a complete event footprint.",
+    "Earth Engine terrain-corrects Sentinel-1 GRD geometrically but does not perform radiometric terrain flattening. The low-slope and angle screens reduce some problems; they do not prove freedom from local/distant terrain shadow, layover or foreshortening.",
+    "C-band radar responds to surface properties. Positive VV change can be consistent with rougher avalanche deposits on glaciers, but cannot uniquely distinguish rock, snow, ice or other causes. No damage or landslide area is reported.",
+    "Each period is one exact frame/date. Three-by-three approximate native-sample power aggregation to a 30 m lattice reduces speckle but does not remove it or create independent observations. Continuous differences and a pre-event repeat must be visually reviewed.",
+    "No-data and excluded steep terrain are unknown, not unchanged. A successful coverage gate applies only to the explicitly low-slope eligible denominator; the full domain coverage is reported separately.",
+    "The USGS provisional SAR/landslide products used the same acquisitions and are contextual corroboration, not an independent pixel-level accuracy reference. The EE preprocessing and conservative support differ from the USGS product."
+  ],
+  "sources": [
+    {
+      "label": "USGS documented landslide response and Yukon reconnaissance",
+      "url": "https://www.usgs.gov/programs/landslide-hazards/science/2025-m70-hubbard-glacier-earthquake-triggered-landslides-and",
+      "attribution": "USGS documented landslide response and Yukon reconnaissance",
+      "license": "Linked primary-source context/documentation; original terms apply. No source illustrations or survey geometry are redistributed."
+    },
+    {
+      "label": "USGS provisional same-acquisition SAR difference (context, not independent truth)",
+      "url": "https://doi.org/10.5066/P14H7MVU",
+      "attribution": "USGS provisional same-acquisition SAR difference (context, not independent truth)",
+      "license": "Linked primary-source context/documentation; original terms apply. No source illustrations or survey geometry are redistributed."
+    },
+    {
+      "label": "Earth Engine Sentinel-1 preprocessing",
+      "url": "https://developers.google.com/earth-engine/guides/sentinel1",
+      "attribution": "Earth Engine Sentinel-1 preprocessing",
+      "license": "Linked primary-source context/documentation; original terms apply. No source illustrations or survey geometry are redistributed."
+    },
+    {
+      "label": "Copernicus GLO30 2024_1 dataset",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_DEM_GLO30_2024_1",
+      "attribution": "produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved",
+      "license": "Linked primary-source context/documentation; original terms apply. No source illustrations or survey geometry are redistributed."
+    },
+    {
+      "label": "Official Mount King George location",
+      "url": "https://geonames.nrcan.gc.ca/search-place-names/unique?id=KADIK",
+      "attribution": "Official Mount King George location",
+      "license": "Linked primary-source context/documentation; original terms apply. No source illustrations or survey geometry are redistributed."
+    },
+    {
+      "label": "Copernicus Sentinel-1 GRD numerical observations",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD",
+      "attribution": "Contains modified Copernicus Sentinel data (2025), processed by Google Earth Engine",
+      "license": "Copernicus Sentinel data terms"
+    }
+  ],
+  "provenance": {
+    "generated_at": "2026-10-22T15:57:37.630127Z",
+    "inputs": [
+      {
+        "file": "raw/manifest.json",
+        "sha256": "cdbc8326a53569f1a6e524e44d16f40c2782fb695ea51d6b2409a6042fbea789",
+        "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD"
+      },
+      {
+        "file": "raw/source_selection.json",
+        "sha256": "87843111787f2e9ae6478bb19d7ef9a084a5c918fdb42280b449d10ffa0a6ead",
+        "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD"
+      },
+      {
+        "file": "raw/export_audit.json",
+        "sha256": "e460f6b83aa4b08d9db0272f0e21b64d0e42e40949be8351798f59a922efbbfe",
+        "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD"
+      },
+      {
+        "file": "raw/processing_report.json",
+        "sha256": "9c0fc89d4ff47b6c0e77f3b1a3fe053b590ba04a8c031fd8d2aa23798596ddb6",
+        "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD"
+      }
+    ],
+    "software": "scripts/import_satellite_site.py deterministic event-v1 adapter; original processing versions and source fingerprints retained in raw/source_selection.json",
+    "report_url": "checks.json"
+  },
+  "checks": {
+    "status": "automated_checks_passed",
+    "summary": "Independent returned-data hashes/grid/formula/mask/coverage checks passed. These checks are consistency evidence, not damage classification accuracy; source flags remain unapproved and publication is not approved."
+  },
+  "consistency_review": {
+    "status": "bounded_exploratory_consistency_review",
+    "source_review_status": "unapproved",
+    "publishing_approved": false,
+    "scope": "Returned numerical data, hashes, fixed grids, acquisition recipe, formulas, masks and coverage checked; derivative metadata describe exploratory observations. Not independent field accuracy or damage validation.",
+    "numerical_input_directory": "data/satellite_inputs/satellite-earthquake-hubbard-2025",
+    "source_archive_sha256": "9ce9d4c042f31427e12e58658fe1de5b496f9950f32582f06c27a29db0092d02",
+    "frozen_manifest_sha256": "cdbc8326a53569f1a6e524e44d16f40c2782fb695ea51d6b2409a6042fbea789"
+  },
+  "satellite_export": {
+    "source_manifest_url": "raw/manifest.json",
+    "source_selection_url": "raw/source_selection.json",
+    "source_archive_sha256": "9ce9d4c042f31427e12e58658fe1de5b496f9950f32582f06c27a29db0092d02",
+    "source_manifest_sha256": "cdbc8326a53569f1a6e524e44d16f40c2782fb695ea51d6b2409a6042fbea789",
+    "hazard_area_ha": null,
+    "hazard_area_interpretation": "No official or confirmed impact area; any candidate area is a bounded exploratory spectral/backscatter indicator."
+  }
+}

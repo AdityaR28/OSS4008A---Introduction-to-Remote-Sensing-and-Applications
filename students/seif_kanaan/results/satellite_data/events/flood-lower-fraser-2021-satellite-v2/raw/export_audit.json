@@ -1,0 +1,181 @@
+{
+  "status": "passed",
+  "common": {
+    "status": "passed",
+    "domain_pixels": 2534825,
+    "shared_pixels": 2534825,
+    "area_checks": {
+      "domain_area_m2": {
+        "local_m2": 1014642953.1807556,
+        "ee_m2": 1014642953.1802368,
+        "difference_m2": 0.000518798828125,
+        "tolerance_m2": 1014.6429531802368
+      },
+      "pre_valid_area_m2": {
+        "local_m2": 1014642953.1807556,
+        "ee_m2": 1014642953.1802368,
+        "difference_m2": 0.000518798828125,
+        "tolerance_m2": 1014.6429531802368
+      },
+      "post_valid_area_m2": {
+        "local_m2": 1014642953.1807556,
+        "ee_m2": 1014642953.1802368,
+        "difference_m2": 0.000518798828125,
+        "tolerance_m2": 1014.6429531802368
+      },
+      "shared_valid_area_m2": {
+        "local_m2": 1014642953.1807556,
+        "ee_m2": 1014642953.1802368,
+        "difference_m2": 0.000518798828125,
+        "tolerance_m2": 1014.6429531802368
+      },
+      "eligible_area_m2": {
+        "local_m2": 491458499.1833801,
+        "ee_m2": 491458499.1832886,
+        "difference_m2": 9.1552734375e-05,
+        "tolerance_m2": 491.45849918328855
+      },
+      "candidate_area_m2": {
+        "local_m2": 30528313.323028564,
+        "ee_m2": 30528313.322875977,
+        "difference_m2": 0.000152587890625,
+        "tolerance_m2": 30.528313322875974
+      },
+      "gate_0_population_m2": {
+        "local_m2": 1014642953.1807556,
+        "ee_m2": 1014642953.1802368,
+        "difference_m2": 0.000518798828125,
+        "tolerance_m2": 1014.6429531802368
+      },
+      "gate_0_observed_m2": {
+        "local_m2": 1014642953.1807556,
+        "ee_m2": 1014642953.1802368,
+        "difference_m2": 0.000518798828125,
+        "tolerance_m2": 1014.6429531802368
+      },
+      "gate_1_population_m2": {
+        "local_m2": 1014642953.1807556,
+        "ee_m2": 1014642953.1802368,
+        "difference_m2": 0.000518798828125,
+        "tolerance_m2": 1014.6429531802368
+      },
+      "gate_1_observed_m2": {
+        "local_m2": 1014642953.1807556,
+        "ee_m2": 1014642953.1802368,
+        "difference_m2": 0.000518798828125,
+        "tolerance_m2": 1014.6429531802368
+      }
+    },
+    "scope": "Numerical implementation consistency; not independent hazard classification accuracy."
+  },
+  "hazard_specific": {
+    "status": "numerical_formula_checks_passed",
+    "independent_accuracy_validation": false,
+    "domain_pixel_count": 2534825,
+    "shared_pixel_count": 2534825,
+    "eligible_pixel_count": 1227780,
+    "candidate_pixel_count": 76267,
+    "candidate_area_ha": 3052.8313323028565,
+    "shared_area_ha": 101464.29531807556,
+    "eligible_area_ha": 49145.84991833801,
+    "baseline_valid_area_ha": 101464.29531807556,
+    "baseline_fraction_of_domain": 1.0,
+    "jrc_known_fraction_of_domain": 0.06440073469929541,
+    "baseline_interpretation": "Known pre-event WorldCover2020 categories; JRC missing values are never recoded as dry. Exclude any WorldCover native water overlap or observed JRC class3.",
+    "conservative_baseline_exclusions_with_rounded_full_fraction": 0,
+    "backscatter_diagnostics": {
+      "pre": {
+        "min_db": -26.353527069091797,
+        "max_db": 19.903226852416992,
+        "screening_range_db": [
+          -60,
+          20
+        ],
+        "screening_is_physical_bound": false,
+        "outside_screening_count": 0,
+        "outside_screening_eligible_count": 0,
+        "outside_screening_candidate_count": 0,
+        "outside_screening_rowcol_bbox": null,
+        "review_required": false,
+        "action": "Retain unchanged raw values; flag strong/weak returns for review, with no post-hoc masking or threshold change"
+      },
+      "post": {
+        "min_db": -28.551298141479492,
+        "max_db": 21.940410614013672,
+        "screening_range_db": [
+          -60,
+          20
+        ],
+        "screening_is_physical_bound": false,
+        "outside_screening_count": 6,
+        "outside_screening_eligible_count": 6,
+        "outside_screening_candidate_count": 0,
+        "outside_screening_rowcol_bbox": [
+          1133,
+          916,
+          1135,
+          918
+        ],
+        "review_required": true,
+        "action": "Retain unchanged raw values; flag strong/weak returns for review, with no post-hoc masking or threshold change"
+      }
+    },
+    "threshold_sensitivity": [
+      {
+        "post_vv_max_db": -14,
+        "decrease_min_db": 2,
+        "candidate_pixel_count": 102243,
+        "candidate_area_ha": 4092.605085372925
+      },
+      {
+        "post_vv_max_db": -14,
+        "decrease_min_db": 3,
+        "candidate_pixel_count": 99462,
+        "candidate_area_ha": 3981.2863277038573
+      },
+      {
+        "post_vv_max_db": -14,
+        "decrease_min_db": 4,
+        "candidate_pixel_count": 95962,
+        "candidate_area_ha": 3841.187396759033
+      },
+      {
+        "post_vv_max_db": -16,
+        "decrease_min_db": 2,
+        "candidate_pixel_count": 77561,
+        "candidate_area_ha": 3104.6278868927
+      },
+      {
+        "post_vv_max_db": -16,
+        "decrease_min_db": 3,
+        "candidate_pixel_count": 76267,
+        "candidate_area_ha": 3052.8313323028565
+      },
+      {
+        "post_vv_max_db": -16,
+        "decrease_min_db": 4,
+        "candidate_pixel_count": 74908,
+        "candidate_area_ha": 2998.433063824463
+      },
+      {
+        "post_vv_max_db": -18,
+        "decrease_min_db": 2,
+        "candidate_pixel_count": 41268,
+        "candidate_area_ha": 1651.8853619476317
+      },
+      {
+        "post_vv_max_db": -18,
+        "decrease_min_db": 3,
+        "candidate_pixel_count": 40939,
+        "candidate_area_ha": 1638.7159875762939
+      },
+      {
+        "post_vv_max_db": -18,
+        "decrease_min_db": 4,
+        "candidate_pixel_count": 40514,
+        "candidate_area_ha": 1621.7039947814942
+      }
+    ],
+    "sensitivity_interpretation": "Exploratory threshold stability, not uncertainty bounds, validation or a confidence interval"
+  }
+}

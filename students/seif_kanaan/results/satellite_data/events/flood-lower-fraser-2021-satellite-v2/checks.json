@@ -1,0 +1,395 @@
+{
+  "status": "automated_checks_passed",
+  "source_manifest_status": "export_complete_unreviewed",
+  "source_review_status": "unapproved",
+  "publishing_approved": false,
+  "independent_consistency": {
+    "event": "flood-lower-fraser-2021-satellite-v2",
+    "hazard": "flood",
+    "status": "passed_consistency_only",
+    "common": {
+      "status": "passed",
+      "domain_pixels": 2534825,
+      "shared_pixels": 2534825,
+      "area_checks": {
+        "domain_area_m2": {
+          "local_m2": 1014642953.1807556,
+          "ee_m2": 1014642953.1802368,
+          "difference_m2": 0.000518798828125,
+          "tolerance_m2": 1014.6429531802368
+        },
+        "pre_valid_area_m2": {
+          "local_m2": 1014642953.1807556,
+          "ee_m2": 1014642953.1802368,
+          "difference_m2": 0.000518798828125,
+          "tolerance_m2": 1014.6429531802368
+        },
+        "post_valid_area_m2": {
+          "local_m2": 1014642953.1807556,
+          "ee_m2": 1014642953.1802368,
+          "difference_m2": 0.000518798828125,
+          "tolerance_m2": 1014.6429531802368
+        },
+        "shared_valid_area_m2": {
+          "local_m2": 1014642953.1807556,
+          "ee_m2": 1014642953.1802368,
+          "difference_m2": 0.000518798828125,
+          "tolerance_m2": 1014.6429531802368
+        },
+        "eligible_area_m2": {
+          "local_m2": 491458499.1833801,
+          "ee_m2": 491458499.1832886,
+          "difference_m2": 9.1552734375e-05,
+          "tolerance_m2": 491.45849918328855
+        },
+        "candidate_area_m2": {
+          "local_m2": 30528313.323028564,
+          "ee_m2": 30528313.322875977,
+          "difference_m2": 0.000152587890625,
+          "tolerance_m2": 30.528313322875974
+        },
+        "gate_0_population_m2": {
+          "local_m2": 1014642953.1807556,
+          "ee_m2": 1014642953.1802368,
+          "difference_m2": 0.000518798828125,
+          "tolerance_m2": 1014.6429531802368
+        },
+        "gate_0_observed_m2": {
+          "local_m2": 1014642953.1807556,
+          "ee_m2": 1014642953.1802368,
+          "difference_m2": 0.000518798828125,
+          "tolerance_m2": 1014.6429531802368
+        },
+        "gate_1_population_m2": {
+          "local_m2": 1014642953.1807556,
+          "ee_m2": 1014642953.1802368,
+          "difference_m2": 0.000518798828125,
+          "tolerance_m2": 1014.6429531802368
+        },
+        "gate_1_observed_m2": {
+          "local_m2": 1014642953.1807556,
+          "ee_m2": 1014642953.1802368,
+          "difference_m2": 0.000518798828125,
+          "tolerance_m2": 1014.6429531802368
+        }
+      },
+      "scope": "Numerical implementation consistency; not independent hazard classification accuracy."
+    },
+    "hazard_specific": {
+      "status": "numerical_formula_checks_passed",
+      "independent_accuracy_validation": false,
+      "domain_pixel_count": 2534825,
+      "shared_pixel_count": 2534825,
+      "eligible_pixel_count": 1227780,
+      "candidate_pixel_count": 76267,
+      "candidate_area_ha": 3052.8313323028565,
+      "shared_area_ha": 101464.29531807556,
+      "eligible_area_ha": 49145.84991833801,
+      "baseline_valid_area_ha": 101464.29531807556,
+      "baseline_fraction_of_domain": 1.0,
+      "jrc_known_fraction_of_domain": 0.06440073469929541,
+      "baseline_interpretation": "Known pre-event WorldCover2020 categories; JRC missing values are never recoded as dry. Exclude any WorldCover native water overlap or observed JRC class3.",
+      "conservative_baseline_exclusions_with_rounded_full_fraction": 0,
+      "backscatter_diagnostics": {
+        "pre": {
+          "min_db": -26.353527069091797,
+          "max_db": 19.903226852416992,
+          "screening_range_db": [
+            -60,
+            20
+          ],
+          "screening_is_physical_bound": false,
+          "outside_screening_count": 0,
+          "outside_screening_eligible_count": 0,
+          "outside_screening_candidate_count": 0,
+          "outside_screening_rowcol_bbox": null,
+          "review_required": false,
+          "action": "Retain unchanged raw values; flag strong/weak returns for review, with no post-hoc masking or threshold change"
+        },
+        "post": {
+          "min_db": -28.551298141479492,
+          "max_db": 21.940410614013672,
+          "screening_range_db": [
+            -60,
+            20
+          ],
+          "screening_is_physical_bound": false,
+          "outside_screening_count": 6,
+          "outside_screening_eligible_count": 6,
+          "outside_screening_candidate_count": 0,
+          "outside_screening_rowcol_bbox": [
+            1133,
+            916,
+            1135,
+            918
+          ],
+          "review_required": true,
+          "action": "Retain unchanged raw values; flag strong/weak returns for review, with no post-hoc masking or threshold change"
+        }
+      },
+      "threshold_sensitivity": [
+        {
+          "post_vv_max_db": -14,
+          "decrease_min_db": 2,
+          "candidate_pixel_count": 102243,
+          "candidate_area_ha": 4092.605085372925
+        },
+        {
+          "post_vv_max_db": -14,
+          "decrease_min_db": 3,
+          "candidate_pixel_count": 99462,
+          "candidate_area_ha": 3981.2863277038573
+        },
+        {
+          "post_vv_max_db": -14,
+          "decrease_min_db": 4,
+          "candidate_pixel_count": 95962,
+          "candidate_area_ha": 3841.187396759033
+        },
+        {
+          "post_vv_max_db": -16,
+          "decrease_min_db": 2,
+          "candidate_pixel_count": 77561,
+          "candidate_area_ha": 3104.6278868927
+        },
+        {
+          "post_vv_max_db": -16,
+          "decrease_min_db": 3,
+          "candidate_pixel_count": 76267,
+          "candidate_area_ha": 3052.8313323028565
+        },
+        {
+          "post_vv_max_db": -16,
+          "decrease_min_db": 4,
+          "candidate_pixel_count": 74908,
+          "candidate_area_ha": 2998.433063824463
+        },
+        {
+          "post_vv_max_db": -18,
+          "decrease_min_db": 2,
+          "candidate_pixel_count": 41268,
+          "candidate_area_ha": 1651.8853619476317
+        },
+        {
+          "post_vv_max_db": -18,
+          "decrease_min_db": 3,
+          "candidate_pixel_count": 40939,
+          "candidate_area_ha": 1638.7159875762939
+        },
+        {
+          "post_vv_max_db": -18,
+          "decrease_min_db": 4,
+          "candidate_pixel_count": 40514,
+          "candidate_area_ha": 1621.7039947814942
+        }
+      ],
+      "sensitivity_interpretation": "Exploratory threshold stability, not uncertainty bounds, validation or a confidence interval"
+    },
+    "layers_checked": 7,
+    "review_status": "unapproved",
+    "publishing_approved": false,
+    "next_step": "Inspect actual imagery, masks, acquisition selection, temporal confounds and reference evidence before considering website import."
+  },
+  "coverage_metrics": {
+    "domain_area_m2": 1014642953.1802368,
+    "pre_valid_area_m2": 1014642953.1802368,
+    "post_valid_area_m2": 1014642953.1802368,
+    "shared_valid_area_m2": 1014642953.1802368,
+    "eligible_area_m2": 491458499.1832886,
+    "candidate_area_m2": 30528313.322875977,
+    "gate_0_population_m2": 1014642953.1802368,
+    "gate_0_observed_m2": 1014642953.1802368,
+    "gate_1_population_m2": 1014642953.1802368,
+    "gate_1_observed_m2": 1014642953.1802368,
+    "area_convention": "Full WGS84 pixelArea values for cells whose centres fall inside the declared longitude/latitude box, evaluated on the exact anchored projected grid. Not fractionally clipped geographic boundary area.",
+    "gate_results": [
+      {
+        "population": "domain",
+        "valid": "shared_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 1014642953.1802368,
+        "observed_area_m2": 1014642953.1802368,
+        "fraction": 1.0,
+        "passed": true
+      },
+      {
+        "population": "domain",
+        "valid": "baseline_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 1014642953.1802368,
+        "observed_area_m2": 1014642953.1802368,
+        "fraction": 1.0,
+        "passed": true
+      }
+    ],
+    "shared_fraction_of_aoi": 1.0
+  },
+  "diagnostics": {
+    "threshold_sensitivity_ha": [
+      1621.7039947814942,
+      4092.605085372925
+    ],
+    "range_diagnostics": {
+      "pre": {
+        "min_db": -26.353527069091797,
+        "max_db": 19.903226852416992,
+        "screening_range_db": [
+          -60,
+          20
+        ],
+        "screening_is_physical_bound": false,
+        "outside_screening_count": 0,
+        "outside_screening_eligible_count": 0,
+        "outside_screening_candidate_count": 0,
+        "outside_screening_rowcol_bbox": null,
+        "review_required": false,
+        "action": "Retain unchanged raw values; flag strong/weak returns for review, with no post-hoc masking or threshold change"
+      },
+      "post": {
+        "min_db": -28.551298141479492,
+        "max_db": 21.940410614013672,
+        "screening_range_db": [
+          -60,
+          20
+        ],
+        "screening_is_physical_bound": false,
+        "outside_screening_count": 6,
+        "outside_screening_eligible_count": 6,
+        "outside_screening_candidate_count": 0,
+        "outside_screening_rowcol_bbox": [
+          1133,
+          916,
+          1135,
+          918
+        ],
+        "review_required": true,
+        "action": "Retain unchanged raw values; flag strong/weak returns for review, with no post-hoc masking or threshold change"
+      }
+    }
+  },
+  "analytical_assets": [
+    {
+      "id": "pre_vv_db",
+      "file": "rasters/pre_vv_db.tif",
+      "sha256": "dd50b6f70a9cf10f48b35616fcd3d05a5586e407d70a8a916cc4b9da298f7a37",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_vv_db",
+      "file": "rasters/post_vv_db.tif",
+      "sha256": "02eace74ca57dc68cf69de36632a8645eb1e4d4d5db3ff125bbec4c4908859db",
+      "nodata": -9999.0
+    },
+    {
+      "id": "delta_vv_db",
+      "file": "rasters/delta_vv_db.tif",
+      "sha256": "e78498e22279b9017ff05ff7508f399b0fa6d85ef5c0684b0799f037ee0a0135",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate",
+      "file": "rasters/candidate.tif",
+      "sha256": "19b43a57555bb3a3aca9f7312e3e1684ed8139d079d66227fd7eb30187e28bf2",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_observation_count",
+      "file": "rasters/pre_observation_count.tif",
+      "sha256": "afa7dc4a74b89104bdb5fc1724cab64862545c1a18d0e79a12a3447051001548",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_observation_count",
+      "file": "rasters/post_observation_count.tif",
+      "sha256": "122c4705039f40714ca446ccc680d0c48eff4be6d069c5804a873b551145eec1",
+      "nodata": -9999.0
+    },
+    {
+      "id": "water_class_2020",
+      "file": "rasters/water_class_2020.tif",
+      "sha256": "e6e575623e8b75a36cf23fd99af4ce23aa3185e74b71cc922040148bcd3ad382",
+      "nodata": -9999.0
+    },
+    {
+      "id": "permanent_water",
+      "file": "rasters/permanent_water.tif",
+      "sha256": "68ab9a6e8948bcbb10cd2dbd54d211c167e91d1583a31c97aa54def1965b82e4",
+      "nodata": -9999.0
+    },
+    {
+      "id": "slope_degrees",
+      "file": "rasters/slope_degrees.tif",
+      "sha256": "5029308c6616a7e446464bd1dbbd659fdac51b3d93646c0ebb0e94f59127ab4c",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_valid",
+      "file": "rasters/pre_valid.tif",
+      "sha256": "122c4705039f40714ca446ccc680d0c48eff4be6d069c5804a873b551145eec1",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_valid",
+      "file": "rasters/post_valid.tif",
+      "sha256": "122c4705039f40714ca446ccc680d0c48eff4be6d069c5804a873b551145eec1",
+      "nodata": -9999.0
+    },
+    {
+      "id": "shared_valid",
+      "file": "rasters/shared_valid.tif",
+      "sha256": "122c4705039f40714ca446ccc680d0c48eff4be6d069c5804a873b551145eec1",
+      "nodata": -9999.0
+    },
+    {
+      "id": "eligible",
+      "file": "rasters/eligible.tif",
+      "sha256": "35a9ae49af95a3b4f04dcc7670130f6f7417b24093ed6144fb702bd5aa280664",
+      "nodata": -9999.0
+    },
+    {
+      "id": "worldcover2020",
+      "file": "rasters/worldcover2020.tif",
+      "sha256": "67f4fb958540cef5760a76344952f899e7185a4cd13e06222db092b785d238bf",
+      "nodata": -9999.0
+    },
+    {
+      "id": "worldcover_known_fraction",
+      "file": "rasters/worldcover_known_fraction.tif",
+      "sha256": "122c4705039f40714ca446ccc680d0c48eff4be6d069c5804a873b551145eec1",
+      "nodata": -9999.0
+    },
+    {
+      "id": "worldcover_water_fraction",
+      "file": "rasters/worldcover_water_fraction.tif",
+      "sha256": "a0a7130c9a89d80497955763c2b9e6d53d8164d8a3f73f0f07663a43bc1abc4a",
+      "nodata": -9999.0
+    },
+    {
+      "id": "baseline_valid",
+      "file": "rasters/baseline_valid.tif",
+      "sha256": "122c4705039f40714ca446ccc680d0c48eff4be6d069c5804a873b551145eec1",
+      "nodata": -9999.0
+    },
+    {
+      "id": "domain",
+      "file": "rasters/domain.tif",
+      "sha256": "8697829a69906ebb4fcebe79b952f3476edb6e26b6d38ab3c61737ec533a4a00",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pixel_area_m2",
+      "file": "rasters/pixel_area_m2.tif",
+      "sha256": "f1631ee798f5af40958b8b6a48924675903b8f109a44721bff9cf20bbad1ec52",
+      "nodata": -9999.0
+    }
+  ],
+  "bounded_review": {
+    "status": "bounded_exploratory_consistency_review",
+    "source_review_status": "unapproved",
+    "publishing_approved": false,
+    "scope": "Returned numerical data, hashes, fixed grids, acquisition recipe, formulas, masks and coverage checked; derivative metadata describe exploratory observations. Not independent field accuracy or damage validation.",
+    "numerical_input_directory": "data/satellite_inputs/flood-lower-fraser-2021-satellite-v2",
+    "source_archive_sha256": "194ab532732ef38c2934dff52a1d15a3fad4aee7ea439c8732996ef0de74293d",
+    "frozen_manifest_sha256": "f624adfe9386e2b3f4a0dae6fb32ae9923eb8fb93d89f5a50d42c2a4576719c0"
+  }
+}

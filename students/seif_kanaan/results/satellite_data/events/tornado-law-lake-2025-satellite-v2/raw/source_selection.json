@@ -1,0 +1,260 @@
+{
+  "event": {
+    "id": "tornado-law-lake-2025-satellite-v2",
+    "hazard": "tornado",
+    "title": "Law Lake tornado: Sentinel-2 canopy change (revised baseline)",
+    "event_date": "2025-07-27",
+    "location": "Law Lake (Mine Centre), Ontario",
+    "method": "Explicit v2 42-day baseline / unchanged 21-day comparison; distinct-date Sentinel-2 reflectance medians and predeclared NDVI/NBR decline in baseline mapped-tree cover",
+    "sources": [
+      {
+        "label": "NTP event assessment and explicit Sentinel-2 observability evidence",
+        "url": "https://www.uwo.ca/ntp/blog/2025/ontarios_first_ef2_tornado_recorded_in_nw_on_on_jul_27.html"
+      },
+      {
+        "label": "Sentinel-2 harmonized surface reflectance",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED"
+      },
+      {
+        "label": "Cloud Score+ quality data",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_CLOUD_SCORE_PLUS_V1_S2_HARMONIZED"
+      },
+      {
+        "label": "ESA WorldCover 2021 v200 baseline land cover",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/ESA_WorldCover_v200"
+      },
+      {
+        "label": "Kingfield and de Beurs (2017): tornado spectral response and land-cover/season limitations",
+        "url": "https://doi.org/10.1175/JAMC-D-16-0228.1"
+      }
+    ],
+    "limitations": [
+      "This is satellite-observed spectral change near a documented tornado, not confirmed canopy-loss fraction, treefall, structural damage, wind speed or EF severity.",
+      "NDVI/NBR thresholds are predeclared exploratory diagnostics, not scientifically calibrated damage classes. Report all nine sensitivity combinations; never tune to NTP agreement.",
+      "2021 WorldCover tree cover can be stale or misclassified in 2025. The baseline NDVI criterion limits the study population, not all forest or all tornado-affected land.",
+      "The revised June 15–July 26 42-day baseline is farther from the event and asymmetric with the 21-day comparison. Phenology/leaf development, moisture, illumination, logging, other wind, fire and cloud/shadow can cause change; this is a stronger temporal confound than the failed original 21-day baseline.",
+      "Each 20 m cell mixes vegetation and surroundings. RGB/indices are medians of daily observations, not a simultaneous photograph; per-pixel first/last contributing dates and distinct clear-date counts are retained.",
+      "The original July 6–26 baseline failed its unchanged 80% mapped-forest coverage requirement (35.959%). V2 is an explicitly documented one-time baseline revision; quality/count/coverage/indicator thresholds are unchanged, and no search or automatic relaxation occurs.",
+      "Unobserved or ineligible land is not unchanged or undamaged. Two clear-date and two coverage gates still fail closed; original-window count/support rasters and per-date forest coverage are diagnostic, not evidence that V2 succeeds.",
+      "NTP independently documents the event using satellite review including Sentinel imagery. It is contextual corroboration of observability, not independent pixel-level validation of this experiment.",
+      "As checked 22 October 2026, NTP's current public Damage Tracks service does not contain a full Law Lake line. Do not synthesize a line or footprint from published start/end coordinates, maximum width or a map image."
+    ]
+  },
+  "provenance": {
+    "experiment_version": 2,
+    "revision": {
+      "reason": "Original 21-day baseline had only 35.959124894% qualified mapped-forest coverage; preserve failure, revise baseline once to fixed 42-day window, retaining all quality/count/coverage/indicator thresholds",
+      "prior_pre": {
+        "start": "2025-07-06",
+        "end_exclusive": "2025-07-27"
+      },
+      "prior_source_archive_sha256": "9ce9d4c042f31427e12e58658fe1de5b496f9950f32582f06c27a29db0092d02",
+      "result_used_for_revision": "Observation coverage only, not candidate area or reference agreement"
+    },
+    "pre": {
+      "start": "2025-06-15",
+      "end_exclusive": "2025-07-27",
+      "raw_granule_count": 10,
+      "cloud_matched_granule_count": 10,
+      "missing_cloud_score_granules": 0,
+      "catalogue_dates": [
+        "2025-06-17",
+        "2025-06-22",
+        "2025-06-27",
+        "2025-06-29",
+        "2025-07-02",
+        "2025-07-07",
+        "2025-07-12",
+        "2025-07-17",
+        "2025-07-19",
+        "2025-07-22"
+      ],
+      "catalogue_date_count": 10,
+      "source_images": [
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20250617T170911_20250617T171334_T15UWQ",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20250617T170911_20250617T171334_T15UWQ",
+          "acquired_at": "2025-06-17T17:20:23.732000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20250622T170849_20250622T171504_T15UWQ",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20250622T170849_20250622T171504_T15UWQ",
+          "acquired_at": "2025-06-22T17:20:06.131000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20250627T170911_20250627T171950_T15UWQ",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20250627T170911_20250627T171950_T15UWQ",
+          "acquired_at": "2025-06-27T17:20:25.891000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20250629T171721_20250629T171717_T15UWQ",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20250629T171721_20250629T171717_T15UWQ",
+          "acquired_at": "2025-06-29T17:20:21.896000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20250702T170849_20250702T171145_T15UWQ",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20250702T170849_20250702T171145_T15UWQ",
+          "acquired_at": "2025-07-02T17:20:08.196000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20250707T170911_20250707T171847_T15UWQ",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20250707T170911_20250707T171847_T15UWQ",
+          "acquired_at": "2025-07-07T17:20:27.858000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20250712T170849_20250712T171616_T15UWQ",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20250712T170849_20250712T171616_T15UWQ",
+          "acquired_at": "2025-07-12T17:20:08.641000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20250717T170911_20250717T171229_T15UWQ",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20250717T170911_20250717T171229_T15UWQ",
+          "acquired_at": "2025-07-17T17:20:28.321000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20250719T171721_20250719T171948_T15UWQ",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20250719T171721_20250719T171948_T15UWQ",
+          "acquired_at": "2025-07-19T17:20:24.405000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20250722T170849_20250722T171546_T15UWQ",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20250722T170849_20250722T171546_T15UWQ",
+          "acquired_at": "2025-07-22T17:20:07.494000Z"
+        }
+      ],
+      "composite": "Per-UTC-day mosaic, stable system:index tie order, then bandwise median of distinct daily observations",
+      "pixel_dates": "first_day/last_day are earliest/latest contributing clear UTC days since 1970-01-01, not a fictitious single median acquisition date"
+    },
+    "post": {
+      "start": "2025-07-28",
+      "end_exclusive": "2025-08-18",
+      "raw_granule_count": 5,
+      "cloud_matched_granule_count": 5,
+      "missing_cloud_score_granules": 0,
+      "catalogue_dates": [
+        "2025-08-01",
+        "2025-08-06",
+        "2025-08-08",
+        "2025-08-11",
+        "2025-08-16"
+      ],
+      "catalogue_date_count": 5,
+      "source_images": [
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20250801T170849_20250801T171707_T15UWQ",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20250801T170849_20250801T171707_T15UWQ",
+          "acquired_at": "2025-08-01T17:20:05.215000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20250806T170911_20250806T171125_T15UWQ",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20250806T170911_20250806T171125_T15UWQ",
+          "acquired_at": "2025-08-06T17:20:24.064000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20250808T171721_20250808T171715_T15UWQ",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20250808T171721_20250808T171715_T15UWQ",
+          "acquired_at": "2025-08-08T17:20:19.844000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20250811T170849_20250811T171524_T15UWQ",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20250811T170849_20250811T171524_T15UWQ",
+          "acquired_at": "2025-08-11T17:20:07.177000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20250816T170911_20250816T171909_T15UWQ",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20250816T170911_20250816T171909_T15UWQ",
+          "acquired_at": "2025-08-16T17:20:24.488000Z"
+        }
+      ],
+      "composite": "Per-UTC-day mosaic, stable system:index tie order, then bandwise median of distinct daily observations",
+      "pixel_dates": "first_day/last_day are earliest/latest contributing clear UTC days since 1970-01-01, not a fictitious single median acquisition date"
+    },
+    "daily_forest_coverage": {
+      "status": "unavailable",
+      "failure_message": "Too many concurrent aggregations.",
+      "scope": "Optional per-date area diagnostic retrieval failed; source inventory and analytical date/count/support rasters remain authoritative. No coverage gate or pixel-quality fallback was applied."
+    },
+    "dataset": "COPERNICUS/S2_SR_HARMONIZED",
+    "cloud_dataset": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED",
+    "cloud_score_band": "cs_cdf",
+    "cloud_score_gte": 0.65,
+    "scl_classes": [
+      4,
+      5
+    ],
+    "reflectance_range_inclusive": [
+      0,
+      1
+    ],
+    "crs_transform": [
+      20,
+      0,
+      0,
+      0,
+      -20,
+      10000000
+    ],
+    "forest_source": {
+      "dataset": "ESA/WorldCover/v200",
+      "year": 2021,
+      "class": 10,
+      "aggregation": "All contributing WorldCover source pixels must map to tree cover on each 20 m target cell"
+    },
+    "coverage_gate": {
+      "raster": "eligible",
+      "min_shared_fraction": 0.8
+    },
+    "coverage_gates": [
+      {
+        "population": "forest_mask",
+        "valid": "pre_valid",
+        "min_fraction": 0.8
+      },
+      {
+        "population": "eligible",
+        "valid": "shared_valid",
+        "min_fraction": 0.8
+      }
+    ],
+    "window_selection": "Explicit V2 recipe fixed before its new computation; no automatic date search, reference/candidate-based tuning or subsequent threshold relaxation"
+  },
+  "audit_recipe": {
+    "method": "satellite_tornado.audit_arrays",
+    "experiment_version": 2,
+    "pre_start": "2025-06-15",
+    "pre_end_exclusive": "2025-07-27",
+    "post_start": "2025-07-28",
+    "post_end_exclusive": "2025-08-18",
+    "ndvi_formula": "(nir-red)/(nir+red)",
+    "nbr_formula": "(nir-swir2)/(nir+swir2)",
+    "change_sign": "before minus after",
+    "min_clear_dates": 2,
+    "min_pre_ndvi": 0.6,
+    "candidate_thresholds": {
+      "dndvi_gte": 0.15,
+      "dnbr_gte": 0.1
+    },
+    "ndvi_sensitivity": [
+      0.1,
+      0.15,
+      0.2
+    ],
+    "nbr_sensitivity": [
+      0.05,
+      0.1,
+      0.15
+    ],
+    "candidate_population": "eligible & shared_valid",
+    "grid_transform": [
+      20,
+      0,
+      0,
+      0,
+      -20,
+      10000000
+    ],
+    "min_coverage_fraction": 0.8
+  },
+  "source_archive_sha256": "194ab532732ef38c2934dff52a1d15a3fad4aee7ea439c8732996ef0de74293d",
+  "selection_frozen_at": "2026-10-22T17:16:34.829371Z"
+}

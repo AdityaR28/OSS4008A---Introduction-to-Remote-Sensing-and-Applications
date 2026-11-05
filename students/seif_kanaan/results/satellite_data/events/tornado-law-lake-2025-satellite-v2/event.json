@@ -1,0 +1,419 @@
+{
+  "schema_version": "1.0",
+  "id": "tornado-law-lake-2025-satellite-v2",
+  "hazard": "tornado",
+  "title": "Law Lake tornado: Sentinel-2 canopy change (revised baseline)",
+  "location": "Law Lake (Mine Centre), Ontario",
+  "event_date": "2025-07-27",
+  "event_date_label": "Documented event date",
+  "analysis_kind": "exploratory_satellite_canopy_change",
+  "summary": "Sentinel-2 before/after composites show spectral change near the documented 2025 Law Lake tornado. A dual-index rule marks AOI-wide exploratory canopy-change candidates, including scattered changes away from the documented event corridor. The widened 42-day baseline, seasonal change and possible residual haze/colour or contrast differences limit attribution; this is not a complete tornado footprint.",
+  "bbox": [
+    -92.55,
+    48.765,
+    -92.4,
+    48.825
+  ],
+  "temporal": [
+    {
+      "label": "Baseline",
+      "start": "2025-06-17",
+      "end": "2025-07-22",
+      "description": "Actual catalogue acquisition dates: 2025-06-17, 2025-06-22, 2025-06-27, 2025-06-29, 2025-07-02, 2025-07-07, 2025-07-12, 2025-07-17, 2025-07-19, 2025-07-22. 10 matched source frames. Search window 2025-06-15 to 2025-07-27 (exclusive end). Daily-observation reflectance medians; catalogue dates do not prove independent clear observations at every pixel. At least two distinct clear dates are required per accepted period; numerical first/last-day rasters are retained."
+    },
+    {
+      "label": "Comparison",
+      "start": "2025-08-01",
+      "end": "2025-08-16",
+      "description": "Actual catalogue acquisition dates: 2025-08-01, 2025-08-06, 2025-08-08, 2025-08-11, 2025-08-16. 5 matched source frames. Search window 2025-07-28 to 2025-08-18 (exclusive end). Daily-observation reflectance medians; catalogue dates do not prove independent clear observations at every pixel. At least two distinct clear dates are required per accepted period; numerical first/last-day rasters are retained."
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Exploratory canopy-change indicator",
+      "value": 54.601802526855465,
+      "unit": "ha",
+      "precision": 1,
+      "description": "AOI-wide cells meeting both index-decrease criteria in baseline mapped-tree/NDVI support, including scattered off-corridor changes; not a complete tornado footprint or validated damage area. Nine-threshold sensitivity 17.1–248.0 ha."
+    },
+    {
+      "label": "Shared full-box coverage",
+      "value": 93.14458540575201,
+      "unit": "%",
+      "precision": 2,
+      "description": "At least two distinct quality-qualified dates in each period; forest and eligible denominator gates are reported separately."
+    },
+    {
+      "label": "Baseline mapped-forest coverage",
+      "value": 93.2241868458324,
+      "unit": "%",
+      "precision": 2,
+      "description": "Observed baseline fraction of WorldCover2021 mapped-tree cells; the original 21-day window reached only 35.96%."
+    },
+    {
+      "label": "Shared eligible coverage",
+      "value": 99.9949395344195,
+      "unit": "%",
+      "precision": 3,
+      "description": "Shared support within baseline mapped-tree cells with NDVI ≥0.60. This differs from full-domain coverage."
+    },
+    {
+      "label": "Candidate with original-window support",
+      "value": 34.237493061233266,
+      "unit": "%",
+      "precision": 2,
+      "description": "The rest relies on the revised baseline's earlier dates; no alternate-window causal attribution is claimed."
+    }
+  ],
+  "layers": [
+    {
+      "id": "pre_rgb",
+      "label": "Before: Sentinel-2 median reflectance",
+      "kind": "image",
+      "url": "layers/pre_rgb.png",
+      "description": "Actual returned satellite display: Before: Sentinel-2 median reflectance. Units: surface reflectance. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          48.76499719214159,
+          -92.55036945086829
+        ],
+        [
+          48.825002639170776,
+          -92.39999147230668
+        ]
+      ],
+      "units": "surface reflectance",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#a8b9ae",
+          "label": "RGB reflectance composite; colours are not damage classes"
+        }
+      ]
+    },
+    {
+      "id": "post_rgb",
+      "label": "After: Sentinel-2 median reflectance",
+      "kind": "image",
+      "url": "layers/post_rgb.png",
+      "description": "Actual returned satellite display: After: Sentinel-2 median reflectance. Units: surface reflectance. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          48.76499719214159,
+          -92.55036945086829
+        ],
+        [
+          48.825002639170776,
+          -92.39999147230668
+        ]
+      ],
+      "units": "surface reflectance",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#a8b9ae",
+          "label": "RGB reflectance composite; colours are not damage classes"
+        }
+      ]
+    },
+    {
+      "id": "dndvi",
+      "label": "Observed NDVI decrease in eligible forest",
+      "kind": "image",
+      "url": "layers/dndvi.png",
+      "description": "Actual returned satellite display: Observed NDVI decrease in eligible forest. Units: NDVI before minus after. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          48.76499719214159,
+          -92.55036945086829
+        ],
+        [
+          48.825002639170776,
+          -92.39999147230668
+        ]
+      ],
+      "units": "NDVI before minus after",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#2166ac",
+          "label": "NDVI increase"
+        },
+        {
+          "color": "#f7f7f7",
+          "label": "Little NDVI change"
+        },
+        {
+          "color": "#b2182b",
+          "label": "NDVI decrease"
+        }
+      ]
+    },
+    {
+      "id": "dnbr",
+      "label": "Observed NIR/SWIR index decrease in eligible forest",
+      "kind": "image",
+      "url": "layers/dnbr.png",
+      "description": "Actual returned satellite display: Observed NIR/SWIR index decrease in eligible forest. Units: NBR before minus after. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          48.76499719214159,
+          -92.55036945086829
+        ],
+        [
+          48.825002639170776,
+          -92.39999147230668
+        ]
+      ],
+      "units": "NBR before minus after",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#2166ac",
+          "label": "Index increase"
+        },
+        {
+          "color": "#f7f7f7",
+          "label": "Little index change"
+        },
+        {
+          "color": "#b2182b",
+          "label": "Index decrease (not burn severity)"
+        }
+      ]
+    },
+    {
+      "id": "candidate",
+      "label": "Exploratory canopy spectral-change indicator",
+      "kind": "image",
+      "url": "layers/candidate.png",
+      "description": "Actual returned satellite display: Exploratory canopy spectral-change indicator. Units: binary exploratory indicator. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected. Exploratory indicator only; do not interpret it as independently validated damage or complete event extent. This is an AOI-wide dual-index spectral indicator including scattered off-corridor changes, not a complete tornado footprint.",
+      "bounds": [
+        [
+          48.76499719214159,
+          -92.55036945086829
+        ],
+        [
+          48.825002639170776,
+          -92.39999147230668
+        ]
+      ],
+      "units": "binary exploratory indicator",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#e6550d",
+          "label": "Both predeclared index-decrease criteria met"
+        }
+      ]
+    },
+    {
+      "id": "eligible",
+      "label": "Baseline mapped-tree study population",
+      "kind": "image",
+      "url": "layers/eligible.png",
+      "description": "Actual returned satellite display: Baseline mapped-tree study population. Units: baseline eligibility. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          48.76499719214159,
+          -92.55036945086829
+        ],
+        [
+          48.825002639170776,
+          -92.39999147230668
+        ]
+      ],
+      "units": "baseline eligibility",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#238b45",
+          "label": "2021 tree cover, observed baseline NDVI ≥ 0.60"
+        }
+      ]
+    },
+    {
+      "id": "shared_valid",
+      "label": "Shared quality-qualified observation support",
+      "kind": "image",
+      "url": "layers/shared_valid.png",
+      "description": "Actual returned satellite display: Shared quality-qualified observation support. Units: observation support. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          48.76499719214159,
+          -92.55036945086829
+        ],
+        [
+          48.825002639170776,
+          -92.39999147230668
+        ]
+      ],
+      "units": "observation support",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#3182bd",
+          "label": "At least two distinct clear dates in both windows"
+        }
+      ]
+    }
+  ],
+  "methods": [
+    {
+      "title": "Quality-screened satellite composites",
+      "description": "Sentinel-2 harmonized surface reflectance with matched Cloud Score+ cs_cdf ≥0.65, SCL vegetation/bare classes and consistent 20 m support. Daily mosaics are reduced to bandwise reflectance medians; at least two distinct clear dates per accepted cell. RGB is a composite, not one contemporaneous photograph."
+    },
+    {
+      "title": "Explicit revised experiment",
+      "description": "The original 6–26 July baseline failed forest coverage. V2 predeclared 15 June–26 July, keeping 28 July–17 August comparison, quality/count/coverage floors and exploratory index criteria unchanged. Earlier summer observations increase phenology and time-mixing confounds. Original-window count and support rasters are retained."
+    },
+    {
+      "title": "Exploratory dual-index diagnostic",
+      "description": "Study WorldCover2021 mapped-tree cells with observed baseline NDVI ≥0.60. Candidate requires before-minus-after NDVI ≥0.15 AND NIR/SWIR NBR decrease ≥0.10. Report all nine sensitivity combinations. NBR here is a spectral index, not calibrated burn severity or wind-damage class."
+    },
+    {
+      "title": "Observability limits",
+      "description": "Inspect actual before/after RGB before interpreting the AOI-wide candidate, which includes scattered off-corridor changes. Broad spectral shifts, possible residual haze/colour or contrast differences, moisture, phenology and other disturbance can explain change. NTP contextual evidence supports observability but is not an independent pixel-level validation; no surveyed track is invented. Optional per-date area aggregation failed remotely, while retained per-cell counts/date rasters and mandatory gates were audited."
+    },
+    {
+      "title": "Frozen export and independent audit",
+      "description": "Original Colab selection, numerical manifest, processing receipt and provider audit remain byte-identical with unapproved history. Independent local checks rerun full numerical TIFFs. The portable source package retains those inputs; the website ships durable PNGs and hashed records. No credentials or live Earth Engine tile URLs are used."
+    }
+  ],
+  "limitations": [
+    "Exploratory satellite observations, not independently validated damage, an official affected-area total or an emergency warning. Blank/excluded pixels are unknown, not unchanged.",
+    "Shared observations cover 93.14% of the box; baseline mapped-forest coverage is 93.22%, and shared coverage of the NDVI-qualified eligible population is 99.995%. Unobserved or excluded land is unknown, not undamaged.",
+    "The 42-day baseline mixes earlier summer conditions with a 21-day comparison; broad NDVI shifts and possible residual haze/colour or contrast differences limit interpretation. 65.76% of candidate area relies on the added earlier baseline (34.24% also has qualified original-window support). Nine-threshold candidate sensitivity is 17.1–248.0 ha, not a confidence interval.",
+    "The original baseline failed. V2 revised dates once using coverage diagnostics only; its quality/count/coverage/index thresholds were retained. Source history is preserved rather than re-labelled as approved.",
+    "This is satellite-observed spectral change near a documented tornado, not confirmed canopy-loss fraction, treefall, structural damage, wind speed or EF severity.",
+    "NDVI/NBR thresholds are predeclared exploratory diagnostics, not scientifically calibrated damage classes. Report all nine sensitivity combinations; never tune to NTP agreement.",
+    "2021 WorldCover tree cover can be stale or misclassified in 2025. The baseline NDVI criterion limits the study population, not all forest or all tornado-affected land.",
+    "The revised June 15–July 26 42-day baseline is farther from the event and asymmetric with the 21-day comparison. Phenology/leaf development, moisture, illumination, logging, other wind, fire and cloud/shadow can cause change; this is a stronger temporal confound than the failed original 21-day baseline.",
+    "Each 20 m cell mixes vegetation and surroundings. RGB/indices are medians of daily observations, not a simultaneous photograph; per-pixel first/last contributing dates and distinct clear-date counts are retained.",
+    "The original July 6–26 baseline failed its unchanged 80% mapped-forest coverage requirement (35.959%). V2 is an explicitly documented one-time baseline revision; quality/count/coverage/indicator thresholds are unchanged, and no search or automatic relaxation occurs.",
+    "Unobserved or ineligible land is not unchanged or undamaged. Two clear-date and two coverage gates still fail closed; original-window count/support rasters and per-date forest coverage are diagnostic, not evidence that V2 succeeds.",
+    "NTP independently documents the event using satellite review including Sentinel imagery. It is contextual corroboration of observability, not independent pixel-level validation of this experiment.",
+    "As checked 22 October 2026, NTP's current public Damage Tracks service does not contain a full Law Lake line. Do not synthesize a line or footprint from published start/end coordinates, maximum width or a map image."
+  ],
+  "sources": [
+    {
+      "label": "NTP event assessment and explicit Sentinel-2 observability evidence",
+      "url": "https://www.uwo.ca/ntp/blog/2025/ontarios_first_ef2_tornado_recorded_in_nw_on_on_jul_27.html",
+      "attribution": "NTP event assessment and explicit Sentinel-2 observability evidence",
+      "license": "Linked primary-source context/documentation; original terms apply. No source illustrations or survey geometry are redistributed."
+    },
+    {
+      "label": "Sentinel-2 harmonized surface reflectance",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED",
+      "attribution": "Sentinel-2 harmonized surface reflectance",
+      "license": "Linked primary-source context/documentation; original terms apply. No source illustrations or survey geometry are redistributed."
+    },
+    {
+      "label": "Cloud Score+ quality data",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_CLOUD_SCORE_PLUS_V1_S2_HARMONIZED",
+      "attribution": "Google Earth Engine, Cloud Score+; Pasquarella et al. (2023), doi:10.1109/CVPRW59228.2023.00206",
+      "license": "CC BY 4.0"
+    },
+    {
+      "label": "ESA WorldCover 2021 v200 baseline land cover",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/ESA_WorldCover_v200",
+      "attribution": "ESA WorldCover 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover Consortium; Zanaga et al. (2022), doi:10.5281/zenodo.7254221",
+      "license": "CC BY 4.0"
+    },
+    {
+      "label": "Kingfield and de Beurs (2017): tornado spectral response and land-cover/season limitations",
+      "url": "https://doi.org/10.1175/JAMC-D-16-0228.1",
+      "attribution": "Kingfield and de Beurs (2017): tornado spectral response and land-cover/season limitations",
+      "license": "Linked primary-source context/documentation; original terms apply. No source illustrations or survey geometry are redistributed."
+    },
+    {
+      "label": "Satellite and baseline attribution",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/ESA_WorldCover_v200",
+      "attribution": "Contains modified Copernicus Sentinel data (2025). ESA WorldCover 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover Consortium; Zanaga et al. (2022), doi:10.5281/zenodo.7254221.",
+      "license": "Sentinel observations: Copernicus Sentinel data terms; ESA WorldCover: CC BY 4.0. NTP is linked contextual event evidence; no NTP survey geometry is redistributed."
+    }
+  ],
+  "provenance": {
+    "generated_at": "2026-10-22T17:16:39.963024Z",
+    "inputs": [
+      {
+        "file": "raw/manifest.json",
+        "sha256": "bb110958c6f2d986af405577d85037a7f9f8c82bdb07d488d2439aeb42659713",
+        "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED"
+      },
+      {
+        "file": "raw/source_selection.json",
+        "sha256": "cf39f2ab7938df9aad7d6afd79f6a8a1fe0a08d8b84b28df5f04f09b95912483",
+        "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED"
+      },
+      {
+        "file": "raw/export_audit.json",
+        "sha256": "fdcd3de5e973e7c004c1d190872e10b6b7252359793af9671b44aa145ca121c2",
+        "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED"
+      },
+      {
+        "file": "raw/processing_report.json",
+        "sha256": "a02cf94bca58d5c50f4fe74e7e717fac01698be0873c3b0159c63ae73654f6ec",
+        "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED"
+      }
+    ],
+    "software": "scripts/import_satellite_site.py deterministic event-v1 adapter; original processing versions and source fingerprints retained in raw/source_selection.json",
+    "report_url": "checks.json"
+  },
+  "checks": {
+    "status": "automated_checks_passed",
+    "summary": "Independent returned-data hashes/grid/formula/mask/coverage checks passed. These checks are consistency evidence, not damage classification accuracy; source flags remain unapproved and publication is not approved."
+  },
+  "consistency_review": {
+    "status": "bounded_exploratory_consistency_review",
+    "source_review_status": "unapproved",
+    "publishing_approved": false,
+    "scope": "Returned numerical data, hashes, fixed grids, acquisition recipe, formulas, masks and coverage checked; derivative metadata describe exploratory observations. Not independent field accuracy or damage validation.",
+    "numerical_input_directory": "data/satellite_inputs/tornado-law-lake-2025-satellite-v2",
+    "source_archive_sha256": "194ab532732ef38c2934dff52a1d15a3fad4aee7ea439c8732996ef0de74293d",
+    "frozen_manifest_sha256": "bb110958c6f2d986af405577d85037a7f9f8c82bdb07d488d2439aeb42659713"
+  },
+  "satellite_export": {
+    "source_manifest_url": "raw/manifest.json",
+    "source_selection_url": "raw/source_selection.json",
+    "source_archive_sha256": "194ab532732ef38c2934dff52a1d15a3fad4aee7ea439c8732996ef0de74293d",
+    "source_manifest_sha256": "bb110958c6f2d986af405577d85037a7f9f8c82bdb07d488d2439aeb42659713",
+    "hazard_area_ha": null,
+    "hazard_area_interpretation": "No official or confirmed impact area; any candidate area is a bounded exploratory spectral/backscatter indicator."
+  }
+}

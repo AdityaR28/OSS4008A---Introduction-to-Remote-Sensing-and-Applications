@@ -1,0 +1,76 @@
+{
+  "status": "passed",
+  "common": {
+    "status": "passed",
+    "domain_pixels": 502352,
+    "shared_pixels": 331745,
+    "area_checks": {
+      "domain_area_m2": {
+        "local_m2": 452429070.3288574,
+        "ee_m2": 452429070.3288574,
+        "difference_m2": 0.0,
+        "tolerance_m2": 452.4290703288574
+      },
+      "pre_valid_area_m2": {
+        "local_m2": 298777559.54748535,
+        "ee_m2": 298777559.5477295,
+        "difference_m2": 0.000244140625,
+        "tolerance_m2": 298.7775595477295
+      },
+      "post_valid_area_m2": {
+        "local_m2": 298777559.54748535,
+        "ee_m2": 298777559.5477295,
+        "difference_m2": 0.000244140625,
+        "tolerance_m2": 298.7775595477295
+      },
+      "shared_valid_area_m2": {
+        "local_m2": 298777559.54748535,
+        "ee_m2": 298777559.5477295,
+        "difference_m2": 0.000244140625,
+        "tolerance_m2": 298.7775595477295
+      },
+      "eligible_area_m2": {
+        "local_m2": 298777559.54748535,
+        "ee_m2": 298777559.5477295,
+        "difference_m2": 0.000244140625,
+        "tolerance_m2": 298.7775595477295
+      },
+      "gate_0_population_m2": {
+        "local_m2": 298777559.54748535,
+        "ee_m2": 298777559.5477295,
+        "difference_m2": 0.000244140625,
+        "tolerance_m2": 298.7775595477295
+      },
+      "gate_0_observed_m2": {
+        "local_m2": 298777559.54748535,
+        "ee_m2": 298777559.5477295,
+        "difference_m2": 0.000244140625,
+        "tolerance_m2": 298.7775595477295
+      },
+      "gate_1_population_m2": {
+        "local_m2": 298777559.54748535,
+        "ee_m2": 298777559.5477295,
+        "difference_m2": 0.000244140625,
+        "tolerance_m2": 298.7775595477295
+      },
+      "gate_1_observed_m2": {
+        "local_m2": 298777559.54748535,
+        "ee_m2": 298777559.5477295,
+        "difference_m2": 0.000244140625,
+        "tolerance_m2": 298.7775595477295
+      }
+    },
+    "scope": "Numerical implementation consistency; not independent hazard classification accuracy."
+  },
+  "hazard_specific": {
+    "status": "numerical_consistency_passed",
+    "shared_pixels": 331745,
+    "max_arithmetic_error_db": {
+      "delta_vv_db": 1.9073486328125e-06,
+      "delta_vh_db": 3.3974647521972656e-06,
+      "control_delta_vv_db": 1.9073486328125e-06,
+      "control_delta_vh_db": 3.3974647521972656e-06
+    },
+    "impact_classification": "not performed"
+  }
+}

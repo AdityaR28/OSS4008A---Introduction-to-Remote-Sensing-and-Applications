@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "default_event": "wildfire-mcdougall-2023",
+  "events": [
+    {
+      "id": "wildfire-mcdougall-2023",
+      "hazard": "wildfire",
+      "url": "manifest.json",
+      "contract": "wildfire-v1"
+    },
+    {
+      "id": "flood-lower-fraser-2021-satellite-v2",
+      "hazard": "flood",
+      "url": "events/flood-lower-fraser-2021-satellite-v2/event.json",
+      "contract": "event-v1",
+      "manifest_sha256": "76920bec0a367e0e8b3d8fa91a772d06fc621241d23f693cf22fbd1a0d5d3f47",
+      "layers_sha256": {
+        "layers/post_vv_db.png": "ad057f2169cafdffa563ab33dfd1d5c97d4c4644f679a7c0b4b1b796c00f70f6",
+        "layers/pre_vv_db.png": "30e5d6b32bcc7fd41e5d938bbeef059e593d77c0b69838b34a836e6d6b167f37",
+        "layers/delta_vv_db.png": "63fdbde03a696c26056036f8ea89ec6ad5ea784053230f1e6d916fe288dcc120",
+        "layers/candidate.png": "15bef24bc422a03541645f86ce68770536c03571d01e09555f15c5cb321b38cf",
+        "layers/permanent_water.png": "d32bf84d32213c522e0208c4a3c63f5e122cb73e6a39964474b0d51defea2ed8",
+        "layers/baseline_valid.png": "d8b6cba7e7b2998808e6123e7db00644b45a39f40ba92f9a0ba6778c7053fedb",
+        "layers/eligible.png": "75b0e89535bec0575699b20f8fbea6ca4557fdb5692eaa9ef1dd976453956cbb"
+      },
+      "checks_sha256": "23dd5a315fa27f6b79ac39ceb1d9f8007b654d81b6817127a61c641cdd2e9629",
+      "source_manifest_sha256": "f624adfe9386e2b3f4a0dae6fb32ae9923eb8fb93d89f5a50d42c2a4576719c0",
+      "source_archive_sha256": "194ab532732ef38c2934dff52a1d15a3fad4aee7ea439c8732996ef0de74293d"
+    },
+    {
+      "id": "satellite-earthquake-hubbard-2025",
+      "hazard": "earthquake",
+      "url": "events/satellite-earthquake-hubbard-2025/event.json",
+      "contract": "event-v1",
+      "manifest_sha256": "899da3bbb08b633bbf609d0f73373fd7d8e5aeb00c1953431c4f6bfe4d7442d6",
+      "layers_sha256": {
+        "layers/delta_vv_db.png": "4ad1833efe7e573df2a49d4b5773a7cd82b79bd95afc09580a89c4c054778424",
+        "layers/pre_vv_db.png": "045cd3dfb4b33ea8a42bb6e9c4adcbc15ef3db7b78c70e06bef2a1380e277cdd",
+        "layers/post_vv_db.png": "2f486097950dc70aefcacc79de8de8eaad4fef0154dfdf653b806019b7727f5d",
+        "layers/pre_vh_db.png": "1520b221c3b80ae8ffe3a9d8579da3b0ebf2c28bde48934f92ac26321fac2d93",
+        "layers/post_vh_db.png": "4fef4d1904dd9067c7f78926c919bb7a2d55d5b7d2f5d7b18cbea0fc10e78c29",
+        "layers/delta_vh_db.png": "a351582cbfe67f6fdcfa35e5d1bcbb394119ad1c00bfbaa9451ea22898373f80",
+        "layers/control_delta_vv_db.png": "7513c453bf25d8dad6a66163c9fe411ed032c6ab99f6bd66cdc38666af0e0087",
+        "layers/shared_valid.png": "a1af22a1c663747d552792b72c322d755966a706204202934a6107d184026780"
+      },
+      "checks_sha256": "7cea878562b6692d62c56cd519ef3c5d70eb3e82cf7db24f21e409d7f3860bff",
+      "source_manifest_sha256": "cdbc8326a53569f1a6e524e44d16f40c2782fb695ea51d6b2409a6042fbea789",
+      "source_archive_sha256": "9ce9d4c042f31427e12e58658fe1de5b496f9950f32582f06c27a29db0092d02"
+    },
+    {
+      "id": "tornado-law-lake-2025-satellite-v2",
+      "hazard": "tornado",
+      "url": "events/tornado-law-lake-2025-satellite-v2/event.json",
+      "contract": "event-v1",
+      "manifest_sha256": "f315eb3d9f84d047f89e4ab56bb7e4b29fee39006cffaa54487b28550c377f09",
+      "layers_sha256": {
+        "layers/pre_rgb.png": "751de452fa32f7b957ffbaa7b4907add31fd56bb9cce8ded21630d7a73997116",
+        "layers/post_rgb.png": "0eb4143ca2edd337002893fe9909e6f10a732e8b4725654966e95c7b3a09f8a5",
+        "layers/dndvi.png": "015a595199179996ce0f193e5f85c1d5e9d9fb6ca44584080aed9f0a22a396d6",
+        "layers/dnbr.png": "f5c0dca3da250181a87e1f1e05b0836ed81c1ac3e25377184e898b7ea77c75a1",
+        "layers/candidate.png": "ffb0109210089811e47a11bf591d2fce04f2d02b10235456ba1a0a21306e8494",
+        "layers/eligible.png": "392037a85ce7dde47da3fd275c8042c9e3f7405ee1ab53b9cf561c7a764367bd",
+        "layers/shared_valid.png": "31b19dbf19c300c03d07365e3fe6d0e2eb3123083329caec81ca6579d18ff9c9"
+      },
+      "checks_sha256": "6226ce7b48395a8ef950dbc55aaba154390bf9783b274946b7c0c53c28e78487",
+      "source_manifest_sha256": "bb110958c6f2d986af405577d85037a7f9f8c82bdb07d488d2439aeb42659713",
+      "source_archive_sha256": "194ab532732ef38c2934dff52a1d15a3fad4aee7ea439c8732996ef0de74293d"
+    }
+  ]
+}

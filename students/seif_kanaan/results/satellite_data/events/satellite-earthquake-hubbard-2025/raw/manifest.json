@@ -1,0 +1,574 @@
+{
+  "schema": "canadian-disasters-satellite/1.0",
+  "status": "export_complete_unreviewed",
+  "review_status": "unapproved",
+  "publishing_approved": false,
+  "event": {
+    "id": "satellite-earthquake-hubbard-2025",
+    "hazard": "earthquake",
+    "title": "2025 Hubbard Glacier earthquake — Mount King George radar surface change",
+    "event_date": "2025-12-06",
+    "location": "Mount King George, Kluane region, Yukon, Canada",
+    "method": "Matched Sentinel-1A VV/VH amplitude change on conservative low-slope support; pre-event repeat diagnostic",
+    "sources": [
+      {
+        "label": "USGS documented landslide response and Yukon reconnaissance",
+        "url": "https://www.usgs.gov/programs/landslide-hazards/science/2025-m70-hubbard-glacier-earthquake-triggered-landslides-and"
+      },
+      {
+        "label": "USGS provisional same-acquisition SAR difference (context, not independent truth)",
+        "url": "https://doi.org/10.5066/P14H7MVU"
+      },
+      {
+        "label": "Earth Engine Sentinel-1 preprocessing",
+        "url": "https://developers.google.com/earth-engine/guides/sentinel1"
+      },
+      {
+        "label": "Copernicus GLO30 2024_1 dataset",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_DEM_GLO30_2024_1",
+        "attribution": "produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved",
+        "licence_notice": "The organisations in charge of the Copernicus programme by law or by delegation do not incur any liability for any use of the Copernicus WorldDEM-30"
+      },
+      {
+        "label": "Official Mount King George location",
+        "url": "https://geonames.nrcan.gc.ca/search-place-names/unique?id=KADIK"
+      }
+    ],
+    "limitations": [
+      "This is measured radar-amplitude/backscatter change, not InSAR displacement, earthquake shaking, confirmed landslides, building damage or losses. GRD contains no phase information for interferometry.",
+      "Snowfall, wetness, melt/freeze, glacier motion and viewing/processing effects can change backscatter. Timing and documented regional landslides do not establish the cause of every changed pixel.",
+      "Only low-slope support (Copernicus GLO30 slope ≤20°) with matched same-platform ascending orbit, accepted incidence angles and complete source support is admitted. This omits steep landslide source/transport areas and is not a complete event footprint.",
+      "Earth Engine terrain-corrects Sentinel-1 GRD geometrically but does not perform radiometric terrain flattening. The low-slope and angle screens reduce some problems; they do not prove freedom from local/distant terrain shadow, layover or foreshortening.",
+      "C-band radar responds to surface properties. Positive VV change can be consistent with rougher avalanche deposits on glaciers, but cannot uniquely distinguish rock, snow, ice or other causes. No damage or landslide area is reported.",
+      "Each period is one exact frame/date. Three-by-three approximate native-sample power aggregation to a 30 m lattice reduces speckle but does not remove it or create independent observations. Continuous differences and a pre-event repeat must be visually reviewed.",
+      "No-data and excluded steep terrain are unknown, not unchanged. A successful coverage gate applies only to the explicitly low-slope eligible denominator; the full domain coverage is reported separately.",
+      "The USGS provisional SAR/landslide products used the same acquisitions and are contextual corroboration, not an independent pixel-level accuracy reference. The EE preprocessing and conservative support differ from the USGS product."
+    ]
+  },
+  "generated_at": "2026-10-22T15:57:37.630127Z",
+  "source_archive_sha256": "9ce9d4c042f31427e12e58658fe1de5b496f9950f32582f06c27a29db0092d02",
+  "source_selection": {
+    "file": "source_selection.json",
+    "sha256": "87843111787f2e9ae6478bb19d7ef9a084a5c918fdb42280b449d10ffa0a6ead"
+  },
+  "analysis_grid": {
+    "crs": "EPSG:32607",
+    "scale_m": 30,
+    "transform": [
+      30.0,
+      0.0,
+      556290.0,
+      0.0,
+      -30.0,
+      6724630.0
+    ],
+    "width": 692,
+    "height": 756,
+    "bbox": [
+      -139.97,
+      60.45,
+      -139.6,
+      60.65
+    ],
+    "anchor_transform": [
+      30,
+      0,
+      0,
+      0,
+      -30,
+      10000000
+    ]
+  },
+  "validity": {
+    "pre": "pre_valid",
+    "post": "post_valid",
+    "shared": "shared_valid",
+    "candidate": null
+  },
+  "coverage_flag_ids": [
+    "control_valid",
+    "domain",
+    "eligible",
+    "post_valid",
+    "pre_valid",
+    "shared_valid"
+  ],
+  "coverage_gates": [
+    {
+      "population": "eligible",
+      "valid": "shared_valid",
+      "min_fraction": 0.8
+    },
+    {
+      "population": "shared_valid",
+      "valid": "control_valid",
+      "min_fraction": 0.8
+    }
+  ],
+  "metrics": {
+    "domain_area_m2": 452429070.3288574,
+    "pre_valid_area_m2": 298777559.5477295,
+    "post_valid_area_m2": 298777559.5477295,
+    "shared_valid_area_m2": 298777559.5477295,
+    "eligible_area_m2": 298777559.5477295,
+    "gate_0_population_m2": 298777559.5477295,
+    "gate_0_observed_m2": 298777559.5477295,
+    "gate_1_population_m2": 298777559.5477295,
+    "gate_1_observed_m2": 298777559.5477295,
+    "area_convention": "Full WGS84 pixelArea values for cells whose centres fall inside the declared longitude/latitude box, evaluated on the exact anchored projected grid. Not fractionally clipped geographic boundary area.",
+    "gate_results": [
+      {
+        "population": "eligible",
+        "valid": "shared_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 298777559.5477295,
+        "observed_area_m2": 298777559.5477295,
+        "fraction": 1.0,
+        "passed": true
+      },
+      {
+        "population": "shared_valid",
+        "valid": "control_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 298777559.5477295,
+        "observed_area_m2": 298777559.5477295,
+        "fraction": 1.0,
+        "passed": true
+      }
+    ],
+    "shared_fraction_of_aoi": 0.6603854153990522
+  },
+  "hazard_area_ha": null,
+  "hazard_area_note": "No official event area or confirmed damage is inferred. Any candidate area is an exploratory satellite indicator only.",
+  "audit_recipe": {
+    "kind": "satellite_earthquake_backscatter",
+    "difference_formula": "delta_vv_db=post_vv_db-pre_vv_db; delta_vh_db=post_vh_db-pre_vh_db",
+    "control_formula": "control_delta=pre-control, on control_valid",
+    "candidate_threshold": null,
+    "arithmetic_tolerance_db": 5e-05,
+    "validity": "shared_valid=pre_valid AND post_valid; flags pair-conditioned by incidence agreement",
+    "damage_or_landslide_area": "not estimated"
+  },
+  "analytical_assets": [
+    {
+      "id": "eligible",
+      "file": "rasters/eligible.tif",
+      "sha256": "6205fdcc1a2d482c03db39dac8863b38b402e780b636cdb4d703ab440c25be7e",
+      "nodata": -9999.0
+    },
+    {
+      "id": "slope_deg",
+      "file": "rasters/slope_deg.tif",
+      "sha256": "77c1b53f79c661a76ccacd5c0f52d9e4c2446ce5b96361129e0504c6f2f596eb",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_count",
+      "file": "rasters/pre_count.tif",
+      "sha256": "b06a0da1b2c739494b1603c0742444ace7cc9e6cc1c624b0eae0e9ad84ce32d6",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_count",
+      "file": "rasters/post_count.tif",
+      "sha256": "b06a0da1b2c739494b1603c0742444ace7cc9e6cc1c624b0eae0e9ad84ce32d6",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_valid",
+      "file": "rasters/pre_valid.tif",
+      "sha256": "6205fdcc1a2d482c03db39dac8863b38b402e780b636cdb4d703ab440c25be7e",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_valid",
+      "file": "rasters/post_valid.tif",
+      "sha256": "6205fdcc1a2d482c03db39dac8863b38b402e780b636cdb4d703ab440c25be7e",
+      "nodata": -9999.0
+    },
+    {
+      "id": "shared_valid",
+      "file": "rasters/shared_valid.tif",
+      "sha256": "6205fdcc1a2d482c03db39dac8863b38b402e780b636cdb4d703ab440c25be7e",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_angle_deg",
+      "file": "rasters/pre_angle_deg.tif",
+      "sha256": "6834074ee04fc7486a7883b265ee33b2077db4f118d551dff20403c18c6c6f51",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_angle_deg",
+      "file": "rasters/post_angle_deg.tif",
+      "sha256": "2b6521b2138f9234e947b47ed2a1b9c1835f0200c94b3edf106fc250a5461b22",
+      "nodata": -9999.0
+    },
+    {
+      "id": "angle_difference_deg",
+      "file": "rasters/angle_difference_deg.tif",
+      "sha256": "3eba750f582b53c9bdc9dd3c2c5c2090d932ec5829693eca2b47c85c1cc08f2b",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_vv_db",
+      "file": "rasters/pre_vv_db.tif",
+      "sha256": "2555734f397d058867e9723fbd07d66160c582e803ecf54e30a497e3e242136b",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_vv_db",
+      "file": "rasters/post_vv_db.tif",
+      "sha256": "20967ebf959dae50830f798c333e85733b934e761040228069ee59cef4c7e388",
+      "nodata": -9999.0
+    },
+    {
+      "id": "delta_vv_db",
+      "file": "rasters/delta_vv_db.tif",
+      "sha256": "a2714fdb613ddb8b540ac274127b1ef1422bd6162e4ab70c63dcb4ccfcadef3d",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_vh_db",
+      "file": "rasters/pre_vh_db.tif",
+      "sha256": "b5e1543ffea7bb6e8b25ef1f463d651e7dd32860023dd1f0530575882d997351",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_vh_db",
+      "file": "rasters/post_vh_db.tif",
+      "sha256": "abea5695541a92d38bbdb5f4e6fc515c38f270f4e6f118c0c94cd2ef5fb59e06",
+      "nodata": -9999.0
+    },
+    {
+      "id": "delta_vh_db",
+      "file": "rasters/delta_vh_db.tif",
+      "sha256": "a97dd6d9b2df10f310d15e28a58ab33199600394f77191a03ab4349bfde8f3de",
+      "nodata": -9999.0
+    },
+    {
+      "id": "control_valid",
+      "file": "rasters/control_valid.tif",
+      "sha256": "6205fdcc1a2d482c03db39dac8863b38b402e780b636cdb4d703ab440c25be7e",
+      "nodata": -9999.0
+    },
+    {
+      "id": "control_count",
+      "file": "rasters/control_count.tif",
+      "sha256": "b06a0da1b2c739494b1603c0742444ace7cc9e6cc1c624b0eae0e9ad84ce32d6",
+      "nodata": -9999.0
+    },
+    {
+      "id": "control_angle_deg",
+      "file": "rasters/control_angle_deg.tif",
+      "sha256": "bb0e4ae06d74c23b845b8141ea5c091deca60f5c193f4f68e21b307065fda819",
+      "nodata": -9999.0
+    },
+    {
+      "id": "control_vv_db",
+      "file": "rasters/control_vv_db.tif",
+      "sha256": "0c9bbebc70b5a6f58977bbe4e20584e9bb10ea784e603ac0c5228e3d424c876a",
+      "nodata": -9999.0
+    },
+    {
+      "id": "control_delta_vv_db",
+      "file": "rasters/control_delta_vv_db.tif",
+      "sha256": "a32f3ec6fca8196c88fc708a42de58720709fd95e221b447d11d29eb64e264f4",
+      "nodata": -9999.0
+    },
+    {
+      "id": "control_vh_db",
+      "file": "rasters/control_vh_db.tif",
+      "sha256": "348c4e1d5b50521aa926cd75855512fb0b9179004a3ff0e9345771038ded8123",
+      "nodata": -9999.0
+    },
+    {
+      "id": "control_delta_vh_db",
+      "file": "rasters/control_delta_vh_db.tif",
+      "sha256": "d1e374fe6753c5def84a7f0e7af8dae6fa2c713bb8164f493dd75816fc824605",
+      "nodata": -9999.0
+    },
+    {
+      "id": "domain",
+      "file": "rasters/domain.tif",
+      "sha256": "4c6290054dd272e62e71a45e8b45b7ee8728fa98cef806d0baefced7381093e9",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pixel_area_m2",
+      "file": "rasters/pixel_area_m2.tif",
+      "sha256": "78ff3ac834e8bd0bc41bacb4e3b7798886d1a8bc19a579973f360e1a8c4b7d66",
+      "nodata": -9999.0
+    }
+  ],
+  "layers": [
+    {
+      "id": "pre_vv_db",
+      "label": "Baseline VV backscatter",
+      "legend": [
+        {
+          "color": "#111111",
+          "label": "Lower backscatter"
+        },
+        {
+          "color": "#eeeeee",
+          "label": "Higher backscatter"
+        }
+      ],
+      "units": "dB",
+      "file": "layers/pre_vv_db.png",
+      "sha256": "045cd3dfb4b33ea8a42bb6e9c4adcbc15ef3db7b78c70e06bef2a1380e277cdd",
+      "bounds": [
+        [
+          60.44975999206617,
+          -139.9700976797991
+        ],
+        [
+          60.650100805284495,
+          -139.59981211968505
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 687,
+      "height": 756,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "post_vv_db",
+      "label": "Comparison VV backscatter",
+      "legend": [
+        {
+          "color": "#111111",
+          "label": "Lower backscatter"
+        },
+        {
+          "color": "#eeeeee",
+          "label": "Higher backscatter"
+        }
+      ],
+      "units": "dB",
+      "file": "layers/post_vv_db.png",
+      "sha256": "2f486097950dc70aefcacc79de8de8eaad4fef0154dfdf653b806019b7727f5d",
+      "bounds": [
+        [
+          60.44975999206617,
+          -139.9700976797991
+        ],
+        [
+          60.650100805284495,
+          -139.59981211968505
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 687,
+      "height": 756,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "delta_vv_db",
+      "label": "VV backscatter difference (comparison − baseline)",
+      "legend": [
+        {
+          "color": "#305b9b",
+          "label": "Decrease (−7 dB display limit)"
+        },
+        {
+          "color": "#f1f0e8",
+          "label": "Approximately no backscatter change"
+        },
+        {
+          "color": "#b94b30",
+          "label": "Increase (+7 dB display limit)"
+        }
+      ],
+      "units": "dB",
+      "file": "layers/delta_vv_db.png",
+      "sha256": "4ad1833efe7e573df2a49d4b5773a7cd82b79bd95afc09580a89c4c054778424",
+      "bounds": [
+        [
+          60.44975999206617,
+          -139.9700976797991
+        ],
+        [
+          60.650100805284495,
+          -139.59981211968505
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 687,
+      "height": 756,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "pre_vh_db",
+      "label": "Baseline VH backscatter",
+      "legend": [
+        {
+          "color": "#111111",
+          "label": "Lower backscatter"
+        },
+        {
+          "color": "#eeeeee",
+          "label": "Higher backscatter"
+        }
+      ],
+      "units": "dB",
+      "file": "layers/pre_vh_db.png",
+      "sha256": "1520b221c3b80ae8ffe3a9d8579da3b0ebf2c28bde48934f92ac26321fac2d93",
+      "bounds": [
+        [
+          60.44975999206617,
+          -139.9700976797991
+        ],
+        [
+          60.650100805284495,
+          -139.59981211968505
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 687,
+      "height": 756,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "post_vh_db",
+      "label": "Comparison VH backscatter",
+      "legend": [
+        {
+          "color": "#111111",
+          "label": "Lower backscatter"
+        },
+        {
+          "color": "#eeeeee",
+          "label": "Higher backscatter"
+        }
+      ],
+      "units": "dB",
+      "file": "layers/post_vh_db.png",
+      "sha256": "4fef4d1904dd9067c7f78926c919bb7a2d55d5b7d2f5d7b18cbea0fc10e78c29",
+      "bounds": [
+        [
+          60.44975999206617,
+          -139.9700976797991
+        ],
+        [
+          60.650100805284495,
+          -139.59981211968505
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 687,
+      "height": 756,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "delta_vh_db",
+      "label": "VH backscatter difference (comparison − baseline)",
+      "legend": [
+        {
+          "color": "#305b9b",
+          "label": "Decrease (−7 dB display limit)"
+        },
+        {
+          "color": "#f1f0e8",
+          "label": "Approximately no backscatter change"
+        },
+        {
+          "color": "#b94b30",
+          "label": "Increase (+7 dB display limit)"
+        }
+      ],
+      "units": "dB",
+      "file": "layers/delta_vh_db.png",
+      "sha256": "a351582cbfe67f6fdcfa35e5d1bcbb394119ad1c00bfbaa9451ea22898373f80",
+      "bounds": [
+        [
+          60.44975999206617,
+          -139.9700976797991
+        ],
+        [
+          60.650100805284495,
+          -139.59981211968505
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 687,
+      "height": 756,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "control_delta_vv_db",
+      "label": "Pre-event VV repeat difference (28 − 16 November)",
+      "legend": [
+        {
+          "color": "#305b9b",
+          "label": "Decrease (−7 dB display limit)"
+        },
+        {
+          "color": "#f1f0e8",
+          "label": "Approximately no backscatter change"
+        },
+        {
+          "color": "#b94b30",
+          "label": "Increase (+7 dB display limit)"
+        }
+      ],
+      "units": "dB",
+      "file": "layers/control_delta_vv_db.png",
+      "sha256": "7513c453bf25d8dad6a66163c9fe411ed032c6ab99f6bd66cdc38666af0e0087",
+      "bounds": [
+        [
+          60.44975999206617,
+          -139.9700976797991
+        ],
+        [
+          60.650100805284495,
+          -139.59981211968505
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 687,
+      "height": 756,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "shared_valid",
+      "label": "Accepted common observation support",
+      "legend": [
+        {
+          "color": "#567c6b",
+          "label": "Accepted low-slope common support"
+        }
+      ],
+      "units": "0/1",
+      "file": "layers/shared_valid.png",
+      "sha256": "a1af22a1c663747d552792b72c322d755966a706204202934a6107d184026780",
+      "bounds": [
+        [
+          60.44975999206617,
+          -139.9700976797991
+        ],
+        [
+          60.650100805284495,
+          -139.59981211968505
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 687,
+      "height": 756,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    }
+  ],
+  "export_audit": {
+    "file": "export_audit.json",
+    "sha256": "e460f6b83aa4b08d9db0272f0e21b64d0e42e40949be8351798f59a922efbbfe"
+  }
+}

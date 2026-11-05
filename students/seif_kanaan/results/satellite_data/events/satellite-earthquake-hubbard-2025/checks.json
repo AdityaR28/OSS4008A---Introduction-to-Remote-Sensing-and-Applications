@@ -1,0 +1,295 @@
+{
+  "status": "automated_checks_passed",
+  "source_manifest_status": "export_complete_unreviewed",
+  "source_review_status": "unapproved",
+  "publishing_approved": false,
+  "independent_consistency": {
+    "event": "satellite-earthquake-hubbard-2025",
+    "hazard": "earthquake",
+    "status": "passed_consistency_only",
+    "common": {
+      "status": "passed",
+      "domain_pixels": 502352,
+      "shared_pixels": 331745,
+      "area_checks": {
+        "domain_area_m2": {
+          "local_m2": 452429070.3288574,
+          "ee_m2": 452429070.3288574,
+          "difference_m2": 0.0,
+          "tolerance_m2": 452.4290703288574
+        },
+        "pre_valid_area_m2": {
+          "local_m2": 298777559.54748535,
+          "ee_m2": 298777559.5477295,
+          "difference_m2": 0.000244140625,
+          "tolerance_m2": 298.7775595477295
+        },
+        "post_valid_area_m2": {
+          "local_m2": 298777559.54748535,
+          "ee_m2": 298777559.5477295,
+          "difference_m2": 0.000244140625,
+          "tolerance_m2": 298.7775595477295
+        },
+        "shared_valid_area_m2": {
+          "local_m2": 298777559.54748535,
+          "ee_m2": 298777559.5477295,
+          "difference_m2": 0.000244140625,
+          "tolerance_m2": 298.7775595477295
+        },
+        "eligible_area_m2": {
+          "local_m2": 298777559.54748535,
+          "ee_m2": 298777559.5477295,
+          "difference_m2": 0.000244140625,
+          "tolerance_m2": 298.7775595477295
+        },
+        "gate_0_population_m2": {
+          "local_m2": 298777559.54748535,
+          "ee_m2": 298777559.5477295,
+          "difference_m2": 0.000244140625,
+          "tolerance_m2": 298.7775595477295
+        },
+        "gate_0_observed_m2": {
+          "local_m2": 298777559.54748535,
+          "ee_m2": 298777559.5477295,
+          "difference_m2": 0.000244140625,
+          "tolerance_m2": 298.7775595477295
+        },
+        "gate_1_population_m2": {
+          "local_m2": 298777559.54748535,
+          "ee_m2": 298777559.5477295,
+          "difference_m2": 0.000244140625,
+          "tolerance_m2": 298.7775595477295
+        },
+        "gate_1_observed_m2": {
+          "local_m2": 298777559.54748535,
+          "ee_m2": 298777559.5477295,
+          "difference_m2": 0.000244140625,
+          "tolerance_m2": 298.7775595477295
+        }
+      },
+      "scope": "Numerical implementation consistency; not independent hazard classification accuracy."
+    },
+    "hazard_specific": {
+      "status": "numerical_consistency_passed",
+      "shared_pixels": 331745,
+      "max_arithmetic_error_db": {
+        "delta_vv_db": 1.9073486328125e-06,
+        "delta_vh_db": 3.3974647521972656e-06,
+        "control_delta_vv_db": 1.9073486328125e-06,
+        "control_delta_vh_db": 3.3974647521972656e-06
+      },
+      "impact_classification": "not performed"
+    },
+    "layers_checked": 8,
+    "review_status": "unapproved",
+    "publishing_approved": false,
+    "next_step": "Inspect actual imagery, masks, acquisition selection, temporal confounds and reference evidence before considering website import."
+  },
+  "coverage_metrics": {
+    "domain_area_m2": 452429070.3288574,
+    "pre_valid_area_m2": 298777559.5477295,
+    "post_valid_area_m2": 298777559.5477295,
+    "shared_valid_area_m2": 298777559.5477295,
+    "eligible_area_m2": 298777559.5477295,
+    "gate_0_population_m2": 298777559.5477295,
+    "gate_0_observed_m2": 298777559.5477295,
+    "gate_1_population_m2": 298777559.5477295,
+    "gate_1_observed_m2": 298777559.5477295,
+    "area_convention": "Full WGS84 pixelArea values for cells whose centres fall inside the declared longitude/latitude box, evaluated on the exact anchored projected grid. Not fractionally clipped geographic boundary area.",
+    "gate_results": [
+      {
+        "population": "eligible",
+        "valid": "shared_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 298777559.5477295,
+        "observed_area_m2": 298777559.5477295,
+        "fraction": 1.0,
+        "passed": true
+      },
+      {
+        "population": "shared_valid",
+        "valid": "control_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 298777559.5477295,
+        "observed_area_m2": 298777559.5477295,
+        "fraction": 1.0,
+        "passed": true
+      }
+    ],
+    "shared_fraction_of_aoi": 0.6603854153990522
+  },
+  "diagnostics": {
+    "medians_db": {
+      "delta_vv_db": 2.2365498542785645,
+      "delta_vh_db": 2.6534762382507324,
+      "control_delta_vv_db": 1.1860517263412476,
+      "control_delta_vh_db": 1.290720820426941
+    },
+    "positive_display_clipping_fraction": {
+      "delta_vv_db": 0.11588117379312424,
+      "delta_vh_db": 0.15044687938024687
+    },
+    "hazard_area_ha": null
+  },
+  "analytical_assets": [
+    {
+      "id": "eligible",
+      "file": "rasters/eligible.tif",
+      "sha256": "6205fdcc1a2d482c03db39dac8863b38b402e780b636cdb4d703ab440c25be7e",
+      "nodata": -9999.0
+    },
+    {
+      "id": "slope_deg",
+      "file": "rasters/slope_deg.tif",
+      "sha256": "77c1b53f79c661a76ccacd5c0f52d9e4c2446ce5b96361129e0504c6f2f596eb",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_count",
+      "file": "rasters/pre_count.tif",
+      "sha256": "b06a0da1b2c739494b1603c0742444ace7cc9e6cc1c624b0eae0e9ad84ce32d6",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_count",
+      "file": "rasters/post_count.tif",
+      "sha256": "b06a0da1b2c739494b1603c0742444ace7cc9e6cc1c624b0eae0e9ad84ce32d6",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_valid",
+      "file": "rasters/pre_valid.tif",
+      "sha256": "6205fdcc1a2d482c03db39dac8863b38b402e780b636cdb4d703ab440c25be7e",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_valid",
+      "file": "rasters/post_valid.tif",
+      "sha256": "6205fdcc1a2d482c03db39dac8863b38b402e780b636cdb4d703ab440c25be7e",
+      "nodata": -9999.0
+    },
+    {
+      "id": "shared_valid",
+      "file": "rasters/shared_valid.tif",
+      "sha256": "6205fdcc1a2d482c03db39dac8863b38b402e780b636cdb4d703ab440c25be7e",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_angle_deg",
+      "file": "rasters/pre_angle_deg.tif",
+      "sha256": "6834074ee04fc7486a7883b265ee33b2077db4f118d551dff20403c18c6c6f51",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_angle_deg",
+      "file": "rasters/post_angle_deg.tif",
+      "sha256": "2b6521b2138f9234e947b47ed2a1b9c1835f0200c94b3edf106fc250a5461b22",
+      "nodata": -9999.0
+    },
+    {
+      "id": "angle_difference_deg",
+      "file": "rasters/angle_difference_deg.tif",
+      "sha256": "3eba750f582b53c9bdc9dd3c2c5c2090d932ec5829693eca2b47c85c1cc08f2b",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_vv_db",
+      "file": "rasters/pre_vv_db.tif",
+      "sha256": "2555734f397d058867e9723fbd07d66160c582e803ecf54e30a497e3e242136b",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_vv_db",
+      "file": "rasters/post_vv_db.tif",
+      "sha256": "20967ebf959dae50830f798c333e85733b934e761040228069ee59cef4c7e388",
+      "nodata": -9999.0
+    },
+    {
+      "id": "delta_vv_db",
+      "file": "rasters/delta_vv_db.tif",
+      "sha256": "a2714fdb613ddb8b540ac274127b1ef1422bd6162e4ab70c63dcb4ccfcadef3d",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_vh_db",
+      "file": "rasters/pre_vh_db.tif",
+      "sha256": "b5e1543ffea7bb6e8b25ef1f463d651e7dd32860023dd1f0530575882d997351",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_vh_db",
+      "file": "rasters/post_vh_db.tif",
+      "sha256": "abea5695541a92d38bbdb5f4e6fc515c38f270f4e6f118c0c94cd2ef5fb59e06",
+      "nodata": -9999.0
+    },
+    {
+      "id": "delta_vh_db",
+      "file": "rasters/delta_vh_db.tif",
+      "sha256": "a97dd6d9b2df10f310d15e28a58ab33199600394f77191a03ab4349bfde8f3de",
+      "nodata": -9999.0
+    },
+    {
+      "id": "control_valid",
+      "file": "rasters/control_valid.tif",
+      "sha256": "6205fdcc1a2d482c03db39dac8863b38b402e780b636cdb4d703ab440c25be7e",
+      "nodata": -9999.0
+    },
+    {
+      "id": "control_count",
+      "file": "rasters/control_count.tif",
+      "sha256": "b06a0da1b2c739494b1603c0742444ace7cc9e6cc1c624b0eae0e9ad84ce32d6",
+      "nodata": -9999.0
+    },
+    {
+      "id": "control_angle_deg",
+      "file": "rasters/control_angle_deg.tif",
+      "sha256": "bb0e4ae06d74c23b845b8141ea5c091deca60f5c193f4f68e21b307065fda819",
+      "nodata": -9999.0
+    },
+    {
+      "id": "control_vv_db",
+      "file": "rasters/control_vv_db.tif",
+      "sha256": "0c9bbebc70b5a6f58977bbe4e20584e9bb10ea784e603ac0c5228e3d424c876a",
+      "nodata": -9999.0
+    },
+    {
+      "id": "control_delta_vv_db",
+      "file": "rasters/control_delta_vv_db.tif",
+      "sha256": "a32f3ec6fca8196c88fc708a42de58720709fd95e221b447d11d29eb64e264f4",
+      "nodata": -9999.0
+    },
+    {
+      "id": "control_vh_db",
+      "file": "rasters/control_vh_db.tif",
+      "sha256": "348c4e1d5b50521aa926cd75855512fb0b9179004a3ff0e9345771038ded8123",
+      "nodata": -9999.0
+    },
+    {
+      "id": "control_delta_vh_db",
+      "file": "rasters/control_delta_vh_db.tif",
+      "sha256": "d1e374fe6753c5def84a7f0e7af8dae6fa2c713bb8164f493dd75816fc824605",
+      "nodata": -9999.0
+    },
+    {
+      "id": "domain",
+      "file": "rasters/domain.tif",
+      "sha256": "4c6290054dd272e62e71a45e8b45b7ee8728fa98cef806d0baefced7381093e9",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pixel_area_m2",
+      "file": "rasters/pixel_area_m2.tif",
+      "sha256": "78ff3ac834e8bd0bc41bacb4e3b7798886d1a8bc19a579973f360e1a8c4b7d66",
+      "nodata": -9999.0
+    }
+  ],
+  "bounded_review": {
+    "status": "bounded_exploratory_consistency_review",
+    "source_review_status": "unapproved",
+    "publishing_approved": false,
+    "scope": "Returned numerical data, hashes, fixed grids, acquisition recipe, formulas, masks and coverage checked; derivative metadata describe exploratory observations. Not independent field accuracy or damage validation.",
+    "numerical_input_directory": "data/satellite_inputs/satellite-earthquake-hubbard-2025",
+    "source_archive_sha256": "9ce9d4c042f31427e12e58658fe1de5b496f9950f32582f06c27a29db0092d02",
+    "frozen_manifest_sha256": "cdbc8326a53569f1a6e524e44d16f40c2782fb695ea51d6b2409a6042fbea789"
+  }
+}

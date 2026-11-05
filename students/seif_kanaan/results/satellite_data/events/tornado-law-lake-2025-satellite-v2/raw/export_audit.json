@@ -1,0 +1,128 @@
+{
+  "status": "passed",
+  "common": {
+    "status": "passed",
+    "domain_pixels": 183665,
+    "shared_pixels": 171074,
+    "area_checks": {
+      "domain_area_m2": {
+        "local_m2": 73522103.01885986,
+        "ee_m2": 73522103.01876831,
+        "difference_m2": 9.1552734375e-05,
+        "tolerance_m2": 73.5221030187683
+      },
+      "pre_valid_area_m2": {
+        "local_m2": 68497069.63754272,
+        "ee_m2": 68497069.63742065,
+        "difference_m2": 0.0001220703125,
+        "tolerance_m2": 68.49706963742065
+      },
+      "post_valid_area_m2": {
+        "local_m2": 73441641.45474243,
+        "ee_m2": 73441641.45465088,
+        "difference_m2": 9.1552734375e-05,
+        "tolerance_m2": 73.44164145465088
+      },
+      "shared_valid_area_m2": {
+        "local_m2": 68481858.0385437,
+        "ee_m2": 68481858.03842163,
+        "difference_m2": 0.0001220703125,
+        "tolerance_m2": 68.48185803842163
+      },
+      "eligible_area_m2": {
+        "local_m2": 55373062.43963623,
+        "ee_m2": 55373062.43951416,
+        "difference_m2": 0.0001220703125,
+        "tolerance_m2": 55.37306243951416
+      },
+      "candidate_area_m2": {
+        "local_m2": 546018.0252685547,
+        "ee_m2": 546018.0252685547,
+        "difference_m2": 0.0,
+        "tolerance_m2": 1.0
+      },
+      "gate_0_population_m2": {
+        "local_m2": 62103399.20535278,
+        "ee_m2": 62103399.20523071,
+        "difference_m2": 0.0001220703125,
+        "tolerance_m2": 62.10339920523071
+      },
+      "gate_0_observed_m2": {
+        "local_m2": 57895388.91281128,
+        "ee_m2": 57895388.91265869,
+        "difference_m2": 0.000152587890625,
+        "tolerance_m2": 57.89538891265869
+      },
+      "gate_1_population_m2": {
+        "local_m2": 55373062.43963623,
+        "ee_m2": 55373062.43951416,
+        "difference_m2": 0.0001220703125,
+        "tolerance_m2": 55.37306243951416
+      },
+      "gate_1_observed_m2": {
+        "local_m2": 55370260.304870605,
+        "ee_m2": 55370260.304748535,
+        "difference_m2": 0.0001220703125,
+        "tolerance_m2": 55.370260304748534
+      }
+    },
+    "scope": "Numerical implementation consistency; not independent hazard classification accuracy."
+  },
+  "hazard_specific": {
+    "status": "passed",
+    "scope": "Numerical TIFF arithmetic, masks, distinct-date bounds, declared coverage gates and all nine exploratory thresholds; not damage accuracy",
+    "domain_area_ha": 7352.210301885986,
+    "forest_area_ha": 6210.339920535278,
+    "eligible_area_ha": 5537.306243963623,
+    "baseline_forest_coverage": 0.9322418684583241,
+    "shared_eligible_coverage": 0.999949395344195,
+    "candidate_area_ha": 54.601802526855465,
+    "sensitivity": [
+      {
+        "dndvi_gte": 0.1,
+        "dnbr_gte": 0.05,
+        "candidate_area_ha": 247.98967331848144
+      },
+      {
+        "dndvi_gte": 0.1,
+        "dnbr_gte": 0.1,
+        "candidate_area_ha": 65.93048121032714
+      },
+      {
+        "dndvi_gte": 0.1,
+        "dnbr_gte": 0.15,
+        "candidate_area_ha": 30.303182907104492
+      },
+      {
+        "dndvi_gte": 0.15,
+        "dnbr_gte": 0.05,
+        "candidate_area_ha": 105.8009330291748
+      },
+      {
+        "dndvi_gte": 0.15,
+        "dnbr_gte": 0.1,
+        "candidate_area_ha": 54.601802526855465
+      },
+      {
+        "dndvi_gte": 0.15,
+        "dnbr_gte": 0.15,
+        "candidate_area_ha": 28.26162335510254
+      },
+      {
+        "dndvi_gte": 0.2,
+        "dnbr_gte": 0.05,
+        "candidate_area_ha": 23.978309255981447
+      },
+      {
+        "dndvi_gte": 0.2,
+        "dnbr_gte": 0.1,
+        "candidate_area_ha": 20.455631286621095
+      },
+      {
+        "dndvi_gte": 0.2,
+        "dnbr_gte": 0.15,
+        "candidate_area_ha": 17.053035916137695
+      }
+    ]
+  }
+}

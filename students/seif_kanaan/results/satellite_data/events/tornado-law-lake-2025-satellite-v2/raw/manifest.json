@@ -1,0 +1,642 @@
+{
+  "schema": "canadian-disasters-satellite/1.0",
+  "status": "export_complete_unreviewed",
+  "review_status": "unapproved",
+  "publishing_approved": false,
+  "event": {
+    "id": "tornado-law-lake-2025-satellite-v2",
+    "hazard": "tornado",
+    "title": "Law Lake tornado: Sentinel-2 canopy change (revised baseline)",
+    "event_date": "2025-07-27",
+    "location": "Law Lake (Mine Centre), Ontario",
+    "method": "Explicit v2 42-day baseline / unchanged 21-day comparison; distinct-date Sentinel-2 reflectance medians and predeclared NDVI/NBR decline in baseline mapped-tree cover",
+    "sources": [
+      {
+        "label": "NTP event assessment and explicit Sentinel-2 observability evidence",
+        "url": "https://www.uwo.ca/ntp/blog/2025/ontarios_first_ef2_tornado_recorded_in_nw_on_on_jul_27.html"
+      },
+      {
+        "label": "Sentinel-2 harmonized surface reflectance",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED"
+      },
+      {
+        "label": "Cloud Score+ quality data",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_CLOUD_SCORE_PLUS_V1_S2_HARMONIZED"
+      },
+      {
+        "label": "ESA WorldCover 2021 v200 baseline land cover",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/ESA_WorldCover_v200"
+      },
+      {
+        "label": "Kingfield and de Beurs (2017): tornado spectral response and land-cover/season limitations",
+        "url": "https://doi.org/10.1175/JAMC-D-16-0228.1"
+      }
+    ],
+    "limitations": [
+      "This is satellite-observed spectral change near a documented tornado, not confirmed canopy-loss fraction, treefall, structural damage, wind speed or EF severity.",
+      "NDVI/NBR thresholds are predeclared exploratory diagnostics, not scientifically calibrated damage classes. Report all nine sensitivity combinations; never tune to NTP agreement.",
+      "2021 WorldCover tree cover can be stale or misclassified in 2025. The baseline NDVI criterion limits the study population, not all forest or all tornado-affected land.",
+      "The revised June 15–July 26 42-day baseline is farther from the event and asymmetric with the 21-day comparison. Phenology/leaf development, moisture, illumination, logging, other wind, fire and cloud/shadow can cause change; this is a stronger temporal confound than the failed original 21-day baseline.",
+      "Each 20 m cell mixes vegetation and surroundings. RGB/indices are medians of daily observations, not a simultaneous photograph; per-pixel first/last contributing dates and distinct clear-date counts are retained.",
+      "The original July 6–26 baseline failed its unchanged 80% mapped-forest coverage requirement (35.959%). V2 is an explicitly documented one-time baseline revision; quality/count/coverage/indicator thresholds are unchanged, and no search or automatic relaxation occurs.",
+      "Unobserved or ineligible land is not unchanged or undamaged. Two clear-date and two coverage gates still fail closed; original-window count/support rasters and per-date forest coverage are diagnostic, not evidence that V2 succeeds.",
+      "NTP independently documents the event using satellite review including Sentinel imagery. It is contextual corroboration of observability, not independent pixel-level validation of this experiment.",
+      "As checked 22 October 2026, NTP's current public Damage Tracks service does not contain a full Law Lake line. Do not synthesize a line or footprint from published start/end coordinates, maximum width or a map image."
+    ]
+  },
+  "generated_at": "2026-10-22T17:16:39.963024Z",
+  "source_archive_sha256": "194ab532732ef38c2934dff52a1d15a3fad4aee7ea439c8732996ef0de74293d",
+  "source_selection": {
+    "file": "source_selection.json",
+    "sha256": "cf39f2ab7938df9aad7d6afd79f6a8a1fe0a08d8b84b28df5f04f09b95912483"
+  },
+  "analysis_grid": {
+    "crs": "EPSG:32615",
+    "scale_m": 20,
+    "transform": [
+      20.0,
+      0.0,
+      533020.0,
+      0.0,
+      -20.0,
+      5408180.0
+    ],
+    "width": 554,
+    "height": 338,
+    "bbox": [
+      -92.55,
+      48.765,
+      -92.4,
+      48.825
+    ],
+    "anchor_transform": [
+      20,
+      0,
+      0,
+      0,
+      -20,
+      10000000
+    ]
+  },
+  "validity": {
+    "pre": "pre_valid",
+    "post": "post_valid",
+    "shared": "shared_valid",
+    "candidate": "candidate"
+  },
+  "coverage_flag_ids": [
+    "domain",
+    "eligible",
+    "forest_mask",
+    "post_valid",
+    "pre_valid",
+    "shared_valid"
+  ],
+  "coverage_gates": [
+    {
+      "population": "forest_mask",
+      "valid": "pre_valid",
+      "min_fraction": 0.8
+    },
+    {
+      "population": "eligible",
+      "valid": "shared_valid",
+      "min_fraction": 0.8
+    }
+  ],
+  "metrics": {
+    "domain_area_m2": 73522103.01876831,
+    "pre_valid_area_m2": 68497069.63742065,
+    "post_valid_area_m2": 73441641.45465088,
+    "shared_valid_area_m2": 68481858.03842163,
+    "eligible_area_m2": 55373062.43951416,
+    "candidate_area_m2": 546018.0252685547,
+    "gate_0_population_m2": 62103399.20523071,
+    "gate_0_observed_m2": 57895388.91265869,
+    "gate_1_population_m2": 55373062.43951416,
+    "gate_1_observed_m2": 55370260.304748535,
+    "area_convention": "Full WGS84 pixelArea values for cells whose centres fall inside the declared longitude/latitude box, evaluated on the exact anchored projected grid. Not fractionally clipped geographic boundary area.",
+    "gate_results": [
+      {
+        "population": "forest_mask",
+        "valid": "pre_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 62103399.20523071,
+        "observed_area_m2": 57895388.91265869,
+        "fraction": 0.9322418684576995,
+        "passed": true
+      },
+      {
+        "population": "eligible",
+        "valid": "shared_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 55373062.43951416,
+        "observed_area_m2": 55370260.304748535,
+        "fraction": 0.9999493953441949,
+        "passed": true
+      }
+    ],
+    "shared_fraction_of_aoi": 0.9314458540575201
+  },
+  "hazard_area_ha": null,
+  "hazard_area_note": "No official event area or confirmed damage is inferred. Any candidate area is an exploratory satellite indicator only.",
+  "audit_recipe": {
+    "method": "satellite_tornado.audit_arrays",
+    "experiment_version": 2,
+    "pre_start": "2025-06-15",
+    "pre_end_exclusive": "2025-07-27",
+    "post_start": "2025-07-28",
+    "post_end_exclusive": "2025-08-18",
+    "ndvi_formula": "(nir-red)/(nir+red)",
+    "nbr_formula": "(nir-swir2)/(nir+swir2)",
+    "change_sign": "before minus after",
+    "min_clear_dates": 2,
+    "min_pre_ndvi": 0.6,
+    "candidate_thresholds": {
+      "dndvi_gte": 0.15,
+      "dnbr_gte": 0.1
+    },
+    "ndvi_sensitivity": [
+      0.1,
+      0.15,
+      0.2
+    ],
+    "nbr_sensitivity": [
+      0.05,
+      0.1,
+      0.15
+    ],
+    "candidate_population": "eligible & shared_valid",
+    "grid_transform": [
+      20,
+      0,
+      0,
+      0,
+      -20,
+      10000000
+    ],
+    "min_coverage_fraction": 0.8
+  },
+  "analytical_assets": [
+    {
+      "id": "pre_ndvi",
+      "file": "rasters/pre_ndvi.tif",
+      "sha256": "42a56b532f00de586e0bda089dbf0615d9e12021a2f7d072627ec1d2e41976ef",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_ndvi",
+      "file": "rasters/post_ndvi.tif",
+      "sha256": "ff839023431e6742460bed31325de5f2a1eb782efe4911b2a0e8ac0d478ca346",
+      "nodata": -9999.0
+    },
+    {
+      "id": "dndvi",
+      "file": "rasters/dndvi.tif",
+      "sha256": "210eaec65b71e34c1ce8ecfcc8458382b1bdb32d8897c89c61b6ce0c4eaa6ac6",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_nbr",
+      "file": "rasters/pre_nbr.tif",
+      "sha256": "5760a202630d7b1f41fab6b915289466e5cd5b7f586386d2235950495fd0929a",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_nbr",
+      "file": "rasters/post_nbr.tif",
+      "sha256": "dd3fc50ab898bf53a4f639f322f0a76361e709f0259bfb54cd9bea8b639ea56e",
+      "nodata": -9999.0
+    },
+    {
+      "id": "dnbr",
+      "file": "rasters/dnbr.tif",
+      "sha256": "967ce852f37f793bb0f9cc7214a39fd6fa43485b7897e15e1fd9482d4b8eca13",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_valid",
+      "file": "rasters/pre_valid.tif",
+      "sha256": "7c9d8bf8618c2434d770cc30f659d0e297a68c033f5d397d27205c6cab55ff2b",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_valid",
+      "file": "rasters/post_valid.tif",
+      "sha256": "f68375e6b30ee8e7dbed6e60e5c08b1559eb08a514f0397ca411ff0dfeebe92b",
+      "nodata": -9999.0
+    },
+    {
+      "id": "shared_valid",
+      "file": "rasters/shared_valid.tif",
+      "sha256": "8bacda243f2795583733257d5ee72b460e158885a328ba40062b4dfa40fc56d0",
+      "nodata": -9999.0
+    },
+    {
+      "id": "forest_mask",
+      "file": "rasters/forest_mask.tif",
+      "sha256": "3f7b5c7f05ba5cf3d5ce9d33fe373cc32387fce4e26aa01953007edb77995779",
+      "nodata": -9999.0
+    },
+    {
+      "id": "eligible",
+      "file": "rasters/eligible.tif",
+      "sha256": "1c2a6e1baf260435998198f7d86e811fcd0f74778143b79e1ab7e45d7dfdac68",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate",
+      "file": "rasters/candidate.tif",
+      "sha256": "fd8ecaf12fcf1e3d02a1ea2b19e8c13e9654ac162203bbd6eae02a4d746b4d71",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_clear_count",
+      "file": "rasters/pre_clear_count.tif",
+      "sha256": "94b60a24e4f6159849484ffc9354e3bd77a3fff511a4626568c667e361f4dd43",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_clear_count",
+      "file": "rasters/post_clear_count.tif",
+      "sha256": "ade462eaf8df2b5bbbd56ffd825e33a76b393dac7dbbbe4b17f533287698ed6d",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_first_day",
+      "file": "rasters/pre_first_day.tif",
+      "sha256": "72665ac27e27eb0d5ef7666b08c19ad8844404a63351c0d21224d1c4869efd24",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_last_day",
+      "file": "rasters/pre_last_day.tif",
+      "sha256": "ffb3f730a28d003eace089f968b48220fcd9fb5c795e5dfa5d60dda3bce6fb91",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_first_day",
+      "file": "rasters/post_first_day.tif",
+      "sha256": "a950ac44b68dfaabbdcdb4cbc7286631c559ac84b5b81a4bfc72afd03ed0ed37",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_last_day",
+      "file": "rasters/post_last_day.tif",
+      "sha256": "64f3ad0db4b101735c2f9bd020b32530446818d581951cf47b43906106c41bca",
+      "nodata": -9999.0
+    },
+    {
+      "id": "original_pre_clear_count",
+      "file": "rasters/original_pre_clear_count.tif",
+      "sha256": "2afd635bad3c43ad0d04b0ec324cf61a740a16f141239dd643b3c0e98ace1387",
+      "nodata": -9999.0
+    },
+    {
+      "id": "original_pre_valid",
+      "file": "rasters/original_pre_valid.tif",
+      "sha256": "e0c04f48f678e9b2a14653c5a33ab4fb820638c3954d3faea7e8561387f56847",
+      "nodata": -9999.0
+    },
+    {
+      "id": "original_shared_valid",
+      "file": "rasters/original_shared_valid.tif",
+      "sha256": "12b89a13eae02de45459c3df3fcc9338efe74a730fa5fa7b60eb14ebc4e653d1",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_blue",
+      "file": "rasters/pre_blue.tif",
+      "sha256": "dd5eeee2473400b1ea41073e40d74da50fd7977b77133cfbd93fa38c964fe208",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_green",
+      "file": "rasters/pre_green.tif",
+      "sha256": "651b4b9ed147da6303052aad7ed4d1a41c8c9f14237f670e4702f055eefc66c3",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_red",
+      "file": "rasters/pre_red.tif",
+      "sha256": "4ca3cbc36aee95b04cceef86d68e0c1273c83a2d0ff212e858acf52fd8cabc0d",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_nir",
+      "file": "rasters/pre_nir.tif",
+      "sha256": "61d99297b5114d03629053bb3a74aebe52cb412fac7b3ad55c0aa69866a3dccd",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_swir2",
+      "file": "rasters/pre_swir2.tif",
+      "sha256": "5d814c6ac26f57ba187f38b2b249601311ff3000bf5ca843fb111ad74993b784",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_blue",
+      "file": "rasters/post_blue.tif",
+      "sha256": "e750fd1d0d6353de2e51c678e47fa6be136c1f33186178575464703cd1ffd7b7",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_green",
+      "file": "rasters/post_green.tif",
+      "sha256": "cfb96e71592bec851ddd8e122a0bc142dd2b8f4e209f0472839eef7edcde5a74",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_red",
+      "file": "rasters/post_red.tif",
+      "sha256": "f3738f0a9d4c242c2b14d0894e8f862085bfa59b49a5a7fa3cb881858da94058",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_nir",
+      "file": "rasters/post_nir.tif",
+      "sha256": "5f3dacc09c61f334cb0788efa43b28c155d032964ce1bee2d0a800ea16d6fb55",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_swir2",
+      "file": "rasters/post_swir2.tif",
+      "sha256": "84368264461c5b9083d5fe2e9f73e5ef9f42c8d24b1ef967517aa6087d3a3789",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi010_nbr005",
+      "file": "rasters/candidate_ndvi010_nbr005.tif",
+      "sha256": "bef4e45801dc2a3d40fb876154f6bd86aed9b044f5070dc9e28d3098449108e9",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi010_nbr010",
+      "file": "rasters/candidate_ndvi010_nbr010.tif",
+      "sha256": "1517c0bf5b4a43d99f31d951225fe9a84935c60454ea09aed7eb8747339812f6",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi010_nbr015",
+      "file": "rasters/candidate_ndvi010_nbr015.tif",
+      "sha256": "f73c16358d3b1e3f0026f177bef7d78ec3e2af2402f94633dcb4fb1dad24c03e",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi015_nbr005",
+      "file": "rasters/candidate_ndvi015_nbr005.tif",
+      "sha256": "64fb488980d19ab39c877862d8c2abf56ff287e80439996bbd22c61b3d2fa900",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi015_nbr010",
+      "file": "rasters/candidate_ndvi015_nbr010.tif",
+      "sha256": "fd8ecaf12fcf1e3d02a1ea2b19e8c13e9654ac162203bbd6eae02a4d746b4d71",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi015_nbr015",
+      "file": "rasters/candidate_ndvi015_nbr015.tif",
+      "sha256": "77b6693d8e105c10b8608d6edef0055b0f29a01ecca6112e08250640200d1acc",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi020_nbr005",
+      "file": "rasters/candidate_ndvi020_nbr005.tif",
+      "sha256": "cbd7bb426b6b24dc03b1034c16829ea3a7ec9ebf218096022e62f4bd8ea3327a",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi020_nbr010",
+      "file": "rasters/candidate_ndvi020_nbr010.tif",
+      "sha256": "82240ddf4c03fb358645f6312ea77e268d2a3af407654d49b834ed91d423a777",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi020_nbr015",
+      "file": "rasters/candidate_ndvi020_nbr015.tif",
+      "sha256": "ec12032f2e47e94cc57133d9bafd4cd9988132159ae01a18388e2e16ed69db76",
+      "nodata": -9999.0
+    },
+    {
+      "id": "domain",
+      "file": "rasters/domain.tif",
+      "sha256": "a28472f8a555c5037f9c54bcc427e6249f584c62b60fa5ee65bf37023be8e0b9",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pixel_area_m2",
+      "file": "rasters/pixel_area_m2.tif",
+      "sha256": "87314c110333853a1dfa14ab367bc4631a4fb8d1db4bd7f94b55935cf1f46ecf",
+      "nodata": -9999.0
+    }
+  ],
+  "layers": [
+    {
+      "id": "pre_rgb",
+      "label": "Before: Sentinel-2 median reflectance",
+      "legend": [],
+      "units": "surface reflectance",
+      "file": "layers/pre_rgb.png",
+      "sha256": "751de452fa32f7b957ffbaa7b4907add31fd56bb9cce8ded21630d7a73997116",
+      "bounds": [
+        [
+          48.76499719214159,
+          -92.55036945086829
+        ],
+        [
+          48.825002639170776,
+          -92.39999147230668
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 279,
+      "height": 169,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "post_rgb",
+      "label": "After: Sentinel-2 median reflectance",
+      "legend": [],
+      "units": "surface reflectance",
+      "file": "layers/post_rgb.png",
+      "sha256": "0eb4143ca2edd337002893fe9909e6f10a732e8b4725654966e95c7b3a09f8a5",
+      "bounds": [
+        [
+          48.76499719214159,
+          -92.55036945086829
+        ],
+        [
+          48.825002639170776,
+          -92.39999147230668
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 279,
+      "height": 169,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "dndvi",
+      "label": "Observed NDVI decrease in eligible forest",
+      "legend": [
+        {
+          "color": "#2166ac",
+          "label": "NDVI increase"
+        },
+        {
+          "color": "#f7f7f7",
+          "label": "Little NDVI change"
+        },
+        {
+          "color": "#b2182b",
+          "label": "NDVI decrease"
+        }
+      ],
+      "units": "NDVI before minus after",
+      "file": "layers/dndvi.png",
+      "sha256": "015a595199179996ce0f193e5f85c1d5e9d9fb6ca44584080aed9f0a22a396d6",
+      "bounds": [
+        [
+          48.76499719214159,
+          -92.55036945086829
+        ],
+        [
+          48.825002639170776,
+          -92.39999147230668
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 279,
+      "height": 169,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "dnbr",
+      "label": "Observed NIR/SWIR index decrease in eligible forest",
+      "legend": [
+        {
+          "color": "#2166ac",
+          "label": "Index increase"
+        },
+        {
+          "color": "#f7f7f7",
+          "label": "Little index change"
+        },
+        {
+          "color": "#b2182b",
+          "label": "Index decrease (not burn severity)"
+        }
+      ],
+      "units": "NBR before minus after",
+      "file": "layers/dnbr.png",
+      "sha256": "f5c0dca3da250181a87e1f1e05b0836ed81c1ac3e25377184e898b7ea77c75a1",
+      "bounds": [
+        [
+          48.76499719214159,
+          -92.55036945086829
+        ],
+        [
+          48.825002639170776,
+          -92.39999147230668
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 279,
+      "height": 169,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "candidate",
+      "label": "Exploratory canopy spectral-change indicator",
+      "legend": [
+        {
+          "color": "#e6550d",
+          "label": "Both predeclared index-decrease criteria met"
+        }
+      ],
+      "units": "binary exploratory indicator",
+      "file": "layers/candidate.png",
+      "sha256": "ffb0109210089811e47a11bf591d2fce04f2d02b10235456ba1a0a21306e8494",
+      "bounds": [
+        [
+          48.76499719214159,
+          -92.55036945086829
+        ],
+        [
+          48.825002639170776,
+          -92.39999147230668
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 279,
+      "height": 169,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "eligible",
+      "label": "Baseline mapped-tree study population",
+      "legend": [
+        {
+          "color": "#238b45",
+          "label": "2021 tree cover, observed baseline NDVI ≥ 0.60"
+        }
+      ],
+      "units": "baseline eligibility",
+      "file": "layers/eligible.png",
+      "sha256": "392037a85ce7dde47da3fd275c8042c9e3f7405ee1ab53b9cf561c7a764367bd",
+      "bounds": [
+        [
+          48.76499719214159,
+          -92.55036945086829
+        ],
+        [
+          48.825002639170776,
+          -92.39999147230668
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 279,
+      "height": 169,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "shared_valid",
+      "label": "Shared quality-qualified observation support",
+      "legend": [
+        {
+          "color": "#3182bd",
+          "label": "At least two distinct clear dates in both windows"
+        }
+      ],
+      "units": "observation support",
+      "file": "layers/shared_valid.png",
+      "sha256": "31b19dbf19c300c03d07365e3fe6d0e2eb3123083329caec81ca6579d18ff9c9",
+      "bounds": [
+        [
+          48.76499719214159,
+          -92.55036945086829
+        ],
+        [
+          48.825002639170776,
+          -92.39999147230668
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 279,
+      "height": 169,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    }
+  ],
+  "export_audit": {
+    "file": "export_audit.json",
+    "sha256": "fdcd3de5e973e7c004c1d190872e10b6b7252359793af9671b44aa145ca121c2"
+  }
+}

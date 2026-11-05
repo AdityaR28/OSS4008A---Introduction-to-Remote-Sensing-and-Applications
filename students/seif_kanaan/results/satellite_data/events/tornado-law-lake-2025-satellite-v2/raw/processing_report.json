@@ -1,0 +1,87 @@
+{
+  "schema": "canadian-disasters-satellite/1.0",
+  "event": {
+    "id": "tornado-law-lake-2025-satellite-v2",
+    "hazard": "tornado",
+    "title": "Law Lake tornado: Sentinel-2 canopy change (revised baseline)",
+    "event_date": "2025-07-27",
+    "location": "Law Lake (Mine Centre), Ontario",
+    "method": "Explicit v2 42-day baseline / unchanged 21-day comparison; distinct-date Sentinel-2 reflectance medians and predeclared NDVI/NBR decline in baseline mapped-tree cover",
+    "sources": [
+      {
+        "label": "NTP event assessment and explicit Sentinel-2 observability evidence",
+        "url": "https://www.uwo.ca/ntp/blog/2025/ontarios_first_ef2_tornado_recorded_in_nw_on_on_jul_27.html"
+      },
+      {
+        "label": "Sentinel-2 harmonized surface reflectance",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED"
+      },
+      {
+        "label": "Cloud Score+ quality data",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_CLOUD_SCORE_PLUS_V1_S2_HARMONIZED"
+      },
+      {
+        "label": "ESA WorldCover 2021 v200 baseline land cover",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/ESA_WorldCover_v200"
+      },
+      {
+        "label": "Kingfield and de Beurs (2017): tornado spectral response and land-cover/season limitations",
+        "url": "https://doi.org/10.1175/JAMC-D-16-0228.1"
+      }
+    ],
+    "limitations": [
+      "This is satellite-observed spectral change near a documented tornado, not confirmed canopy-loss fraction, treefall, structural damage, wind speed or EF severity.",
+      "NDVI/NBR thresholds are predeclared exploratory diagnostics, not scientifically calibrated damage classes. Report all nine sensitivity combinations; never tune to NTP agreement.",
+      "2021 WorldCover tree cover can be stale or misclassified in 2025. The baseline NDVI criterion limits the study population, not all forest or all tornado-affected land.",
+      "The revised June 15–July 26 42-day baseline is farther from the event and asymmetric with the 21-day comparison. Phenology/leaf development, moisture, illumination, logging, other wind, fire and cloud/shadow can cause change; this is a stronger temporal confound than the failed original 21-day baseline.",
+      "Each 20 m cell mixes vegetation and surroundings. RGB/indices are medians of daily observations, not a simultaneous photograph; per-pixel first/last contributing dates and distinct clear-date counts are retained.",
+      "The original July 6–26 baseline failed its unchanged 80% mapped-forest coverage requirement (35.959%). V2 is an explicitly documented one-time baseline revision; quality/count/coverage/indicator thresholds are unchanged, and no search or automatic relaxation occurs.",
+      "Unobserved or ineligible land is not unchanged or undamaged. Two clear-date and two coverage gates still fail closed; original-window count/support rasters and per-date forest coverage are diagnostic, not evidence that V2 succeeds.",
+      "NTP independently documents the event using satellite review including Sentinel imagery. It is contextual corroboration of observability, not independent pixel-level validation of this experiment.",
+      "As checked 22 October 2026, NTP's current public Damage Tracks service does not contain a full Law Lake line. Do not synthesize a line or footprint from published start/end coordinates, maximum width or a map image."
+    ]
+  },
+  "status": "export_complete_unreviewed",
+  "phase": "complete",
+  "started_at": "2026-10-22T17:16:34.829352Z",
+  "review_status": "unapproved",
+  "metrics": {
+    "domain_area_m2": 73522103.01876831,
+    "pre_valid_area_m2": 68497069.63742065,
+    "post_valid_area_m2": 73441641.45465088,
+    "shared_valid_area_m2": 68481858.03842163,
+    "eligible_area_m2": 55373062.43951416,
+    "candidate_area_m2": 546018.0252685547,
+    "gate_0_population_m2": 62103399.20523071,
+    "gate_0_observed_m2": 57895388.91265869,
+    "gate_1_population_m2": 55373062.43951416,
+    "gate_1_observed_m2": 55370260.304748535,
+    "area_convention": "Full WGS84 pixelArea values for cells whose centres fall inside the declared longitude/latitude box, evaluated on the exact anchored projected grid. Not fractionally clipped geographic boundary area.",
+    "gate_results": [
+      {
+        "population": "forest_mask",
+        "valid": "pre_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 62103399.20523071,
+        "observed_area_m2": 57895388.91265869,
+        "fraction": 0.9322418684576995,
+        "passed": true
+      },
+      {
+        "population": "eligible",
+        "valid": "shared_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 55373062.43951416,
+        "observed_area_m2": 55370260.304748535,
+        "fraction": 0.9999493953441949,
+        "passed": true
+      }
+    ],
+    "shared_fraction_of_aoi": 0.9314458540575201
+  },
+  "raster": "pixel_area_m2",
+  "raster_index": 42,
+  "raster_total": 42,
+  "layer": "shared_valid",
+  "completed_at": "2026-10-22T17:20:35.042836Z"
+}

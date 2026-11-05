@@ -1,0 +1,446 @@
+{
+  "schema_version": "1.0",
+  "id": "flood-lower-fraser-2021-satellite-v2",
+  "hazard": "flood",
+  "title": "Lower Fraser 2021 — Sentinel-1 candidate inundation v2",
+  "location": "Sumas Prairie / Lower Fraser Valley, British Columbia",
+  "event_date": "2021-11-14",
+  "event_date_label": "Documented event date",
+  "analysis_kind": "exploratory_satellite_inundation_indicator",
+  "summary": "Sentinel-1B observations show event-period VV backscatter change in the Lower Fraser Valley. A predeclared darkening/low-backscatter rule identifies candidate open-water inundation on eligible low-slope, known-baseline land. This is an exploratory indicator, not independently validated flood extent or damage.",
+  "bbox": [
+    -122.4,
+    49.0,
+    -121.9,
+    49.25
+  ],
+  "temporal": [
+    {
+      "label": "Baseline",
+      "start": "2021-10-15",
+      "end": "2021-11-08",
+      "description": "Actual catalogue acquisition dates: 2021-10-15, 2021-10-27, 2021-11-08. 3 matched source frames. Search window 2021-10-15 to 2021-11-13 (exclusive end). Same-track VV temporal composite after linear-power spatial smoothing; the comparison is the 20 November acquisition, not a simultaneous peak-event inventory."
+    },
+    {
+      "label": "Comparison",
+      "start": "2021-11-20",
+      "end": "2021-11-20",
+      "description": "Actual catalogue acquisition dates: 2021-11-20. 1 matched source frames. Search window 2021-11-16 to 2021-11-22 (exclusive end). Same-track VV temporal composite after linear-power spatial smoothing; the comparison is the 20 November acquisition, not a simultaneous peak-event inventory."
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Candidate open-water indicator",
+      "value": 3052.8313322875974,
+      "unit": "ha",
+      "precision": 1,
+      "description": "VV ≤−16 dB and comparison-minus-baseline ≤−3 dB on eligible support. Nine-threshold sensitivity 1621.7–4092.6 ha; not validated inundation or damage area."
+    },
+    {
+      "label": "Shared SAR coverage",
+      "value": 100.0,
+      "unit": "% of box",
+      "precision": 2,
+      "description": "Both periods have sufficient same-track observations. Coverage is not flood classification accuracy."
+    },
+    {
+      "label": "Eligible evaluation support",
+      "value": 491.45849918328855,
+      "unit": "km²",
+      "precision": 2,
+      "description": "Known WorldCover baseline, shared SAR, slope <5° and conservative permanent-water exclusions; excludes much of the full box."
+    },
+    {
+      "label": "Full analysis domain",
+      "value": 1014.6429531802369,
+      "unit": "km²",
+      "precision": 2,
+      "description": "Fixed box only; full cells whose centres are inside it. Do not extrapolate to the entire provincial disaster."
+    },
+    {
+      "label": "Independent known baseline",
+      "value": 100.0,
+      "unit": "% of box",
+      "precision": 2,
+      "description": "WorldCover 2020 known-category support. Only 6.44% has JRC yearly known classes; JRC missing cells are preserved, never interpreted as dry."
+    }
+  ],
+  "layers": [
+    {
+      "id": "post_vv_db",
+      "label": "Event period — Sentinel-1 VV backscatter",
+      "kind": "image",
+      "url": "layers/post_vv_db.png",
+      "description": "Actual returned satellite display: Event period — Sentinel-1 VV backscatter. Units: dB. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          48.99999178445149,
+          -122.40012870076221
+        ],
+        [
+          49.25006967451085,
+          -121.89994675056445
+        ]
+      ],
+      "units": "dB",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#08111d",
+          "label": "-25"
+        },
+        {
+          "color": "#e4edf2",
+          "label": "0"
+        }
+      ]
+    },
+    {
+      "id": "pre_vv_db",
+      "label": "Before — Sentinel-1 VV backscatter",
+      "kind": "image",
+      "url": "layers/pre_vv_db.png",
+      "description": "Actual returned satellite display: Before — Sentinel-1 VV backscatter. Units: dB. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          48.99999178445149,
+          -122.40012870076221
+        ],
+        [
+          49.25006967451085,
+          -121.89994675056445
+        ]
+      ],
+      "units": "dB",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#08111d",
+          "label": "-25"
+        },
+        {
+          "color": "#e4edf2",
+          "label": "0"
+        }
+      ]
+    },
+    {
+      "id": "delta_vv_db",
+      "label": "VV change — event minus before",
+      "kind": "image",
+      "url": "layers/delta_vv_db.png",
+      "description": "Actual returned satellite display: VV change — event minus before. Units: dB. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          48.99999178445149,
+          -122.40012870076221
+        ],
+        [
+          49.25006967451085,
+          -121.89994675056445
+        ]
+      ],
+      "units": "dB",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#245fc5",
+          "label": "-8"
+        },
+        {
+          "color": "#c46531",
+          "label": "8"
+        }
+      ]
+    },
+    {
+      "id": "candidate",
+      "label": "Candidate open-water inundation",
+      "kind": "image",
+      "url": "layers/candidate.png",
+      "description": "Actual returned satellite display: Candidate open-water inundation. Units: 0=eligible noncandidate; 1=candidate. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected. Exploratory indicator only; do not interpret it as independently validated damage or complete event extent.",
+      "bounds": [
+        [
+          48.99999178445149,
+          -122.40012870076221
+        ],
+        [
+          49.25006967451085,
+          -121.89994675056445
+        ]
+      ],
+      "units": "0=eligible noncandidate; 1=candidate",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#dbe2df",
+          "label": "Eligible noncandidate"
+        },
+        {
+          "color": "#245fc5",
+          "label": "Candidate surface inundation"
+        }
+      ]
+    },
+    {
+      "id": "permanent_water",
+      "label": "2020 permanent-water union context",
+      "kind": "image",
+      "url": "layers/permanent_water.png",
+      "description": "Actual returned satellite display: 2020 permanent-water union context. Units: 0=other known baseline; 1=any WorldCover permanent-water overlap or observed JRC permanent water. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          48.99999178445149,
+          -122.40012870076221
+        ],
+        [
+          49.25006967451085,
+          -121.89994675056445
+        ]
+      ],
+      "units": "0=other known baseline; 1=any WorldCover permanent-water overlap or observed JRC permanent water",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#e8e6d9",
+          "label": "0"
+        },
+        {
+          "color": "#78b7d8",
+          "label": "1"
+        }
+      ]
+    },
+    {
+      "id": "baseline_valid",
+      "label": "Known WorldCover 2020 baseline support",
+      "kind": "image",
+      "url": "layers/baseline_valid.png",
+      "description": "Actual returned satellite display: Known WorldCover 2020 baseline support. Units: 0=unknown native land-cover support; 1=all contributing source categories known. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          48.99999178445149,
+          -122.40012870076221
+        ],
+        [
+          49.25006967451085,
+          -121.89994675056445
+        ]
+      ],
+      "units": "0=unknown native land-cover support; 1=all contributing source categories known",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#5e6671",
+          "label": "0"
+        },
+        {
+          "color": "#50b6a4",
+          "label": "1"
+        }
+      ]
+    },
+    {
+      "id": "eligible",
+      "label": "Eligible evaluation support",
+      "kind": "image",
+      "url": "layers/eligible.png",
+      "description": "Actual returned satellite display: Eligible evaluation support. Units: 0=excluded or unobserved; 1=evaluated. Statistics use the numerical analytical grid; display sampling adds no scientific resolution. Transparent pixels are outside this layer's declared support, not confirmed unaffected.",
+      "bounds": [
+        [
+          48.99999178445149,
+          -122.40012870076221
+        ],
+        [
+          49.25006967451085,
+          -121.89994675056445
+        ]
+      ],
+      "units": "0=excluded or unobserved; 1=evaluated",
+      "style": {
+        "color": "#315f64",
+        "fillColor": "#315f64",
+        "fillOpacity": 0.85,
+        "weight": 1
+      },
+      "legend": [
+        {
+          "color": "#5e6671",
+          "label": "0"
+        },
+        {
+          "color": "#50b6a4",
+          "label": "1"
+        }
+      ]
+    }
+  ],
+  "methods": [
+    {
+      "title": "Direct, matched radar observations",
+      "description": "Sentinel-1B ascending relative orbit 64: 15/27 October and 8 November baseline, 20 November 2021 comparison. Select the track using shared coverage only; median same-track VV after 30 m-radius linear-power smoothing. Exact scene IDs and all evaluated tracks remain in frozen source_selection.json."
+    },
+    {
+      "title": "Explicit baseline and indicator",
+      "description": "Require documented WorldCover 2020 known categories, shared SAR and slope <5°. Exclude any contributing WorldCover class-80 water plus observed JRC 2020 permanent water. On eligible cells, VV ≤−16 dB and decrease ≥3 dB defines an exploratory candidate. Nine threshold combinations are reported; none was chosen to optimize reference agreement."
+    },
+    {
+      "title": "Uncertainty and display",
+      "description": "SAR geometry, smoothing, wet soil, land management and vegetation confound water interpretation. Source comparison is one event-period acquisition. Display backscatter saturates outside −25–0 dB; differences saturate outside ±8 dB; numerical TIFFs retain full values. No independent field accuracy score is available."
+    },
+    {
+      "title": "Frozen export and independent audit",
+      "description": "Original Colab selection, numerical manifest, processing receipt and provider audit remain byte-identical with unapproved history. Independent local checks rerun full numerical TIFFs. The portable source package retains those inputs; the website ships durable PNGs and hashed records. No credentials or live Earth Engine tile URLs are used."
+    }
+  ],
+  "limitations": [
+    "Exploratory satellite observations, not independently validated damage, an official affected-area total or an emergency warning. Blank/excluded pixels are unknown, not unchanged.",
+    "Shared SAR observations and independently known WorldCover baseline cover 100.00% of this fixed box; candidate evaluation covers only 48.44% after slope and permanent-water exclusions. Those exclusions are not confirmed dry land.",
+    "Candidate area varies from 1621.7 to 4092.6 ha across nine predeclared threshold combinations; that sensitivity is not a confidence interval. Smooth fields, wet soil and management can mimic water; urban/vegetation-covered flooding may be missed.",
+    "Six comparison pixels exceed the exploratory +20 dB range screen (maximum 21.94 dB). Values were retained, and none is a candidate; the screen is not a universal physical ceiling.",
+    "Exploratory candidate open-water inundation, not independently validated flood extent, water depth, damage, exposure, or an emergency warning.",
+    "The −16 dB post-event and 3 dB decrease thresholds are predeclared exploratory choices, not locally calibrated universal water thresholds or an accuracy guarantee.",
+    "Same relative orbit and pass reduce viewing-geometry differences. Earth Engine GRD is terrain-corrected, but is not radiometrically terrain-flattened; a <5° slope filter is not a layover/shadow correction.",
+    "Wet bare soil, smooth fields, land management, freeze/thaw, wind, SAR noise and changing incidence geometry can mimic or hide inundation. Urban or vegetation-covered flooding can increase backscatter or remain undetected.",
+    "Temporal medians and 30 m-radius spatial smoothing suppress speckle and also erase narrow, short-lived or heterogeneous flood signals. The 20 m export grid is not a claim of 20 m independent resolving power.",
+    "The post window is an event-period composite, not a simultaneous or peak flood snapshot. The pre window may already contain wet or flooded locations; no change is not proof of no flooding.",
+    "Baseline support comes from observed, documented ESA WorldCover 2020 land-cover classes, not from filling JRC no-data as dry land. Any contributing WorldCover permanent-water class 80, plus observed JRC2020 class 3, is excluded. Both baseline products can misclassify boundaries and miss changes before the event; seasonal water remains eligible.",
+    "WorldCover class 80 is aggregated conservatively: any native permanent-water overlap excludes the full 20 m analysis cell, widening water exclusions along boundaries. WorldCover2020 is a land-cover model, not independent field truth or proof of dry conditions in November 2021.",
+    "No-data, missing baseline/DEM, high slope, insufficient observations and permanent water are excluded from candidate evaluation; blank map pixels are not confirmed dry land.",
+    "The fixed bounding box covers a Lower Fraser case study. Results must not be extrapolated to the whole British Columbia event. No SAR coherence or earthquake/tornado damage inference is performed by this module."
+  ],
+  "sources": [
+    {
+      "label": "Copernicus Sentinel-1 GRD; Earth Engine catalogue",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD",
+      "attribution": "Contains modified Copernicus Sentinel data (2021), processed by Google Earth Engine",
+      "license": "Copernicus Sentinel data terms"
+    },
+    {
+      "label": "Earth Engine Sentinel-1 preprocessing and filtering",
+      "url": "https://developers.google.com/earth-engine/guides/sentinel1",
+      "attribution": "Google Earth Engine",
+      "license": "Documentation"
+    },
+    {
+      "label": "JRC Yearly Water Classification History v1.4",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/JRC_GSW1_4_YearlyHistory",
+      "attribution": "Source: EC JRC/Google; Pekel et al. (2016), Nature 540, 418–422, doi:10.1038/nature20584",
+      "license": "Copernicus Programme; acknowledgement required"
+    },
+    {
+      "label": "ESA WorldCover 2020 v100 global land cover",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/ESA_WorldCover_v100",
+      "attribution": "© ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium; Zanaga et al. (2021), doi:10.5281/zenodo.5571936",
+      "license": "CC BY 4.0"
+    },
+    {
+      "label": "ESA WorldCover product documentation and validation",
+      "url": "https://esa-worldcover.org/en/data-access",
+      "attribution": "ESA WorldCover Consortium",
+      "license": "Documentation; global validation does not establish local flood accuracy"
+    },
+    {
+      "label": "NASA SAR scattering mechanisms",
+      "url": "https://science.nasa.gov/mission/nisar/get-to-know-sar/",
+      "attribution": "NASA; strong point and corner-reflector returns can be bright",
+      "license": "Method reference"
+    },
+    {
+      "label": "NASA SRTM 30 m elevation v3",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003",
+      "attribution": "NASA/USGS/JPL-Caltech; Farr et al. (2007), doi:10.1029/2005RG000183",
+      "license": "NASA/JPL data terms"
+    },
+    {
+      "label": "UN-SPIDER SAR flood-mapping recommended practice",
+      "url": "https://un-spider.org/advisory-support/recommended-practices/recommended-practice-google-earth-engine-flood-mapping/in-detail",
+      "attribution": "UNOOSA/UN-SPIDER",
+      "license": "Method reference; this implementation is an independent exploratory adaptation"
+    },
+    {
+      "label": "2021 atmospheric-river event context",
+      "url": "https://www.publicsafety.gc.ca/cnt/trnsprnc/brfng-mtrls/prlmntry-bndrs/20211207/02-en.aspx?wbdisable=true",
+      "attribution": "Public Safety Canada; atmospheric-river rainfall began 14 November 2021",
+      "license": "Government of Canada information terms"
+    }
+  ],
+  "provenance": {
+    "generated_at": "2026-10-22T16:56:29.392323Z",
+    "inputs": [
+      {
+        "file": "raw/manifest.json",
+        "sha256": "f624adfe9386e2b3f4a0dae6fb32ae9923eb8fb93d89f5a50d42c2a4576719c0",
+        "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD"
+      },
+      {
+        "file": "raw/source_selection.json",
+        "sha256": "746c83ec4ff7eda755eed3b73908d0e59bdec3980d18c7ee1224ac2f6a07f423",
+        "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD"
+      },
+      {
+        "file": "raw/export_audit.json",
+        "sha256": "e19067063cec426f105557e2be393600c7987e6410a1f4078cce2ebcff1e9495",
+        "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD"
+      },
+      {
+        "file": "raw/processing_report.json",
+        "sha256": "0fdfe6ab28be4c3960bf4d4ffd3e6efd93f87a932adc0580acdef281cb9b7501",
+        "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD"
+      }
+    ],
+    "software": "scripts/import_satellite_site.py deterministic event-v1 adapter; original processing versions and source fingerprints retained in raw/source_selection.json",
+    "report_url": "checks.json"
+  },
+  "checks": {
+    "status": "automated_checks_passed",
+    "summary": "Independent returned-data hashes/grid/formula/mask/coverage checks passed. These checks are consistency evidence, not damage classification accuracy; source flags remain unapproved and publication is not approved."
+  },
+  "consistency_review": {
+    "status": "bounded_exploratory_consistency_review",
+    "source_review_status": "unapproved",
+    "publishing_approved": false,
+    "scope": "Returned numerical data, hashes, fixed grids, acquisition recipe, formulas, masks and coverage checked; derivative metadata describe exploratory observations. Not independent field accuracy or damage validation.",
+    "numerical_input_directory": "data/satellite_inputs/flood-lower-fraser-2021-satellite-v2",
+    "source_archive_sha256": "194ab532732ef38c2934dff52a1d15a3fad4aee7ea439c8732996ef0de74293d",
+    "frozen_manifest_sha256": "f624adfe9386e2b3f4a0dae6fb32ae9923eb8fb93d89f5a50d42c2a4576719c0"
+  },
+  "satellite_export": {
+    "source_manifest_url": "raw/manifest.json",
+    "source_selection_url": "raw/source_selection.json",
+    "source_archive_sha256": "194ab532732ef38c2934dff52a1d15a3fad4aee7ea439c8732996ef0de74293d",
+    "source_manifest_sha256": "f624adfe9386e2b3f4a0dae6fb32ae9923eb8fb93d89f5a50d42c2a4576719c0",
+    "hazard_area_ha": null,
+    "hazard_area_interpretation": "No official or confirmed impact area; any candidate area is a bounded exploratory spectral/backscatter indicator."
+  }
+}

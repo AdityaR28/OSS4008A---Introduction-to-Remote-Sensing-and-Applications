@@ -1,0 +1,445 @@
+{
+  "status": "automated_checks_passed",
+  "source_manifest_status": "export_complete_unreviewed",
+  "source_review_status": "unapproved",
+  "publishing_approved": false,
+  "independent_consistency": {
+    "event": "tornado-law-lake-2025-satellite-v2",
+    "hazard": "tornado",
+    "status": "passed_consistency_only",
+    "common": {
+      "status": "passed",
+      "domain_pixels": 183665,
+      "shared_pixels": 171074,
+      "area_checks": {
+        "domain_area_m2": {
+          "local_m2": 73522103.01885986,
+          "ee_m2": 73522103.01876831,
+          "difference_m2": 9.1552734375e-05,
+          "tolerance_m2": 73.5221030187683
+        },
+        "pre_valid_area_m2": {
+          "local_m2": 68497069.63754272,
+          "ee_m2": 68497069.63742065,
+          "difference_m2": 0.0001220703125,
+          "tolerance_m2": 68.49706963742065
+        },
+        "post_valid_area_m2": {
+          "local_m2": 73441641.45474243,
+          "ee_m2": 73441641.45465088,
+          "difference_m2": 9.1552734375e-05,
+          "tolerance_m2": 73.44164145465088
+        },
+        "shared_valid_area_m2": {
+          "local_m2": 68481858.0385437,
+          "ee_m2": 68481858.03842163,
+          "difference_m2": 0.0001220703125,
+          "tolerance_m2": 68.48185803842163
+        },
+        "eligible_area_m2": {
+          "local_m2": 55373062.43963623,
+          "ee_m2": 55373062.43951416,
+          "difference_m2": 0.0001220703125,
+          "tolerance_m2": 55.37306243951416
+        },
+        "candidate_area_m2": {
+          "local_m2": 546018.0252685547,
+          "ee_m2": 546018.0252685547,
+          "difference_m2": 0.0,
+          "tolerance_m2": 1.0
+        },
+        "gate_0_population_m2": {
+          "local_m2": 62103399.20535278,
+          "ee_m2": 62103399.20523071,
+          "difference_m2": 0.0001220703125,
+          "tolerance_m2": 62.10339920523071
+        },
+        "gate_0_observed_m2": {
+          "local_m2": 57895388.91281128,
+          "ee_m2": 57895388.91265869,
+          "difference_m2": 0.000152587890625,
+          "tolerance_m2": 57.89538891265869
+        },
+        "gate_1_population_m2": {
+          "local_m2": 55373062.43963623,
+          "ee_m2": 55373062.43951416,
+          "difference_m2": 0.0001220703125,
+          "tolerance_m2": 55.37306243951416
+        },
+        "gate_1_observed_m2": {
+          "local_m2": 55370260.304870605,
+          "ee_m2": 55370260.304748535,
+          "difference_m2": 0.0001220703125,
+          "tolerance_m2": 55.370260304748534
+        }
+      },
+      "scope": "Numerical implementation consistency; not independent hazard classification accuracy."
+    },
+    "hazard_specific": {
+      "status": "passed",
+      "scope": "Numerical TIFF arithmetic, masks, distinct-date bounds, declared coverage gates and all nine exploratory thresholds; not damage accuracy",
+      "domain_area_ha": 7352.210301885986,
+      "forest_area_ha": 6210.339920535278,
+      "eligible_area_ha": 5537.306243963623,
+      "baseline_forest_coverage": 0.9322418684583241,
+      "shared_eligible_coverage": 0.999949395344195,
+      "candidate_area_ha": 54.601802526855465,
+      "sensitivity": [
+        {
+          "dndvi_gte": 0.1,
+          "dnbr_gte": 0.05,
+          "candidate_area_ha": 247.98967331848144
+        },
+        {
+          "dndvi_gte": 0.1,
+          "dnbr_gte": 0.1,
+          "candidate_area_ha": 65.93048121032714
+        },
+        {
+          "dndvi_gte": 0.1,
+          "dnbr_gte": 0.15,
+          "candidate_area_ha": 30.303182907104492
+        },
+        {
+          "dndvi_gte": 0.15,
+          "dnbr_gte": 0.05,
+          "candidate_area_ha": 105.8009330291748
+        },
+        {
+          "dndvi_gte": 0.15,
+          "dnbr_gte": 0.1,
+          "candidate_area_ha": 54.601802526855465
+        },
+        {
+          "dndvi_gte": 0.15,
+          "dnbr_gte": 0.15,
+          "candidate_area_ha": 28.26162335510254
+        },
+        {
+          "dndvi_gte": 0.2,
+          "dnbr_gte": 0.05,
+          "candidate_area_ha": 23.978309255981447
+        },
+        {
+          "dndvi_gte": 0.2,
+          "dnbr_gte": 0.1,
+          "candidate_area_ha": 20.455631286621095
+        },
+        {
+          "dndvi_gte": 0.2,
+          "dnbr_gte": 0.15,
+          "candidate_area_ha": 17.053035916137695
+        }
+      ]
+    },
+    "layers_checked": 7,
+    "review_status": "unapproved",
+    "publishing_approved": false,
+    "next_step": "Inspect actual imagery, masks, acquisition selection, temporal confounds and reference evidence before considering website import."
+  },
+  "coverage_metrics": {
+    "domain_area_m2": 73522103.01876831,
+    "pre_valid_area_m2": 68497069.63742065,
+    "post_valid_area_m2": 73441641.45465088,
+    "shared_valid_area_m2": 68481858.03842163,
+    "eligible_area_m2": 55373062.43951416,
+    "candidate_area_m2": 546018.0252685547,
+    "gate_0_population_m2": 62103399.20523071,
+    "gate_0_observed_m2": 57895388.91265869,
+    "gate_1_population_m2": 55373062.43951416,
+    "gate_1_observed_m2": 55370260.304748535,
+    "area_convention": "Full WGS84 pixelArea values for cells whose centres fall inside the declared longitude/latitude box, evaluated on the exact anchored projected grid. Not fractionally clipped geographic boundary area.",
+    "gate_results": [
+      {
+        "population": "forest_mask",
+        "valid": "pre_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 62103399.20523071,
+        "observed_area_m2": 57895388.91265869,
+        "fraction": 0.9322418684576995,
+        "passed": true
+      },
+      {
+        "population": "eligible",
+        "valid": "shared_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 55373062.43951416,
+        "observed_area_m2": 55370260.304748535,
+        "fraction": 0.9999493953441949,
+        "passed": true
+      }
+    ],
+    "shared_fraction_of_aoi": 0.9314458540575201
+  },
+  "diagnostics": {
+    "threshold_sensitivity_ha": [
+      17.053035916137695,
+      247.98967331848144
+    ],
+    "candidate_original_window_support_fraction": 0.34237493061233265,
+    "optional_daily_area_diagnostic": "unavailable"
+  },
+  "analytical_assets": [
+    {
+      "id": "pre_ndvi",
+      "file": "rasters/pre_ndvi.tif",
+      "sha256": "42a56b532f00de586e0bda089dbf0615d9e12021a2f7d072627ec1d2e41976ef",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_ndvi",
+      "file": "rasters/post_ndvi.tif",
+      "sha256": "ff839023431e6742460bed31325de5f2a1eb782efe4911b2a0e8ac0d478ca346",
+      "nodata": -9999.0
+    },
+    {
+      "id": "dndvi",
+      "file": "rasters/dndvi.tif",
+      "sha256": "210eaec65b71e34c1ce8ecfcc8458382b1bdb32d8897c89c61b6ce0c4eaa6ac6",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_nbr",
+      "file": "rasters/pre_nbr.tif",
+      "sha256": "5760a202630d7b1f41fab6b915289466e5cd5b7f586386d2235950495fd0929a",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_nbr",
+      "file": "rasters/post_nbr.tif",
+      "sha256": "dd3fc50ab898bf53a4f639f322f0a76361e709f0259bfb54cd9bea8b639ea56e",
+      "nodata": -9999.0
+    },
+    {
+      "id": "dnbr",
+      "file": "rasters/dnbr.tif",
+      "sha256": "967ce852f37f793bb0f9cc7214a39fd6fa43485b7897e15e1fd9482d4b8eca13",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_valid",
+      "file": "rasters/pre_valid.tif",
+      "sha256": "7c9d8bf8618c2434d770cc30f659d0e297a68c033f5d397d27205c6cab55ff2b",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_valid",
+      "file": "rasters/post_valid.tif",
+      "sha256": "f68375e6b30ee8e7dbed6e60e5c08b1559eb08a514f0397ca411ff0dfeebe92b",
+      "nodata": -9999.0
+    },
+    {
+      "id": "shared_valid",
+      "file": "rasters/shared_valid.tif",
+      "sha256": "8bacda243f2795583733257d5ee72b460e158885a328ba40062b4dfa40fc56d0",
+      "nodata": -9999.0
+    },
+    {
+      "id": "forest_mask",
+      "file": "rasters/forest_mask.tif",
+      "sha256": "3f7b5c7f05ba5cf3d5ce9d33fe373cc32387fce4e26aa01953007edb77995779",
+      "nodata": -9999.0
+    },
+    {
+      "id": "eligible",
+      "file": "rasters/eligible.tif",
+      "sha256": "1c2a6e1baf260435998198f7d86e811fcd0f74778143b79e1ab7e45d7dfdac68",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate",
+      "file": "rasters/candidate.tif",
+      "sha256": "fd8ecaf12fcf1e3d02a1ea2b19e8c13e9654ac162203bbd6eae02a4d746b4d71",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_clear_count",
+      "file": "rasters/pre_clear_count.tif",
+      "sha256": "94b60a24e4f6159849484ffc9354e3bd77a3fff511a4626568c667e361f4dd43",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_clear_count",
+      "file": "rasters/post_clear_count.tif",
+      "sha256": "ade462eaf8df2b5bbbd56ffd825e33a76b393dac7dbbbe4b17f533287698ed6d",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_first_day",
+      "file": "rasters/pre_first_day.tif",
+      "sha256": "72665ac27e27eb0d5ef7666b08c19ad8844404a63351c0d21224d1c4869efd24",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_last_day",
+      "file": "rasters/pre_last_day.tif",
+      "sha256": "ffb3f730a28d003eace089f968b48220fcd9fb5c795e5dfa5d60dda3bce6fb91",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_first_day",
+      "file": "rasters/post_first_day.tif",
+      "sha256": "a950ac44b68dfaabbdcdb4cbc7286631c559ac84b5b81a4bfc72afd03ed0ed37",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_last_day",
+      "file": "rasters/post_last_day.tif",
+      "sha256": "64f3ad0db4b101735c2f9bd020b32530446818d581951cf47b43906106c41bca",
+      "nodata": -9999.0
+    },
+    {
+      "id": "original_pre_clear_count",
+      "file": "rasters/original_pre_clear_count.tif",
+      "sha256": "2afd635bad3c43ad0d04b0ec324cf61a740a16f141239dd643b3c0e98ace1387",
+      "nodata": -9999.0
+    },
+    {
+      "id": "original_pre_valid",
+      "file": "rasters/original_pre_valid.tif",
+      "sha256": "e0c04f48f678e9b2a14653c5a33ab4fb820638c3954d3faea7e8561387f56847",
+      "nodata": -9999.0
+    },
+    {
+      "id": "original_shared_valid",
+      "file": "rasters/original_shared_valid.tif",
+      "sha256": "12b89a13eae02de45459c3df3fcc9338efe74a730fa5fa7b60eb14ebc4e653d1",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_blue",
+      "file": "rasters/pre_blue.tif",
+      "sha256": "dd5eeee2473400b1ea41073e40d74da50fd7977b77133cfbd93fa38c964fe208",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_green",
+      "file": "rasters/pre_green.tif",
+      "sha256": "651b4b9ed147da6303052aad7ed4d1a41c8c9f14237f670e4702f055eefc66c3",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_red",
+      "file": "rasters/pre_red.tif",
+      "sha256": "4ca3cbc36aee95b04cceef86d68e0c1273c83a2d0ff212e858acf52fd8cabc0d",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_nir",
+      "file": "rasters/pre_nir.tif",
+      "sha256": "61d99297b5114d03629053bb3a74aebe52cb412fac7b3ad55c0aa69866a3dccd",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_swir2",
+      "file": "rasters/pre_swir2.tif",
+      "sha256": "5d814c6ac26f57ba187f38b2b249601311ff3000bf5ca843fb111ad74993b784",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_blue",
+      "file": "rasters/post_blue.tif",
+      "sha256": "e750fd1d0d6353de2e51c678e47fa6be136c1f33186178575464703cd1ffd7b7",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_green",
+      "file": "rasters/post_green.tif",
+      "sha256": "cfb96e71592bec851ddd8e122a0bc142dd2b8f4e209f0472839eef7edcde5a74",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_red",
+      "file": "rasters/post_red.tif",
+      "sha256": "f3738f0a9d4c242c2b14d0894e8f862085bfa59b49a5a7fa3cb881858da94058",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_nir",
+      "file": "rasters/post_nir.tif",
+      "sha256": "5f3dacc09c61f334cb0788efa43b28c155d032964ce1bee2d0a800ea16d6fb55",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_swir2",
+      "file": "rasters/post_swir2.tif",
+      "sha256": "84368264461c5b9083d5fe2e9f73e5ef9f42c8d24b1ef967517aa6087d3a3789",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi010_nbr005",
+      "file": "rasters/candidate_ndvi010_nbr005.tif",
+      "sha256": "bef4e45801dc2a3d40fb876154f6bd86aed9b044f5070dc9e28d3098449108e9",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi010_nbr010",
+      "file": "rasters/candidate_ndvi010_nbr010.tif",
+      "sha256": "1517c0bf5b4a43d99f31d951225fe9a84935c60454ea09aed7eb8747339812f6",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi010_nbr015",
+      "file": "rasters/candidate_ndvi010_nbr015.tif",
+      "sha256": "f73c16358d3b1e3f0026f177bef7d78ec3e2af2402f94633dcb4fb1dad24c03e",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi015_nbr005",
+      "file": "rasters/candidate_ndvi015_nbr005.tif",
+      "sha256": "64fb488980d19ab39c877862d8c2abf56ff287e80439996bbd22c61b3d2fa900",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi015_nbr010",
+      "file": "rasters/candidate_ndvi015_nbr010.tif",
+      "sha256": "fd8ecaf12fcf1e3d02a1ea2b19e8c13e9654ac162203bbd6eae02a4d746b4d71",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi015_nbr015",
+      "file": "rasters/candidate_ndvi015_nbr015.tif",
+      "sha256": "77b6693d8e105c10b8608d6edef0055b0f29a01ecca6112e08250640200d1acc",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi020_nbr005",
+      "file": "rasters/candidate_ndvi020_nbr005.tif",
+      "sha256": "cbd7bb426b6b24dc03b1034c16829ea3a7ec9ebf218096022e62f4bd8ea3327a",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi020_nbr010",
+      "file": "rasters/candidate_ndvi020_nbr010.tif",
+      "sha256": "82240ddf4c03fb358645f6312ea77e268d2a3af407654d49b834ed91d423a777",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate_ndvi020_nbr015",
+      "file": "rasters/candidate_ndvi020_nbr015.tif",
+      "sha256": "ec12032f2e47e94cc57133d9bafd4cd9988132159ae01a18388e2e16ed69db76",
+      "nodata": -9999.0
+    },
+    {
+      "id": "domain",
+      "file": "rasters/domain.tif",
+      "sha256": "a28472f8a555c5037f9c54bcc427e6249f584c62b60fa5ee65bf37023be8e0b9",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pixel_area_m2",
+      "file": "rasters/pixel_area_m2.tif",
+      "sha256": "87314c110333853a1dfa14ab367bc4631a4fb8d1db4bd7f94b55935cf1f46ecf",
+      "nodata": -9999.0
+    }
+  ],
+  "bounded_review": {
+    "status": "bounded_exploratory_consistency_review",
+    "source_review_status": "unapproved",
+    "publishing_approved": false,
+    "scope": "Returned numerical data, hashes, fixed grids, acquisition recipe, formulas, masks and coverage checked; derivative metadata describe exploratory observations. Not independent field accuracy or damage validation.",
+    "numerical_input_directory": "data/satellite_inputs/tornado-law-lake-2025-satellite-v2",
+    "source_archive_sha256": "194ab532732ef38c2934dff52a1d15a3fad4aee7ea439c8732996ef0de74293d",
+    "frozen_manifest_sha256": "bb110958c6f2d986af405577d85037a7f9f8c82bdb07d488d2439aeb42659713"
+  }
+}

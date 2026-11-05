@@ -1,0 +1,576 @@
+{
+  "schema": "canadian-disasters-satellite/1.0",
+  "status": "export_complete_unreviewed",
+  "review_status": "unapproved",
+  "publishing_approved": false,
+  "event": {
+    "id": "flood-lower-fraser-2021-satellite-v2",
+    "hazard": "flood",
+    "title": "Lower Fraser 2021 — Sentinel-1 candidate inundation v2",
+    "event_date": "2021-11-14",
+    "location": "Sumas Prairie / Lower Fraser Valley, British Columbia",
+    "method": "Same-track Sentinel-1 VV backscatter change; independently observed pre-event land-cover support, conservative permanent-water union and terrain exclusions",
+    "sources": [
+      {
+        "label": "Copernicus Sentinel-1 GRD; Earth Engine catalogue",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD",
+        "attribution": "Contains modified Copernicus Sentinel data (2021), processed by Google Earth Engine",
+        "license": "Copernicus Sentinel data terms"
+      },
+      {
+        "label": "Earth Engine Sentinel-1 preprocessing and filtering",
+        "url": "https://developers.google.com/earth-engine/guides/sentinel1",
+        "attribution": "Google Earth Engine",
+        "license": "Documentation"
+      },
+      {
+        "label": "JRC Yearly Water Classification History v1.4",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/JRC_GSW1_4_YearlyHistory",
+        "attribution": "Source: EC JRC/Google; Pekel et al. (2016), Nature 540, 418–422, doi:10.1038/nature20584",
+        "license": "Copernicus Programme; acknowledgement required"
+      },
+      {
+        "label": "ESA WorldCover 2020 v100 global land cover",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/ESA_WorldCover_v100",
+        "attribution": "© ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium; Zanaga et al. (2021), doi:10.5281/zenodo.5571936",
+        "license": "CC BY 4.0"
+      },
+      {
+        "label": "ESA WorldCover product documentation and validation",
+        "url": "https://esa-worldcover.org/en/data-access",
+        "attribution": "ESA WorldCover Consortium",
+        "license": "Documentation; global validation does not establish local flood accuracy"
+      },
+      {
+        "label": "NASA SAR scattering mechanisms",
+        "url": "https://science.nasa.gov/mission/nisar/get-to-know-sar/",
+        "attribution": "NASA; strong point and corner-reflector returns can be bright",
+        "license": "Method reference"
+      },
+      {
+        "label": "NASA SRTM 30 m elevation v3",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003",
+        "attribution": "NASA/USGS/JPL-Caltech; Farr et al. (2007), doi:10.1029/2005RG000183",
+        "license": "NASA/JPL data terms"
+      },
+      {
+        "label": "UN-SPIDER SAR flood-mapping recommended practice",
+        "url": "https://un-spider.org/advisory-support/recommended-practices/recommended-practice-google-earth-engine-flood-mapping/in-detail",
+        "attribution": "UNOOSA/UN-SPIDER",
+        "license": "Method reference; this implementation is an independent exploratory adaptation"
+      },
+      {
+        "label": "2021 atmospheric-river event context",
+        "url": "https://www.publicsafety.gc.ca/cnt/trnsprnc/brfng-mtrls/prlmntry-bndrs/20211207/02-en.aspx?wbdisable=true",
+        "attribution": "Public Safety Canada; atmospheric-river rainfall began 14 November 2021",
+        "license": "Government of Canada information terms"
+      }
+    ],
+    "limitations": [
+      "Exploratory candidate open-water inundation, not independently validated flood extent, water depth, damage, exposure, or an emergency warning.",
+      "The −16 dB post-event and 3 dB decrease thresholds are predeclared exploratory choices, not locally calibrated universal water thresholds or an accuracy guarantee.",
+      "Same relative orbit and pass reduce viewing-geometry differences. Earth Engine GRD is terrain-corrected, but is not radiometrically terrain-flattened; a <5° slope filter is not a layover/shadow correction.",
+      "Wet bare soil, smooth fields, land management, freeze/thaw, wind, SAR noise and changing incidence geometry can mimic or hide inundation. Urban or vegetation-covered flooding can increase backscatter or remain undetected.",
+      "Temporal medians and 30 m-radius spatial smoothing suppress speckle and also erase narrow, short-lived or heterogeneous flood signals. The 20 m export grid is not a claim of 20 m independent resolving power.",
+      "The post window is an event-period composite, not a simultaneous or peak flood snapshot. The pre window may already contain wet or flooded locations; no change is not proof of no flooding.",
+      "Baseline support comes from observed, documented ESA WorldCover 2020 land-cover classes, not from filling JRC no-data as dry land. Any contributing WorldCover permanent-water class 80, plus observed JRC2020 class 3, is excluded. Both baseline products can misclassify boundaries and miss changes before the event; seasonal water remains eligible.",
+      "WorldCover class 80 is aggregated conservatively: any native permanent-water overlap excludes the full 20 m analysis cell, widening water exclusions along boundaries. WorldCover2020 is a land-cover model, not independent field truth or proof of dry conditions in November 2021.",
+      "No-data, missing baseline/DEM, high slope, insufficient observations and permanent water are excluded from candidate evaluation; blank map pixels are not confirmed dry land.",
+      "The fixed bounding box covers a Lower Fraser case study. Results must not be extrapolated to the whole British Columbia event. No SAR coherence or earthquake/tornado damage inference is performed by this module."
+    ]
+  },
+  "generated_at": "2026-10-22T16:56:29.392323Z",
+  "source_archive_sha256": "194ab532732ef38c2934dff52a1d15a3fad4aee7ea439c8732996ef0de74293d",
+  "source_selection": {
+    "file": "source_selection.json",
+    "sha256": "746c83ec4ff7eda755eed3b73908d0e59bdec3980d18c7ee1224ac2f6a07f423"
+  },
+  "analysis_grid": {
+    "crs": "EPSG:32610",
+    "scale_m": 20,
+    "transform": [
+      20.0,
+      0.0,
+      543660.0,
+      0.0,
+      -20.0,
+      5455840.0
+    ],
+    "width": 1840,
+    "height": 1411,
+    "bbox": [
+      -122.4,
+      49.0,
+      -121.9,
+      49.25
+    ],
+    "anchor_transform": [
+      20,
+      0,
+      0,
+      0,
+      -20,
+      10000000
+    ]
+  },
+  "validity": {
+    "pre": "pre_valid",
+    "post": "post_valid",
+    "shared": "shared_valid",
+    "candidate": "candidate"
+  },
+  "coverage_flag_ids": [
+    "baseline_valid",
+    "domain",
+    "eligible",
+    "post_valid",
+    "pre_valid",
+    "shared_valid"
+  ],
+  "coverage_gates": [
+    {
+      "population": "domain",
+      "valid": "shared_valid",
+      "min_fraction": 0.8
+    },
+    {
+      "population": "domain",
+      "valid": "baseline_valid",
+      "min_fraction": 0.8
+    }
+  ],
+  "metrics": {
+    "domain_area_m2": 1014642953.1802368,
+    "pre_valid_area_m2": 1014642953.1802368,
+    "post_valid_area_m2": 1014642953.1802368,
+    "shared_valid_area_m2": 1014642953.1802368,
+    "eligible_area_m2": 491458499.1832886,
+    "candidate_area_m2": 30528313.322875977,
+    "gate_0_population_m2": 1014642953.1802368,
+    "gate_0_observed_m2": 1014642953.1802368,
+    "gate_1_population_m2": 1014642953.1802368,
+    "gate_1_observed_m2": 1014642953.1802368,
+    "area_convention": "Full WGS84 pixelArea values for cells whose centres fall inside the declared longitude/latitude box, evaluated on the exact anchored projected grid. Not fractionally clipped geographic boundary area.",
+    "gate_results": [
+      {
+        "population": "domain",
+        "valid": "shared_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 1014642953.1802368,
+        "observed_area_m2": 1014642953.1802368,
+        "fraction": 1.0,
+        "passed": true
+      },
+      {
+        "population": "domain",
+        "valid": "baseline_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 1014642953.1802368,
+        "observed_area_m2": 1014642953.1802368,
+        "fraction": 1.0,
+        "passed": true
+      }
+    ],
+    "shared_fraction_of_aoi": 1.0
+  },
+  "hazard_area_ha": null,
+  "hazard_area_note": "No official event area or confirmed damage is inferred. Any candidate area is an exploratory satellite indicator only.",
+  "audit_recipe": {
+    "formula": "delta_vv_db=post_vv_db-pre_vv_db; candidate=(post_vv_db<=post_vv_max_db)&(delta_vv_db<=-decrease_min_db), masked to eligible",
+    "parameters": {
+      "aoi_bbox": [
+        -122.4,
+        49.0,
+        -121.9,
+        49.25
+      ],
+      "analysis_crs": "EPSG:32610",
+      "analysis_transform": [
+        20,
+        0,
+        0,
+        0,
+        -20,
+        10000000
+      ],
+      "pre_start": "2021-10-15",
+      "pre_end_exclusive": "2021-11-13",
+      "post_start": "2021-11-16",
+      "post_end_exclusive": "2021-11-22",
+      "post_vv_max_db": -16.0,
+      "decrease_min_db": 3.0,
+      "slope_max_degrees": 5.0,
+      "smoothing_radius_m": 30,
+      "incidence_min_degrees": 30.0,
+      "incidence_max_degrees": 45.0,
+      "permanent_water_year": 2020,
+      "min_pre_observations": 2,
+      "min_post_observations": 1,
+      "min_valid_fraction": 0.8,
+      "min_baseline_fraction": 0.8,
+      "max_scenes_per_window": 128,
+      "max_orbit_candidates": 16
+    },
+    "module": "processing.satellite_flood",
+    "function": "audit_arrays",
+    "threshold_sensitivity": {
+      "post_vv_max_db": [
+        -14,
+        -16,
+        -18
+      ],
+      "decrease_min_db": [
+        2,
+        3,
+        4
+      ],
+      "interpretation": "Threshold stability only, not accuracy or a confidence interval"
+    }
+  },
+  "analytical_assets": [
+    {
+      "id": "pre_vv_db",
+      "file": "rasters/pre_vv_db.tif",
+      "sha256": "dd50b6f70a9cf10f48b35616fcd3d05a5586e407d70a8a916cc4b9da298f7a37",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_vv_db",
+      "file": "rasters/post_vv_db.tif",
+      "sha256": "02eace74ca57dc68cf69de36632a8645eb1e4d4d5db3ff125bbec4c4908859db",
+      "nodata": -9999.0
+    },
+    {
+      "id": "delta_vv_db",
+      "file": "rasters/delta_vv_db.tif",
+      "sha256": "e78498e22279b9017ff05ff7508f399b0fa6d85ef5c0684b0799f037ee0a0135",
+      "nodata": -9999.0
+    },
+    {
+      "id": "candidate",
+      "file": "rasters/candidate.tif",
+      "sha256": "19b43a57555bb3a3aca9f7312e3e1684ed8139d079d66227fd7eb30187e28bf2",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_observation_count",
+      "file": "rasters/pre_observation_count.tif",
+      "sha256": "afa7dc4a74b89104bdb5fc1724cab64862545c1a18d0e79a12a3447051001548",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_observation_count",
+      "file": "rasters/post_observation_count.tif",
+      "sha256": "122c4705039f40714ca446ccc680d0c48eff4be6d069c5804a873b551145eec1",
+      "nodata": -9999.0
+    },
+    {
+      "id": "water_class_2020",
+      "file": "rasters/water_class_2020.tif",
+      "sha256": "e6e575623e8b75a36cf23fd99af4ce23aa3185e74b71cc922040148bcd3ad382",
+      "nodata": -9999.0
+    },
+    {
+      "id": "permanent_water",
+      "file": "rasters/permanent_water.tif",
+      "sha256": "68ab9a6e8948bcbb10cd2dbd54d211c167e91d1583a31c97aa54def1965b82e4",
+      "nodata": -9999.0
+    },
+    {
+      "id": "slope_degrees",
+      "file": "rasters/slope_degrees.tif",
+      "sha256": "5029308c6616a7e446464bd1dbbd659fdac51b3d93646c0ebb0e94f59127ab4c",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pre_valid",
+      "file": "rasters/pre_valid.tif",
+      "sha256": "122c4705039f40714ca446ccc680d0c48eff4be6d069c5804a873b551145eec1",
+      "nodata": -9999.0
+    },
+    {
+      "id": "post_valid",
+      "file": "rasters/post_valid.tif",
+      "sha256": "122c4705039f40714ca446ccc680d0c48eff4be6d069c5804a873b551145eec1",
+      "nodata": -9999.0
+    },
+    {
+      "id": "shared_valid",
+      "file": "rasters/shared_valid.tif",
+      "sha256": "122c4705039f40714ca446ccc680d0c48eff4be6d069c5804a873b551145eec1",
+      "nodata": -9999.0
+    },
+    {
+      "id": "eligible",
+      "file": "rasters/eligible.tif",
+      "sha256": "35a9ae49af95a3b4f04dcc7670130f6f7417b24093ed6144fb702bd5aa280664",
+      "nodata": -9999.0
+    },
+    {
+      "id": "worldcover2020",
+      "file": "rasters/worldcover2020.tif",
+      "sha256": "67f4fb958540cef5760a76344952f899e7185a4cd13e06222db092b785d238bf",
+      "nodata": -9999.0
+    },
+    {
+      "id": "worldcover_known_fraction",
+      "file": "rasters/worldcover_known_fraction.tif",
+      "sha256": "122c4705039f40714ca446ccc680d0c48eff4be6d069c5804a873b551145eec1",
+      "nodata": -9999.0
+    },
+    {
+      "id": "worldcover_water_fraction",
+      "file": "rasters/worldcover_water_fraction.tif",
+      "sha256": "a0a7130c9a89d80497955763c2b9e6d53d8164d8a3f73f0f07663a43bc1abc4a",
+      "nodata": -9999.0
+    },
+    {
+      "id": "baseline_valid",
+      "file": "rasters/baseline_valid.tif",
+      "sha256": "122c4705039f40714ca446ccc680d0c48eff4be6d069c5804a873b551145eec1",
+      "nodata": -9999.0
+    },
+    {
+      "id": "domain",
+      "file": "rasters/domain.tif",
+      "sha256": "8697829a69906ebb4fcebe79b952f3476edb6e26b6d38ab3c61737ec533a4a00",
+      "nodata": -9999.0
+    },
+    {
+      "id": "pixel_area_m2",
+      "file": "rasters/pixel_area_m2.tif",
+      "sha256": "f1631ee798f5af40958b8b6a48924675903b8f109a44721bff9cf20bbad1ec52",
+      "nodata": -9999.0
+    }
+  ],
+  "layers": [
+    {
+      "id": "pre_vv_db",
+      "label": "Before — Sentinel-1 VV backscatter",
+      "legend": [
+        {
+          "color": "#08111d",
+          "label": "-25"
+        },
+        {
+          "color": "#e4edf2",
+          "label": "0"
+        }
+      ],
+      "units": "dB",
+      "file": "layers/pre_vv_db.png",
+      "sha256": "30e5d6b32bcc7fd41e5d938bbeef059e593d77c0b69838b34a836e6d6b167f37",
+      "bounds": [
+        [
+          48.99999178445149,
+          -122.40012870076221
+        ],
+        [
+          49.25006967451085,
+          -121.89994675056445
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 928,
+      "height": 709,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "post_vv_db",
+      "label": "Event period — Sentinel-1 VV backscatter",
+      "legend": [
+        {
+          "color": "#08111d",
+          "label": "-25"
+        },
+        {
+          "color": "#e4edf2",
+          "label": "0"
+        }
+      ],
+      "units": "dB",
+      "file": "layers/post_vv_db.png",
+      "sha256": "ad057f2169cafdffa563ab33dfd1d5c97d4c4644f679a7c0b4b1b796c00f70f6",
+      "bounds": [
+        [
+          48.99999178445149,
+          -122.40012870076221
+        ],
+        [
+          49.25006967451085,
+          -121.89994675056445
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 928,
+      "height": 709,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "delta_vv_db",
+      "label": "VV change — event minus before",
+      "legend": [
+        {
+          "color": "#245fc5",
+          "label": "-8"
+        },
+        {
+          "color": "#c46531",
+          "label": "8"
+        }
+      ],
+      "units": "dB",
+      "file": "layers/delta_vv_db.png",
+      "sha256": "63fdbde03a696c26056036f8ea89ec6ad5ea784053230f1e6d916fe288dcc120",
+      "bounds": [
+        [
+          48.99999178445149,
+          -122.40012870076221
+        ],
+        [
+          49.25006967451085,
+          -121.89994675056445
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 928,
+      "height": 709,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "candidate",
+      "label": "Candidate open-water inundation",
+      "legend": [
+        {
+          "color": "#dbe2df",
+          "label": "Eligible noncandidate"
+        },
+        {
+          "color": "#245fc5",
+          "label": "Candidate surface inundation"
+        }
+      ],
+      "units": "0=eligible noncandidate; 1=candidate",
+      "file": "layers/candidate.png",
+      "sha256": "15bef24bc422a03541645f86ce68770536c03571d01e09555f15c5cb321b38cf",
+      "bounds": [
+        [
+          48.99999178445149,
+          -122.40012870076221
+        ],
+        [
+          49.25006967451085,
+          -121.89994675056445
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 928,
+      "height": 709,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "permanent_water",
+      "label": "2020 permanent-water union context",
+      "legend": [
+        {
+          "color": "#e8e6d9",
+          "label": "0"
+        },
+        {
+          "color": "#78b7d8",
+          "label": "1"
+        }
+      ],
+      "units": "0=other known baseline; 1=any WorldCover permanent-water overlap or observed JRC permanent water",
+      "file": "layers/permanent_water.png",
+      "sha256": "d32bf84d32213c522e0208c4a3c63f5e122cb73e6a39964474b0d51defea2ed8",
+      "bounds": [
+        [
+          48.99999178445149,
+          -122.40012870076221
+        ],
+        [
+          49.25006967451085,
+          -121.89994675056445
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 928,
+      "height": 709,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "baseline_valid",
+      "label": "Known WorldCover 2020 baseline support",
+      "legend": [
+        {
+          "color": "#5e6671",
+          "label": "0"
+        },
+        {
+          "color": "#50b6a4",
+          "label": "1"
+        }
+      ],
+      "units": "0=unknown native land-cover support; 1=all contributing source categories known",
+      "file": "layers/baseline_valid.png",
+      "sha256": "d8b6cba7e7b2998808e6123e7db00644b45a39f40ba92f9a0ba6778c7053fedb",
+      "bounds": [
+        [
+          48.99999178445149,
+          -122.40012870076221
+        ],
+        [
+          49.25006967451085,
+          -121.89994675056445
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 928,
+      "height": 709,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    },
+    {
+      "id": "eligible",
+      "label": "Eligible evaluation support",
+      "legend": [
+        {
+          "color": "#5e6671",
+          "label": "0"
+        },
+        {
+          "color": "#50b6a4",
+          "label": "1"
+        }
+      ],
+      "units": "0=excluded or unobserved; 1=evaluated",
+      "file": "layers/eligible.png",
+      "sha256": "75b0e89535bec0575699b20f8fbea6ca4557fdb5692eaa9ef1dd976453956cbb",
+      "bounds": [
+        [
+          48.99999178445149,
+          -122.40012870076221
+        ],
+        [
+          49.25006967451085,
+          -121.89994675056445
+        ]
+      ],
+      "crs": "EPSG:3857",
+      "pixel_size_map_m": 60,
+      "width": 928,
+      "height": 709,
+      "resampling": "nearest display sampling; statistics use numerical analysis grid"
+    }
+  ],
+  "export_audit": {
+    "file": "export_audit.json",
+    "sha256": "e19067063cec426f105557e2be393600c7987e6410a1f4078cce2ebcff1e9495"
+  }
+}

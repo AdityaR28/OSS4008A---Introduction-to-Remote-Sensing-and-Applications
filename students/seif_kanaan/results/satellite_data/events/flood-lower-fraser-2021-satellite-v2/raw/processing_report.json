@@ -1,0 +1,122 @@
+{
+  "schema": "canadian-disasters-satellite/1.0",
+  "event": {
+    "id": "flood-lower-fraser-2021-satellite-v2",
+    "hazard": "flood",
+    "title": "Lower Fraser 2021 — Sentinel-1 candidate inundation v2",
+    "event_date": "2021-11-14",
+    "location": "Sumas Prairie / Lower Fraser Valley, British Columbia",
+    "method": "Same-track Sentinel-1 VV backscatter change; independently observed pre-event land-cover support, conservative permanent-water union and terrain exclusions",
+    "sources": [
+      {
+        "label": "Copernicus Sentinel-1 GRD; Earth Engine catalogue",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD",
+        "attribution": "Contains modified Copernicus Sentinel data (2021), processed by Google Earth Engine",
+        "license": "Copernicus Sentinel data terms"
+      },
+      {
+        "label": "Earth Engine Sentinel-1 preprocessing and filtering",
+        "url": "https://developers.google.com/earth-engine/guides/sentinel1",
+        "attribution": "Google Earth Engine",
+        "license": "Documentation"
+      },
+      {
+        "label": "JRC Yearly Water Classification History v1.4",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/JRC_GSW1_4_YearlyHistory",
+        "attribution": "Source: EC JRC/Google; Pekel et al. (2016), Nature 540, 418–422, doi:10.1038/nature20584",
+        "license": "Copernicus Programme; acknowledgement required"
+      },
+      {
+        "label": "ESA WorldCover 2020 v100 global land cover",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/ESA_WorldCover_v100",
+        "attribution": "© ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium; Zanaga et al. (2021), doi:10.5281/zenodo.5571936",
+        "license": "CC BY 4.0"
+      },
+      {
+        "label": "ESA WorldCover product documentation and validation",
+        "url": "https://esa-worldcover.org/en/data-access",
+        "attribution": "ESA WorldCover Consortium",
+        "license": "Documentation; global validation does not establish local flood accuracy"
+      },
+      {
+        "label": "NASA SAR scattering mechanisms",
+        "url": "https://science.nasa.gov/mission/nisar/get-to-know-sar/",
+        "attribution": "NASA; strong point and corner-reflector returns can be bright",
+        "license": "Method reference"
+      },
+      {
+        "label": "NASA SRTM 30 m elevation v3",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003",
+        "attribution": "NASA/USGS/JPL-Caltech; Farr et al. (2007), doi:10.1029/2005RG000183",
+        "license": "NASA/JPL data terms"
+      },
+      {
+        "label": "UN-SPIDER SAR flood-mapping recommended practice",
+        "url": "https://un-spider.org/advisory-support/recommended-practices/recommended-practice-google-earth-engine-flood-mapping/in-detail",
+        "attribution": "UNOOSA/UN-SPIDER",
+        "license": "Method reference; this implementation is an independent exploratory adaptation"
+      },
+      {
+        "label": "2021 atmospheric-river event context",
+        "url": "https://www.publicsafety.gc.ca/cnt/trnsprnc/brfng-mtrls/prlmntry-bndrs/20211207/02-en.aspx?wbdisable=true",
+        "attribution": "Public Safety Canada; atmospheric-river rainfall began 14 November 2021",
+        "license": "Government of Canada information terms"
+      }
+    ],
+    "limitations": [
+      "Exploratory candidate open-water inundation, not independently validated flood extent, water depth, damage, exposure, or an emergency warning.",
+      "The −16 dB post-event and 3 dB decrease thresholds are predeclared exploratory choices, not locally calibrated universal water thresholds or an accuracy guarantee.",
+      "Same relative orbit and pass reduce viewing-geometry differences. Earth Engine GRD is terrain-corrected, but is not radiometrically terrain-flattened; a <5° slope filter is not a layover/shadow correction.",
+      "Wet bare soil, smooth fields, land management, freeze/thaw, wind, SAR noise and changing incidence geometry can mimic or hide inundation. Urban or vegetation-covered flooding can increase backscatter or remain undetected.",
+      "Temporal medians and 30 m-radius spatial smoothing suppress speckle and also erase narrow, short-lived or heterogeneous flood signals. The 20 m export grid is not a claim of 20 m independent resolving power.",
+      "The post window is an event-period composite, not a simultaneous or peak flood snapshot. The pre window may already contain wet or flooded locations; no change is not proof of no flooding.",
+      "Baseline support comes from observed, documented ESA WorldCover 2020 land-cover classes, not from filling JRC no-data as dry land. Any contributing WorldCover permanent-water class 80, plus observed JRC2020 class 3, is excluded. Both baseline products can misclassify boundaries and miss changes before the event; seasonal water remains eligible.",
+      "WorldCover class 80 is aggregated conservatively: any native permanent-water overlap excludes the full 20 m analysis cell, widening water exclusions along boundaries. WorldCover2020 is a land-cover model, not independent field truth or proof of dry conditions in November 2021.",
+      "No-data, missing baseline/DEM, high slope, insufficient observations and permanent water are excluded from candidate evaluation; blank map pixels are not confirmed dry land.",
+      "The fixed bounding box covers a Lower Fraser case study. Results must not be extrapolated to the whole British Columbia event. No SAR coherence or earthquake/tornado damage inference is performed by this module."
+    ]
+  },
+  "status": "export_complete_unreviewed",
+  "phase": "complete",
+  "started_at": "2026-10-22T16:56:17.350051Z",
+  "review_status": "unapproved",
+  "metrics": {
+    "domain_area_m2": 1014642953.1802368,
+    "pre_valid_area_m2": 1014642953.1802368,
+    "post_valid_area_m2": 1014642953.1802368,
+    "shared_valid_area_m2": 1014642953.1802368,
+    "eligible_area_m2": 491458499.1832886,
+    "candidate_area_m2": 30528313.322875977,
+    "gate_0_population_m2": 1014642953.1802368,
+    "gate_0_observed_m2": 1014642953.1802368,
+    "gate_1_population_m2": 1014642953.1802368,
+    "gate_1_observed_m2": 1014642953.1802368,
+    "area_convention": "Full WGS84 pixelArea values for cells whose centres fall inside the declared longitude/latitude box, evaluated on the exact anchored projected grid. Not fractionally clipped geographic boundary area.",
+    "gate_results": [
+      {
+        "population": "domain",
+        "valid": "shared_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 1014642953.1802368,
+        "observed_area_m2": 1014642953.1802368,
+        "fraction": 1.0,
+        "passed": true
+      },
+      {
+        "population": "domain",
+        "valid": "baseline_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 1014642953.1802368,
+        "observed_area_m2": 1014642953.1802368,
+        "fraction": 1.0,
+        "passed": true
+      }
+    ],
+    "shared_fraction_of_aoi": 1.0
+  },
+  "raster": "pixel_area_m2",
+  "raster_index": 19,
+  "raster_total": 19,
+  "layer": "eligible",
+  "completed_at": "2026-10-22T17:15:59.240909Z"
+}

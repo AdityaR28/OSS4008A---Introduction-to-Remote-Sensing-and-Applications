@@ -1,0 +1,866 @@
+{
+  "schema_version": "1.0.0",
+  "status": "ready",
+  "generated_at": "2026-10-21T17:26:20.400346Z",
+  "processing_version": "0.1.0",
+  "event": {
+    "id": "mcdougall-creek-2023",
+    "name": "McDougall Creek",
+    "year": 2023,
+    "location": "West Kelowna, British Columbia",
+    "ignition_date": "2023-08-15",
+    "center": [
+      49.92,
+      -119.65
+    ],
+    "aoi_bbox": [
+      -119.85,
+      49.78,
+      -119.43,
+      50.12
+    ]
+  },
+  "analysis": {
+    "sensor": "Sentinel-2 MSI",
+    "dataset": "COPERNICUS/S2_SR_HARMONIZED",
+    "cloud_dataset": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED",
+    "crs": "EPSG:32611",
+    "crs_transform": [
+      20,
+      0,
+      0,
+      0,
+      -20,
+      10000000
+    ],
+    "scale_m": 20,
+    "threshold": 0.27,
+    "cloud_score_threshold": 0.6,
+    "cloud_score_band": "cs_cdf",
+    "scene_cloud_limit_percent": 100,
+    "scl_kept_classes": [
+      4,
+      5
+    ],
+    "min_valid_fraction": 0.4,
+    "composite": "Per-band median surface reflectance; NBR computed after compositing",
+    "spatial_support": "10 m B8/RGB aggregated by area-weighted mean to native B12 20 m grid; all 10 m child pixels must pass clear/input-mask checks; common 20 m EPSG:32611 grid",
+    "area_reducer": "ee.Image.pixelArea sum, 20 m EPSG:32611 fixed transform; no bestEffort",
+    "area_reducer_max_pixels": 100000000,
+    "raster_export": {
+      "method": "ee.data.computePixels",
+      "tile_size_pixels": 512,
+      "grid_assembly": "Exact raster windows, no local resampling",
+      "workers": 1
+    },
+    "valid_fraction_denominator": "Full AOI including excluded water and uncertain land pixels",
+    "display_crs": "EPSG:3857",
+    "display_pixel_size_map_m": 60,
+    "display_note": "Nearest-neighbour display sampling only. Web Mercator map metres differ from ground metres; all statistics use the 20 m analysis grid.",
+    "pre": {
+      "start": "2023-07-15",
+      "end_exclusive": "2023-08-15",
+      "image_count": 22,
+      "scene_count_before_cloud_join": 24,
+      "scenes_missing_cloud_score": 2,
+      "acquisitions": [
+        "2023-07-16",
+        "2023-07-18",
+        "2023-07-21",
+        "2023-07-23",
+        "2023-07-26",
+        "2023-07-28",
+        "2023-07-31",
+        "2023-08-02",
+        "2023-08-05",
+        "2023-08-07",
+        "2023-08-12"
+      ],
+      "source_images": [
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230716T185919_20230716T190738_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230716T185919_20230716T190738_T11ULR",
+          "acquired_at": "2023-07-16T19:10:39.705000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230716T185919_20230716T190738_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230716T185919_20230716T190738_T10UGA",
+          "acquired_at": "2023-07-16T19:10:41.524000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230718T184921_20230718T185858_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230718T184921_20230718T185858_T11ULR",
+          "acquired_at": "2023-07-18T19:00:41.630000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230718T184921_20230718T185858_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230718T184921_20230718T185858_T10UGA",
+          "acquired_at": "2023-07-18T19:00:42.961000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230721T185921_20230721T190933_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230721T185921_20230721T190933_T11ULR",
+          "acquired_at": "2023-07-21T19:10:38.488000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230721T185921_20230721T190933_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230721T185921_20230721T190933_T10UGA",
+          "acquired_at": "2023-07-21T19:10:40.309000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230723T184929_20230723T185535_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230723T184929_20230723T185535_T11ULR",
+          "acquired_at": "2023-07-23T19:00:43.337000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230723T184929_20230723T185535_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230723T184929_20230723T185535_T10UGA",
+          "acquired_at": "2023-07-23T19:00:44.667000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230726T185919_20230726T190731_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230726T185919_20230726T190731_T11ULR",
+          "acquired_at": "2023-07-26T19:10:40.253000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230726T185919_20230726T190731_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230726T185919_20230726T190731_T10UGA",
+          "acquired_at": "2023-07-26T19:10:42.070000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230728T184921_20230728T184922_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230728T184921_20230728T184922_T11ULR",
+          "acquired_at": "2023-07-28T19:00:42.500000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230728T184921_20230728T184922_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230728T184921_20230728T184922_T10UGA",
+          "acquired_at": "2023-07-28T19:00:43.678000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230731T185921_20230731T190732_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230731T185921_20230731T190732_T11ULR",
+          "acquired_at": "2023-07-31T19:10:39.676000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230731T185921_20230731T190732_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230731T185921_20230731T190732_T10UGA",
+          "acquired_at": "2023-07-31T19:10:41.493000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230802T184919_20230802T185529_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230802T184919_20230802T185529_T11ULR",
+          "acquired_at": "2023-08-02T19:00:42.074000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230802T184919_20230802T185529_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230802T184919_20230802T185529_T10UGA",
+          "acquired_at": "2023-08-02T19:00:43.404000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230805T185919_20230805T190632_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230805T185919_20230805T190632_T11ULR",
+          "acquired_at": "2023-08-05T19:10:39.326000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230805T185919_20230805T190632_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230805T185919_20230805T190632_T10UGA",
+          "acquired_at": "2023-08-05T19:10:41.145000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230807T184921_20230807T185044_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230807T184921_20230807T185044_T11ULR",
+          "acquired_at": "2023-08-07T19:00:41.868000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230807T184921_20230807T185044_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230807T184921_20230807T185044_T10UGA",
+          "acquired_at": "2023-08-07T19:00:43.198000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230812T184919_20230812T185631_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230812T184919_20230812T185631_T11ULR",
+          "acquired_at": "2023-08-12T19:00:42.937000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230812T184919_20230812T185631_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230812T184919_20230812T185631_T10UGA",
+          "acquired_at": "2023-08-12T19:00:44.268000Z"
+        }
+      ],
+      "image_count_definition": "Selected spatially intersecting granules with Cloud Score+ matches; not independent per-pixel observations.",
+      "unique_date_count": 11,
+      "date_count_definition": "Catalog dates among selected granules. Valid dates can be fewer at a pixel; overlapping tiles do not add independent dates."
+    },
+    "post": {
+      "start": "2023-09-01",
+      "end_exclusive": "2023-10-01",
+      "image_count": 24,
+      "scene_count_before_cloud_join": 24,
+      "scenes_missing_cloud_score": 0,
+      "acquisitions": [
+        "2023-09-01",
+        "2023-09-04",
+        "2023-09-06",
+        "2023-09-09",
+        "2023-09-11",
+        "2023-09-14",
+        "2023-09-16",
+        "2023-09-19",
+        "2023-09-21",
+        "2023-09-24",
+        "2023-09-26",
+        "2023-09-29"
+      ],
+      "source_images": [
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230901T184919_20230901T190032_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230901T184919_20230901T190032_T11ULR",
+          "acquired_at": "2023-09-01T19:00:43.581000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230901T184919_20230901T190032_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230901T184919_20230901T190032_T10UGA",
+          "acquired_at": "2023-09-01T19:00:43.957000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230904T185919_20230904T190914_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230904T185919_20230904T190914_T11ULR",
+          "acquired_at": "2023-09-04T19:10:39.975000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230904T185919_20230904T190914_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230904T185919_20230904T190914_T10UGA",
+          "acquired_at": "2023-09-04T19:10:40.846000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230906T184921_20230906T185823_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230906T184921_20230906T185823_T11ULR",
+          "acquired_at": "2023-09-06T19:00:42.638000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230906T184921_20230906T185823_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230906T184921_20230906T185823_T10UGA",
+          "acquired_at": "2023-09-06T19:00:43.601000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230909T185941_20230909T190644_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230909T185941_20230909T190644_T11ULR",
+          "acquired_at": "2023-09-09T19:10:39.466000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230909T185941_20230909T190644_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230909T185941_20230909T190644_T10UGA",
+          "acquired_at": "2023-09-09T19:10:41.274000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230911T184939_20230911T185319_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230911T184939_20230911T185319_T11ULR",
+          "acquired_at": "2023-09-11T19:00:40.924000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230911T184939_20230911T185319_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230911T184939_20230911T185319_T10UGA",
+          "acquired_at": "2023-09-11T19:00:42.255000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230914T190019_20230914T190744_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230914T190019_20230914T190744_T11ULR",
+          "acquired_at": "2023-09-14T19:10:37.166000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230914T190019_20230914T190744_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230914T190019_20230914T190744_T10UGA",
+          "acquired_at": "2023-09-14T19:10:38.986000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230916T185021_20230916T185149_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230916T185021_20230916T185149_T11ULR",
+          "acquired_at": "2023-09-16T19:00:40.914000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230916T185021_20230916T185149_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230916T185021_20230916T185149_T10UGA",
+          "acquired_at": "2023-09-16T19:00:42.246000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230919T190051_20230919T190531_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230919T190051_20230919T190531_T11ULR",
+          "acquired_at": "2023-09-19T19:10:36.783000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230919T190051_20230919T190531_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230919T190051_20230919T190531_T10UGA",
+          "acquired_at": "2023-09-19T19:10:38.592000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230921T185009_20230921T185619_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230921T185009_20230921T185619_T11ULR",
+          "acquired_at": "2023-09-21T19:00:40.947000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230921T185009_20230921T185619_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230921T185009_20230921T185619_T10UGA",
+          "acquired_at": "2023-09-21T19:00:42.278000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230924T190029_20230924T190814_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230924T190029_20230924T190814_T11ULR",
+          "acquired_at": "2023-09-24T19:10:37.802000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230924T190029_20230924T190814_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230924T190029_20230924T190814_T10UGA",
+          "acquired_at": "2023-09-24T19:10:39.619000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230926T185131_20230926T185713_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230926T185131_20230926T185713_T11ULR",
+          "acquired_at": "2023-09-26T19:00:39.618000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230926T185131_20230926T185713_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230926T185131_20230926T185713_T10UGA",
+          "acquired_at": "2023-09-26T19:00:40.949000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230929T190201_20230929T190158_T11ULR",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230929T190201_20230929T190158_T11ULR",
+          "acquired_at": "2023-09-29T19:10:36.615000Z"
+        },
+        {
+          "id": "COPERNICUS/S2_SR_HARMONIZED/20230929T190201_20230929T190158_T10UGA",
+          "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230929T190201_20230929T190158_T10UGA",
+          "acquired_at": "2023-09-29T19:10:38.434000Z"
+        }
+      ],
+      "image_count_definition": "Selected spatially intersecting granules with Cloud Score+ matches; not independent per-pixel observations.",
+      "unique_date_count": 12,
+      "date_count_definition": "Catalog dates among selected granules. Valid dates can be fewer at a pixel; overlapping tiles do not add independent dates."
+    }
+  },
+  "metrics": {
+    "aoi_area_ha": 113994.24598714622,
+    "candidate_area_ha": 10783.907729226512,
+    "post_valid_area_ha": 98799.3489322462,
+    "pre_valid_area_ha": 98412.81263190198,
+    "valid_area_ha": 98329.29303526197,
+    "valid_fraction": 0.862581195952201,
+    "no_data_area_ha": 15664.952951884246,
+    "pre_valid_fraction": 0.8633138609732883,
+    "post_valid_fraction": 0.8667047014231458
+  },
+  "layers": [
+    {
+      "id": "pre_rgb",
+      "label": "Before \u2022 true colour",
+      "kind": "image",
+      "url": "layers/pre_rgb.png",
+      "bounds": [
+        [
+          49.77986930237246,
+          -119.85017093526054
+        ],
+        [
+          50.120093761790805,
+          -119.42975938229262
+        ]
+      ],
+      "legend": [
+        {
+          "color": "#ffffff",
+          "label": "RGB reflectance, 0\u20130.30; gamma 1.3"
+        }
+      ],
+      "units": "surface reflectance",
+      "sha256": "90b4e5188c39b76d708b704b959e203e59b104fd0c87d3673496efbd119e2130",
+      "display_crs": "EPSG:3857",
+      "display_pixel_size_map_m": 60,
+      "width": 780,
+      "height": 981,
+      "resampling": "nearest (display only)"
+    },
+    {
+      "id": "post_rgb",
+      "label": "After \u2022 true colour",
+      "kind": "image",
+      "url": "layers/post_rgb.png",
+      "bounds": [
+        [
+          49.77986930237246,
+          -119.85017093526054
+        ],
+        [
+          50.120093761790805,
+          -119.42975938229262
+        ]
+      ],
+      "legend": [
+        {
+          "color": "#ffffff",
+          "label": "RGB reflectance, 0\u20130.30; gamma 1.3"
+        }
+      ],
+      "units": "surface reflectance",
+      "sha256": "79efe360f7f5af6e184f7fef267b8275d16dfa93077502de39f69d1696c8dc81",
+      "display_crs": "EPSG:3857",
+      "display_pixel_size_map_m": 60,
+      "width": 780,
+      "height": 981,
+      "resampling": "nearest (display only)"
+    },
+    {
+      "id": "pre_nbr",
+      "label": "Before \u2022 NBR",
+      "kind": "image",
+      "url": "layers/pre_nbr.png",
+      "bounds": [
+        [
+          49.77986930237246,
+          -119.85017093526054
+        ],
+        [
+          50.120093761790805,
+          -119.42975938229262
+        ]
+      ],
+      "legend": [
+        {
+          "color": "#895d50",
+          "label": "\u22121: low NBR"
+        },
+        {
+          "color": "#246957",
+          "label": "+1: high NBR"
+        }
+      ],
+      "units": "NBR (unitless)",
+      "sha256": "9005774461b658d12279a99d46c946fac10c366b5a1e8cce812b5c694eec03f2",
+      "display_crs": "EPSG:3857",
+      "display_pixel_size_map_m": 60,
+      "width": 780,
+      "height": 981,
+      "resampling": "nearest (display only)"
+    },
+    {
+      "id": "post_nbr",
+      "label": "After \u2022 NBR",
+      "kind": "image",
+      "url": "layers/post_nbr.png",
+      "bounds": [
+        [
+          49.77986930237246,
+          -119.85017093526054
+        ],
+        [
+          50.120093761790805,
+          -119.42975938229262
+        ]
+      ],
+      "legend": [
+        {
+          "color": "#895d50",
+          "label": "\u22121: low NBR"
+        },
+        {
+          "color": "#246957",
+          "label": "+1: high NBR"
+        }
+      ],
+      "units": "NBR (unitless)",
+      "sha256": "fa2fc7f7f5db659243b82914227166cdcad33ba6d07e7f7d092dc397ddf9bc89",
+      "display_crs": "EPSG:3857",
+      "display_pixel_size_map_m": 60,
+      "width": 780,
+      "height": 981,
+      "resampling": "nearest (display only)"
+    },
+    {
+      "id": "dnbr",
+      "label": "Change \u2022 dNBR",
+      "kind": "image",
+      "url": "layers/dnbr.png",
+      "bounds": [
+        [
+          49.77986930237246,
+          -119.85017093526054
+        ],
+        [
+          50.120093761790805,
+          -119.42975938229262
+        ]
+      ],
+      "legend": [
+        {
+          "color": "#416ca1",
+          "label": "\u2264 \u22120.30"
+        },
+        {
+          "color": "#ece8cf",
+          "label": "\u22120.025"
+        },
+        {
+          "color": "#dfb251",
+          "label": "+0.25"
+        },
+        {
+          "color": "#d87836",
+          "label": "+0.525"
+        },
+        {
+          "color": "#a83235",
+          "label": "\u2265 +0.80"
+        }
+      ],
+      "units": "dNBR (unitless)",
+      "sha256": "6afac8d8bb79b7640873e023798b5e662d53f61ed535d8a494120cbc14e8d7e1",
+      "display_crs": "EPSG:3857",
+      "display_pixel_size_map_m": 60,
+      "width": 780,
+      "height": 981,
+      "resampling": "nearest (display only)"
+    },
+    {
+      "id": "candidate",
+      "label": "Candidate burned area",
+      "kind": "image",
+      "url": "layers/candidate.png",
+      "bounds": [
+        [
+          49.77986930237246,
+          -119.85017093526054
+        ],
+        [
+          50.120093761790805,
+          -119.42975938229262
+        ]
+      ],
+      "legend": [
+        {
+          "color": "#e97439",
+          "label": "dNBR \u2265 0.27"
+        }
+      ],
+      "units": "candidate indicator",
+      "sha256": "985468cb539846066e8d0088a49f50ae2c758fe3142e1ebaf69bb298a1cf8d9c",
+      "display_crs": "EPSG:3857",
+      "display_pixel_size_map_m": 60,
+      "width": 780,
+      "height": 981,
+      "resampling": "nearest (display only)"
+    }
+  ],
+  "reference": {
+    "status": "loaded",
+    "url": "reference/mcdougall-creek-2023.geojson",
+    "label": "BC Wildfire Service historical perimeter \u2014 hand-sketched contextual reference",
+    "source_url": "https://catalogue.data.gov.bc.ca/dataset/bc-wildfire-fire-perimeters-historical",
+    "sha256": "933e0e97026698161add1ecdd1548715bfb20a76398dd7ccff2fb476f9187839",
+    "creation_method": "Hand sketch of any type",
+    "comparison": {
+      "status": "descriptive_overlap_only",
+      "intersection_area_ha": 10198.234577648926,
+      "candidate_outside_reference_ha": 587.6161323913574,
+      "reference_without_candidate_within_valid_coverage_ha": 3705.748918713379,
+      "reference_area_in_aoi_ha": 13969.181654251104,
+      "reference_area_with_valid_observations_ha": 13903.983496362303,
+      "intersection_over_union_within_valid_coverage": 0.7037342211286316,
+      "rasterization": "20 m analysis grid, pixel-centre rule; restricted to valid shared land observations for overlap",
+      "notes": "Descriptive spatial agreement only. Historical perimeter may contain unburned islands and dates outside the composites. The pilot perimeter is hand sketched, with unverified boundary precision. No pixel-accuracy or damage claim."
+    }
+  },
+  "validation": {
+    "status": "exploratory_reference_compared",
+    "export_consistency": {
+      "status": "passed",
+      "exported_candidate_area_ha": 10785.850710040284,
+      "absolute_difference_ha": 1.9429808137720102,
+      "tolerance_ha": 107.83907729226512,
+      "note": "Client pixelArea sum; differences can arise at fractionally covered AOI edge pixels. This is implementation consistency, not independent fire validation."
+    },
+    "notes": "Genuine Earth Engine data exported with numerical and coverage checks. No field validation or calibrated severity accuracy assessment. Inspect all layers before public release.",
+    "review_status": "unapproved"
+  },
+  "sources": [
+    {
+      "label": "Sentinel-2 harmonized surface reflectance \u00b7 Copernicus/ESA",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED"
+    },
+    {
+      "label": "Google Cloud Score+ \u00b7 CC BY 4.0",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_CLOUD_SCORE_PLUS_V1_S2_HARMONIZED"
+    },
+    {
+      "label": "BC Wildfire Service historical perimeters \u00b7 Open Government Licence BC",
+      "url": "https://catalogue.data.gov.bc.ca/dataset/bc-wildfire-fire-perimeters-historical"
+    }
+  ],
+  "limitations": [
+    "Analytical portfolio prototype; not an emergency warning system or evidence of property damage.",
+    "dNBR \u2265 0.27 flags candidate spectral change; the threshold is exploratory and not locally calibrated severity.",
+    "Spectral change can reflect fire, phenology, moisture, harvest, smoke, shadows or other disturbance; composites span multiple dates.",
+    "SCL vegetation/bare-land mask excludes water, dark/uncertain pixels, cloud, shadow and snow; no-data is not unburned.",
+    "RGB and NBR before/after have individual coverage; dNBR and area use their valid intersection. Some haze or cloud may remain.",
+    "Historical perimeter is a contextual hand-sketched source with unverified boundary precision; comparison is not pixel accuracy.",
+    "The candidate estimate covers the analysis AOI and selected windows, not an official final fire size. SAR, WUI exposure and thermal layers are not implemented in this MVP.",
+    "September observations may span ongoing fire activity and its aftermath; this is not a final-fire snapshot.",
+    "Date windows were changed after a documented coverage failure. Scene inventory includes all cloud percentages; pixel-level CS+ >=0.6 and SCL4/5 remain unchanged.",
+    "Both 40% coverage guards are project triage criteria, not proof of accuracy. Candidate change is not official final fire area."
+  ],
+  "acquisition_selection": {
+    "method": "First eligible predeclared window; coverage only",
+    "selected_profile": {
+      "id": "september_30_days",
+      "start": "2023-09-01",
+      "end_exclusive": "2023-10-01",
+      "temporal_context": "September observations may span ongoing fire activity and its aftermath; this is not a final-fire snapshot."
+    },
+    "selection_criteria": {
+      "minimum_shared_aoi_fraction": 0.4,
+      "minimum_shared_reference_fraction": 0.4,
+      "decision_inputs": [
+        "shared_valid_fraction",
+        "reference_valid_fraction"
+      ],
+      "rule": "First qualifying window in the fixed order. No candidate area, dNBR value or reference agreement is evaluated for selection.",
+      "interpretation": "Project coverage triage; neither guard is an accuracy claim."
+    },
+    "evaluated_windows": [
+      {
+        "id": "september_30_days",
+        "start": "2023-09-01",
+        "end_exclusive": "2023-10-01",
+        "temporal_context": "September observations may span ongoing fire activity and its aftermath; this is not a final-fire snapshot.",
+        "coverage_status": "validated",
+        "post": {
+          "start": "2023-09-01",
+          "end_exclusive": "2023-10-01",
+          "image_count": 24,
+          "scene_count_before_cloud_join": 24,
+          "scenes_missing_cloud_score": 0,
+          "acquisitions": [
+            "2023-09-01",
+            "2023-09-04",
+            "2023-09-06",
+            "2023-09-09",
+            "2023-09-11",
+            "2023-09-14",
+            "2023-09-16",
+            "2023-09-19",
+            "2023-09-21",
+            "2023-09-24",
+            "2023-09-26",
+            "2023-09-29"
+          ],
+          "source_images": [
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230901T184919_20230901T190032_T11ULR",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230901T184919_20230901T190032_T11ULR",
+              "acquired_at": "2023-09-01T19:00:43.581000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230901T184919_20230901T190032_T10UGA",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230901T184919_20230901T190032_T10UGA",
+              "acquired_at": "2023-09-01T19:00:43.957000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230904T185919_20230904T190914_T11ULR",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230904T185919_20230904T190914_T11ULR",
+              "acquired_at": "2023-09-04T19:10:39.975000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230904T185919_20230904T190914_T10UGA",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230904T185919_20230904T190914_T10UGA",
+              "acquired_at": "2023-09-04T19:10:40.846000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230906T184921_20230906T185823_T11ULR",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230906T184921_20230906T185823_T11ULR",
+              "acquired_at": "2023-09-06T19:00:42.638000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230906T184921_20230906T185823_T10UGA",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230906T184921_20230906T185823_T10UGA",
+              "acquired_at": "2023-09-06T19:00:43.601000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230909T185941_20230909T190644_T11ULR",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230909T185941_20230909T190644_T11ULR",
+              "acquired_at": "2023-09-09T19:10:39.466000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230909T185941_20230909T190644_T10UGA",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230909T185941_20230909T190644_T10UGA",
+              "acquired_at": "2023-09-09T19:10:41.274000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230911T184939_20230911T185319_T11ULR",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230911T184939_20230911T185319_T11ULR",
+              "acquired_at": "2023-09-11T19:00:40.924000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230911T184939_20230911T185319_T10UGA",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230911T184939_20230911T185319_T10UGA",
+              "acquired_at": "2023-09-11T19:00:42.255000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230914T190019_20230914T190744_T11ULR",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230914T190019_20230914T190744_T11ULR",
+              "acquired_at": "2023-09-14T19:10:37.166000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230914T190019_20230914T190744_T10UGA",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230914T190019_20230914T190744_T10UGA",
+              "acquired_at": "2023-09-14T19:10:38.986000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230916T185021_20230916T185149_T11ULR",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230916T185021_20230916T185149_T11ULR",
+              "acquired_at": "2023-09-16T19:00:40.914000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230916T185021_20230916T185149_T10UGA",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230916T185021_20230916T185149_T10UGA",
+              "acquired_at": "2023-09-16T19:00:42.246000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230919T190051_20230919T190531_T11ULR",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230919T190051_20230919T190531_T11ULR",
+              "acquired_at": "2023-09-19T19:10:36.783000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230919T190051_20230919T190531_T10UGA",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230919T190051_20230919T190531_T10UGA",
+              "acquired_at": "2023-09-19T19:10:38.592000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230921T185009_20230921T185619_T11ULR",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230921T185009_20230921T185619_T11ULR",
+              "acquired_at": "2023-09-21T19:00:40.947000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230921T185009_20230921T185619_T10UGA",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230921T185009_20230921T185619_T10UGA",
+              "acquired_at": "2023-09-21T19:00:42.278000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230924T190029_20230924T190814_T11ULR",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230924T190029_20230924T190814_T11ULR",
+              "acquired_at": "2023-09-24T19:10:37.802000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230924T190029_20230924T190814_T10UGA",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230924T190029_20230924T190814_T10UGA",
+              "acquired_at": "2023-09-24T19:10:39.619000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230926T185131_20230926T185713_T11ULR",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230926T185131_20230926T185713_T11ULR",
+              "acquired_at": "2023-09-26T19:00:39.618000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230926T185131_20230926T185713_T10UGA",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230926T185131_20230926T185713_T10UGA",
+              "acquired_at": "2023-09-26T19:00:40.949000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230929T190201_20230929T190158_T11ULR",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230929T190201_20230929T190158_T11ULR",
+              "acquired_at": "2023-09-29T19:10:36.615000Z"
+            },
+            {
+              "id": "COPERNICUS/S2_SR_HARMONIZED/20230929T190201_20230929T190158_T10UGA",
+              "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230929T190201_20230929T190158_T10UGA",
+              "acquired_at": "2023-09-29T19:10:38.434000Z"
+            }
+          ],
+          "image_count_definition": "Selected spatially intersecting granules with Cloud Score+ matches; not independent per-pixel observations.",
+          "unique_date_count": 12,
+          "date_count_definition": "Catalog dates among selected granules. Valid dates can be fewer at a pixel; overlapping tiles do not add independent dates."
+        },
+        "raw_coverage": {
+          "post_valid_area_ha": 98799.34893226434,
+          "pre_valid_area_ha": 98412.81263192015,
+          "shared_aoi_area_ha": 98329.29303528013,
+          "shared_reference_area_ha": 13903.969055179403
+        },
+        "post_valid_area_ha": 98799.34893226434,
+        "pre_valid_area_ha": 98412.81263192015,
+        "shared_aoi_area_ha": 98329.29303528013,
+        "shared_reference_area_ha": 13903.969055179403,
+        "shared_valid_fraction": 0.8625811958609985,
+        "reference_valid_fraction": 0.9952564881429181,
+        "passes_coverage_guards": true
+      }
+    ],
+    "report_url": "acquisition_selection_report.json",
+    "report_sha256": "3d8635dd1650a054aa51c0315d15a8fc1bbb1c0a1f585899bedb81c9a0ec5e9d",
+    "diagnostic_report_sha256": "209ebd01c1bab8693e48f6fd4aa452a6b20856049067d5c21a5a83c991dfbe5b",
+    "diagnostic_zip_sha256": "07b0afaededee763750598c4ab83c2854581b87fcf33ecaac9b9235fa4a806a4",
+    "review_status": "unapproved",
+    "temporal_limitations": [
+      "September observations may span ongoing fire activity and its aftermath; this is not a final-fire snapshot.",
+      "Date windows were changed after a documented coverage failure. Scene inventory includes all cloud percentages; pixel-level CS+ >=0.6 and SCL4/5 remain unchanged.",
+      "Both 40% coverage guards are project triage criteria, not proof of accuracy. Candidate change is not official final fire area."
+    ]
+  },
+  "analytical_archive": {
+    "availability": "retained_in_original_export_only",
+    "note": "Numerical GeoTIFFs are retained in the original authenticated export, not this web bundle.",
+    "assets": [
+      {
+        "id": "pre_nbr",
+        "crs": "EPSG:32611",
+        "scale_m": 20,
+        "nodata": -9999.0,
+        "sha256": "fb0e8f1c3082dc086fdb6be32cec0a62fcd1ea4f14d2ae4966bbc91c85f75747"
+      },
+      {
+        "id": "post_nbr",
+        "crs": "EPSG:32611",
+        "scale_m": 20,
+        "nodata": -9999.0,
+        "sha256": "46597993333aa9977c6f5260645de56c2be5e3b4ad3f0b724ee61e419dbe757a"
+      },
+      {
+        "id": "dnbr",
+        "crs": "EPSG:32611",
+        "scale_m": 20,
+        "nodata": -9999.0,
+        "sha256": "4fa64a4759e04836ebbb4f3a4799db2b23bbedb05457a2e1df482c0df36ae8be"
+      },
+      {
+        "id": "candidate",
+        "crs": "EPSG:32611",
+        "scale_m": 20,
+        "nodata": -9999.0,
+        "sha256": "52b35d83c0b73def001cba6ee35518b04e260f9190daf450d72320d5ad983809"
+      },
+      {
+        "id": "pixel_area_m2",
+        "crs": "EPSG:32611",
+        "scale_m": 20,
+        "nodata": -9999.0,
+        "sha256": "3c5a2cac2b20ad9b236e7ebe5112f7b8101d4e47a063a1a3f0d9d958c4815995"
+      }
+    ]
+  },
+  "quality": {
+    "status": "reviewed",
+    "review_status": "reviewed_for_public_pilot",
+    "reviewed_at": "2026-10-21T17:41:48.881802Z",
+    "reviewer": "Codex automated consistency audit and visual image review",
+    "scope": "Exploratory fixed-event research pilot; not field validation, severity certification or publishing approval. Interactive browser QA remains separate.",
+    "shared_valid_fraction": 0.862581195952201,
+    "reference_valid_fraction": 0.9953327145782402,
+    "warnings": [
+      "September observations may span ongoing fire activity and its aftermath; this is not a final-fire snapshot.",
+      "13.7% of the analysis area is excluded from shared change analysis. Missing observations are unknown, not unburned.",
+      "The dNBR threshold is exploratory and not locally calibrated; no field accuracy or severity validation is claimed.",
+      "The historical perimeter is hand sketched. Spatial overlap is descriptive, not classification accuracy.",
+      "Candidate hectares describe observed spectral change in the AOI, not official final fire area or property damage.",
+      "Granule and catalog-date totals are not independent observation counts at each pixel."
+    ],
+    "scientific_payload_sha256": "f908ebffd12e803bfc58afc0e220aa07c5f1d435617910381cee85ea7e800406"
+  }
+}

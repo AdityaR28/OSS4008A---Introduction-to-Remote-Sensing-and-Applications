@@ -1,0 +1,450 @@
+{
+  "report_type": "bounded_coverage_recovery",
+  "report_version": 1,
+  "status": "selected_for_export",
+  "phase": "export",
+  "generated_at": "2026-10-21T17:15:27.356573Z",
+  "attempt": 1,
+  "settings": {
+    "pre": {
+      "start": "2023-07-15",
+      "end_exclusive": "2023-08-15"
+    },
+    "post": {
+      "start": "2023-09-15",
+      "end_exclusive": "2023-10-16"
+    },
+    "aoi_bbox": [
+      -119.85,
+      49.78,
+      -119.43,
+      50.12
+    ],
+    "threshold": 0.27,
+    "cloud_score_threshold": 0.6,
+    "scene_cloud_limit": 100,
+    "min_valid_fraction": 0.4,
+    "display_pixel_size_m": 60,
+    "max_scenes_per_window": 256
+  },
+  "export_directory": null,
+  "policy": {
+    "minimum_shared_aoi_fraction": 0.4,
+    "minimum_shared_reference_fraction": 0.4,
+    "decision_inputs": [
+      "shared_valid_fraction",
+      "reference_valid_fraction"
+    ],
+    "rule": "First qualifying window in the fixed order. No candidate area, dNBR value or reference agreement is evaluated for selection.",
+    "interpretation": "Project coverage triage; neither guard is an accuracy claim."
+  },
+  "declared_profiles": [
+    {
+      "id": "september_30_days",
+      "start": "2023-09-01",
+      "end_exclusive": "2023-10-01",
+      "temporal_context": "September observations may span ongoing fire activity and its aftermath; this is not a final-fire snapshot."
+    },
+    {
+      "id": "late_august_21_days",
+      "start": "2023-08-25",
+      "end_exclusive": "2023-09-15",
+      "temporal_context": "Late-August/early-September observations overlap the active fire period and can omit later burning."
+    },
+    {
+      "id": "late_august_to_mid_october_52_days",
+      "start": "2023-08-25",
+      "end_exclusive": "2023-10-16",
+      "temporal_context": "Last resort: the 52-day median spans ongoing fire, aftermath and substantial seasonal change; interpret spectral change cautiously."
+    }
+  ],
+  "analysis_grid": {
+    "crs": "EPSG:32611",
+    "transform": [
+      20,
+      0,
+      0,
+      0,
+      -20,
+      10000000
+    ],
+    "scale_m": 20,
+    "max_pixels": 100000000,
+    "best_effort": false
+  },
+  "coverage_method": "Explicit fractional NBR/reference support; nested mask minimum; weighted pixelArea sum on the fixed 20 m grid",
+  "evidence": {
+    "report_sha256": "209ebd01c1bab8693e48f6fd4aa452a6b20856049067d5c21a5a83c991dfbe5b",
+    "zip_sha256": "07b0afaededee763750598c4ab83c2854581b87fcf33ecaac9b9235fa4a806a4",
+    "original_post_all_scene_union_upper_bounds": {
+      "aoi_fraction": 0.338661,
+      "reference_fraction": 0.192598
+    },
+    "interpretation": "The original post window cannot satisfy 40% shared AOI coverage even at its scene-mask union upper bound; catalog-cloud filtering also discarded usable dates."
+  },
+  "regions": {
+    "aoi_area_ha": 113994.24599922012,
+    "reference_area_in_aoi_ha": 13970.237040225958
+  },
+  "reference_sha256": "933e0e97026698161add1ecdd1548715bfb20a76398dd7ccff2fb476f9187839",
+  "evaluated_windows": [
+    {
+      "id": "september_30_days",
+      "start": "2023-09-01",
+      "end_exclusive": "2023-10-01",
+      "temporal_context": "September observations may span ongoing fire activity and its aftermath; this is not a final-fire snapshot.",
+      "coverage_status": "validated",
+      "post": {
+        "start": "2023-09-01",
+        "end_exclusive": "2023-10-01",
+        "image_count": 24,
+        "scene_count_before_cloud_join": 24,
+        "scenes_missing_cloud_score": 0,
+        "acquisitions": [
+          "2023-09-01",
+          "2023-09-04",
+          "2023-09-06",
+          "2023-09-09",
+          "2023-09-11",
+          "2023-09-14",
+          "2023-09-16",
+          "2023-09-19",
+          "2023-09-21",
+          "2023-09-24",
+          "2023-09-26",
+          "2023-09-29"
+        ],
+        "source_images": [
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230901T184919_20230901T190032_T11ULR",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230901T184919_20230901T190032_T11ULR",
+            "acquired_at": "2023-09-01T19:00:43.581000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230901T184919_20230901T190032_T10UGA",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230901T184919_20230901T190032_T10UGA",
+            "acquired_at": "2023-09-01T19:00:43.957000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230904T185919_20230904T190914_T11ULR",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230904T185919_20230904T190914_T11ULR",
+            "acquired_at": "2023-09-04T19:10:39.975000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230904T185919_20230904T190914_T10UGA",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230904T185919_20230904T190914_T10UGA",
+            "acquired_at": "2023-09-04T19:10:40.846000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230906T184921_20230906T185823_T11ULR",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230906T184921_20230906T185823_T11ULR",
+            "acquired_at": "2023-09-06T19:00:42.638000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230906T184921_20230906T185823_T10UGA",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230906T184921_20230906T185823_T10UGA",
+            "acquired_at": "2023-09-06T19:00:43.601000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230909T185941_20230909T190644_T11ULR",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230909T185941_20230909T190644_T11ULR",
+            "acquired_at": "2023-09-09T19:10:39.466000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230909T185941_20230909T190644_T10UGA",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230909T185941_20230909T190644_T10UGA",
+            "acquired_at": "2023-09-09T19:10:41.274000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230911T184939_20230911T185319_T11ULR",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230911T184939_20230911T185319_T11ULR",
+            "acquired_at": "2023-09-11T19:00:40.924000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230911T184939_20230911T185319_T10UGA",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230911T184939_20230911T185319_T10UGA",
+            "acquired_at": "2023-09-11T19:00:42.255000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230914T190019_20230914T190744_T11ULR",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230914T190019_20230914T190744_T11ULR",
+            "acquired_at": "2023-09-14T19:10:37.166000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230914T190019_20230914T190744_T10UGA",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230914T190019_20230914T190744_T10UGA",
+            "acquired_at": "2023-09-14T19:10:38.986000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230916T185021_20230916T185149_T11ULR",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230916T185021_20230916T185149_T11ULR",
+            "acquired_at": "2023-09-16T19:00:40.914000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230916T185021_20230916T185149_T10UGA",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230916T185021_20230916T185149_T10UGA",
+            "acquired_at": "2023-09-16T19:00:42.246000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230919T190051_20230919T190531_T11ULR",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230919T190051_20230919T190531_T11ULR",
+            "acquired_at": "2023-09-19T19:10:36.783000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230919T190051_20230919T190531_T10UGA",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230919T190051_20230919T190531_T10UGA",
+            "acquired_at": "2023-09-19T19:10:38.592000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230921T185009_20230921T185619_T11ULR",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230921T185009_20230921T185619_T11ULR",
+            "acquired_at": "2023-09-21T19:00:40.947000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230921T185009_20230921T185619_T10UGA",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230921T185009_20230921T185619_T10UGA",
+            "acquired_at": "2023-09-21T19:00:42.278000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230924T190029_20230924T190814_T11ULR",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230924T190029_20230924T190814_T11ULR",
+            "acquired_at": "2023-09-24T19:10:37.802000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230924T190029_20230924T190814_T10UGA",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230924T190029_20230924T190814_T10UGA",
+            "acquired_at": "2023-09-24T19:10:39.619000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230926T185131_20230926T185713_T11ULR",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230926T185131_20230926T185713_T11ULR",
+            "acquired_at": "2023-09-26T19:00:39.618000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230926T185131_20230926T185713_T10UGA",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230926T185131_20230926T185713_T10UGA",
+            "acquired_at": "2023-09-26T19:00:40.949000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230929T190201_20230929T190158_T11ULR",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230929T190201_20230929T190158_T11ULR",
+            "acquired_at": "2023-09-29T19:10:36.615000Z"
+          },
+          {
+            "id": "COPERNICUS/S2_SR_HARMONIZED/20230929T190201_20230929T190158_T10UGA",
+            "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230929T190201_20230929T190158_T10UGA",
+            "acquired_at": "2023-09-29T19:10:38.434000Z"
+          }
+        ],
+        "image_count_definition": "Selected spatially intersecting granules with Cloud Score+ matches; not independent per-pixel observations.",
+        "unique_date_count": 12,
+        "date_count_definition": "Catalog dates among selected granules. Valid dates can be fewer at a pixel; overlapping tiles do not add independent dates."
+      },
+      "raw_coverage": {
+        "post_valid_area_ha": 98799.34893226434,
+        "pre_valid_area_ha": 98412.81263192015,
+        "shared_aoi_area_ha": 98329.29303528013,
+        "shared_reference_area_ha": 13903.969055179403
+      },
+      "post_valid_area_ha": 98799.34893226434,
+      "pre_valid_area_ha": 98412.81263192015,
+      "shared_aoi_area_ha": 98329.29303528013,
+      "shared_reference_area_ha": 13903.969055179403,
+      "shared_valid_fraction": 0.8625811958609985,
+      "reference_valid_fraction": 0.9952564881429181,
+      "passes_coverage_guards": true
+    }
+  ],
+  "selected_profile": {
+    "id": "september_30_days",
+    "start": "2023-09-01",
+    "end_exclusive": "2023-10-01",
+    "temporal_context": "September observations may span ongoing fire activity and its aftermath; this is not a final-fire snapshot."
+  },
+  "notes": [
+    "The original Config defaults are preserved in the source. This separately declared experiment sets only scene_cloud_limit=100 and its enumerated post windows.",
+    "The July 15\u2013August 15 exclusive pre window is fixed and built once per attempt. Its composite is reused for each comparison.",
+    "Only actual composite NBR validity is assessed before selection. Candidate and dNBR are constructed only after a window passes both guards.",
+    "Fractional pre/post/reference support is represented as data, combined by minimum, and applied once to fresh pixelArea; weighted reductions also retain AOI boundary fractions.",
+    "Granules and catalog acquisition dates are provenance counts, not per-pixel independent observation counts.",
+    "The 30-minute budget covers selection, with a check before each server query. Durable tile export follows only if selection completes within budget.",
+    "A resumed attempt preserves its previous evaluations but rebuilds graphs and rechecks coverage; cached JSON never authorizes an export.",
+    "The historical perimeter is contextual and hand sketched. No-data is not unburned; no extrapolation to whole-fire area is permitted."
+  ],
+  "updated_at": "2026-10-21T17:15:53.801459Z",
+  "mask_self_check": {
+    "clear": {
+      "post_valid_area_ha": 3.9992732849121078,
+      "pre_valid_area_ha": 3.9992732849121078,
+      "shared_aoi_area_ha": 3.9992732849121078,
+      "shared_reference_area_ha": 2.557182218687768
+    },
+    "fractional": {
+      "post_valid_area_ha": 2.995534113370906,
+      "pre_valid_area_ha": 1.0037391793494124,
+      "shared_aoi_area_ha": 1.0037391793494124,
+      "shared_reference_area_ha": 0.8065984564084628
+    },
+    "production_shared": {
+      "valid_area_ha": 1.0037391773897055
+    },
+    "regions": {
+      "aoi_area_ha": 3.9992732849121078,
+      "reference_area_in_aoi_ha": 2.557182218687768
+    },
+    "status": "passed",
+    "note": "Synthetic constant images only; checks server mask arithmetic, not satellite coverage or accuracy."
+  },
+  "display_self_check": {
+    "status": "passed",
+    "source_mask_values": [
+      0,
+      0.25,
+      0.5,
+      1
+    ],
+    "alpha_values": [
+      0,
+      255,
+      255,
+      255
+    ],
+    "grid_pixels": 4,
+    "note": "Constant images only; checks authenticated RGBA transport, not satellite observations."
+  },
+  "pre": {
+    "start": "2023-07-15",
+    "end_exclusive": "2023-08-15",
+    "image_count": 22,
+    "scene_count_before_cloud_join": 24,
+    "scenes_missing_cloud_score": 2,
+    "acquisitions": [
+      "2023-07-16",
+      "2023-07-18",
+      "2023-07-21",
+      "2023-07-23",
+      "2023-07-26",
+      "2023-07-28",
+      "2023-07-31",
+      "2023-08-02",
+      "2023-08-05",
+      "2023-08-07",
+      "2023-08-12"
+    ],
+    "source_images": [
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230716T185919_20230716T190738_T11ULR",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230716T185919_20230716T190738_T11ULR",
+        "acquired_at": "2023-07-16T19:10:39.705000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230716T185919_20230716T190738_T10UGA",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230716T185919_20230716T190738_T10UGA",
+        "acquired_at": "2023-07-16T19:10:41.524000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230718T184921_20230718T185858_T11ULR",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230718T184921_20230718T185858_T11ULR",
+        "acquired_at": "2023-07-18T19:00:41.630000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230718T184921_20230718T185858_T10UGA",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230718T184921_20230718T185858_T10UGA",
+        "acquired_at": "2023-07-18T19:00:42.961000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230721T185921_20230721T190933_T11ULR",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230721T185921_20230721T190933_T11ULR",
+        "acquired_at": "2023-07-21T19:10:38.488000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230721T185921_20230721T190933_T10UGA",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230721T185921_20230721T190933_T10UGA",
+        "acquired_at": "2023-07-21T19:10:40.309000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230723T184929_20230723T185535_T11ULR",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230723T184929_20230723T185535_T11ULR",
+        "acquired_at": "2023-07-23T19:00:43.337000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230723T184929_20230723T185535_T10UGA",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230723T184929_20230723T185535_T10UGA",
+        "acquired_at": "2023-07-23T19:00:44.667000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230726T185919_20230726T190731_T11ULR",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230726T185919_20230726T190731_T11ULR",
+        "acquired_at": "2023-07-26T19:10:40.253000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230726T185919_20230726T190731_T10UGA",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230726T185919_20230726T190731_T10UGA",
+        "acquired_at": "2023-07-26T19:10:42.070000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230728T184921_20230728T184922_T11ULR",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230728T184921_20230728T184922_T11ULR",
+        "acquired_at": "2023-07-28T19:00:42.500000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230728T184921_20230728T184922_T10UGA",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230728T184921_20230728T184922_T10UGA",
+        "acquired_at": "2023-07-28T19:00:43.678000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230731T185921_20230731T190732_T11ULR",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230731T185921_20230731T190732_T11ULR",
+        "acquired_at": "2023-07-31T19:10:39.676000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230731T185921_20230731T190732_T10UGA",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230731T185921_20230731T190732_T10UGA",
+        "acquired_at": "2023-07-31T19:10:41.493000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230802T184919_20230802T185529_T11ULR",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230802T184919_20230802T185529_T11ULR",
+        "acquired_at": "2023-08-02T19:00:42.074000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230802T184919_20230802T185529_T10UGA",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230802T184919_20230802T185529_T10UGA",
+        "acquired_at": "2023-08-02T19:00:43.404000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230805T185919_20230805T190632_T11ULR",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230805T185919_20230805T190632_T11ULR",
+        "acquired_at": "2023-08-05T19:10:39.326000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230805T185919_20230805T190632_T10UGA",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230805T185919_20230805T190632_T10UGA",
+        "acquired_at": "2023-08-05T19:10:41.145000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230807T184921_20230807T185044_T11ULR",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230807T184921_20230807T185044_T11ULR",
+        "acquired_at": "2023-08-07T19:00:41.868000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230807T184921_20230807T185044_T10UGA",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230807T184921_20230807T185044_T10UGA",
+        "acquired_at": "2023-08-07T19:00:43.198000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230812T184919_20230812T185631_T11ULR",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230812T184919_20230812T185631_T11ULR",
+        "acquired_at": "2023-08-12T19:00:42.937000Z"
+      },
+      {
+        "id": "COPERNICUS/S2_SR_HARMONIZED/20230812T184919_20230812T185631_T10UGA",
+        "cloud_score_id": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED/20230812T184919_20230812T185631_T10UGA",
+        "acquired_at": "2023-08-12T19:00:44.268000Z"
+      }
+    ],
+    "image_count_definition": "Selected spatially intersecting granules with Cloud Score+ matches; not independent per-pixel observations.",
+    "unique_date_count": 11,
+    "date_count_definition": "Catalog dates among selected granules. Valid dates can be fewer at a pixel; overlapping tiles do not add independent dates."
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "schema": "canadian-disasters-satellite/1.0",
+  "event": {
+    "id": "satellite-earthquake-hubbard-2025",
+    "hazard": "earthquake",
+    "title": "2025 Hubbard Glacier earthquake — Mount King George radar surface change",
+    "event_date": "2025-12-06",
+    "location": "Mount King George, Kluane region, Yukon, Canada",
+    "method": "Matched Sentinel-1A VV/VH amplitude change on conservative low-slope support; pre-event repeat diagnostic",
+    "sources": [
+      {
+        "label": "USGS documented landslide response and Yukon reconnaissance",
+        "url": "https://www.usgs.gov/programs/landslide-hazards/science/2025-m70-hubbard-glacier-earthquake-triggered-landslides-and"
+      },
+      {
+        "label": "USGS provisional same-acquisition SAR difference (context, not independent truth)",
+        "url": "https://doi.org/10.5066/P14H7MVU"
+      },
+      {
+        "label": "Earth Engine Sentinel-1 preprocessing",
+        "url": "https://developers.google.com/earth-engine/guides/sentinel1"
+      },
+      {
+        "label": "Copernicus GLO30 2024_1 dataset",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_DEM_GLO30_2024_1",
+        "attribution": "produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved",
+        "licence_notice": "The organisations in charge of the Copernicus programme by law or by delegation do not incur any liability for any use of the Copernicus WorldDEM-30"
+      },
+      {
+        "label": "Official Mount King George location",
+        "url": "https://geonames.nrcan.gc.ca/search-place-names/unique?id=KADIK"
+      }
+    ],
+    "limitations": [
+      "This is measured radar-amplitude/backscatter change, not InSAR displacement, earthquake shaking, confirmed landslides, building damage or losses. GRD contains no phase information for interferometry.",
+      "Snowfall, wetness, melt/freeze, glacier motion and viewing/processing effects can change backscatter. Timing and documented regional landslides do not establish the cause of every changed pixel.",
+      "Only low-slope support (Copernicus GLO30 slope ≤20°) with matched same-platform ascending orbit, accepted incidence angles and complete source support is admitted. This omits steep landslide source/transport areas and is not a complete event footprint.",
+      "Earth Engine terrain-corrects Sentinel-1 GRD geometrically but does not perform radiometric terrain flattening. The low-slope and angle screens reduce some problems; they do not prove freedom from local/distant terrain shadow, layover or foreshortening.",
+      "C-band radar responds to surface properties. Positive VV change can be consistent with rougher avalanche deposits on glaciers, but cannot uniquely distinguish rock, snow, ice or other causes. No damage or landslide area is reported.",
+      "Each period is one exact frame/date. Three-by-three approximate native-sample power aggregation to a 30 m lattice reduces speckle but does not remove it or create independent observations. Continuous differences and a pre-event repeat must be visually reviewed.",
+      "No-data and excluded steep terrain are unknown, not unchanged. A successful coverage gate applies only to the explicitly low-slope eligible denominator; the full domain coverage is reported separately.",
+      "The USGS provisional SAR/landslide products used the same acquisitions and are contextual corroboration, not an independent pixel-level accuracy reference. The EE preprocessing and conservative support differ from the USGS product."
+    ]
+  },
+  "status": "export_complete_unreviewed",
+  "phase": "complete",
+  "started_at": "2026-10-22T15:57:31.118326Z",
+  "review_status": "unapproved",
+  "metrics": {
+    "domain_area_m2": 452429070.3288574,
+    "pre_valid_area_m2": 298777559.5477295,
+    "post_valid_area_m2": 298777559.5477295,
+    "shared_valid_area_m2": 298777559.5477295,
+    "eligible_area_m2": 298777559.5477295,
+    "gate_0_population_m2": 298777559.5477295,
+    "gate_0_observed_m2": 298777559.5477295,
+    "gate_1_population_m2": 298777559.5477295,
+    "gate_1_observed_m2": 298777559.5477295,
+    "area_convention": "Full WGS84 pixelArea values for cells whose centres fall inside the declared longitude/latitude box, evaluated on the exact anchored projected grid. Not fractionally clipped geographic boundary area.",
+    "gate_results": [
+      {
+        "population": "eligible",
+        "valid": "shared_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 298777559.5477295,
+        "observed_area_m2": 298777559.5477295,
+        "fraction": 1.0,
+        "passed": true
+      },
+      {
+        "population": "shared_valid",
+        "valid": "control_valid",
+        "min_fraction": 0.8,
+        "population_area_m2": 298777559.5477295,
+        "observed_area_m2": 298777559.5477295,
+        "fraction": 1.0,
+        "passed": true
+      }
+    ],
+    "shared_fraction_of_aoi": 0.6603854153990522
+  },
+  "raster": "pixel_area_m2",
+  "raster_index": 25,
+  "raster_total": 25,
+  "layer": "shared_valid",
+  "completed_at": "2026-10-22T16:01:14.765816Z"
+}
