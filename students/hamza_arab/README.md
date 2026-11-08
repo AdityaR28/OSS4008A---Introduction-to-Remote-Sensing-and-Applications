@@ -2,7 +2,7 @@
 
 **Hamza Arab — OSS 4008 \| November 2026**
 
-This project is about identifying hospital infrastructure in overhead imagery and showing the results on an interactive map of Canada. I have a working geographic reference viewer and the initial remote-sensing data workflow. The image based detector is the next major stage and has not been trained yet.
+This project is about identifying hospital infrastructure in overhead imagery and showing the results on an interactive map of Canada. I have a working geographic reference viewer and the initial remote sensing data workflow. The image based detector is the next major stage and has not been trained yet.
 
 The current map can search Canadian cities and towns, display known hospitals from Statistics Canada's ODHF v2.0 dataset, and adjust the study radius. It also includes basic map-navigation commands. These hospital markers are published location records, **not predictions from a trained model**.
 
