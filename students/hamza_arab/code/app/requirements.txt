@@ -1,0 +1,7 @@
+gradio>=5,<7
+folium>=0.19,<1
+pandas>=2,<3
+requests>=2,<3
+numpy>=1.24
+shapely>=2,<3
+pyproj>=3,<4
