@@ -1,0 +1,50 @@
+{
+  "notebook_version": "0.1",
+  "run_utc": "2026-11-08T23:08:20.317676+00:00",
+  "study_area": "Halifax Harbour",
+  "aoi_bounds_wgs84": [
+    -63.65,
+    44.58,
+    -63.48,
+    44.75
+  ],
+  "date_range_start_inclusive": "2025-06-01",
+  "date_range_end_exclusive": "2025-09-01",
+  "collection": "COPERNICUS/S2_SR_HARMONIZED",
+  "selected_image_id": "COPERNICUS/S2_SR_HARMONIZED/20250726T151649_20250726T151759_T20TMQ",
+  "acquired_utc": "2025-07-26T15:20:32.404000+00:00",
+  "whole_scene_cloud_percent": 0.00505,
+  "max_scene_cloud_percent": 30,
+  "candidate_limit": 10,
+  "rgb_bands": [
+    "B4",
+    "B3",
+    "B2"
+  ],
+  "reflectance_scale_factor": 0.0001,
+  "rgb_pixel_size_m": 10,
+  "quality_layer_pixel_size_m": 20,
+  "excluded_scl_classes": [
+    0,
+    1,
+    3,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "coverage_report": {
+    "rgb_available_percent": 100,
+    "rgb_retained_percent": 99.49
+  },
+  "runtime_versions": {
+    "python": "3.13.18",
+    "earthengine-api": "1.7.39",
+    "geemap": "0.38.9",
+    "pandas": "2.2.3",
+    "ipywidgets": "7.7.1"
+  },
+  "model_status": "No model trained; no detections generated.",
+  "source": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED"
+}
