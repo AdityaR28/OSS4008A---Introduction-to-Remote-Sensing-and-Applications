@@ -1,31 +1,23 @@
-# Where Are Homes in Canada? — Residential and WUI Mapping
+# Canadian dataset sources
 
-**Student:** Chidubem Udobi  
-**Course:** OSS4008A — Introduction to Remote Sensing and Applications  
-**Study area:** Ottawa (Kanata pilot), Ontario, Canada  
-**Environment:** Python in Google Colab; Google Earth Engine and geemap
+| Source | Use | Caution |
+|---|---|---|
+| Sentinel-2 SR Harmonized (`COPERNICUS/S2_SR_HARMONIZED`) | Optical context and NDVI | 10 m pixels cannot reliably identify individual homes |
+| Agriculture and Agri-Food Canada Annual Crop Inventory (`AAFC/ACI`) | Canadian forest and land-cover classes | 30 m classes; validate legend and year |
+| NRCan Automatically Extracted Buildings | Candidate building polygons | Verify local coverage, vintage, errors, residential status |
+| City of Ottawa aerial photography | Candidate AI training imagery | Verify download access, licence and acquisition year |
 
-## Objective
-Develop a reproducible interactive map of Canadian imagery and vegetation/forest cover, then incorporate validated building data and screen for potential wildland–urban interface (WUI) exposure. The later AI milestone will evaluate building detection on high-resolution Canadian imagery.
+Sources:
+- https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED
+- https://developers.google.com/earth-engine/datasets/catalog/AAFC_ACI
+- https://open.canada.ca/data/en/dataset/7a5cda52-c7df-427f-9ced-26f19a8a64d6
+- https://ottawa.ca/en/planning-development-and-construction/developing-property/geomatic-services/geospatial-analytics-technology-and-solutions/aerial-photography-base-mapping-and-lidar
 
-**Scope warning:** A building is not necessarily a home. Proximity to vegetation is not a wildfire-risk score. The first notebook is a visualization baseline, not an AI detector.
+Checklist:
+- [ ] Confirm imagery dates and scene count
+- [ ] Confirm AAFC year and forest class codes
+- [ ] Confirm building polygon coverage
+- [ ] Verify residential-vs-nonresidential limitation
+- [ ] Verify orthophoto access and permitted uses
 
-## Milestones
-- November 9: Interactive map and Canadian data source documentation.
-- November 23: AI building-detection experiments and testing.
-- December 7: WUI screening, integrated results, case studies, final documentation.
-
-## Files
-- `code/01_ottawa_baseline_map.ipynb`: first Colab map.
-- `data/README.md`: data sources and validation checklist.
-
-## Run
-Open the notebook in Google Colab and run cells in order. Authenticate Earth Engine with an enabled Google Cloud project. Verify scene counts, displayed layers and forest-class legend before reporting results.
-
-## Weekly progress log
-### Week of November 8, 2026
-- Prepared project structure, initial notebook, and source documentation.
-- Pending: run and test the notebook in Colab; capture outputs; validate Canadian building-footprint availability.
-- Next: obtain building polygons and suitable high-resolution Canadian imagery; plan AI labels.
-
-No code execution or AI performance has yet been verified.
+Do not commit large satellite scenes or credentials.
