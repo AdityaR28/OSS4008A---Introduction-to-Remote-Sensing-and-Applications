@@ -3,7 +3,7 @@
 **Course:** OSS4008A – Introduction to Remote Sensing and Applications (Carleton University)
 **Owner:** Nifemi Ogunmeru (individual project, no group work)
 **Instructor:** M. Hamed Mozaffari | **Research Assistant (progress reviews):** Aditya Rawal
-**Version:** 1.3 (draft) | **Date:** 2026-11-04
+**Version:** 1.4 (draft) | **Date:** 2026-11-07
 **Status:** Draft. Scope items marked **[TO CONFIRM]** must be validated with the RA at the Oct 19 meeting.
 
 ---
@@ -34,6 +34,9 @@ The project is graded by the instructor's discretion (up to 15% of the final gra
 | 2026-10-19 | **Progress 1 review:** RA approved the project. RA asked to look further into **airplane detection** (part of the project scope) and try other models. Decision #1 (skip airplane detection) is **reopened**: aircraft detection moves from "stretch" to "investigate now" | RA feedback at Oct 19 review |
 | 2026-10-27 | Moved the project into the course repository (`students/nifemi_ogunmeru/`, with `code/`, `data/`, `results/`); weekly progress log kept in the folder README | TA email of Oct 27 |
 | 2026-10-27 | Datasets must be **primarily Canadian**; non-Canadian data only when no Canadian data exists. Own datasets allowed (annotation with LabelMe) | TA email of Oct 27 |
+| 2026-11-04 | Imagery for airplanes switched from Sentinel-2 (10 m) to **Ontario open aerial imagery (~20 cm, Land Information Ontario)**; Sentinel-2 kept only as a comparison layer | Planes clearly visible at YOW in the aerial imagery, blobs in Sentinel-2; open and Canadian |
+| 2026-11-07 | Aircraft detection scoped as a **case study on Ontario airports** (Quebec as a possible test region); map stays national | No free, current, sub-metre imagery covers all of Canada (BC orthophotos are paid) |
+| 2026-11-07 | Map packaged as one function, `build_airport_map()` | Shared-UI framework not announced yet; a single entry function fits any framework |
 
 ## 3. Goals and non-goals
 
@@ -196,16 +199,16 @@ Functionality; usefulness and user-friendliness; bugs and errors; presentation; 
 ### Mandatory rules
 Python only; Colab must run top to bottom; all code commented; deployable with minimal bugs using un-licensed data and code **[exact meaning TO CONFIRM]**; if AI is used I must understand how it works in detail and keep it as simple as possible; no ownership claim unless the instructor specifies.
 
-## 11. Current state (as of 2026-11-04)
+## 11. Current state (as of 2026-11-07)
 
 | Item | Status |
 |---|---|
 | Project folder | Course repository: `students/nifemi_ogunmeru/` (`README.md`, `code/`, `data/`, `docs/`, `results/`) |
 | `01_airports_loader_and_map.ipynb` | Rebuilt and **verified in Colab**: runs top to bottom on a fresh runtime. Map has 5 type layers, legend and click info (inspector). FR-1, FR-2, FR-3 met |
 | `data/canada_airports_clean.csv` | Regenerated from the 2026-10-18 download (2,477 rows) |
-| Course GitHub repository | Collaborator access accepted; first upload of project files in progress (week of Nov 2) |
+| Course GitHub repository | First upload done Nov 4; updated notebook and screenshots to push before Nov 9 |
 | Progress 1 review (Oct 19) | Done. Project approved; RA asked for further work on airplane detection |
-| AI component | Imagery survey done (§7); aircraft-detection feasibility spike next |
+| AI component | Ontario aerial imagery on the map, planes visible at YOW; Sentinel-2 comparison done. Next: label planes (LabelMe) and train a detector |
 
 ## 12. Timeline
 
