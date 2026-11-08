@@ -2,7 +2,7 @@
 
 **Student:** Nifemi Ogunmeru | **Course:** OSS4008A – Introduction to Remote Sensing and Applications (Carleton University)
 
-An interactive Google Earth Engine map of every active airport, heliport and seaplane base in Canada, built in Python on Google Colab. It will plug into the class-wide dashboard. The AI component is aircraft detection at selected Canadian airports, which is being investigated after the RA's feedback at the Oct 19 review.
+An interactive Google Earth Engine map of every active airport, heliport and seaplane base in Canada, built in Python on Google Colab. It will plug into the class-wide dashboard. Planes are visible on the map through open Ontario aerial imagery (about 20 cm per pixel). The AI component, aircraft detection, will be a case study at selected Ontario airports, following the RA's feedback at the Oct 19 review.
 
 ## Objectives
 1. Interactive map: airports by type, click for details, legend; then filters, search and summary statistics.
@@ -13,8 +13,10 @@ An interactive Google Earth Engine map of every active airport, heliport and sea
 | Dataset | Used for | Source | Licence |
 |---|---|---|---|
 | OurAirports `airports.csv` | Airport locations, type, codes, province | https://ourairports.com/data/ | Public domain (per OurAirports) |
+| Ontario Imagery Web Map Service (Land Information Ontario) | Aerial imagery (~20 cm) where planes are visible | https://ws.lioservices.lrc.gov.on.ca/arcgis2/rest/services/LIO_Imagery/Ontario_Imagery_Web_Map_Service/MapServer | Open Government Licence – Ontario (to confirm per image collection) |
+| Sentinel-2 Surface Reflectance (`COPERNICUS/S2_SR_HARMONIZED`, Google Earth Engine) | 10 m comparison: shows why free satellite imagery cannot resolve planes | https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED | Copernicus Sentinel data, free and open |
 
-Downloaded on 2026-10-18. OurAirports updates nightly, so counts can change slightly on a new download. The notebook downloads it directly:
+The CSV in `data/` comes from the 2026-10-18 download. The notebook was last run on 2026-11-07 (86,345 rows worldwide); the Canadian counts were unchanged. OurAirports updates nightly, so counts can change slightly on a new download. The notebook downloads it directly:
 
 ```python
 URL = 'https://raw.githubusercontent.com/davidmegginson/ourairports-data/main/airports.csv'
@@ -26,7 +28,8 @@ Datasets are primarily Canadian, as the course requires.
 1. Open `code/01_airports_loader_and_map.ipynb` in Google Colab.
 2. Replace `YOUR_PROJECT_ID` with your own Google Cloud project ID.
 3. Runtime → Run all.
-4. On the map: use the layers menu (top right) to switch types on and off; use the inspector tool and click a point to see its details under "Objects".
+4. On the map: use the layers menu (top right) to switch types and imagery on and off; use the inspector tool and click a point to see its details under "Objects".
+5. The last cell builds the whole map with one function, `build_airport_map(airports_fc, center=(lat, lon), zoom=..., s2_compare=...)`. This is the entry point for the shared dashboard.
 
 ## Folder contents
 ```
@@ -35,7 +38,10 @@ students/nifemi_ogunmeru/
 ├── code/01_airports_loader_and_map.ipynb    load + clean data, build the interactive map
 ├── data/canada_airports_clean.csv           cleaned table: 2,477 facilities
 ├── docs/PRD.md                              project plan: requirements, decisions, timeline
-└── results/map_canada_airports.png          screenshot of the interactive map
+└── results/
+    ├── map_canada_airports.png            the national airport map
+    ├── yow_aerial_20cm.png                Ottawa airport (YOW) in Ontario aerial imagery: planes visible
+    └── yow_sentinel2_10m.png              same view in Sentinel-2 (10 m): planes not resolvable
 ```
 
 ## Pipeline (notebook 01)
@@ -45,6 +51,8 @@ students/nifemi_ogunmeru/
 4. Remove junk rows, printing each one first: names containing "duplicate", and "large airports" with no IATA code. This removed 2 fake copies of Edmonton (YEG). One was labelled Alberta but placed in Saskatchewan, which a coordinate check alone could not catch.
 5. Bounding-box check on coordinates: 0 points outside Canada.
 6. Convert to an Earth Engine FeatureCollection and map one coloured layer per type.
+7. Add the Ontario aerial imagery layer (planes visible when zoomed in) and a Sentinel-2 comparison layer for YOW.
+8. Wrap the map in one function, `build_airport_map()`, so the shared UI can call it.
 
 **Result: 2,477 facilities** (15 large, 233 medium, 1,254 small, 525 heliports, 450 seaplane bases).
 
@@ -52,7 +60,7 @@ students/nifemi_ogunmeru/
 | Date | Milestone | Status |
 |---|---|---|
 | Oct 19 | Progress 1: topic, objectives, datasets, tools | Done |
-| Nov 9 | Progress 2: map connected to the shared UI | Upcoming |
+| Nov 9 | Progress 2: map connected to the shared UI | Map packaged as one function; UI framework to confirm |
 | Nov 23 | Progress 3: AI component and testing | Upcoming |
 | Dec 7 | Final delivery | Upcoming |
 
@@ -61,7 +69,11 @@ students/nifemi_ogunmeru/
 
 ### Week of Nov 2 – 8
 - **Done:** first upload of the project files to the course repository (README, notebook 01, cleaned data, project plan, map screenshot).
-- **Next:** Progress 2 (Nov 9): connect the map to the shared UI; aircraft-detection feasibility spike.
+- **Done:** added open Ontario aerial imagery (~20 cm) to the map. Parked aircraft are clearly visible at the gates of Ottawa airport (YOW).
+- **Done:** Sentinel-2 comparison at YOW (clearest summer 2025 image, Aug 15, ~0% cloud). Planes are only blurry blobs at 10 m, which confirms the RA's point and justifies switching imagery. A moving aircraft shows as a red-green-blue streak, because Sentinel-2 captures colour bands a fraction of a second apart.
+- **Done:** packaged the whole map in one function, `build_airport_map()`, ready for the shared UI.
+- **Problems & fixes:** no free, current, sub-metre imagery covers all of Canada (Ontario and Quebec publish open 20 cm imagery; BC's is paid). Plane detection becomes a case study on Ontario airports; the map itself stays national.
+- **Next:** Progress 2 review; ask the RA about the UI framework and whether open aerial imagery is acceptable; start labelling planes at YOW and YYZ with LabelMe.
 
 ### Week of Oct 26 – Nov 1
 - **Done:** received the course repository and collaborator access; prepared the project files in the course folder layout.
