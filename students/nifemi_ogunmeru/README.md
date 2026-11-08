@@ -40,8 +40,8 @@ students/nifemi_ogunmeru/
 ├── docs/PRD.md                              project plan: requirements, decisions, timeline
 └── results/
     ├── map_canada_airports.png            the national airport map
-    ├── yow_aerial_20cm.png                Ottawa airport (YOW) in Ontario aerial imagery: planes visible
-    └── yow_sentinel2_10m.png              same view in Sentinel-2 (10 m): planes not resolvable
+    ├── yow_aerial_planes.png              Ottawa airport (YOW) in Ontario aerial imagery (~20 cm): planes visible
+    └── yow_sentinel2_vs_aerial.png        same airport in Sentinel-2 (10 m): planes not resolvable
 ```
 
 ## Pipeline (notebook 01)
