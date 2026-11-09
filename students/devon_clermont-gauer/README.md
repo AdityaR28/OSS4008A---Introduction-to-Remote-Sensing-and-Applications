@@ -97,8 +97,8 @@ Global datasets are used for imagery and labels because no Canadian source offer
 
 1. Correct test tiles in labelme (~40 tiles).
 2. Add prairie and urban test regions.
-3. NDWI baseline (`02_water_ndwi_baseline.ipynb`).
-4. Train and evaluate the U-Net (`03_water_unet_training.ipynb`) against NDWI and Dynamic World.
+3. NDWI baseline (`test_prep_and_baseline.ipynb`).
+4. Train and evaluate the U-Net (`unet_training.ipynb`) against NDWI and Dynamic World.
 5. Connect the model to the dashboard (replaces the placeholder in `detect_in_region()`).
 
 ## References
