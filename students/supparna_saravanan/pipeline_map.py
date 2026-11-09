@@ -9,12 +9,19 @@ from shapely import wkt
 from shapely.geometry import shape, mapping, box
 from shapely.ops import unary_union
 
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+
 
 # --------------------------------------------------
 # CONFIGURATION
 # --------------------------------------------------
 
-MAPBOX_TOKEN = "[REDACTED]"
+# Load environment variables from this project's folder
+load_dotenv(Path(__file__).resolve().parent / ".env")
+
+MAPBOX_TOKEN = os.getenv("MAPBOX_ACCESS_TOKEN")
 
 if not MAPBOX_TOKEN:
     raise ValueError(
