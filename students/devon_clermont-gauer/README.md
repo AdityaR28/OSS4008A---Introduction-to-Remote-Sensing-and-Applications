@@ -36,7 +36,6 @@ students/devon_clermont-gauer/
 2. Replace `YOUR-PROJECT-ID` in the first code cell with your Google Earth Engine Cloud project ID.
 
 - **Dashboard:** run all cells top to bottom (**Runtime → Run all**). Shows Canada with buttons for all water, permanent water, seasonal water and rivers. The chat panel is a placeholder until the AI model is connected (Progress 3).
-- **Dataset export:**  Running Cell 4 starts 12 Earth Engine exports to your Google Drive (can take some time). If the exports already exist, run Cells 1–3, skip Cells 4–5, then run Cells 6–9. Cell 6 re-tiles the exports (slow, optional if tiles exist); Cell 9 can run on its own.
 
 ## Method
 
