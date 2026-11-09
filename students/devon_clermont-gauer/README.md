@@ -10,12 +10,12 @@ An interactive map that identifies lakes, rivers and ponds across Canada from Se
 
 | Part | Status |
 |---|---|
-| Dashboard UI (chat panel, map, layer buttons) | ✅ Built (Progress 2) |
-| Training dataset (12 regions, 576 tiles) | ✅ Exported and tiled |
-| Test-set corrections in labelme | ⏳ Next |
-| NDWI baseline | ⏳ Next |
-| U-Net training and evaluation | ⏳ Progress 3 |
-| Lake / river / pond classification | ⏳ Final delivery |
+| Dashboard UI (chat panel, map, layer buttons) |  Built (Progress 2) |
+| Training dataset (12 regions, 576 tiles) |  Exported and tiled |
+| Test-set corrections in labelme |  Next |
+| NDWI baseline |  Next |
+| U-Net training and evaluation |  Progress 3 |
+| Lake / river / pond classification |  Final delivery |
 
 ## Folder structure
 
@@ -23,7 +23,7 @@ An interactive map that identifies lakes, rivers and ponds across Canada from Se
 students/devon_clermont-gauer/
 ├── code/
 │   ├── water_dashboard.ipynb          # interactive dashboard (run this to see the map)
-│   ├── 01_water_dataset_export.ipynb  # builds the training dataset
+│   ├── water_dataset_export.ipynb  # builds the training dataset
 │   └── water_layers.py                # reusable map-layer functions used by the dashboard
 ├── data/          # sample tiles
 ├── docs/          # project plan
@@ -36,7 +36,7 @@ students/devon_clermont-gauer/
 2. Replace `YOUR-PROJECT-ID` in the first code cell with your Google Earth Engine Cloud project ID.
 
 - **Dashboard:** run all cells top to bottom (**Runtime → Run all**). Shows Canada with buttons for all water, permanent water, seasonal water and rivers. The chat panel is a placeholder until the AI model is connected (Progress 3).
-- **Dataset export:** ⚠️ Running Cell 4 starts 12 Earth Engine exports to your Google Drive (several hours). If the exports already exist, run Cells 1–3, skip Cells 4–5, then run Cells 6–9. Cell 6 re-tiles the exports (slow, optional if tiles exist); Cell 9 can run on its own.
+- **Dataset export:**  Running Cell 4 starts 12 Earth Engine exports to your Google Drive (can take some time). If the exports already exist, run Cells 1–3, skip Cells 4–5, then run Cells 6–9. Cell 6 re-tiles the exports (slow, optional if tiles exist); Cell 9 can run on its own.
 
 ## Method
 
@@ -60,7 +60,7 @@ Sentinel-2 image tiles paired with water masks, 256×256 pixels at 10 m (2.56 km
 | Test | iqaluit, kejimkujik | 68 |
 
 **Full dataset (~334 MB):** [Google Drive folder]((https://drive.google.com/drive/folders/1QlQR3KWzcUz68h5cVU4suzOqYILWnGtP?usp=sharing))
-Each tile is a GeoTIFF: `images/` hold Sentinel-2 bands B2, B3, B4, B8, B11 (blue, green, red, NIR, SWIR); `masks/` hold water masks (1 = water, 0 = not water). The dataset isn't committed to GitHub (course limit: files under 50 MB) and can be regenerated with `code/01_water_dataset_export.ipynb`.
+Each tile is a GeoTIFF: `images/` hold Sentinel-2 bands B2, B3, B4, B8, B11 (blue, green, red, NIR, SWIR); `masks/` hold water masks (1 = water, 0 = not water). The dataset isn't committed to GitHub .
 
 ## Data sources
 
