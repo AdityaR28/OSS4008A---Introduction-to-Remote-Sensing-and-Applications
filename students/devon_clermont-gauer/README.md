@@ -32,7 +32,7 @@ students/devon_clermont-gauer/
 
 ## How to run
 
-1. Open a notebook in Google Colab.
+1. Open Dashboard.ipbynb in Google Colab.
 2. Replace `YOUR-PROJECT-ID` in the first code cell with your Google Earth Engine Cloud project ID.
 
 - **Dashboard:** run all cells top to bottom (**Runtime → Run all**). Shows Canada with buttons for all water, permanent water, seasonal water and rivers. The chat panel is a placeholder until the AI model is connected (Progress 3).
