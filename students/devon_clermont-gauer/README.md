@@ -36,7 +36,7 @@ students/devon_clermont-gauer/
 2. Replace `YOUR-PROJECT-ID` in the first code cell with your Google Earth Engine Cloud project ID.
 
 - **Dashboard:** run all cells top to bottom (**Runtime → Run all**). Shows Canada with buttons for all water, permanent water, seasonal water and rivers. The chat panel is a placeholder until the AI model is connected (Progress 3).
-- **Dataset export:** ⚠️ Running Cell 4 starts 12 Earth Engine exports to your Google Drive (several hours). To view results without re-exporting, run Cells 1–3, skip Cells 4–5, then run Cells 6–8 using the existing exports.
+- **Dataset export:** ⚠️ Running Cell 4 starts 12 Earth Engine exports to your Google Drive (several hours). If the exports already exist, run Cells 1–3, skip Cells 4–5, then run Cells 6–9. Cell 6 re-tiles the exports (slow, optional if tiles exist); Cell 9 can run on its own.
 
 ## Method
 
@@ -59,7 +59,7 @@ Sentinel-2 image tiles paired with water masks, 256×256 pixels at 10 m (2.56 km
 | Validation | north_manitoba, ottawa | 112 |
 | Test | iqaluit, kejimkujik | 68 |
 
-**Full dataset (~327 MB):** [Google Drive folder](PASTE-LINK-HERE)
+**Full dataset (~334 MB):** [Google Drive folder]((https://drive.google.com/drive/folders/1QlQR3KWzcUz68h5cVU4suzOqYILWnGtP?usp=sharing))
 Each tile is a GeoTIFF: `images/` hold Sentinel-2 bands B2, B3, B4, B8, B11 (blue, green, red, NIR, SWIR); `masks/` hold water masks (1 = water, 0 = not water). The dataset isn't committed to GitHub (course limit: files under 50 MB) and can be regenerated with `code/01_water_dataset_export.ipynb`.
 
 ## Data sources
@@ -89,8 +89,9 @@ Global datasets are used for imagery and labels because no Canadian source offer
 | Date | Update |
 |---|---|
 | 2026-10-19 | **Progress 1:** project plan presented (objectives, datasets, tools, water and classification rules). |
-| 2026-11-07 | Built the dashboard: chat placeholder, map of Canada, layer buttons, loading messages; map layers moved into `water_layers.py`. |
+| 2026-11-07 | Built the dashboard: chat placeholder, map of Canada, layer buttons (all, permanent, seasonal water, rivers), loading messages; map layers moved into `water_layers.py`. |
 | 2026-11-07 | Built the dataset pipeline: 12 regions exported from Earth Engine, tiled into 576 image/mask pairs, split by region. |
+| 2026-11-08 | Added dataset summary and preview images; shared the full dataset via Google Drive; set up the GitHub folder and README. |
 | 2026-11-09 | **Progress 2:** dashboard UI review. |
 
 ## Next steps
