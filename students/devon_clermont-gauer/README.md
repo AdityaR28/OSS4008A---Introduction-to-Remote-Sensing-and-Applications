@@ -11,7 +11,7 @@ An interactive map that identifies lakes, rivers and ponds across Canada from Se
 | Part | Status |
 |---|---|
 | Placeholder dashboard UI (chat panel, map, layer buttons) |  Built (Progress 2) |
-| Training dataset (12 regions, 576 tiles) |  Exported and tiled |
+| Training dataset (12 regions so far, 576 tiles) |  Exported and tiled |
 | Test-set corrections in labelme |  Next |
 | NDWI baseline |  Next |
 | U-Net training and evaluation |  Progress 3 |
