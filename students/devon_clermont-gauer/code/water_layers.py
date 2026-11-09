@@ -59,3 +59,17 @@ def detect_in_region(region, start='2024-06-01', end='2024-09-30'):
            .selfMask()
            .clip(region))
     return img, {'palette': ['00ffff']}, 'Water (region)'
+
+# Project description for a shared dashboard: one entry per button
+PROJECT_INFO = {
+    'id': 'water',
+    'title': 'Water bodies (lakes, rivers, ponds)',
+    'student': 'Devon Clermont-Gauer',
+    'layers': [
+        ('All water',       get_overview_layer),
+        ('Permanent water', get_permanent_layer),
+        ('Seasonal water',  get_seasonal_layer),
+        ('Rivers',          get_rivers_layer),
+    ],
+    'region_tool': detect_in_region,   # for "draw a box" analysis
+}
