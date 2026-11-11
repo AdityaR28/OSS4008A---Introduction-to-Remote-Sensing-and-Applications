@@ -1,0 +1,120 @@
+!pip install -q earthengine-api geemap geopandas rasterio
+
+import ee
+import geemap
+
+# Authenticate with your Google account
+ee.Authenticate()
+
+# Initialize Earth Engine
+# Replace this with your Google Cloud project ID
+ee.Initialize(project='remote-sensing-course-project')
+print("Successfully connected to Google Earth Engine!")
+
+
+# Replace this with your actual Earth Engine asset ID
+NRWN_ASSET_ID = 'projects/YOUR_PROJECT_ID/assets/NRWN_Ontario'
+
+# Load the railway dataset
+railways = ee.FeatureCollection(NRWN_ASSET_ID)
+
+# Check that the dataset loaded
+print("NRWN dataset loaded successfully!")
+
+# Display the number of railway features
+print("Number of features:", railways.size().getInfo())
+
+# Display available attributes
+print("Available attributes:")
+print(railways.first().propertyNames().getInfo())
+
+
+
+# Create interactive map
+Map = geemap.Map()
+
+# Center map over Canada
+Map.setCenter(-100, 57, 4)
+
+# Style railway tracks
+railway_style = {
+    'color': 'FF0000',
+    'width': 2
+}
+
+# Add railway network
+Map.addLayer(
+    railways.style(**railway_style),
+    {},
+    'National Railway Network'
+)
+
+# Display map
+Map
+
+
+
+# Define an area of interest around Ottawa
+# We will use this smaller area to test satellite imagery.
+
+aoi = ee.Geometry.Point([-75.6972, 45.4215]).buffer(20000)
+
+# Load Sentinel-2 imagery
+sentinel = (
+    ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
+    .filterBounds(aoi)
+    .filterDate('2024-06-01', '2024-09-01')
+    .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20))
+)
+
+# Create a cloud-filtered composite
+satellite_image = sentinel.median().clip(aoi)
+
+# Display settings
+satellite_visualization = {
+    'bands': ['B4', 'B3', 'B2'],
+    'min': 0,
+    'max': 3000,
+    'gamma': 1.2
+}
+
+# Add satellite imagery
+Map.addLayer(
+    satellite_image,
+    satellite_visualization,
+    'Sentinel-2 Satellite Imagery'
+)
+
+# Zoom into Ottawa
+Map.centerObject(aoi, 12)
+
+Map
+
+# Create a new map
+Map2 = geemap.Map()
+
+# Center on Ottawa
+Map2.centerObject(aoi, 12)
+
+# Add satellite imagery first
+Map2.addLayer(
+    satellite_image,
+    satellite_visualization,
+    'Satellite Imagery'
+)
+
+# Filter NRWN railway tracks to the selected area
+local_railways = railways.filterBounds(aoi)
+
+# Add railway tracks
+Map2.addLayer(
+    local_railways.style(
+        color='FF0000',
+        width=3
+    ),
+    {},
+    'NRWN Railway Tracks'
+)
+
+# Display map
+Map2
