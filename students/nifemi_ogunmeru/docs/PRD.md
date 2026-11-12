@@ -3,7 +3,7 @@
 **Course:** OSS4008A – Introduction to Remote Sensing and Applications (Carleton University)
 **Owner:** Nifemi Ogunmeru (individual project, no group work)
 **Instructor:** M. Hamed Mozaffari | **Research Assistant (progress reviews):** Aditya Rawal
-**Version:** 1.4 (draft) | **Date:** 2026-11-07
+**Version:** 1.5 (draft) | **Date:** 2026-11-09
 **Status:** Draft. Scope items marked **[TO CONFIRM]** must be validated with the RA at the Oct 19 meeting.
 
 ---
@@ -37,6 +37,10 @@ The project is graded by the instructor's discretion (up to 15% of the final gra
 | 2026-11-04 | Imagery for airplanes switched from Sentinel-2 (10 m) to **Ontario open aerial imagery (~20 cm, Land Information Ontario)**; Sentinel-2 kept only as a comparison layer | Planes clearly visible at YOW in the aerial imagery, blobs in Sentinel-2; open and Canadian |
 | 2026-11-07 | Aircraft detection scoped as a **case study on Ontario airports** (Quebec as a possible test region); map stays national | No free, current, sub-metre imagery covers all of Canada (BC orthophotos are paid) |
 | 2026-11-07 | Map packaged as one function, `build_airport_map()` | Shared-UI framework not announced yet; a single entry function fits any framework |
+| 2026-11-09 | **Progress 2 review:** RA accepts an Ontario focus for plane detection if no better combination of open regional datasets exists; the UI must follow the course document's "Draft for the project UI schema" (behind schedule on the UI milestone) | RA feedback at the Nov 9 review |
+| 2026-11-09 | Imagery plan: **deploy detection on Ontario aerial imagery; train on Ontario plus a few US NAIP airports** (0.6 m, public domain, in Earth Engine); Quebec, Calgary and Edmonton listed as future improvements | No open national sub-metre source; the course document allows US data when Canada has none |
+| 2026-11-09 | UI built with **Streamlit** on Colab (`code/02_streamlit_ui.ipynb`), served through a Cloudflare quick tunnel; map with folium + streamlit-folium | Course document suggests Flask/Streamlit; streamlit-folium returns drawn boxes to Python. Colab's built-in port link did not work with Streamlit |
+| 2026-11-09 | Dashboard speed: 5 GeoJSON layers on a canvas instead of 2,477 markers; map built once (cached) and drawn from a fresh copy each run; one page run per action | First version was very slow; reusing the same cached map object broke the map after a page refresh |
 
 ## 3. Goals and non-goals
 
@@ -199,14 +203,15 @@ Functionality; usefulness and user-friendliness; bugs and errors; presentation; 
 ### Mandatory rules
 Python only; Colab must run top to bottom; all code commented; deployable with minimal bugs using un-licensed data and code **[exact meaning TO CONFIRM]**; if AI is used I must understand how it works in detail and keep it as simple as possible; no ownership claim unless the instructor specifies.
 
-## 11. Current state (as of 2026-11-07)
+## 11. Current state (as of 2026-11-09)
 
 | Item | Status |
 |---|---|
 | Project folder | Course repository: `students/nifemi_ogunmeru/` (`README.md`, `code/`, `data/`, `docs/`, `results/`) |
 | `01_airports_loader_and_map.ipynb` | Rebuilt and **verified in Colab**: runs top to bottom on a fresh runtime. Map has 5 type layers, legend and click info (inspector). FR-1, FR-2, FR-3 met |
 | `data/canada_airports_clean.csv` | Regenerated from the 2026-10-18 download (2,477 rows) |
-| Course GitHub repository | First upload done Nov 4; updated notebook and screenshots to push before Nov 9 |
+| Course GitHub repository | Notebook 01, data, screenshots, README and PRD pushed; dashboard notebook 02 to push |
+| Dashboard (UI) | Built per the course UI draft in Streamlit; airport layers, popups, draw-a-box summary, rule-based assistant, project buttons. Plane detection not connected yet |
 | Progress 1 review (Oct 19) | Done. Project approved; RA asked for further work on airplane detection |
 | AI component | Ontario aerial imagery on the map, planes visible at YOW; Sentinel-2 comparison done. Next: label planes (LabelMe) and train a detector |
 
