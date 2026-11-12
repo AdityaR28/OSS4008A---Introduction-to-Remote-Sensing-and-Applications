@@ -2,7 +2,7 @@
 
 **Student:** Nifemi Ogunmeru | **Course:** OSS4008A – Introduction to Remote Sensing and Applications (Carleton University)
 
-An interactive Google Earth Engine map of every active airport, heliport and seaplane base in Canada, built in Python on Google Colab. It will plug into the class-wide dashboard. Planes are visible on the map through open Ontario aerial imagery (about 20 cm per pixel). The AI component, aircraft detection, will be a case study at selected Ontario airports, following the RA's feedback at the Oct 19 review.
+An interactive Google Earth Engine map of every active airport, heliport and seaplane base in Canada, built in Python on Google Colab. It will plug into the class-wide dashboard. A Streamlit dashboard (notebook 02) follows the course's UI draft: AI assistant on the left, interactive map on the right, project buttons at the bottom. Planes are visible on the map through open Ontario aerial imagery (about 20 cm per pixel). The AI component, aircraft detection, will be a case study at selected Ontario airports, following the RA's feedback at the Oct 19 review.
 
 ## Objectives
 1. Interactive map: airports by type, click for details, legend; then filters, search and summary statistics.
@@ -29,16 +29,27 @@ Datasets are primarily Canadian, as the course requires.
 2. Replace `YOUR_PROJECT_ID` with your own Google Cloud project ID.
 3. Runtime → Run all.
 4. On the map: use the layers menu (top right) to switch types and imagery on and off; use the inspector tool and click a point to see its details under "Objects".
-5. The last cell builds the whole map with one function, `build_airport_map(airports_fc, center=(lat, lon), zoom=..., s2_compare=...)`. This is the entry point for the shared dashboard.
+5. The last cell builds the whole map with one function, `build_airport_map(airports_fc, center=(lat, lon), zoom=..., s2_compare=...)`.
+
+**Dashboard (notebook 02):**
+1. Open `code/02_streamlit_ui.ipynb` in Google Colab (no Earth Engine login needed).
+2. Runtime → Run all, then click the `trycloudflare.com` link printed by the last cell. The link works while the Colab session is open.
+3. Click an airport for details, draw a box (square tool) for an area summary, or ask the assistant (try `YOW`, `how many airports in ON`, `help`).
 
 ## Folder contents
 ```
 students/nifemi_ogunmeru/
 ├── README.md                                this file: project description and weekly progress log
 ├── code/01_airports_loader_and_map.ipynb    load + clean data, build the interactive map
+├── code/02_streamlit_ui.ipynb               Streamlit dashboard (course UI draft), runs on Colab
 ├── data/canada_airports_clean.csv           cleaned table: 2,477 facilities
 ├── docs/PRD.md                              project plan: requirements, decisions, timeline
+├── docs/progress2_update.md                 Progress 2 update: work since Oct 19, UI status, buttons and their functions
 └── results/
+    ├── dashboard.png                      the Streamlit dashboard (overview)
+    ├── dashboard_popup.png                clicking an airport: details popup
+    ├── dashboard_box_summary.png          drawing a box: area summary in the left panel
+    ├── dashboard_yow_chat.png             assistant command "YOW": zoom to Ottawa airport, planes visible
     ├── map_canada_airports.png            the national airport map
     ├── yow_aerial_planes.png              Ottawa airport (YOW) in Ontario aerial imagery (~20 cm): planes visible
     └── yow_sentinel2_vs_aerial.png        same airport in Sentinel-2 (10 m): planes not resolvable
@@ -60,12 +71,20 @@ students/nifemi_ogunmeru/
 | Date | Milestone | Status |
 |---|---|---|
 | Oct 19 | Progress 1: topic, objectives, datasets, tools | Done |
-| Nov 9 | Progress 2: map connected to the shared UI | Map packaged as one function; UI framework to confirm |
+| Nov 9 | Progress 2: uniform UI connection | Review done; dashboard built right after (behind schedule, caught up the same day) |
 | Nov 23 | Progress 3: AI component and testing | Upcoming |
 | Dec 7 | Final delivery | Upcoming |
 
 ## Weekly progress log
 <!-- Newest week first. Keep each week to 3–6 bullets: Done / Problems & fixes / Next. -->
+
+### Week of Nov 9 – 15
+- **Done:** Progress 2 review. The RA accepted an Ontario focus for plane detection if no better combination of open datasets exists, and pointed to the course document's UI draft as the required layout.
+- **Done:** dataset survey. Open sub-metre imagery exists for Ontario (~20 cm), Quebec (20 cm), Calgary and Edmonton (city imagery, licences unclear), while BC and Saskatchewan are paid or members-only. US NAIP (0.6 m, public domain) is available in Earth Engine. Decision: deploy on Ontario; train on Ontario plus a few US NAIP airports.
+- **Done:** Streamlit dashboard (`code/02_streamlit_ui.ipynb`) laid out from the course's UI draft: assistant and area summary on the left, map with airport layers, popups, Ontario aerial imagery and a draw-a-box tool on the right, one button per class project at the bottom. Runs on Colab through a Cloudflare quick tunnel.
+- **Problems & fixes:** the first version was slow, because 2,477 separate markers were rebuilt on every click. It now uses 5 compact GeoJSON layers on a canvas, builds the map once and draws a fresh copy each run, and runs the page once per action. A refresh bug (the map collapsing to a thin strip) was fixed by drawing from a copy of the saved map.
+- **Done:** Progress 2 update document with screenshots: [`docs/progress2_update.md`](docs/progress2_update.md) (Nov 12, as requested by the RA).
+- **Next:** build the labelled plane dataset (LabelMe), train a detector on a Colab GPU, connect it to the "draw a box" tool.
 
 ### Week of Nov 2 – 8
 - **Done:** first upload of the project files to the course repository (README, notebook 01, cleaned data, project plan, map screenshot).
