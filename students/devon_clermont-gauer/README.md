@@ -58,7 +58,7 @@ Sentinel-2 image tiles paired with water masks, 256×256 pixels at 10 m (2.56 km
 |---|---|---|
 | Train | algonquin, fraser_delta, lake_louise, mackenzie_delta, peace_athabasca, prairie_potholes, quebec_city, toronto | 396 |
 | Validation | north_manitoba, ottawa | 112 |
-| Test | iqaluit, kejimkujik | 68 |
+| Test | iqaluit, kejimkujik, minnedosa, winnipeg | 157 |
 
 **Full dataset (~334 MB):** [Google Drive folder]((https://drive.google.com/drive/folders/1QlQR3KWzcUz68h5cVU4suzOqYILWnGtP?usp=sharing))
 Each tile is a GeoTIFF: `images/` hold Sentinel-2 bands B2, B3, B4, B8, B11 (blue, green, red, NIR, SWIR); `masks/` hold water masks (1 = water, 0 = not water). The dataset isn't committed to GitHub .
