@@ -94,6 +94,11 @@ Global datasets are used for imagery and labels because no Canadian source offer
 | 2026-11-07 | Built the dataset pipeline: 12 regions exported from Earth Engine, tiled into 576 image/mask pairs, split by region. |
 | 2026-11-08 | Added dataset summary and preview images; shared the full dataset via Google Drive; set up the GitHub folder and README. |
 | 2026-11-09 | **Progress 2:** dashboard UI review. |
+| 2026-11-14 | Added two test regions, Minnedosa (prairie potholes, MB) and Winnipeg (urban rivers, MB): test set now 4 regions / 157 tiles; dataset now 14 regions / 665 tiles. Updated the export notebook (regions, previews for new tiles). |
+| 2026-11-14 | Set the labelling rule: open surface water only (lakes, rivers, ponds, ocean); vegetated wetlands are not labelled as water. |
+| 2026-11-14 | Made `water_layers.py` integration-ready: `show_water()` entry point, `build_water_controls()` filter buttons that work on a shared map, and `PROJECT_INFO`. |
+| 2026-11-14 | Created `water_test_prep_and_baseline.ipynb`: band statistics from training tiles; NDWI baseline vs Dynamic World on the test set (IoU 0.546 overall; best Iqaluit 0.708, worst Minnedosa 0.203). |
+| 2026-11-15 | Built the labelme correction pipeline (draft polygons → labelme → corrected masks) and verified the 40 tiles to be used. |
 
 ## Next steps
 
