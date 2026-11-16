@@ -43,11 +43,12 @@ students/devon_clermont-gauer/
     ├── Training curves.png                    # U-Net loss and validation IoU per epoch
     ├── Example predictions.png                # test tiles: image, corrected mask, U-Net prediction
     └── Unet vs baselines.png                  # test results: NDWI vs Dynamic World vs U-Net
+    └──ai box detection 5000 square km limit.png
 ```
 
 ## How to run
 
-**Dashboard:** click the **Open in Colab** badge above, replace `YOUR-PROJECT-ID` in Cell 1 with your Google Earth Engine Cloud project ID, then **Runtime → Run all**. The notebook automatically downloads `water_layers.py`, `water_ai.py` and `band_stats.json` from this repo, and the trained model from Google Drive, so nothing needs to be set up by hand. Draw a box on the map and click **AI: water in drawn box** to run the U-Net (boxes up to 200 km²). A T4 GPU runtime makes detection faster, but CPU works.
+**Dashboard:** click the **Open in Colab** badge above, replace `YOUR-PROJECT-ID` in Cell 1 with your Google Earth Engine Cloud project ID, then **Runtime → Run all**. The notebook automatically downloads `water_layers.py`, `water_ai.py` and `band_stats.json` from this repo, and the trained model from Google Drive, so nothing needs to be set up by hand. Draw a box on the map and click **AI: water in drawn box** to run the U-Net (boxes up to 5000 km²). A T4 GPU runtime makes detection faster, but CPU works.
 
 **Other notebooks** (open them in Colab from the `code/` folder):
 - **water_dataset_export:** Cell 4 starts 14 Earth Engine exports to your Google Drive. If the exports already exist, run Cells 1–3, skip Cells 4–5, then run Cells 6–9.
@@ -120,6 +121,7 @@ Global datasets are used for imagery and labels because no Canadian source offer
 | 2026-11-16 | Corrected 40 test tiles in labelme (open water only). NDWI baseline vs corrected masks: IoU 0.609 pooled, 0.468 region average. |
 | 2026-11-16 | Trained the U-Net (ResNet-34 encoder, 50 epochs; best validation IoU 0.964 vs Dynamic World labels). Test IoU vs corrected masks: 0.891 pooled, 0.840 region average, far above NDWI; largest gain on prairie ponds (Minnedosa 0.168 → 0.760). Below Dynamic World (0.929 / 0.905), which is expected since the model learns from Dynamic World labels and the corrected masks were drafted from them. Weakest region: Winnipeg (urban rivers, 0.783). |
 | 2026-11-16 | Wrote `water_ai.py`: runs the trained U-Net on Sentinel-2 imagery for a drawn box, replacing the Dynamic World placeholder so detection in the tool is done by AI. |
+| 2026-11-16 | AI detection now scales resolution with box size: full 10 m detail up to 200 km², coarser (up to 50 m) for boxes up to 5,000 km². A ~5,000 km² box takes about 18 seconds. |
 
 ## Next steps
 
