@@ -20,15 +20,23 @@ An interactive map that identifies lakes, rivers and ponds across Canada from Se
 
 ## Folder structure
 
+## Folder structure
+
 ```
 students/devon_clermont-gauer/
 ├── code/
-│   ├── water_dashboard.ipynb          # interactive dashboard (run this to see the map)
-│   ├── water_dataset_export.ipynb  # builds the training dataset
-│   └── water_layers.py                # reusable map-layer functions used by the dashboard
-├── data/          # sample tiles
-├── docs/          # project plan
-└── results/       # screenshots and figures
+│   ├── water_dashboard.ipynb                  # interactive dashboard (run this to see the map)
+│   ├── water_dataset_export.ipynb          # builds the training dataset
+│   ├── water_test_prep_and_baseline.ipynb  # band stats, labelme test-set prep, NDWI baseline
+│   ├── water_unet_training.ipynb           # trains and evaluates the U-Net
+│   └── water_layers.py                        # map-layer functions and shared-UI controls
+├── data/          # dataset description (full dataset on Google Drive, see below)
+├── docs/
+│   └── project_plan.pdf                       # Phase 1 project plan
+└── results/
+    ├── dashboard.png                          # dashboard screenshot
+    ├── ndwi_baseline_vs_dynamic_world.png     # NDWI scores vs Dynamic World masks
+    ├── ndwi_baseline_vs_corrected.png         # NDWI scores vs hand-corrected masks
 ```
 
 ## How to run
