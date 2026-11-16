@@ -48,6 +48,10 @@ def validate_bounds(bounds, max_area_km2=16):
     return [west, south, east, north]
 
 
+class _RejectedObservation(ValueError):
+    """A scene failed a quality check and another candidate may work."""
+
+
 def fetch_observation(bounds, start, end, scene_cloud_max=30):
     """Retrieve one native 10 m observation; never use a multi-date composite."""
     bounds = validate_bounds(bounds)
@@ -55,48 +59,58 @@ def fetch_observation(bounds, start, end, scene_cloud_max=30):
         raise ValueError('Scene cloud maximum must be between 0 and 100.')
     if datetime.fromisoformat(start) >= datetime.fromisoformat(end):
         raise ValueError('The end date must be later than the start date (end exclusive).')
+    started = time.perf_counter()
     region = ee.Geometry.Rectangle(bounds, 'EPSG:4326', False)
     collection = (ee.ImageCollection(COLLECTION).filterBounds(region).filterDate(start, end)
                   .filter(ee.Filter.lte('CLOUDY_PIXEL_PERCENTAGE', scene_cloud_max))
                   .sort('CLOUDY_PIXEL_PERCENTAGE'))
     candidates = collection.limit(12).getInfo()['features']
+    search_seconds = time.perf_counter() - started
     if not candidates:
         raise ValueError('No matching images. Adjust dates or choose another area.')
-    # Check actual AOI coverage; a scene may merely intersect the requested box.
-    raw = None
+    skipped = []
     for candidate in candidates:
-        image = ee.Image(candidate['id'])
-        mask = image.select(['B4', 'B3', 'B2']).mask().reduce(ee.Reducer.min())
-        coverage = mask.unmask(0, sameFootprint=False).reduceRegion(
-            ee.Reducer.mean(), region, 60, maxPixels=100000).getInfo()
-        if float(next(iter(coverage.values())) or 0) >= 0.98:
-            raw, selected = image, candidate
-            break
-    if raw is None:
-        raise ValueError('No candidate covers at least 98% of the requested area.')
-    # Approximate the source dataset's 1st/99th percentile band stretch. Source
-    # percentiles were not supplied; this reproducible scene-level approximation
-    # remains a domain-shift limitation and is recorded in every result.
+        try:
+            rgb, valid, transform, crs, metadata = _fetch_candidate(
+                candidate, region, bounds, scene_cloud_max)
+        except _RejectedObservation as error:
+            skipped.append({'scene': candidate['id'], 'reason': str(error)})
+            continue
+        metadata['skipped_scenes'] = skipped
+        metadata['scene_search_seconds'] = search_seconds
+        metadata['imagery_total_seconds'] = time.perf_counter() - started
+        return rgb, valid, transform, crs, metadata
+    reasons = '; '.join(dict.fromkeys(item['reason'] for item in skipped))
+    raise ValueError(f'No usable scene among {len(skipped)} candidates. {reasons} Adjust dates or area.')
+
+
+def _cloud_probability_image(image_id):
+    return (ee.ImageCollection('COPERNICUS/S2_CLOUD_PROBABILITY')
+            .filter(ee.Filter.eq('system:index', image_id.split('/')[-1])))
+
+
+def _fetch_candidate(selected, region, bounds, scene_cloud_max):
     bands = ['B4', 'B3', 'B2']
-    stats = raw.select(bands).reduceRegion(
-        ee.Reducer.percentile([1, 99]), raw.geometry(), 120,
-        bestEffort=True, maxPixels=2000000).getInfo()
-    lows = np.array([stats[b+'_p1'] for b in bands], dtype=np.float32)
-    highs = np.array([stats[b+'_p99'] for b in bands], dtype=np.float32)
-    if not np.isfinite(lows).all() or not np.isfinite(highs).all() or np.any(highs <= lows):
-        raise ValueError('Cannot determine a valid contrast stretch for this scene.')
-    projection = raw.select('B2').projection().getInfo()
-    cloud_collection = ee.ImageCollection('COPERNICUS/S2_CLOUD_PROBABILITY').filter(
-        ee.Filter.eq('system:index', selected['id'].split('/')[-1]))
+    raw = ee.Image(selected['id'])
+    mask = raw.select(bands).mask().reduce(ee.Reducer.min())
+    coverage = mask.unmask(0, sameFootprint=False).reduceRegion(
+        ee.Reducer.mean(), region, 60, maxPixels=100000).getInfo()
+    if float(next(iter(coverage.values()), None) or 0) < 0.98:
+        raise _RejectedObservation('Area coverage below 98%.')
+
+    cloud_collection = _cloud_probability_image(selected['id'])
     if cloud_collection.size().getInfo() == 0:
-        raise ValueError('No matching pixel-cloud assessment. Choose another date or area.')
-    cloud = ee.Image(cloud_collection.first()).select('probability')
+        raise _RejectedObservation('No matching pixel-cloud assessment.')
+    cloud = ee.Image(cloud_collection.first()).select('probability').unmask(100)
+    projection = raw.select('B2').projection().getInfo()
     # Download RGB and cloud probability on exactly the same native grid.
     download = raw.select(bands).addBands(cloud).toFloat()
+    download_started = time.perf_counter()
     url = download.getDownloadURL({'region': region, 'scale': 10,
                                            'crs': projection['crs'], 'format': 'GEO_TIFF'})
     response = requests.get(url, timeout=120)
     response.raise_for_status()
+    download_seconds = time.perf_counter() - download_started
     with rasterio.MemoryFile(response.content) as memory:
         with memory.open() as raster:
             pixels = raster.read([1,2,3]).astype(np.float32)
@@ -106,9 +120,17 @@ def fetch_observation(bounds, start, end, scene_cloud_max=30):
             transform, crs = raster.transform, raster.crs.to_string()
     clear_fraction = float(valid.sum()/max(available.sum(),1))
     if clear_fraction < 0.8:
-        raise ValueError('Less than 80% of this area passes the pixel-cloud screen. Choose another date or area.')
+        raise _RejectedObservation('Less than 80% of available pixels pass the pixel-cloud screen.')
     if pixels.shape[1]*pixels.shape[2] > 300000:
         raise ValueError('Downloaded raster exceeds the interactive pixel limit.')
+    # Approximate the training data's 1st/99th percentile stretch for usable scenes.
+    stats = raw.select(bands).reduceRegion(
+        ee.Reducer.percentile([1, 99]), raw.geometry(), 120,
+        bestEffort=True, maxPixels=2000000).getInfo()
+    lows = np.array([stats.get(b+'_p1', np.nan) for b in bands], dtype=np.float32)
+    highs = np.array([stats.get(b+'_p99', np.nan) for b in bands], dtype=np.float32)
+    if not np.isfinite(lows).all() or not np.isfinite(highs).all() or np.any(highs <= lows):
+        raise _RejectedObservation('Cannot determine a valid contrast stretch.')
     rgb = np.clip((pixels-lows[:, None, None])/(highs-lows)[:, None, None], 0, 1)
     rgb = np.rint(rgb*255).astype(np.uint8).transpose(1, 2, 0)
     rgb[~valid] = 0
@@ -122,6 +144,7 @@ def fetch_observation(bounds, start, end, scene_cloud_max=30):
                 'raster_width': rgb.shape[1], 'raster_height': rgb.shape[0],
                 'available_pixel_fraction': float(available.mean()),
                 'clear_pixel_fraction': clear_fraction,
+                'selected_scene_download_seconds': download_seconds,
                 'cloud_probability_collection': 'COPERNICUS/S2_CLOUD_PROBABILITY',
                 'cloud_probability_max_exclusive': 65,
                 'preprocessing': 'Scene-level 1/99 percentiles estimated at 120 m; RGB uint8',
@@ -346,12 +369,15 @@ def build_detection_app(project, model, device, metrics):
                 raise ValueError('Restore the preserved checkpoint before Detect ships. References and saved results remain available.')
             bounds = validate_bounds([field.value for field in fields])
             key = (tuple(bounds), start.value, end.value, cloud_max.value)
-            if key not in state['cache']:
+            cache_hit = key in state['cache']
+            if not cache_hit:
                 state['cache'][key] = fetch_observation(bounds, start.value, end.value, cloud_max.value)
                 if len(state['cache']) > 4:
                     state['cache'].popitem(last=False)
             rgb, valid, transform, crs, source_metadata = state['cache'][key]
             metadata = dict(source_metadata)
+            metadata['imagery_cache_hit'] = cache_hit
+            map_started = time.perf_counter()
             west, south, east, north = bounds
             selection = GeoJSON(data={'type':'Feature','properties':{},'geometry':{'type':'Polygon',
                                 'coordinates':[[[west,south],[east,south],[east,north],[west,north],[west,south]]]}},
@@ -364,9 +390,14 @@ def build_detection_app(project, model, device, metrics):
             raw = ee.Image(metadata['image_id']).select(['B4','B3','B2'])
             low = ee.Image.constant(metadata['stretch_low']).rename(['B4','B3','B2'])
             high = ee.Image.constant(metadata['stretch_high']).rename(['B4','B3','B2'])
-            visible = raw.subtract(low).divide(high.subtract(low)).clamp(0,1).clip(ee.Geometry.Rectangle(bounds))
+            cloud = ee.Image(_cloud_probability_image(metadata['image_id']).first()).select('probability')
+            rgb_valid = raw.mask().reduce(ee.Reducer.min()).And(raw.gt(0).reduce(ee.Reducer.max()))
+            visible = (raw.subtract(low).divide(high.subtract(low)).clamp(0,1)
+                       .updateMask(rgb_valid.And(cloud.unmask(100).lt(65)))
+                       .clip(ee.Geometry.Rectangle(bounds)))
             Map.addLayer(visible, {'min':0,'max':1}, 'Selected Sentinel-2 observation')
             state['layers'].append(Map.layers[-1])
+            metadata['map_layer_setup_seconds'] = time.perf_counter() - map_started
             if inference:
                 started = time.perf_counter()
                 boxes, scores = detect_raster(model, device, rgb, valid, threshold.value)
@@ -401,6 +432,10 @@ def build_detection_app(project, model, device, metrics):
                 clear_output(wait=True)
                 print('Acquired:', metadata['acquired_utc'])
                 print('Scene:', metadata['image_id'])
+                print(f"Clear coverage: {metadata['clear_pixel_fraction']:.0%} of available pixels.")
+                skipped_count = len(metadata.get('skipped_scenes', []))
+                if skipped_count:
+                    print(f'Skipped {skipped_count} other scene(s) that failed quality checks.')
                 print('10 m imagery. Results are experimental; Canadian accuracy is not yet validated.')
                 if not inference:
                     print('Imagery loaded. Click Detect ships to run the model.')

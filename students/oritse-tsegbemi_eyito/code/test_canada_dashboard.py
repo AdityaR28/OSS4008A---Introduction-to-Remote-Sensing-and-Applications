@@ -7,6 +7,32 @@ from unittest.mock import patch
 
 
 class CanadaDashboardChecks(unittest.TestCase):
+    def test_scene_selection_tries_next_candidate(self):
+        from ship_map import fetch_observation, HALIFAX_BOUNDS, _RejectedObservation
+
+        candidates = [{'id': 'missing-cloud'}, {'id': 'too-cloudy'}, {'id': 'clear'}]
+        with patch('ship_map.ee') as ee, patch(
+                'ship_map._fetch_candidate') as fetch:
+            ee.ImageCollection.return_value.filterBounds.return_value.filterDate.return_value.filter.return_value.sort.return_value.limit.return_value.getInfo.return_value = {
+                'features': candidates}
+            fetch.side_effect = [_RejectedObservation('No matching pixel-cloud assessment.'),
+                                 _RejectedObservation('Less than 80% clear.'),
+                                 ('rgb', 'valid', 'transform', 'crs', {'image_id': 'clear'})]
+            *_, metadata = fetch_observation(HALIFAX_BOUNDS, '2025-06-01', '2025-09-01')
+            self.assertEqual(metadata['image_id'], 'clear')
+            self.assertEqual([item['scene'] for item in metadata['skipped_scenes']], ['missing-cloud', 'too-cloudy'])
+            self.assertEqual(fetch.call_count, 3)
+
+    def test_scene_selection_reports_exhausted_candidates(self):
+        from ship_map import fetch_observation, HALIFAX_BOUNDS, _RejectedObservation
+
+        with patch('ship_map.ee') as ee, patch(
+                'ship_map._fetch_candidate', side_effect=_RejectedObservation('Area coverage below 98%.')):
+            ee.ImageCollection.return_value.filterBounds.return_value.filterDate.return_value.filter.return_value.sort.return_value.limit.return_value.getInfo.return_value = {
+                'features': [{'id': 'partial'}]}
+            with self.assertRaisesRegex(ValueError, r'No usable scene among 1 candidates.*Area coverage'):
+                fetch_observation(HALIFAX_BOUNDS, '2025-06-01', '2025-09-01')
+
     def test_review_gate(self):
         from canadian_validation import checked_annotation
         sample={'imageWidth':128,'imageHeight':128,'annotation_status':'UNANNOTATED',
