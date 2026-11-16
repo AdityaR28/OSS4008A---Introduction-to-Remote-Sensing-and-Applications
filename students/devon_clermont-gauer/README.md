@@ -1,5 +1,7 @@
 # Project 11: Water Bodies of Canada (Lakes, Rivers, Ponds)
 
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AdityaR28/OSS4008A---Introduction-to-Remote-Sensing-and-Applications/blob/main/students/YOUR-FOLDER/code/Dashboard.ipynb)
+
 **Course:** OSS4008A – Introduction to Remote Sensing and Applications
 **Student:** Devon Clermont-Gauer
 **Instructor:** M. Hamed Mozaffari | **Research Assistant:** Aditya Rawal
@@ -24,15 +26,17 @@ An interactive map that identifies lakes, rivers and ponds across Canada from Se
 ```
 students/devon_clermont-gauer/
 ├── code/
-│   ├── water_dashboard.ipynb                  # interactive dashboard (run this to see the map)
-│   ├── water_dataset_export.ipynb          # builds the training dataset
-│   ├── water_test_prep_and_baseline.ipynb  # band stats, labelme test-set prep, NDWI baseline
-│   ├── unet_training.ipynb           # trains and evaluates the U-Net
-│   └── water_layers.py                        # map-layer functions and shared-UI controls
+│   ├── Dashboard.ipynb                  # interactive dashboard with AI water detection (run this)
+│   ├── water_dataset_export.ipynb       # builds the training dataset
+│   ├── test_prep_and_baseline.ipynb     # band stats, labelme test-set prep, NDWI baseline
+│   ├── unet_training.ipynb              # trains and evaluates the U-Net
+│   ├── water_layers.py                  # reference map layers and shared-UI controls
+│   ├── water_ai.py                      # AI water detection: runs the U-Net on a drawn area
+│   └── band_stats.json                  # band rescaling values used by the model
 ├── data/          # dataset description (full dataset on Google Drive, see below)
 ├── docs/
-│   └── Project Plan.pdf                       # Phase 1 project plan
-└── results/
+│   └── project_plan.pdf
+└── results/       # screenshots and result figures
     ├── dashboard.png                          # dashboard screenshot
     ├── ndwi_baseline_vs_dynamic_world.png     # NDWI scores vs Dynamic World masks
     ├── NDWI baseline vs 40 labelme corrected masks.png         # NDWI scores vs hand-corrected masks
