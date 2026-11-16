@@ -35,6 +35,9 @@ students/devon_clermont-gauer/
     ├── dashboard.png                          # dashboard screenshot
     ├── ndwi_baseline_vs_dynamic_world.png     # NDWI scores vs Dynamic World masks
     ├── NDWI baseline vs 40 labelme corrected masks.png         # NDWI scores vs hand-corrected masks
+    ├── training curves.png                    # U-Net loss and validation IoU per epoch
+    ├── Example Predictions.png                # test tiles: image, corrected mask, U-Net prediction
+    └── Unet vs baselines.png                  # test results: NDWI vs Dynamic World vs U-Net
 ```
 
 ## How to run
