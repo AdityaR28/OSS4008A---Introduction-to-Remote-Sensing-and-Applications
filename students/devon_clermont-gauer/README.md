@@ -50,8 +50,8 @@ students/devon_clermont-gauer/
 **Dashboard:** click the **Open in Colab** badge above, replace `YOUR-PROJECT-ID` in Cell 1 with your Google Earth Engine Cloud project ID, then **Runtime → Run all**. The notebook automatically downloads `water_layers.py`, `water_ai.py` and `band_stats.json` from this repo, and the trained model from Google Drive, so nothing needs to be set up by hand. Draw a box on the map and click **AI: water in drawn box** to run the U-Net (boxes up to 200 km²). A T4 GPU runtime makes detection faster, but CPU works.
 
 **Other notebooks** (open them in Colab from the `code/` folder):
-- **water_dataset_export:** ⚠️ Cell 4 starts 14 Earth Engine exports to your Google Drive (several hours). If the exports already exist, run Cells 1–3, skip Cells 4–5, then run Cells 6–9.
-- **test_prep_and_baseline:** run Cells 1, 2 and 5. ⚠️ Don't re-run Cell 3 after corrections have started: it overwrites the corrected labelme files. Cell 4 converts corrected labelme files into masks.
+- **water_dataset_export:** Cell 4 starts 14 Earth Engine exports to your Google Drive. If the exports already exist, run Cells 1–3, skip Cells 4–5, then run Cells 6–9.
+- **test_prep_and_baseline:** run Cells 1, 2 and 5. Don't re-run Cell 3 after corrections have started: it overwrites the corrected labelme files. Cell 4 converts corrected labelme files into masks.
 - **unet_training:** set **Runtime → Change runtime type → T4 GPU**, then run all cells.
 
 ## Method
@@ -67,7 +67,7 @@ Depth is the traditional lake/pond distinction, but it can't be measured from sa
 
 ## Dataset
 
-**Trained model:** `unet_resnet34_best.pth` (~100 MB) is shared on [Google Drive](PASTE-MODEL-LINK-HERE) because it exceeds the course's 50 MB file limit. The dashboard downloads it automatically.
+**Trained model:** `unet_resnet34_best.pth` (~100 MB) is shared on [Google Drive](https://drive.google.com/file/d/1ZvIHmtM5tdOvZHpJC5JdmKNEVgkQbkL4/view?usp=sharing) because it exceeds the course's 50 MB file limit. The dashboard downloads it automatically.
 
 Sentinel-2 image tiles paired with water masks, 256×256 pixels at 10 m (2.56 km per side). Summer composites (June–September 2024) to avoid ice. Whole regions are assigned to one split so the model is always tested on places it never trained on.
 
@@ -79,7 +79,7 @@ Sentinel-2 image tiles paired with water masks, 256×256 pixels at 10 m (2.56 km
 | Validation | north_manitoba, ottawa | 112 |
 | Test | iqaluit, kejimkujik, minnedosa, winnipeg | 157 |
 
-**Full dataset (~372 MB):** [Google Drive folder]((https://drive.google.com/drive/folders/1QlQR3KWzcUz68h5cVU4suzOqYILWnGtP?usp=sharing))
+**Full dataset (~372 MB):** [Google Drive folder](https://drive.google.com/drive/folders/1QlQR3KWzcUz68h5cVU4suzOqYILWnGtP?usp=sharing)
 Each tile is a GeoTIFF: `images/` hold Sentinel-2 bands B2, B3, B4, B8, B11 (blue, green, red, NIR, SWIR); `masks/` hold water masks (1 = water, 0 = not water). The dataset isn't committed to GitHub .
 
 ## Data sources
