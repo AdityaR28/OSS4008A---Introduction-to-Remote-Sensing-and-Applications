@@ -67,8 +67,6 @@ Depth is the traditional lake/pond distinction, but it can't be measured from sa
 
 ## Dataset
 
-**Trained model:** `unet_resnet34_best.pth` (~100 MB) is shared on [Google Drive](https://drive.google.com/file/d/1ZvIHmtM5tdOvZHpJC5JdmKNEVgkQbkL4/view?usp=sharing) because it exceeds the course's 50 MB file limit. The dashboard downloads it automatically.
-
 Sentinel-2 image tiles paired with water masks, 256×256 pixels at 10 m (2.56 km per side). Summer composites (June–September 2024) to avoid ice. Whole regions are assigned to one split so the model is always tested on places it never trained on.
 
 **Labelling rule:** water = visible open surface water (lakes, rivers, ponds, ocean). Vegetated wetlands and reed-filled potholes are not labelled as water; seasonal wetlands are shown separately by the dashboard's seasonal water layer. Ocean is labelled as water and is excluded later when classifying lakes.
@@ -81,6 +79,7 @@ Sentinel-2 image tiles paired with water masks, 256×256 pixels at 10 m (2.56 km
 
 **Full dataset (~372 MB):** [Google Drive folder](https://drive.google.com/drive/folders/1QlQR3KWzcUz68h5cVU4suzOqYILWnGtP?usp=sharing)
 Each tile is a GeoTIFF: `images/` hold Sentinel-2 bands B2, B3, B4, B8, B11 (blue, green, red, NIR, SWIR); `masks/` hold water masks (1 = water, 0 = not water). The dataset isn't committed to GitHub .
+**Trained model:** `unet_resnet34_best.pth` (~100 MB) is shared on [Google Drive](https://drive.google.com/file/d/1ZvIHmtM5tdOvZHpJC5JdmKNEVgkQbkL4/view?usp=sharing) because it exceeds the course's 50 MB file limit. The dashboard downloads it automatically.
 
 ## Data sources
 
