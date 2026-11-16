@@ -1,0 +1,50 @@
+{
+  "image_id": "COPERNICUS/S2_HARMONIZED/20250810T191909_20250810T192442_T10UDV",
+  "collection": "COPERNICUS/S2_HARMONIZED",
+  "acquired_utc": "2025-08-10T19:30:57.008000+00:00",
+  "scene_cloud_percent": 0,
+  "scene_cloud_max": 30,
+  "bounds_wgs84": [
+    -123.23,
+    49.273,
+    -123.179,
+    49.304
+  ],
+  "pixel_size_m": 10,
+  "raster_crs": "EPSG:32610",
+  "raster_transform": [
+    10.0,
+    0.0,
+    483260.0,
+    0.0,
+    -10.0,
+    5461280.0
+  ],
+  "raster_width": 373,
+  "raster_height": 346,
+  "available_pixel_fraction": 1.0,
+  "clear_pixel_fraction": 0.9998295340079654,
+  "cloud_probability_collection": "COPERNICUS/S2_CLOUD_PROBABILITY",
+  "cloud_probability_max_exclusive": 65,
+  "preprocessing": "Scene-level 1/99 percentiles estimated at 120 m; RGB uint8",
+  "stretch_low": [
+    211.30880737304688,
+    429.4316101074219,
+    626.8394775390625
+  ],
+  "stretch_high": [
+    1166.983154296875,
+    1198.556396484375,
+    1262.9227294921875
+  ],
+  "quality_warning": "Pixel-cloud screening is imperfect; bright ships can be masked and land can produce false detections.",
+  "case": "english_bay_pilot",
+  "image_sha256": "1db4566d665db38a9f05a779fc965a2d2b8dd86d9111d7bed8730cd5e851f7c7",
+  "mask_sha256": "7e4b77f7cb2846faec0fae226c1fca5eecc5c73f3db646be028e217eeb15aff7",
+  "date_range": [
+    "2025-05-01",
+    "2025-10-01"
+  ],
+  "confidence": 0.55,
+  "match_iou": 0.5
+}

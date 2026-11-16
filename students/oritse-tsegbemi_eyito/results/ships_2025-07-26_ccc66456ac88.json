@@ -1,0 +1,49 @@
+{
+  "image_id": "COPERNICUS/S2_HARMONIZED/20250726T151649_20250726T151759_T20TMQ",
+  "collection": "COPERNICUS/S2_HARMONIZED",
+  "acquired_utc": "2025-07-26T15:20:32.404000+00:00",
+  "scene_cloud_percent": 0,
+  "scene_cloud_max": 30,
+  "bounds_wgs84": [
+    -63.58,
+    44.615,
+    -63.545,
+    44.64
+  ],
+  "pixel_size_m": 10,
+  "raster_crs": "EPSG:32620",
+  "raster_transform": [
+    10.0,
+    0.0,
+    453980.0,
+    0.0,
+    -10.0,
+    4943130.0
+  ],
+  "raster_width": 280,
+  "raster_height": 281,
+  "available_pixel_fraction": 1.0,
+  "clear_pixel_fraction": 0.9999872902897814,
+  "cloud_probability_collection": "COPERNICUS/S2_CLOUD_PROBABILITY",
+  "cloud_probability_max_exclusive": 65,
+  "preprocessing": "Scene-level 1/99 percentiles estimated at 120 m; RGB uint8",
+  "stretch_low": [
+    341.7295227050781,
+    530.0469360351562,
+    761.5465087890625
+  ],
+  "stretch_high": [
+    1071.222900390625,
+    1102.4437255859375,
+    1160.6251220703125
+  ],
+  "quality_warning": "Pixel-cloud screening is imperfect; bright ships can be masked and land can produce false detections.",
+  "threshold": 0.55,
+  "detection_count": 6,
+  "inference_seconds": 3.5971312859999216,
+  "model": "Fine-tuned Faster R-CNN",
+  "test_ap50": 0.24344639699439696,
+  "canadian_accuracy_measured": false,
+  "run_utc": "2026-11-16T03:58:57.329069+00:00",
+  "model_checkpoint_sha256": "aa57b80886d48b592209a09e65cbd6b1b657585add4d7dd11f76867268201721"
+}

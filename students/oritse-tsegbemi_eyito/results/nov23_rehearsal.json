@@ -1,0 +1,24 @@
+{
+  "runtime": "fresh Google Colab CPU",
+  "tests_passed": 5,
+  "references": 1396,
+  "yukon_filter": 1,
+  "cases": [
+    {
+      "region": "Halifax (Atlantic)",
+      "scene": "COPERNICUS/S2_HARMONIZED/20250726T151649_20250726T151759_T20TMQ",
+      "acquired_utc": "2025-07-26T15:20:32.404000+00:00",
+      "predictions": 6,
+      "confidence": 0.55,
+      "results_stem": "ships_2025-07-26_ccc66456ac88"
+    },
+    {
+      "region": "Vancouver (Pacific)",
+      "scene": "COPERNICUS/S2_HARMONIZED/20250812T190931_20250812T191308_T10UDV",
+      "acquired_utc": "2025-08-12T19:21:17.741000+00:00",
+      "predictions": 20,
+      "confidence": 0.55,
+      "results_stem": "ships_2025-08-12_f33c2c479429"
+    }
+  ]
+}

@@ -7,6 +7,10 @@
 
 Develop a reproducible Python workflow in Google Colab to detect ships in satellite imagery and display predictions on an interactive Canadian map.
 
+**Dashboard notebook:** [03_canada_dashboard.ipynb in Colab](https://colab.research.google.com/drive/1ZwpYjCsu7-WrrMW_e4poD9-AVteYGjUO).
+The standalone dashboard connects Earth Engine imagery, the existing trained vessel
+detector and an interactive Canada map. The shared course UI connection is pending.
+
 Halifax Harbour is the initial demonstration area. Additional functional checks cover Vancouver and Montreal. Port markers are published reference points, separate from ship predictions; port detection and boundary mapping are not implemented.
 
 ## Folder structure
@@ -16,12 +20,14 @@ students/oritse-tsegbemi_eyito/
 ├── README.md
 ├── code/
 │   ├── 01_halifax_harbour_baseline.ipynb
-│   └── 02_ships_ports_detection.ipynb
+│   ├── 02_ships_ports_detection.ipynb
+│   ├── 03_canada_dashboard.ipynb
+│   └── supporting Python modules
 ├── data/
 └── results/
 ```
 
-The notebooks generate supporting Python modules, dataset records and outputs inside this folder. The full training dataset is downloaded by code rather than committed to GitHub. Some newer results and the trained checkpoint remain in the private project backup pending upload.
+The notebooks generate supporting Python modules, dataset records and outputs inside this folder. The training data download is documented in notebook 02. Notebook 03 uses the preserved checkpoint for the demonstration.
 
 ## Notebooks
 
@@ -145,8 +151,10 @@ The aerial images are for separate annotation and model-development work. They a
 5. Restore the existing checkpoint before the training cell if reusing the trained model. Otherwise, the notebook starts a new training run.
 6. Complete Earth Engine authentication when prompted.
 7. Run the map cells and inspect a demonstration area.
-8. Save notebook editor changes using **File > Save a copy in GitHub**.
-9. Use the professor’s commit, pull/rebase and push workflow for generated files.
+8. Save editor changes to private Drive or download the notebook. Keep a backup
+   of generated artifacts before the runtime ends.
+9. Publishing, committing and pushing require my explicit instruction. The
+   professor's Git workflow is the eventual publication route, not an automatic step.
 
 Keep all repository work inside `students/oritse-tsegbemi_eyito/`.
 
@@ -164,6 +172,14 @@ Without a cloned repository, the detection notebook uses temporary storage under
 - Additional independent validation and higher-resolution model development are needed.
 
 ## Weekly progress log
+
+### Nov 15, 2026 | Progress 3 rehearsal
+
+- **Done (Nov 15):** Updated the Colab startup to load the preserved checkpoint from the course clone or from an uploaded `vessel_detector.pt`. The fresh CPU session loaded the model with its SHA-256 verified, downloaded the national inventory, and passed five dashboard checks.
+- **Done (Nov 15):** Rehearsed Halifax and Vancouver with live Sentinel-2 imagery. At confidence 0.55, the dashboard displayed 6 and 20 predictions respectively. PNG, CSV, GeoJSON and metadata passed the export checks for both runs. See [rehearsal results](results/nov23_rehearsal.json).
+- **Done (Nov 15):** Added a separately attributed Simpson Point park boat dock reference. The map now displays 1,396 entries: 1,395 Statistics Canada ODI records plus one Yukon park site. The site's published coordinates are approximate for the dock. [Government of Yukon site record](https://yukon.ca/en/outdoor-recreation-and-wildlife/camping/site/herschel-island-qikiqtaruk-territorial-park-campground)
+- **Done (Nov 15):** Froze and visually labeled an English Bay Sentinel-2 scene before inference. All six reference boxes matched, with four unmatched predictions at confidence 0.55 and IoU 0.50. Precision was 0.60 and recall was 1.00 against these six visual labels. Small and ambiguous objects were excluded. See [pilot metrics](results/english_bay_pilot_metrics.json) and the [box comparison](results/english_bay_pilot_comparison.png).
+- **Next:** Demonstrate the dashboard on Nov 23. Obtain a second review of the English Bay labels, add independent scenes across more regions, and confirm how the class dashboard should load the project.
 
 ### Week of Nov 9–15, 2026 | Progress 2
 
@@ -189,6 +205,95 @@ Without a cloned repository, the detection notebook uses temporary storage under
 - **Done:** Connected Earth Engine imagery to the detector and verified exports for four functional runs across Halifax, Vancouver and Montreal. Added error analysis and pixel-level cloud screening.
 - **Problems and fixes:** The hard-negative experiment did not improve validation performance, so I kept the existing checkpoint. Canadian detection accuracy still requires checked labels and an independent test.
 - **Next:** Add national port reference data and prepare a Colab dashboard for selecting imagery and running detections.
+
+## National coverage and data products
+
+| Product | Source / implementation | What it establishes |
+| --- | --- | --- |
+| National facility references | Statistics Canada ODI v2 plus the separately sourced Simpson Point park dock | 1,396 map references across 13 provinces and territories. Coverage varies by location and facility type. |
+| Nationwide imagery access | Earth Engine Sentinel-2 L1C, requested per small area | Access to available observations; cloud, ice, darkness and scene gaps still apply |
+| Canadian evaluation annotations | Six visual reference boxes from one frozen English Bay Sentinel-2 scene | Pilot evaluation only. Training candidates, aerial imagery and unreviewed templates stay separate. |
+| Detection results | Existing Faster R-CNN predictions and new on-demand requests | Experimental outputs with scene/model provenance; not validated ground truth |
+
+The meeting feedback is implemented as a combination of these products. It does
+not require processing all Canadian pixels at once. No exhaustive ship inventory,
+port boundary model or coast-to-coast accuracy claim is made. Port detection scope
+still needs instructor clarification if detected port boundaries are expected.
+
+### Run notebook 03
+
+1. Open `code/03_canada_dashboard.ipynb` and run it in Google Colab. It loads the
+   available national inventory or downloads it, executes regression checks and opens
+   the dashboard. A standard CPU runtime is sufficient for the demonstration.
+2. For a course clone in `/content/OSS4008A---Introduction-to-Remote-Sensing-and-Applications`,
+   the notebook automatically loads the verified checkpoint from the student folder at
+   `results/models/vessel_detector.pt`. In a standalone session, upload that same file
+   with Colab's **Files > Upload to session storage**, then click
+   **Restore checkpoint / project ZIP**. The project ZIP is an alternative for restoring
+   saved examples and review imagery along with the model.
+3. Use **Authorize Earth Engine** before loading new imagery. Choose a region,
+   reference, rectangle or numeric bounds. Requests remain at most 16 km2 and
+   6 km per side. The coordinate envelope is a Canadian map extent, not a
+   political-border test; border-water predictions need geographic review.
+4. Set dates (end exclusive), confidence and maximum scene cloud percentage.
+   Pixel cloud probability below 65 and at least 80% clear available pixels
+   remain additional screens. Scene cloud is not local cloud cover.
+5. Load imagery, then Detect ships. Inspect acquisition time, confidence and
+   errors. Zero predictions do not establish absence of vessels.
+6. Choose an export and download the current result. Changing inference settings
+   clears displayed results and disables stale downloads. Archived runs are
+   identified separately and retain their original metadata.
+7. Restore the review imagery, click **Review Canadian labels**, inspect the full
+   original grid, and save drafts or explicitly checked boxes. Dry-stored boats,
+   docks, shadows and ambiguous objects need notes and consistent rules.
+
+`create_project_view(project, model, device, metrics)` returns the complete view
+and controls for a project button to load. `DetectionRequest` and
+`run_detection` define a proposed Python backend contract. There is no assumed
+shared-dashboard framework, HTTP deployment or public tunnel. Aditya's host must
+agree on the interface before Phase III can be marked complete.
+
+## Course milestones and implementation plan
+
+The project brief, pages 12-18, specifies backend data/labels/training, a Colab
+map connected to Earth Engine, then one project button in a uniform web UI that
+reloads the map. Its Windy-style images are design examples, not a supplied
+running application. Page 20 gives the tentative evaluation schedule:
+
+| Date in 2026 | Lab time | Milestone |
+| --- | --- | --- |
+| October 19 | 1:30-3:30 | Backend orchestration on GitHub |
+| November 9 | 1:30-3:30 | Uniform and comprehensive UI connection |
+| November 23 | 1:30-3:30 | AI and testing |
+| December 7 | 1:30-3:30 | Delivery, testing and case studies |
+
+Next: obtain independent review of additional Canadian scenes, freeze evaluation
+splits, and measure performance by region, scene and vessel size. Keep aerial
+modelling separate from 10 m Sentinel-2. Fine-tune with the training split and
+select the model and threshold using validation before evaluating the reserved
+test scenes. The final assessment, poster and maintenance plan remain delivery work.
+
+## Source provenance for the national continuation
+
+Source research date: November 9, 2026. Actual downloads have their own runtime
+retrieval timestamps; research dates are not acquisition dates.
+
+- [Statistics Canada ODI v2](https://www150.statcan.gc.ca/n1/pub/34-26-0003/342600032023001-eng.htm):
+  Open Government Licence - Canada; source collection October 2023-June 2024.
+  Provider-specific metadata and licence records accompany the download.
+- [Government of Yukon Simpson Point site](https://yukon.ca/en/outdoor-recreation-and-wildlife/camping/site/herschel-island-qikiqtaruk-territorial-park-campground):
+  the park lists a boat dock and publishes a single coordinate for the campground.
+  `data/canada_facility_supplements.csv` keeps this source separate from the ODI snapshot.
+- [DFO Small Craft Harbours](https://open.canada.ca/data/en/dataset/262451e7-6416-47b5-8453-f31d212ea657):
+  candidate supplementary federal harbour inventory; not all Canadian commercial
+  ports. Catalogue located; detailed data/licence ingestion remains unverified.
+- [NRCan aerial imagery](https://registry.opendata.aws/aerial-imagery-canada/):
+  Open Government Licence; national archive does not mean uniform recent online
+  coverage of every harbour. Check actual footprints and dates before downloading.
+- Sentinel-2 RGB bands are 10 m; Copernicus Sentinel terms apply. National
+  on-demand access is distinct from guaranteed clear imagery or annotated training
+  coverage. Existing Ontario previews retain their own source footprints and
+  Open Government Licence - Ontario attribution.
 
 ## File management
 

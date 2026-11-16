@@ -1,0 +1,65 @@
+{
+  "source_url": "https://www150.statcan.gc.ca/n1/pub/34-26-0003/342600032023001-eng.htm",
+  "download_url": "https://www150.statcan.gc.ca/pub/34-26-0003/2023001/zip/ODI_v2_ports_marinas.zip",
+  "licence": "Open Government Licence - Canada",
+  "attribution": "Contains information licensed under the Open Government Licence - Canada.",
+  "retrieved_utc": "2026-11-09T20:59:57.998631+00:00",
+  "archive_sha256": "014037f1be12e5a6260bec070de5dc3d6aa6339b0b675d87a6d1e1d11927ff34",
+  "source_version": "ODI v2",
+  "source_collection_period": "October 2023 to June 2024",
+  "exact_record_acquisition_dates": null,
+  "records": 1395,
+  "province_counts": {
+    "NL": 355,
+    "NS": 288,
+    "BC": 208,
+    "ON": 175,
+    "QC": 144,
+    "NB": 82,
+    "MB": 51,
+    "PE": 48,
+    "SK": 15,
+    "AB": 11,
+    "NT": 9,
+    "NU": 9
+  },
+  "provinces_territories_without_records": [
+    "YT"
+  ],
+  "subtype_counts": {
+    "mixed": 989,
+    "port": 372,
+    "marina": 34
+  },
+  "source_columns": [
+    "id",
+    "sub_type",
+    "provider",
+    "source_id",
+    "prov_terr",
+    "region",
+    "csdname",
+    "csduid",
+    "name",
+    "source_class",
+    "ownership",
+    "jurisdiction",
+    "harbour_size",
+    "un_locode",
+    "channel_depth",
+    "anchorage_depth",
+    "cargo_pier_depth",
+    "geometry"
+  ],
+  "metadata_files": [
+    "data/raw/odi_ports_v2/ODI v2 Metadata.pdf",
+    "data/raw/odi_ports_v2/data_providers_ports_marinas.csv",
+    "data/raw/odi_ports_v2/record_layout_ports_marinas.csv"
+  ],
+  "limitations": [
+    "Selected infrastructure; geographic completeness varies by source and licence.",
+    "Ports and marinas include different facility types; filter explicitly.",
+    "Derived representative map points are not port boundaries or ship labels.",
+    "No assumption of current operating status or exhaustive Canadian coverage."
+  ]
+}

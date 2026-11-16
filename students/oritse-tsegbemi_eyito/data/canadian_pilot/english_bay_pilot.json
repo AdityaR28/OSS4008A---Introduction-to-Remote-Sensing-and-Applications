@@ -1,0 +1,109 @@
+{
+  "version": "5.6.0",
+  "imagePath": "english_bay_pilot.png",
+  "imageData": null,
+  "imageWidth": 373,
+  "imageHeight": 346,
+  "shapes": [
+    {
+      "label": "ship",
+      "points": [
+        [
+          136,
+          3
+        ],
+        [
+          166,
+          18
+        ]
+      ],
+      "shape_type": "rectangle",
+      "flags": {}
+    },
+    {
+      "label": "ship",
+      "points": [
+        [
+          360,
+          35
+        ],
+        [
+          373,
+          47
+        ]
+      ],
+      "shape_type": "rectangle",
+      "flags": {}
+    },
+    {
+      "label": "ship",
+      "points": [
+        [
+          180,
+          84
+        ],
+        [
+          202,
+          90
+        ]
+      ],
+      "shape_type": "rectangle",
+      "flags": {}
+    },
+    {
+      "label": "ship",
+      "points": [
+        [
+          91,
+          96
+        ],
+        [
+          109,
+          115
+        ]
+      ],
+      "shape_type": "rectangle",
+      "flags": {}
+    },
+    {
+      "label": "ship",
+      "points": [
+        [
+          225,
+          159
+        ],
+        [
+          245,
+          171
+        ]
+      ],
+      "shape_type": "rectangle",
+      "flags": {}
+    },
+    {
+      "label": "ship",
+      "points": [
+        [
+          277,
+          239
+        ],
+        [
+          296,
+          251
+        ]
+      ],
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "flags": {
+    "review_required": false
+  },
+  "annotation_status": "reviewer_checked",
+  "image_sha256": "1db4566d665db38a9f05a779fc965a2d2b8dd86d9111d7bed8730cd5e851f7c7",
+  "reviewer": "Codex visual review",
+  "reviewed_utc": "2026-11-16T04:01:03.175755+00:00",
+  "reviewed_before_predictions": true,
+  "negative_confirmed": false,
+  "review_notes": "Single visual review of the full unmarked 10 m image before inference. Six clearly resolvable hulls, including one clipped at the east edge. Excludes wakes and small or ambiguous bright marks. Vessel presence not corroborated by AIS or independent imagery."
+}

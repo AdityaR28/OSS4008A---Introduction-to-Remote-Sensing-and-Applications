@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+results/runtime_sync.json
+results/audit_inputs/
+*.partial
+*.zip
+data/raw/
+data/images/
+data/annotations/
+results/models/mobilenet_baseline.pt
