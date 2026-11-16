@@ -30,11 +30,11 @@ students/devon_clermont-gauer/
 │   └── water_layers.py                        # map-layer functions and shared-UI controls
 ├── data/          # dataset description (full dataset on Google Drive, see below)
 ├── docs/
-│   └── project_plan.pdf                       # Phase 1 project plan
+│   └── Project Plan.pdf                       # Phase 1 project plan
 └── results/
     ├── dashboard.png                          # dashboard screenshot
     ├── ndwi_baseline_vs_dynamic_world.png     # NDWI scores vs Dynamic World masks
-    ├── ndwi_baseline_vs_corrected.png         # NDWI scores vs hand-corrected masks
+    ├── NDWI baseline vs 40 labelme corrected masks.png         # NDWI scores vs hand-corrected masks
 ```
 
 ## How to run
