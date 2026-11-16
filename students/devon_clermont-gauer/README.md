@@ -28,7 +28,7 @@ students/devon_clermont-gauer/
 │   ├── water_dashboard.ipynb                  # interactive dashboard (run this to see the map)
 │   ├── water_dataset_export.ipynb          # builds the training dataset
 │   ├── water_test_prep_and_baseline.ipynb  # band stats, labelme test-set prep, NDWI baseline
-│   ├── water_unet_training.ipynb           # trains and evaluates the U-Net
+│   ├── unet_training.ipynb           # trains and evaluates the U-Net
 │   └── water_layers.py                        # map-layer functions and shared-UI controls
 ├── data/          # dataset description (full dataset on Google Drive, see below)
 ├── docs/
