@@ -165,26 +165,30 @@ Without a cloned repository, the detection notebook uses temporary storage under
 
 ## Weekly progress log
 
-### Week of November 2, 2026
+### Week of Nov 9–15, 2026 | Progress 2
 
-- Completed the initial Halifax imagery, coverage and PNG-export baseline.
-- Saved baseline data records and results in the assigned repository folder.
-- Prepared 2,373 labelled source images with geographically separated partitions.
-- Trained and evaluated the vessel detector in Google Colab.
-- Implemented the notebook connection between Earth Engine imagery, model inference and geographic outputs.
-- Tested four Canadian cases and checked export consistency.
-- Added error analysis, validation threshold comparison and pixel-cloud screening.
-- Tested a hard-negative refinement and retained the original model after validation did not improve.
-- Prepared three higher-resolution Canadian aerial previews and annotation-review tools.
-- Kept the newer project files and results in a private backup while preparing the repository update.
+- **Meeting feedback:** Expand the dataset beyond Halifax to cover Canada and prepare an interactive UI with ship detection integrated.
+- **Done:** Added 1,395 port and marina reference records from Statistics Canada ODI v2 across 12 provinces and territories. Yukon remains a gap in this source. The map displays facility points alongside separate ship predictions.
+- **Done:** Built the standalone Colab dashboard. **Canada overview** resets the map. **Region**, **Province**, **Facility**, **Port name** and **Reference** help browse facilities and select a study area. **Pick area on map**, the rectangle tool and coordinate fields set the detection area. Date, cloud and confidence controls configure the request.
+- **Done:** **Restore checkpoint / project ZIP** loads the trained model and saved files. **Authorize Earth Engine** enables live imagery access. **Open Ships and Ports** rebuilds the view. **Load imagery** previews an observation, **Detect ships** runs the model, and the optional movement toggle runs detection after the map moves at zoom 15 or closer. **Saved run** opens archived results, **Download current result** exports PNG, CSV, GeoJSON or metadata, and **Review Canadian labels** opens the box review panel.
+- **Problems and fixes:** Earth Engine authorization failed initially and succeeded on retry. Five Colab dashboard checks passed. The November 9 Halifax demo produced six experimental predictions at a confidence threshold of 0.55. Three Hamilton candidate boxes were saved as a draft and still need review.
+- **Next:** Rerun the live demo for November 23, review Canadian ship labels, measure performance on separate Canadian scenes and confirm the shared dashboard interface.
 
-### Week of November 9, 2026 — Meeting priorities
+**Canada overview**
 
-- Prepare a reproducible demonstration using the existing checkpoint.
-- Synchronize the latest notebook, documentation and selected supporting files with GitHub.
-- Confirm the shared dashboard interface with Aditya.
-- Clarify the expected scope of port mapping.
-- Continue Canadian annotation review and independent accuracy assessment.
+![Colab dashboard showing port and marina reference points across Canada](results/canada_dashboard_preview.png)
+
+**Halifax inference demo**
+
+![Colab dashboard showing six experimental ship predictions in Halifax Harbour](results/earth_engine_authorization_retry.png)
+
+### Week of Nov 2–8, 2026
+
+- **Done:** Completed the Halifax Sentinel-2 baseline with imagery selection, coverage checks, scene metadata and a PNG export. Added the baseline notebook and outputs to the course repository.
+- **Done:** Prepared 2,373 source images and 1,344 ship boxes, split by geographic tile. Trained a Faster R-CNN vessel detector in Colab and measured AP50 of 0.243 on the held-out source benchmark.
+- **Done:** Connected Earth Engine imagery to the detector and verified exports for four functional runs across Halifax, Vancouver and Montreal. Added error analysis and pixel-level cloud screening.
+- **Problems and fixes:** The hard-negative experiment did not improve validation performance, so I kept the existing checkpoint. Canadian detection accuracy still requires checked labels and an independent test.
+- **Next:** Add national port reference data and prepare a Colab dashboard for selecting imagery and running detections.
 
 ## File management
 
