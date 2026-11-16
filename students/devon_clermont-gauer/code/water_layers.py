@@ -128,5 +128,5 @@ PROJECT_INFO = {
     'entry': show_water,               # loads the default view
     'controls': build_water_controls,  # builds the filter buttons
     'layers': FILTERS,                 # (label, function) pairs
-    'region_tool': detect_in_region,   # for "draw a box" analysis
+        'region_tool': 'water_ai.detect_water_ai',   # AI detection lives in water_ai.py
 }
