@@ -1,7 +1,9 @@
 """
 Project 11 (OSS4008A): AI water detection.
 Runs the trained U-Net on Sentinel-2 imagery for a user-selected area and
-returns a water mask, its map bounds and the water area.
+returns a water mask, its map bounds, the water area and the resolution used.
+Small boxes run at full 10 m detail (as trained); larger boxes run at a coarser
+resolution so downloads stay a similar size (rougher: small water is missed).
 """
 import base64, io, json, math
 import numpy as np
@@ -51,7 +53,8 @@ def _s2_image(region):
 
 
 def _fetch(image, x0, y_top, step, w, h):
-    """Download image pixels for the grid, in chunks, as a (5, h, w) array."""
+    """Download image pixels for the grid, in chunks, as a (5, h, w) array.
+    Earth Engine averages pixels on its side when the grid is coarser than 10 m."""
     out = np.zeros((5, h, w), np.float32)
     for r in range(0, h, CHUNK):
         for c in range(0, w, CHUNK):
@@ -83,9 +86,10 @@ def _predict(img):
     return water
 
 
-def detect_water_ai(region, max_km2=200):
+def detect_water_ai(region, max_km2=5000, detail_km2=200, max_res=50):
     """AI water detection for a drawn area.
-    Returns (water mask, map bounds ((south, west), (north, east)), water area in km²)."""
+    Boxes up to detail_km2 run at full 10 m detail; larger boxes run coarser, up to max_res.
+    Returns (water mask, map bounds ((south, west), (north, east)), water area in km², resolution in m)."""
     if _model is None:
         raise RuntimeError('Model not loaded: call load_model() first.')
 
@@ -93,23 +97,27 @@ def detect_water_ai(region, max_km2=200):
     lons, lats = [p[0] for p in ring], [p[1] for p in ring]
     west, east, south, north = min(lons), max(lons), min(lats), max(lats)
 
-    # Grid in Web Mercator so the result lines up exactly with the web map;
-    # step chosen so each pixel is ~10 m on the ground, like the training tiles
-    step = 10 / math.cos(math.radians((south + north) / 2))
     x0, y0 = _to_merc(west, south)
     x1, y1 = _to_merc(east, north)
-    w, h = int((x1 - x0) / step), int((y1 - y0) / step)
+    stretch = 1 / math.cos(math.radians((south + north) / 2))   # Web Mercator stretch at this latitude
 
-    if w * h * 100 / 1e6 > max_km2:
-        raise ValueError(f'Area too large: draw a box under {max_km2} km².')
+    # Box size on the ground
+    box_km2 = ((x1 - x0) / stretch) * ((y1 - y0) / stretch) / 1e6
+    if box_km2 > max_km2:
+        raise ValueError(f'Your box is {box_km2:.0f} km²; please draw one under {max_km2} km².')
+
+    # Resolution: 10 m up to detail_km2, then coarser so the pixel count stays about the same
+    res = min(max_res, max(10, 10 * math.sqrt(box_km2 / detail_km2)))
+    step = res * stretch                                         # grid step in Web Mercator units
+    w, h = int((x1 - x0) / step), int((y1 - y0) / step)
 
     img = _fetch(_s2_image(region), x0, y1, step, w, h)
     water = _predict(img)
 
     lon_w, lat_s = _from_merc(x0, y1 - h * step)
     lon_e, lat_n = _from_merc(x0 + w * step, y1)
-    water_km2 = water.sum() * 100 / 1e6            # each pixel is ~100 m²
-    return water, ((lat_s, lon_w), (lat_n, lon_e)), water_km2
+    water_km2 = water.sum() * res * res / 1e6                    # each pixel is res x res metres
+    return water, ((lat_s, lon_w), (lat_n, lon_e)), water_km2, round(res)
 
 
 def water_overlay(water, bounds, color=(0, 255, 255), name='Water (AI)'):
