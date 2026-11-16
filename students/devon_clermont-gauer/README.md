@@ -15,7 +15,8 @@ An interactive map that identifies lakes, rivers and ponds across Canada from Se
 | Training dataset (14 regions, 665 tiles) | Exported and tiled |
 | Test-set corrections in labelme (40 tiles) | Done |
 | NDWI baseline | IoU 0.609 pooled, 0.468 averaged across regions |
-| U-Net training and evaluation | Progress 3 |
+| U-Net training and evaluation | IoU 0.891 pooled, 0.840 averaged across regions |
+| AI detection in the dashboard (`water_ai.py`) | Written; testing |
 | Lake / river / pond classification | Final delivery |
 
 ## Folder structure
@@ -109,14 +110,16 @@ Global datasets are used for imagery and labels because no Canadian source offer
 | 2026-11-14 | Made `water_layers.py` integration-ready: `show_water()` entry point, `build_water_controls()` filter buttons that work on a shared map, and `PROJECT_INFO`. |
 | 2026-11-14 | Created `water_test_prep_and_baseline.ipynb`: band statistics from training tiles; NDWI baseline vs Dynamic World on the test set (IoU 0.546 overall; best Iqaluit 0.708, worst Minnedosa 0.203). |
 | 2026-11-15 | Built the labelme correction pipeline (draft polygons → labelme → corrected masks) and verified the 40 tiles to be used. |
-| 2026-11-16 | Corrected 40 test tiles in labelme (open water only). NDWI baseline vs corrected masks: IoU 0.609 pooled, 0.468 averaged across regions (Iqaluit 0.738, Kejimkujik 0.496, Winnipeg 0.469, Minnedosa 0.168). |
+| 2026-11-16 | Corrected 40 test tiles in labelme (open water only). NDWI baseline vs corrected masks: IoU 0.609 pooled, 0.468 region average. |
+| 2026-11-16 | Trained the U-Net (ResNet-34 encoder, 50 epochs; best validation IoU 0.964 vs Dynamic World labels). Test IoU vs corrected masks: 0.891 pooled, 0.840 region average, far above NDWI; largest gain on prairie ponds (Minnedosa 0.168 → 0.760). Below Dynamic World (0.929 / 0.905), which is expected since the model learns from Dynamic World labels and the corrected masks were drafted from them. Weakest region: Winnipeg (urban rivers, 0.783). |
+| 2026-11-16 | Wrote `water_ai.py`: runs the trained U-Net on Sentinel-2 imagery for a drawn box, replacing the Dynamic World placeholder so detection in the tool is done by AI. |
 
 ## Next steps
 
-1. Train the U-Net (`water_unet_training.ipynb`) on the training tiles, tracking validation IoU.
-2. Evaluate on the corrected test set against the NDWI baseline (IoU 0.609 pooled / 0.468 region average) and Dynamic World.
-3. Connect the model to the dashboard (replaces the placeholder in `detect_in_region()`).
-4. Classify detected water into lakes, rivers and ponds (`water_postprocess.ipynb`).
+1. Test AI detection in the dashboard and add an example screenshot.
+2. Improve urban river detection (weakest region: Winnipeg), e.g. by adding more urban/river training regions.
+3. Classify detected water into lakes, rivers and ponds (`water_postprocess.ipynb`).
+4. Validate results against NRCan's National Hydro Network.
 5. Case studies, user manual, poster and maintenance plan for final delivery.
 
 ## References
