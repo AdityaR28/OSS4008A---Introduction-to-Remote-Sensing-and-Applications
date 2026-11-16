@@ -10,12 +10,13 @@ An interactive map that identifies lakes, rivers and ponds across Canada from Se
 
 | Part | Status |
 |---|---|
-| Placeholder dashboard UI (chat panel, map, layer buttons) |  Built (Progress 2) |
-| Training dataset (14 regions so far, 665 tiles) |  Exported and tiled |
-| Test-set corrections in labelme |  Next |
-| NDWI baseline |  Next |
-| U-Net training and evaluation |  Progress 3 |
-| Lake / river / pond classification |  Final delivery |
+| Dashboard UI (chat panel, map, layer buttons, draw-a-box) | Built (Progress 2) |
+| Integration-ready module (`water_layers.py`) | Shared-UI entry point and filter controls |
+| Training dataset (14 regions, 665 tiles) | Exported and tiled |
+| Test-set corrections in labelme (40 tiles) | Done |
+| NDWI baseline | IoU 0.609 pooled, 0.468 averaged across regions |
+| U-Net training and evaluation | Progress 3 |
+| Lake / river / pond classification | Final delivery |
 
 ## Folder structure
 
@@ -99,6 +100,7 @@ Global datasets are used for imagery and labels because no Canadian source offer
 | 2026-11-14 | Made `water_layers.py` integration-ready: `show_water()` entry point, `build_water_controls()` filter buttons that work on a shared map, and `PROJECT_INFO`. |
 | 2026-11-14 | Created `water_test_prep_and_baseline.ipynb`: band statistics from training tiles; NDWI baseline vs Dynamic World on the test set (IoU 0.546 overall; best Iqaluit 0.708, worst Minnedosa 0.203). |
 | 2026-11-15 | Built the labelme correction pipeline (draft polygons → labelme → corrected masks) and verified the 40 tiles to be used. |
+| 2026-11-16 | Corrected 40 test tiles in labelme (open water only). NDWI baseline vs corrected masks: IoU 0.609 pooled, 0.468 averaged across regions (Iqaluit 0.738, Kejimkujik 0.496, Winnipeg 0.469, Minnedosa 0.168). |
 
 ## Next steps
 
