@@ -20,8 +20,6 @@ An interactive map that identifies lakes, rivers and ponds across Canada from Se
 
 ## Folder structure
 
-## Folder structure
-
 ```
 students/devon_clermont-gauer/
 ├── code/
