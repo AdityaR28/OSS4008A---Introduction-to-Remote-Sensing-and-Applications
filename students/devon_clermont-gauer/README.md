@@ -104,11 +104,11 @@ Global datasets are used for imagery and labels because no Canadian source offer
 
 ## Next steps
 
-1. Correct test tiles in labelme (~40 tiles).
-2. Add prairie and urban test regions.
-3. NDWI baseline (`test_prep_and_baseline.ipynb`).
-4. Train and evaluate the U-Net (`unet_training.ipynb`) against NDWI and Dynamic World.
-5. Connect the model to the dashboard (replaces the placeholder in `detect_in_region()`).
+1. Train the U-Net (`water_unet_training.ipynb`) on the training tiles, tracking validation IoU.
+2. Evaluate on the corrected test set against the NDWI baseline (IoU 0.609 pooled / 0.468 region average) and Dynamic World.
+3. Connect the model to the dashboard (replaces the placeholder in `detect_in_region()`).
+4. Classify detected water into lakes, rivers and ponds (`water_postprocess.ipynb`).
+5. Case studies, user manual, poster and maintenance plan for final delivery.
 
 ## References
 
