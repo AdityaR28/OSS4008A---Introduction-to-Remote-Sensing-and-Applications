@@ -1,0 +1,75 @@
+{
+  "runtime": "Google Colab CPU",
+  "dashboard_checks": {
+    "passed": 7,
+    "total": 7
+  },
+  "live_exports_verified": [
+    "GeoJSON",
+    "CSV",
+    "PNG",
+    "metadata"
+  ],
+  "live_cases": [
+    {
+      "image_id": "COPERNICUS/S2_HARMONIZED/20250726T151649_20250726T151759_T20TMQ",
+      "acquired_utc": "2025-07-26T15:20:32.404000+00:00",
+      "detection_count": 6,
+      "clear_pixel_fraction": 0.9999872902897814,
+      "threshold": 0.55,
+      "skipped_scenes": [],
+      "scene_search_seconds": 0.3751750659998834,
+      "selected_scene_download_seconds": 1.780325477000133,
+      "imagery_total_seconds": 3.4158890070000325,
+      "inference_seconds": 3.3131564079999407,
+      "map_layer_setup_seconds": 0.26992798900005255,
+      "imagery_cache_hit": true
+    },
+    {
+      "image_id": "COPERNICUS/S2_HARMONIZED/20250812T190931_20250812T191308_T10UDV",
+      "acquired_utc": "2025-08-12T19:21:17.741000+00:00",
+      "detection_count": 20,
+      "clear_pixel_fraction": 0.9994259632616488,
+      "threshold": 0.55,
+      "skipped_scenes": [
+        {
+          "scene": "COPERNICUS/S2_HARMONIZED/20250810T191909_20250810T192442_T10UDV",
+          "reason": "Area coverage below 98%."
+        }
+      ],
+      "scene_search_seconds": 0.45256556999993336,
+      "selected_scene_download_seconds": 1.8072671230002015,
+      "imagery_total_seconds": 3.7968542969997543,
+      "inference_seconds": 2.9998931119998815,
+      "map_layer_setup_seconds": 0.3325493259999348,
+      "imagery_cache_hit": true
+    }
+  ],
+  "unscored_saint_john": {
+    "image_id": "COPERNICUS/S2_HARMONIZED/20250726T152721_20250726T152715_T19TGL",
+    "acquired_utc": "2025-07-26T15:30:39.094000+00:00",
+    "clear_pixel_fraction": 0.9991072954851944,
+    "image_sha256": "da5fa14840c7294e94d711fe52ccaacd6e2977d7b0f1db59d3a6eabd48057836",
+    "mask_sha256": "b9f095fb0d7f84771b4ac732f18e36e4c2f693a7f19b013151309fa263bba45c"
+  },
+  "english_bay_reproduction": {
+    "scene": "COPERNICUS/S2_HARMONIZED/20250810T191909_20250810T192442_T10UDV",
+    "image_sha256": "1db4566d665db38a9f05a779fc965a2d2b8dd86d9111d7bed8730cd5e851f7c7",
+    "labels_sha256": "a35111234e701890f26166a6e2687f5587ae3ac738b91f185b3c0b55ab9b1026",
+    "checkpoint_sha256": "aa57b80886d48b592209a09e65cbd6b1b657585add4d7dd11f76867268201721",
+    "score_threshold": 0.55,
+    "iou_threshold": 0.5,
+    "true_positives": 6,
+    "false_positives": 4,
+    "false_negatives": 0,
+    "precision": 0.6,
+    "recall": 1
+  },
+  "saved_demo_without_earth_engine": true,
+  "shared_adapter_smoke_test": {
+    "call": "dashboard_adapter.run_detection",
+    "scene": "COPERNICUS/S2_HARMONIZED/20250726T151649_20250726T151759_T20TMQ",
+    "predictions": 6,
+    "feature_type": "FeatureCollection"
+  }
+}
