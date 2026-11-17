@@ -12,13 +12,13 @@ An interactive map that identifies lakes, rivers and ponds across Canada from Se
 
 | Part | Status |
 |---|---|
-| Dashboard UI (chat panel, map, layer buttons, draw-a-box) | Built (Progress 2) |
-| Integration-ready module (`water_layers.py`) | Shared-UI entry point and filter controls |
+| Dashboard UI (chat panel, map, reference layers, AI box detection) | Built |
+| Integration-ready module (`water_layers.py`) | Shared-UI entry point and reference filter controls |
 | Training dataset (14 regions, 665 tiles) | Exported and tiled |
 | Test-set corrections in labelme (40 tiles) | Done |
 | NDWI baseline | IoU 0.609 pooled, 0.468 averaged across regions |
 | U-Net training and evaluation | IoU 0.891 pooled, 0.840 averaged across regions |
-| AI detection in the dashboard (`water_ai.py`) | Written; testing |
+| AI detection in the dashboard (`water_ai.py`) | U-Net on a drawn box; parallel downloads, up to 20,000 km² |
 | Lake / river / pond classification | Final delivery |
 
 ## Folder structure
@@ -88,8 +88,8 @@ Each tile is a GeoTIFF: `images/` hold Sentinel-2 bands B2, B3, B4, B8, B11 (blu
 |---|---|---|
 | Sentinel-2 SR Harmonized (Copernicus/ESA) | Satellite imagery | Copernicus open data; attribution required |
 | Dynamic World V1 (Google / WRI) | Training labels (water masks) | CC BY 4.0 |
-| JRC Global Surface Water v1.4 | Dashboard water layers | Free use with attribution |
-| HydroSHEDS Free Flowing Rivers (WWF) | Reference river network | Free use with attribution |
+| JRC Global Surface Water v1.4 | "All water" reference layer (country-scale view, not AI) | Free use with attribution |
+| HydroSHEDS Free Flowing Rivers (WWF) | "Rivers" reference layer (approximate river courses, not AI) | Free use with attribution |
 | LSIB Simple 2017 (US Department of State) | Canada boundary | Public domain |
 | National Hydro Network (NRCan) | Planned: validating results against official Canadian data | Open Government Licence – Canada |
 
@@ -122,14 +122,18 @@ Global datasets are used for imagery and labels because no Canadian source offer
 | 2026-11-16 | Trained the U-Net (ResNet-34 encoder, 50 epochs; best validation IoU 0.964 vs Dynamic World labels). Test IoU vs corrected masks: 0.891 pooled, 0.840 region average, far above NDWI; largest gain on prairie ponds (Minnedosa 0.168 → 0.760). Below Dynamic World (0.929 / 0.905), which is expected since the model learns from Dynamic World labels and the corrected masks were drafted from them. Weakest region: Winnipeg (urban rivers, 0.783). |
 | 2026-11-16 | Wrote `water_ai.py`: runs the trained U-Net on Sentinel-2 imagery for a drawn box, replacing the Dynamic World placeholder so detection in the tool is done by AI. |
 | 2026-11-16 | AI detection now scales resolution with box size: full 10 m detail up to 200 km², coarser (up to 50 m) for boxes up to 5,000 km². A ~5,000 km² box takes about 18 seconds. |
+| 2026-11-17 | Simplified the dashboard to the base map, two reference layers (all water, rivers) and AI box detection; removed permanent/seasonal water layers; reference layers labelled as non-AI. |
 
 ## Next steps
 
-1. Test AI detection in the dashboard and add an example screenshot.
-2. Improve urban river detection (weakest region: Winnipeg), e.g. by adding more urban/river training regions.
-3. Classify detected water into lakes, rivers and ponds (`water_postprocess.ipynb`).
-4. Validate results against NRCan's National Hydro Network.
-5. Case studies, user manual, poster and maintenance plan for final delivery.
+## Next steps
+
+1. Classify AI-detected water into lakes, rivers and ponds (`water_postprocess.ipynb`), and show each type in its own colour.
+2. Let users ask the assistant for a specific water type (e.g. "show only lakes").
+3. Scan the visible map area with the AI (button, with optional automatic mode).
+4. Improve narrow and urban river detection (weakest cases: Winnipeg, narrow boreal channels).
+5. Validate results against NRCan's National Hydro Network.
+6. Case studies, user manual, poster and maintenance plan for final delivery.
 
 ## References
 
