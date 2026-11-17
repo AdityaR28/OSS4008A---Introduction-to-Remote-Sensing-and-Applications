@@ -1,12 +1,14 @@
 """
 Project 11 (OSS4008A): Water bodies in Canada.
-Reusable layer functions and controls for the dashboard, built so the project
+Reference map layers and controls for the dashboard, built so the project
 can plug into a combined UI.
 
-- Layer functions return (image, display settings, layer name), so any map can
+- Reference layers return (image, display settings, layer name), so any map can
   show them with map.addLayer(*result).
 - show_water() and build_water_controls() let a shared UI load this project and
   its filter buttons onto a map the shared UI owns.
+- Water detection is done by the AI (U-Net) in water_ai.py; the layers here are
+  reference data for country-scale views, where the AI is too slow to run.
 """
 import ee
 import ipywidgets as widgets
@@ -17,39 +19,25 @@ canada = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017') \
            .filter(ee.Filter.eq('country_na', 'Canada')) \
            .union(maxError=100)
 
-# JRC Global Surface Water: 1984-present water history at 30 m
-_jrc = ee.Image('JRC/GSW1_4/GlobalSurfaceWater')
-
 
 # ---------------------------------------------------------------------------
-# Layer functions: each returns (image, display settings, layer name)
+# Reference layers: each returns (image, display settings, layer name)
 # ---------------------------------------------------------------------------
 
 def get_overview_layer():
-    """All water: pixels that were water more than 50% of the time since 1984."""
-    img = (_jrc.select('occurrence')     # % of time each pixel was water
+    """All water (reference): pixels that were water more than 50% of the time since 1984
+    (JRC Global Surface Water). Not AI output."""
+    img = (ee.Image('JRC/GSW1_4/GlobalSurfaceWater')
+           .select('occurrence')         # % of time each pixel was water
            .gt(50)                       # keep mostly-permanent water
            .selfMask()                   # hide non-water pixels
            .clipToCollection(canada))    # cut to Canada
-    return img, {'palette': ['0066ff']}, 'Water (Canada)'
-
-
-def get_permanent_layer():
-    """Water present all 12 months of the year (JRC seasonality)."""
-    img = _jrc.select('seasonality').eq(12).selfMask().clipToCollection(canada)
-    return img, {'palette': ['0033cc']}, 'Permanent water'
-
-
-def get_seasonal_layer():
-    """Water present only part of the year (1-11 months): often ponds and wetlands."""
-    s = _jrc.select('seasonality')
-    img = s.gt(0).And(s.lt(12)).selfMask().clipToCollection(canada)
-    return img, {'palette': ['33ff99']}, 'Seasonal water'
+    return img, {'palette': ['0066ff']}, 'All water (reference)'
 
 
 def get_rivers_layer():
-    """Reference river network (HydroSHEDS), larger rivers only.
-    Reference data, not this project's detection."""
+    """Rivers (reference): HydroSHEDS river network, larger rivers only.
+    Derived from ~500 m elevation data, so lines are approximate at close zoom. Not AI output."""
     rivers = (ee.FeatureCollection('WWF/HydroSHEDS/v1/FreeFlowingRivers')
               .filterBounds(canada.geometry())
               .filter(ee.Filter.lte('RIV_ORD', 6)))   # 1 = largest rivers
@@ -57,9 +45,9 @@ def get_rivers_layer():
 
 
 def detect_in_region(region, start='2024-06-01', end='2024-09-30'):
-    """Water in a selected region.
-    Placeholder: Dynamic World summer water class; to be replaced by the
-    trained U-Net at Progress 3."""
+    """Dynamic World summer water class for a region.
+    Used to build training labels; NOT used for detection in the tool
+    (detection is done by the U-Net in water_ai.py)."""
     img = (ee.ImageCollection('GOOGLE/DYNAMICWORLD/V1')
            .filterBounds(region)
            .filterDate(start, end)       # summer only, avoids ice
@@ -76,20 +64,17 @@ def detect_in_region(region, start='2024-06-01', end='2024-09-30'):
 # ---------------------------------------------------------------------------
 
 # Names of every layer this project adds, so filters only swap this project's layers
-WATER_LAYER_NAMES = {'Water (Canada)', 'Permanent water', 'Seasonal water',
-                     'Rivers (reference)', 'Water (region)'}
+WATER_LAYER_NAMES = {'All water (reference)', 'Rivers (reference)', 'Water (AI)'}
 
 # Filter buttons: (button label, layer function)
 FILTERS = [
-    ('All water',       get_overview_layer),
-    ('Permanent water', get_permanent_layer),
-    ('Seasonal water',  get_seasonal_layer),
-    ('Rivers',          get_rivers_layer),
+    ('All water (reference)', get_overview_layer),
+    ('Rivers (reference)',    get_rivers_layer),
 ]
 
 
 def show_water(m):
-    """Entry point for a shared UI: load this project's default view onto map m."""
+    """Entry point for a shared UI: load this project's default reference view onto map m."""
     m.addLayer(*get_overview_layer())
 
 
@@ -125,8 +110,8 @@ PROJECT_INFO = {
     'id': 'water',
     'title': 'Water bodies (lakes, rivers, ponds)',
     'student': 'Devon Clermont-Gauer',
-    'entry': show_water,               # loads the default view
-    'controls': build_water_controls,  # builds the filter buttons
-    'layers': FILTERS,                 # (label, function) pairs
-        'region_tool': 'water_ai.detect_water_ai',   # AI detection lives in water_ai.py
+    'entry': show_water,                          # loads the default reference view
+    'controls': build_water_controls,             # builds the reference filter buttons
+    'layers': FILTERS,                            # (label, function) pairs
+    'region_tool': 'water_ai.detect_water_ai',    # AI detection lives in water_ai.py
 }
