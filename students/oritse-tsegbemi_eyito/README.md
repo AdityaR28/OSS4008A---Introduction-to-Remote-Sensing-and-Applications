@@ -6,9 +6,9 @@
 ## Quick start for the November 23 demo
 
 1. Open [Notebook 03 in Colab](https://colab.research.google.com/github/AdityaR28/OSS4008A---Introduction-to-Remote-Sensing-and-Applications/blob/main/students/oritse-tsegbemi_eyito/code/03_canada_dashboard.ipynb). Use **Runtime > Run all**. A CPU runtime is sufficient.
-2. Download [the trained checkpoint](results/models/vessel_detector.pt) with GitHub's **Download raw file** button. In Colab's **Files** pane, upload it to session storage as `vessel_detector.pt`, then click **Restore checkpoint / project ZIP**. If you already cloned the course repository into the path shown below, the notebook loads the checked-in checkpoint automatically.
-3. Set `EE_PROJECT` in the dashboard cell to a Google Cloud project you can access. Rerun the cell if you change it, then click **Authorize Earth Engine**.
-4. Choose **Halifax example**, then **Load imagery** and **Detect ships**. Click a box to inspect its score. Use the **Vancouver (Pacific)** preset for a second demonstration.
+2. Click **Load published demo files**. Colab retrieves the verified checkpoint and example outputs from the course repository.
+3. For the archived demo, select the July 26 Halifax or August 12 Vancouver entry under **Saved run**. The map and PNG work without Earth Engine authorization.
+4. For the live demo, set `EE_PROJECT` in the dashboard cell to a Google Cloud project you can access and click **Authorize Earth Engine**. Choose **Halifax example**, then **Load imagery** and **Detect ships**. Click a box to inspect its score. Choose **Vancouver (Pacific)** for the second case.
 
 Saved evidence is available during a runtime interruption. Open the [Halifax preview](results/ships_2025-07-26_ccc66456ac88.png), [Vancouver preview](results/ships_2025-08-12_f33c2c479429.png), or [run metadata](results/nov23_rehearsal.json). Predictions are experimental.
 
@@ -181,6 +181,14 @@ Without a cloned repository, the detection notebook uses temporary storage under
 - Additional independent validation and higher-resolution model development are needed.
 
 ## Weekly progress log
+
+### Week of Nov 16–22, 2026 | Progress 3 testing
+
+- **Live Colab rehearsal:** The preserved CPU checkpoint reproduced 6 Halifax and 20 Vancouver predictions at confidence 0.55. In Vancouver the scene search skipped one candidate because it covered less than 98% of the selected area. I checked the generated PNGs, GeoJSON, CSV, and metadata for both runs in Colab. The [rehearsal evidence](results/nov23_live_rehearsal.json) records scenes, counts, coverage, and timing. These counts describe model output.
+- **Saved demo:** Seven dashboard checks passed. In a fresh runtime I used **Load published demo files** to verify the checkpoint and opened both archived results on the map without authorizing Earth Engine.
+- **Shared UI handoff:** A live call through `dashboard_adapter.run_detection` returned a GeoJSON FeatureCollection with six Halifax predictions. Connection to the course host still depends on the shared dashboard interface.
+- **Model check:** A CPU rerun reproduced the original English Bay pilot result with the same scene, labels, checkpoint, confidence 0.55, and IoU 0.50. Six reference boxes matched, four predictions were unmatched, and no reference boxes were missed. This is one visually reviewed scene.
+- **Next independent case:** I froze the [Saint John scene](data/canadian_pilot/saint_john_pilot.png), its [valid-pixel mask](data/canadian_pilot/saint_john_pilot_mask.png), and [scene metadata](data/canadian_pilot/saint_john_pilot_scene.json) before running inference. The [LabelMe file](data/canadian_pilot/saint_john_pilot.json) has zero boxes and is marked unannotated. In Colab, open **Review Canadian labels** and draw tight boxes against the clean scene before viewing predictions. After checking and saving the labels, score the Saint John case with the existing pilot scoring cell. An independent review of English Bay and the shared dashboard connection are still pending.
 
 ### Nov 15, 2026 | Progress 3 rehearsal
 
