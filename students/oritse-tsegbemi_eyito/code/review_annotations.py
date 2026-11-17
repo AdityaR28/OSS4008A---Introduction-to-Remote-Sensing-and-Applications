@@ -9,6 +9,9 @@ from PIL import Image, ImageDraw
 def annotation_review(project):
     root = Path(project)
     choices = sorted((root/'data/canadian_review').glob('*.png')) + sorted((root/'data/aerial_review').glob('*.png'))
+    pilot_image = root/'data/canadian_pilot/saint_john_pilot.png'
+    if pilot_image.with_suffix('.json').is_file() and pilot_image.is_file():
+        choices.insert(0, pilot_image)
     if not choices:
         raise ValueError('Run the Canadian imagery cells first.')
     select = widgets.Dropdown(options=[(p.stem,str(p)) for p in choices],description='Image:')
@@ -21,6 +24,7 @@ def annotation_review(project):
     notes=widgets.Textarea(description='Review notes:',placeholder='Ambiguities, cloud/ice, dry-stored boats or resolution limitations')
     reviewer=widgets.Text(description='Reviewer:')
     checked=widgets.Checkbox(description='All visible ships checked; ambiguous objects excluded',value=False,indent=False)
+    blind=widgets.Checkbox(description='I drew these boxes before seeing model predictions',value=False,indent=False)
     out=widgets.Output()
     state={'shapes':[]}
 
@@ -42,6 +46,8 @@ def annotation_review(project):
         state['shapes']=loaded.get('shapes',[])
         checked.value=False
         negative.value=False
+        blind.value=False
+        blind.layout.display='' if Path(select.value) == pilot_image else 'none'
         notes.value=loaded.get('review_notes','')
         show()
 
@@ -75,6 +81,9 @@ def annotation_review(project):
         from datetime import datetime,timezone
         path=Path(select.value).with_suffix('.json')
         label=json.loads(path.read_text())
+        if Path(select.value) == pilot_image:
+            prior_result = (root/'results/saint_john_pilot_metrics.json').exists()
+            label['reviewed_before_predictions'] = bool(blind.value and not prior_result)
         history=path.parent/'review_history'
         history.mkdir(exist_ok=True)
         (history/(path.stem+'_'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%f')+'.json')).write_text(path.read_text(),encoding='utf-8')
@@ -101,4 +110,4 @@ def annotation_review(project):
     draft.on_click(save_draft)
     change(None)
     return widgets.VBox([widgets.HTML('<b>Canadian annotation review</b><br>Draw tight axis-aligned boxes using original pixel coordinates. Do not label docks, wakes or uncertain objects as ships. Aerial imagery must be trained and evaluated separately from the 10 m model.'),
-                         select,widgets.HBox(coords),widgets.HBox([add,undo,draft]),notes,reviewer,checked,negative,save,out])
+                         select,widgets.HBox(coords),widgets.HBox([add,undo,draft]),notes,reviewer,checked,negative,blind,save,out])
