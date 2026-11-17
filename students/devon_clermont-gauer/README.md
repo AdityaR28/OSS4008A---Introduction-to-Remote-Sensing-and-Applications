@@ -49,8 +49,6 @@ students/devon_clermont-gauer/
     │   ├── training_curves.png
     │   ├── example_predictions.png
     │   └── unet_vs_baselines.png
-    └── ai_detection/
-        └── ai_box_detection_large_area.png
 ```
 
 ## How to run
