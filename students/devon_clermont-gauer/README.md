@@ -36,14 +36,21 @@ students/devon_clermont-gauer/
 ├── data/          # dataset description (full dataset on Google Drive, see below)
 ├── docs/
 │   └── project_plan.pdf
-└── results/       # screenshots and result figures
-    ├── dashboard.png                          # dashboard screenshot
-    ├── ndwi_baseline_vs_dynamic_world.png     # NDWI scores vs Dynamic World masks
-    ├── NDWI baseline vs 40 labelme corrected masks.png         # NDWI scores vs hand-corrected masks
-    ├── Training curves.png                    # U-Net loss and validation IoU per epoch
-    ├── Example predictions.png                # test tiles: image, corrected mask, U-Net prediction
-    └── Unet vs baselines.png                  # test results: NDWI vs Dynamic World vs U-Net
-    └──ai box detection 5000 square km limit.png
+└── results/
+    ├── performance/
+    │   └── performance_tests.md
+    ├── dashboard/
+    │   └── dashboard_preview_V1.png
+    │   └── dashboard_preview_V2.png
+    ├── baseline/
+    │   ├── ndwi_vs_dynamic_world.png
+    │   └── ndwi_vs_corrected_masks.png
+    ├── training/
+    │   ├── training_curves.png
+    │   ├── example_predictions.png
+    │   └── unet_vs_baselines.png
+    └── ai_detection/
+        └── ai_box_detection_large_area.png
 ```
 
 ## How to run
