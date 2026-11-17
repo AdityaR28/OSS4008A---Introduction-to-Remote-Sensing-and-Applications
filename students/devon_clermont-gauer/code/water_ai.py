@@ -4,8 +4,10 @@ Runs the trained U-Net on Sentinel-2 imagery for a user-selected area and
 returns a water mask, its map bounds, the water area and the resolution used.
 Small boxes run at full 10 m detail (as trained); larger boxes run at a coarser
 resolution so downloads stay a similar size (rougher: small water is missed).
+Image chunks are downloaded in parallel, and the model predicts several tiles at once.
 """
-import base64, io, json, math
+import base64, io, json, math, time
+from concurrent.futures import ThreadPoolExecutor
 import numpy as np
 import ee
 import torch
@@ -17,7 +19,9 @@ BANDS = ['B2', 'B3', 'B4', 'B8', 'B11']        # same bands as training
 START, END = '2024-06-01', '2024-09-30'        # same summer window as training
 R = 6378137.0                                  # Earth radius used by web maps (Web Mercator)
 TILE = 256                                     # model input size, same as training
-CHUNK = 1024                                   # pixels per download request (keeps requests small)
+CHUNK = 512                                    # pixels per download request side
+WORKERS = 8                                    # download requests at once (tested: 10-12 gave no gain;
+                                               # 12 exceeded the Earth Engine client's 10-connection pool)
 
 _model, _mean, _std = None, None, None
 _device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -45,7 +49,8 @@ def _from_merc(x, y):
 
 
 def _s2_image(region):
-    """Cloud-filtered summer Sentinel-2 median composite, built exactly as for training."""
+    """Cloud-filtered summer Sentinel-2 median composite, built exactly as for training.
+    (A lighter composite of the 10 clearest images was tested: similar results, ~2x slower.)"""
     return (ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
             .filterBounds(region).filterDate(START, END)
             .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20))
@@ -53,40 +58,55 @@ def _s2_image(region):
 
 
 def _fetch(image, x0, y_top, step, w, h):
-    """Download image pixels for the grid, in chunks, as a (5, h, w) array.
-    Earth Engine averages pixels on its side when the grid is coarser than 10 m."""
+    """Download image pixels for the grid as a (5, h, w) array.
+    Chunks are requested in parallel; Earth Engine averages pixels on its side
+    when the grid is coarser than 10 m."""
     out = np.zeros((5, h, w), np.float32)
-    for r in range(0, h, CHUNK):
-        for c in range(0, w, CHUNK):
-            cw, ch = min(CHUNK, w - c), min(CHUNK, h - r)
-            arr = ee.data.computePixels({
-                'expression': image,
-                'fileFormat': 'NUMPY_NDARRAY',
-                'grid': {'dimensions': {'width': cw, 'height': ch},
-                         'affineTransform': {'scaleX': step, 'shearX': 0, 'translateX': x0 + c * step,
-                                             'shearY': 0, 'scaleY': -step, 'translateY': y_top - r * step},
-                         'crsCode': 'EPSG:3857'}})
-            out[:, r:r + ch, c:c + cw] = np.stack([arr[b] for b in BANDS]).astype(np.float32)
+    jobs = [(r, c) for r in range(0, h, CHUNK) for c in range(0, w, CHUNK)]
+
+    def get(job):
+        r, c = job
+        cw, ch = min(CHUNK, w - c), min(CHUNK, h - r)
+        request = {'expression': image, 'fileFormat': 'NUMPY_NDARRAY',
+                   'grid': {'dimensions': {'width': cw, 'height': ch},
+                            'affineTransform': {'scaleX': step, 'shearX': 0, 'translateX': x0 + c * step,
+                                                'shearY': 0, 'scaleY': -step, 'translateY': y_top - r * step},
+                            'crsCode': 'EPSG:3857'}}
+        for attempt in range(4):                 # retry if Earth Engine is busy
+            try:
+                arr = ee.data.computePixels(request)
+                break
+            except Exception:
+                if attempt == 3:
+                    raise
+                time.sleep(2 ** attempt)
+        out[:, r:r + ch, c:c + cw] = np.stack([arr[b] for b in BANDS]).astype(np.float32)
+
+    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
+        list(pool.map(get, jobs))
     return out
 
 
-def _predict(img):
-    """Run the U-Net over the image in 256x256 tiles; returns a True/False water mask."""
+def _predict(img, batch=16):
+    """Run the U-Net over the image in 256x256 tiles (several at once); returns a water mask."""
     _, h, w = img.shape
     H, W = math.ceil(h / TILE) * TILE, math.ceil(w / TILE) * TILE
     x = np.pad((img - _mean) / _std, ((0, 0), (0, H - h), (0, W - w)), mode='edge')
     prob = np.zeros((H, W), np.float32)
+    spots = [(r, c) for r in range(0, H, TILE) for c in range(0, W, TILE)]
     with torch.no_grad():
-        for r in range(0, H, TILE):
-            for c in range(0, W, TILE):
-                t = torch.from_numpy(x[None, :, r:r + TILE, c:c + TILE].copy()).to(_device)
-                prob[r:r + TILE, c:c + TILE] = torch.sigmoid(_model(t))[0, 0].cpu().numpy()
+        for i in range(0, len(spots), batch):
+            group = spots[i:i + batch]
+            t = torch.from_numpy(np.stack([x[:, r:r + TILE, c:c + TILE] for r, c in group])).to(_device)
+            p = torch.sigmoid(_model(t))[:, 0].cpu().numpy()
+            for (r, c), tile in zip(group, p):
+                prob[r:r + TILE, c:c + TILE] = tile
     water = prob[:h, :w] > 0.5
     water[(img == 0).all(axis=0)] = False          # no imagery -> not water
     return water
 
 
-def detect_water_ai(region, max_km2=5000, detail_km2=200, max_res=50):
+def detect_water_ai(region, max_km2=20000, detail_km2=400, max_res=60):
     """AI water detection for a drawn area.
     Boxes up to detail_km2 run at full 10 m detail; larger boxes run coarser, up to max_res.
     Returns (water mask, map bounds ((south, west), (north, east)), water area in km², resolution in m)."""
@@ -128,3 +148,10 @@ def water_overlay(water, bounds, color=(0, 255, 255), name='Water (AI)'):
     Image.fromarray(rgba).save(buf, format='PNG')
     url = 'data:image/png;base64,' + base64.b64encode(buf.getvalue()).decode()
     return ImageOverlay(url=url, bounds=bounds, name=name)
+
+
+def get_input_layer(region):
+    """The Sentinel-2 image the AI analysed for this region, as a map layer.
+    Returns (image, display settings, layer name) like the reference layers."""
+    img = _s2_image(region).clip(region)
+    return img, {'bands': ['B4', 'B3', 'B2'], 'min': 0, 'max': 3000}, 'AI input (Sentinel-2)'
