@@ -1,0 +1,54 @@
+{
+  "image_id": "COPERNICUS/S2_HARMONIZED/20250726T152721_20250726T152715_T19TGL",
+  "collection": "COPERNICUS/S2_HARMONIZED",
+  "acquired_utc": "2025-07-26T15:30:39.094000+00:00",
+  "scene_cloud_percent": 0,
+  "scene_cloud_max": 30,
+  "bounds_wgs84": [
+    -66.091,
+    45.251,
+    -66.051,
+    45.279
+  ],
+  "pixel_size_m": 10,
+  "raster_crs": "EPSG:32619",
+  "raster_transform": [
+    10.0,
+    0.0,
+    728150.0,
+    0.0,
+    -10.0,
+    5018180.0
+  ],
+  "raster_width": 326,
+  "raster_height": 323,
+  "available_pixel_fraction": 1.0,
+  "clear_pixel_fraction": 0.9991072954851944,
+  "selected_scene_download_seconds": 5.379315623999901,
+  "cloud_probability_collection": "COPERNICUS/S2_CLOUD_PROBABILITY",
+  "cloud_probability_max_exclusive": 65,
+  "preprocessing": "Scene-level 1/99 percentiles estimated at 120 m; RGB uint8",
+  "stretch_low": [
+    296.485595703125,
+    536.267578125,
+    712.799560546875
+  ],
+  "stretch_high": [
+    951.25390625,
+    1078.967529296875,
+    1174.6761474609375
+  ],
+  "quality_warning": "Pixel-cloud screening is imperfect; bright ships can be masked and land can produce false detections.",
+  "skipped_scenes": [],
+  "scene_search_seconds": 0.40735396599984597,
+  "imagery_total_seconds": 6.915385710999999,
+  "case": "saint_john_pilot",
+  "image_sha256": "da5fa14840c7294e94d711fe52ccaacd6e2977d7b0f1db59d3a6eabd48057836",
+  "mask_sha256": "b9f095fb0d7f84771b4ac732f18e36e4c2f693a7f19b013151309fa263bba45c",
+  "date_range": [
+    "2025-05-01",
+    "2025-10-01"
+  ],
+  "confidence": 0.55,
+  "match_iou": 0.5
+}

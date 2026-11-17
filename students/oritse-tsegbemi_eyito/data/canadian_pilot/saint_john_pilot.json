@@ -1,0 +1,13 @@
+{
+  "version": "5.6.0",
+  "imagePath": "saint_john_pilot.png",
+  "imageData": null,
+  "imageWidth": 326,
+  "imageHeight": 323,
+  "shapes": [],
+  "flags": {
+    "review_required": true
+  },
+  "annotation_status": "UNANNOTATED",
+  "image_sha256": "da5fa14840c7294e94d711fe52ccaacd6e2977d7b0f1db59d3a6eabd48057836"
+}
