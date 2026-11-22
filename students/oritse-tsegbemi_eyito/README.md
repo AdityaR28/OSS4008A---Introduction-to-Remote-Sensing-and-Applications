@@ -182,6 +182,14 @@ Without a cloned repository, the detection notebook uses temporary storage under
 
 ## Weekly progress log
 
+### Nov 21, 2026 | Complete UI rehearsal
+
+- **UI layout:** Reworked the Colab dashboard around the professor's sketch. Ship analysis is on the left, the interactive map is on the right, and the bottom **Ships and ports** project button reloads the Canada view. The analysis panel has **Analyse**, **Ports**, and **Results** views. Prediction totals and confidence bars come from the selected run.
+- **Interactions:** Region, province, facility, and reference filters select locations. Date, confidence, and cloud controls configure inference. The map supports zooming, panning, location inspection, and rectangle selection. Clicking a ship displays its confidence and acquisition time. Results include archived runs and PNG, CSV, GeoJSON, and metadata exports.
+- **Verification:** Eight Colab regression checks passed. The redesigned dashboard loaded the trained checkpoint and ran live Halifax inference, producing six predictions. I verified the Vancouver archived analysis, the Yukon reference filter, project reload, and ship inspection. Saved predictions retain their original acquisition and threshold metadata.
+- **Course UI connection:** This implements the Ships and Ports project view. The common course host still needs to connect its project selector to the Python adapter. Other students' project buttons belong in that shared host.
+
+
 ### Week of Nov 16–22, 2026 | Progress 3 testing
 
 - **Live Colab rehearsal:** The preserved CPU checkpoint reproduced 6 Halifax and 20 Vancouver predictions at confidence 0.55. In Vancouver the scene search skipped one candidate because it covered less than 98% of the selected area. I checked the generated PNGs, GeoJSON, CSV, and metadata for both runs in Colab. The [rehearsal evidence](results/nov23_live_rehearsal.json) records scenes, counts, coverage, and timing. These counts describe model output.
@@ -338,3 +346,4 @@ retrieval timestamps; research dates are not acquisition dates.
 - [Ontario imagery catalogue](https://geohub.lio.gov.on.ca/maps/lio::ontario-imagery-web-map-service-oiwms/about)
 - [Open Government Licence Ontario](https://www.ontario.ca/page/open-government-licence-ontario)
 - [SMDG terminal reference records](https://github.com/smdg-org/Terminal-Code-List/blob/master/SMDG%20Terminal%20Code%20List.csv)
+
