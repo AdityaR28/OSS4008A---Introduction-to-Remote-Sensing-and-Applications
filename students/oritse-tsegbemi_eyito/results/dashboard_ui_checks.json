@@ -1,0 +1,29 @@
+{
+  "checked_date": "2026-11-21",
+  "environment": "Google Colab CPU",
+  "notebook_url": "https://colab.research.google.com/drive/11ME3pSjd3IhAlCC9NUD39MgF783kyW5z",
+  "regression_tests": {
+    "passed": 8,
+    "failures": 0,
+    "errors": 0,
+    "log": "test_geographic_plan_keeps_halifax_together (test_canada_dashboard.CanadaDashboardChecks.test_geographic_plan_keeps_halifax_together) ... ok\ntest_reference_filter (test_canada_dashboard.CanadaDashboardChecks.test_reference_filter) ... ok\ntest_request_rejection_before_download (test_canada_dashboard.CanadaDashboardChecks.test_request_rejection_before_download) ... ok\ntest_review_gate (test_canada_dashboard.CanadaDashboardChecks.test_review_gate) ... ok\ntest_saved_run_updates_analysis (test_canada_dashboard.CanadaDashboardChecks.test_saved_run_updates_analysis) ... ok\ntest_scene_selection_reports_exhausted_candidates (test_canada_dashboard.CanadaDashboardChecks.test_scene_selection_reports_exhausted_candidates) ... ok\ntest_scene_selection_tries_next_candidate (test_canada_dashboard.CanadaDashboardChecks.test_scene_selection_tries_next_candidate) ... ok\ntest_widget_filters_and_stale_result (test_canada_dashboard.CanadaDashboardChecks.test_widget_filters_and_stale_result) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 2.385s\n\nOK\n\n"
+  },
+  "live_halifax": {
+    "predictions": 6,
+    "scene": "COPERNICUS/S2_HARMONIZED/20250726T151649_20250726T151759_T20TMQ",
+    "threshold": 0.55,
+    "clicked_prediction": {
+      "id": 1,
+      "displayed_confidence": 0.999
+    }
+  },
+  "manual_ui_checks": [
+    "trained checkpoint loaded",
+    "side-by-side layout at current browser width",
+    "Vancouver archived summary: 20 predictions",
+    "Yukon filter: 1 of 1396 references",
+    "project button reloads Canada view",
+    "ship click retains confidence and acquisition date"
+  ],
+  "shared_course_host": "Connection pending"
+}
