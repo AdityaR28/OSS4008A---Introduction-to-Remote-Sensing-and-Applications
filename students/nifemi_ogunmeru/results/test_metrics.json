@@ -1,0 +1,17 @@
+{
+  "model": "fasterrcnn_resnet50_fpn_v2 (COCO-pretrained, fine-tuned)",
+  "epochs": 20,
+  "train_chips": 82,
+  "test_chips": 20,
+  "score_threshold": 0.5,
+  "iou_threshold": 0.5,
+  "precision": 0.8823529411764706,
+  "recall": 0.967741935483871,
+  "f1": 0.923076923076923,
+  "AP50": 0.9923423783985699,
+  "true_planes": 31,
+  "TP": 30,
+  "FP": 4,
+  "FN": 1,
+  "mean_count_error": 0.15
+}
