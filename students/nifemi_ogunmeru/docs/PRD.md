@@ -3,7 +3,7 @@
 **Course:** OSS4008A – Introduction to Remote Sensing and Applications (Carleton University)
 **Owner:** Nifemi Ogunmeru (individual project, no group work)
 **Instructor:** M. Hamed Mozaffari | **Research Assistant (progress reviews):** Aditya Rawal
-**Version:** 1.5 (draft) | **Date:** 2026-11-09
+**Version:** 1.6 (draft) | **Date:** 2026-11-22
 **Status:** Draft. Scope items marked **[TO CONFIRM]** must be validated with the RA at the Oct 19 meeting.
 
 ---
@@ -41,6 +41,13 @@ The project is graded by the instructor's discretion (up to 15% of the final gra
 | 2026-11-09 | Imagery plan: **deploy detection on Ontario aerial imagery; train on Ontario plus a few US NAIP airports** (0.6 m, public domain, in Earth Engine); Quebec, Calgary and Edmonton listed as future improvements | No open national sub-metre source; the course document allows US data when Canada has none |
 | 2026-11-09 | UI built with **Streamlit** on Colab (`code/02_streamlit_ui.ipynb`), served through a Cloudflare quick tunnel; map with folium + streamlit-folium | Course document suggests Flask/Streamlit; streamlit-folium returns drawn boxes to Python. Colab's built-in port link did not work with Streamlit |
 | 2026-11-09 | Dashboard speed: 5 GeoJSON layers on a canvas instead of 2,477 markers; map built once (cached) and drawn from a fresh copy each run; one page run per action | First version was very slow; reusing the same cached map object broke the map after a page refresh |
+| 2026-11-18 | Labelling with the **free open-source LabelMe** (pip, Python 3.12) instead of the paid labelme.io app | Same tool the course document names; the paid app only bundles the installation. Python 3.14 lacked the `onnxruntime` dependency |
+| 2026-11-18 | Training chips: 1024 × 1024 px at zoom 19 (~0.21 m per pixel) over **OpenStreetMap apron outlines** at 7 Ontario airports (YYZ, YOW, YTZ, YHM, YKF, YXU, YOO), max 40 chips per airport | Planes park on aprons; avoids labelling hundreds of empty chips; mix of airliners, turboprops and small aircraft |
+| 2026-11-21 | Label rule: one box per plane, tight to the aircraft without its shadow; partial planes at chip edges and static display aircraft are labelled; chips without planes are kept as negatives (each airport fully checked) | The model learns appearance only; consistent rules give clean training data |
+| 2026-11-21 | **US NAIP not used** for training: Ontario labels alone gave 173 planes | Time before Progress 3; Ontario data was sufficient and is Canadian |
+| 2026-11-21 | Model: **Faster R-CNN ResNet-50 FPN v2** (COCO-pretrained, torchvision), fine-tuned for one class, 20 epochs, rotations and mirrors as augmentation, 80/20 split by chip | Standard, well-documented detector with an open licence (BSD), runs on a free Colab T4 GPU. Test: precision 0.88, recall 0.97, F1 0.92, AP50 0.99 |
+| 2026-11-21 | Dashboard detection: drawn box (Ontario only, up to ~36 chips ≈ 1 km) → same chip grid as training → model → planes split across chips merged → red boxes on the map; default confidence 0.7 with an Apply button | Keeps detection fast and consistent with training; the Apply button stops rapid changes from freezing the map |
+| 2026-11-21 | `reset` and the project button reset the whole dashboard (view, drawn boxes, detections, confidence, chat) | Feedback from testing: reset only moved the map |
 
 ## 3. Goals and non-goals
 
@@ -138,7 +145,13 @@ Priority: **M** = must, **S** = should, **C** = could.
 | **B. Runway/airport-surface segmentation** | Train a small segmentation model on Sentinel-2 chips, using OpenStreetMap runway polygons as free (weak) labels | Avoids manual annotation; directly visual on the map | OSM labels contain errors; narrow runways are 3–6 pixels wide at 10 m |
 | **C. Aircraft detection at a few big airports (stretch)** | Fine-tune a pretrained detector on an existing annotated aircraft dataset, run on high-resolution imagery | Matches the brief's original idea | Needs high-resolution imagery and licensing; heavy compute; time risk |
 
-**Next step:** feasibility spike: check SkySat coverage of Canadian airports in GEE, view an Ontario orthophoto of Ottawa airport (YOW), and test a pretrained aircraft detector on it versus Sentinel-2. Then choose imagery and model with the RA.
+**Implemented (Nov 16–22):** own labelled dataset on Ontario aerial imagery (272 chips, 173 planes, LabelMe) → Faster R-CNN fine-tuned in PyTorch on Colab (notebook 04) → connected to the dashboard's draw-a-box tool (notebook 02).
+
+| Test (20 held-out chips, 31 planes) | Precision | Recall | F1 | AP50 |
+|---|---|---|---|---|
+| IoU ≥ 0.5, confidence ≥ 0.5 | 0.88 | 0.97 | 0.92 | 0.99 |
+
+Unseen-airport check: Kingston (YGK), not in the training data: 6 planes detected (average confidence 0.93). Limitations: small test set from the same airports as training; Oshawa (YOO) dominates the labels; Ontario only.
 
 Dataset licences, availability and terms for any external dataset (including annotated aerial/satellite aircraft datasets) must be **verified before use** and documented in the README.
 
@@ -203,7 +216,7 @@ Functionality; usefulness and user-friendliness; bugs and errors; presentation; 
 ### Mandatory rules
 Python only; Colab must run top to bottom; all code commented; deployable with minimal bugs using un-licensed data and code **[exact meaning TO CONFIRM]**; if AI is used I must understand how it works in detail and keep it as simple as possible; no ownership claim unless the instructor specifies.
 
-## 11. Current state (as of 2026-11-09)
+## 11. Current state (as of 2026-11-22)
 
 | Item | Status |
 |---|---|
@@ -211,9 +224,9 @@ Python only; Colab must run top to bottom; all code commented; deployable with m
 | `01_airports_loader_and_map.ipynb` | Rebuilt and **verified in Colab**: runs top to bottom on a fresh runtime. Map has 5 type layers, legend and click info (inspector). FR-1, FR-2, FR-3 met |
 | `data/canada_airports_clean.csv` | Regenerated from the 2026-10-18 download (2,477 rows) |
 | Course GitHub repository | Notebook 01, data, screenshots, README and PRD pushed; dashboard notebook 02 to push |
-| Dashboard (UI) | Built per the course UI draft in Streamlit; airport layers, popups, draw-a-box summary, rule-based assistant, project buttons. Plane detection not connected yet |
+| Dashboard (UI) | Built per the course UI draft in Streamlit; airport layers, popups, draw-a-box summary, rule-based assistant, project buttons, **AI plane detection on drawn boxes** with a confidence setting and full reset |
 | Progress 1 review (Oct 19) | Done. Project approved; RA asked for further work on airplane detection |
-| AI component | Ontario aerial imagery on the map, planes visible at YOW; Sentinel-2 comparison done. Next: label planes (LabelMe) and train a detector |
+| AI component | **Done:** 173 labelled planes, Faster R-CNN detector (F1 0.92 on held-out chips), integrated in the dashboard. Next: case studies across more Ontario airports for the final report |
 
 ## 12. Timeline
 
