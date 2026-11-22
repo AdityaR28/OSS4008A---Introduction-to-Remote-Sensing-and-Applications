@@ -1,0 +1,64 @@
+{
+  "version": "7.11.0",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "plane",
+      "points": [
+        [
+          841.9554783900685,
+          931.1583550465672
+        ],
+        [
+          747.2555086930895,
+          831.9993125081986
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          974.4527248272693,
+          963.1767150000152
+        ],
+        [
+          908.8760722350094,
+          890.0505672800606
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          953.968330638236,
+          960.6838294352884
+        ],
+        [
+          1024.0,
+          879.7458926114514
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    }
+  ],
+  "imagePath": "YYZ_19_146176_191292.jpg",
+  "imageData": null,
+  "imageHeight": 1024,
+  "imageWidth": 1024
+}

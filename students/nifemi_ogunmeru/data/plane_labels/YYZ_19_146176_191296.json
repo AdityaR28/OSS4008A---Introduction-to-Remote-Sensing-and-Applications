@@ -1,0 +1,118 @@
+{
+  "version": "7.11.0",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "plane",
+      "points": [
+        [
+          535.078947440737,
+          71.67365223104598
+        ],
+        [
+          604.5638772790251,
+          132.96195949163112
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          692.4335225971968,
+          205.10419120483076
+        ],
+        [
+          608.5042842681162,
+          120.05798530799076
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          715.2447986784659,
+          323.8307827641209
+        ],
+        [
+          806.6549886833743,
+          241.82477730520372
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          847.183905579034,
+          393.663784818922
+        ],
+        [
+          780.4457627750564,
+          330.97215365553086
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          880.1916321206495,
+          496.064947930485
+        ],
+        [
+          945.8127308574792,
+          435.5113981691422
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          998.5855278404638,
+          553.1334533112628
+        ],
+        [
+          938.2552032940187,
+          492.83338427286833
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    }
+  ],
+  "imagePath": "YYZ_19_146176_191296.jpg",
+  "imageData": null,
+  "imageHeight": 1024,
+  "imageWidth": 1024
+}

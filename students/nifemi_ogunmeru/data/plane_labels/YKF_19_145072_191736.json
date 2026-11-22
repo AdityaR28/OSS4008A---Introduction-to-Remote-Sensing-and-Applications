@@ -1,0 +1,82 @@
+{
+  "version": "7.11.0",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "plane",
+      "points": [
+        [
+          856.764850187096,
+          657.3881597044606
+        ],
+        [
+          899.4029305337223,
+          695.8842004806583
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          1009.9091839953869,
+          667.8373370261711
+        ],
+        [
+          947.7682914602148,
+          729.5659003884547
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          1011.3345749874558,
+          987.1912767413879
+        ],
+        [
+          943.1093953541668,
+          1024.0
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          1023.7589669238628,
+          982.8003965767916
+        ],
+        [
+          990.4910454464425,
+          933.2610445794506
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    }
+  ],
+  "imagePath": "YKF_19_145072_191736.jpg",
+  "imageData": null,
+  "imageHeight": 1024,
+  "imageWidth": 1024
+}

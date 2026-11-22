@@ -1,0 +1,64 @@
+{
+  "version": "7.11.0",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "plane",
+      "points": [
+        [
+          353.860694118927,
+          682.9401015148185
+        ],
+        [
+          244.56326415588978,
+          554.3375919319269
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          320.2756266942296,
+          849.3658211305466
+        ],
+        [
+          223.50864352688143,
+          730.5079566210286
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          278.04222692909195,
+          973.7397505288296
+        ],
+        [
+          162.8763376453408,
+          852.6416014345685
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    }
+  ],
+  "imagePath": "YTZ_19_146520_191392.jpg",
+  "imageData": null,
+  "imageHeight": 1024,
+  "imageWidth": 1024
+}

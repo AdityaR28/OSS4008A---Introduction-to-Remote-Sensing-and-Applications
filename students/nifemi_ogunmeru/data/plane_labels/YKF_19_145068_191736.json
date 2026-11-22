@@ -1,0 +1,136 @@
+{
+  "version": "7.11.0",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "plane",
+      "points": [
+        [
+          437.04666439182313,
+          159.46848114751447
+        ],
+        [
+          395.1441244808433,
+          212.08005566977351
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          534.6205631063754,
+          248.74709219837524
+        ],
+        [
+          490.7877906312077,
+          304.7402839282927
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          448.42793737730176,
+          500.9608322787512
+        ],
+        [
+          491.0292227005077,
+          553.3984089424479
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          636.3356797041607,
+          641.0822372465735
+        ],
+        [
+          580.5203490519119,
+          679.4589968527479
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          612.926866901313,
+          550.0028305964348
+        ],
+        [
+          656.4489753608193,
+          602.6475676034979
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          587.6218637620465,
+          402.10074934964246
+        ],
+        [
+          542.7288862651969,
+          449.8167455211883
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "plane",
+      "points": [
+        [
+          517.7988831271055,
+          346.77283454959417
+        ],
+        [
+          559.0859854596574,
+          398.7338582742211
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    }
+  ],
+  "imagePath": "YKF_19_145068_191736.jpg",
+  "imageData": null,
+  "imageHeight": 1024,
+  "imageWidth": 1024
+}
