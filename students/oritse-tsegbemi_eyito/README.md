@@ -10,7 +10,9 @@
 3. For the archived demo, select the July 26 Halifax or August 12 Vancouver entry under **Saved run**. The map and PNG work without Earth Engine authorization.
 4. For the live demo, set `EE_PROJECT` in the dashboard cell to a Google Cloud project you can access and click **Authorize Earth Engine**. Choose **Halifax example**, then **Load imagery** and **Detect ships**. Click a box to inspect its score. Choose **Vancouver (Pacific)** for the second case.
 
-Saved evidence is available during a runtime interruption. Open the [Halifax preview](results/ships_2025-07-26_ccc66456ac88.png), [Vancouver preview](results/ships_2025-08-12_f33c2c479429.png), or [run metadata](results/nov23_rehearsal.json). Predictions are experimental.
+The [current dashboard screenshot](results/dashboard_ui_preview.jpg), [bottom project bar](results/dashboard_ui_footer.jpg), and [eight-check UI report](results/dashboard_ui_checks.json) document the current interface.
+
+Saved evidence is available during a runtime interruption. Open the [Halifax preview](results/ships_2025-07-26_ccc66456ac88.png), [Vancouver preview](results/ships_2025-08-12_f33c2c479429.png), or [live run metadata](results/nov23_live_rehearsal.json). Predictions are experimental.
 
 ## Project objective
 
@@ -64,6 +66,10 @@ Implements the detection and assessment workflow:
 - Saves PNG, CSV, GeoJSON and scene metadata.
 - Produces error reports and validation threshold comparisons.
 - Downloads Canadian aerial imagery for separate annotation review.
+
+### 03_canada_dashboard.ipynb
+
+Opens the current meeting dashboard with the trained detector, national references, analysis charts, map selection, and saved results. **Load published demo files** restores the verified checkpoint, example runs, and English Bay and Saint John review inputs. **Review Canadian labels** opens the unannotated Saint John scene.
 
 ## Data and model
 
@@ -167,13 +173,13 @@ The aerial images are for separate annotation and model-development work. They a
 
 Keep all repository work inside `students/oritse-tsegbemi_eyito/`.
 
-Without a cloned repository, the detection notebook uses temporary storage under `/content/phase2_work/students/oritse-tsegbemi_eyito/`. Files in a Colab runtime must be backed up before the session ends.
+Without a cloned repository, notebook 02 uses `/content/phase2_work/students/oritse-tsegbemi_eyito/` and notebook 03 uses `/content/phase3_work/students/oritse-tsegbemi_eyito/`. Files in a Colab runtime must be backed up before the session ends.
 
 ## Current limitations and remaining work
 
 - The detector still produces false positives and misses ships.
 - Small vessels may not be distinguishable at 10 m resolution.
-- Canadian images have not yet received checked ship annotations.
+- English Bay has six visually checked ship reference boxes from one scene. Independent review is pending. Saint John is frozen and unannotated.
 - Empty annotation templates are explicitly unannotated and must not be used as negative training examples.
 - Cloud screening is imperfect and can exclude bright ships.
 - Port markers are historical reference points, not detected ports or mapped port boundaries.
@@ -181,6 +187,14 @@ Without a cloned repository, the detection notebook uses temporary storage under
 - Additional independent validation and higher-resolution model development are needed.
 
 ## Weekly progress log
+
+### Nov 21, 2026 | Repository consistency
+
+- **Notebook consistency:** Notebook 02 preserves existing Python modules and uses current embedded map and review modules when creating a standalone workspace.
+- **Demo startup:** Notebook 03 restores the frozen Saint John image, mask, metadata, and unannotated LabelMe file along with the published demo assets. In a fresh Colab session, the loader restored 18 verified assets and opened the 326 × 323 Saint John review grid with zero boxes.
+- **Verification:** All seven notebook 02 module save cells preserved existing files and created valid modules in an empty workspace. The dashboard passed all eight checks. See the [cleanup verification](results/repository_cleanup_checks.json).
+- **Evidence:** The quick start links the current dashboard and eight-check report. Earlier reports retain their measured results and identify themselves as historical rehearsals.
+
 
 ### Nov 21, 2026 | Complete UI rehearsal
 
@@ -199,6 +213,8 @@ Without a cloned repository, the detection notebook uses temporary storage under
 - **Next independent case:** I froze the [Saint John scene](data/canadian_pilot/saint_john_pilot.png), its [valid-pixel mask](data/canadian_pilot/saint_john_pilot_mask.png), and [scene metadata](data/canadian_pilot/saint_john_pilot_scene.json) before running inference. The [LabelMe file](data/canadian_pilot/saint_john_pilot.json) has zero boxes and is marked unannotated. In Colab, open **Review Canadian labels** and draw tight boxes against the clean scene before viewing predictions. After checking and saving the labels, score the Saint John case with the existing pilot scoring cell. An independent review of English Bay and the shared dashboard connection are still pending.
 
 ### Nov 15, 2026 | Progress 3 rehearsal
+
+Historical evidence includes the [initial five-check rehearsal](results/nov23_rehearsal.json). The [later live rehearsal](results/nov23_live_rehearsal.json) passed seven checks. The current UI has [eight passed checks](results/dashboard_ui_checks.json).
 
 - **Done (Nov 15):** Updated the Colab startup to load the preserved checkpoint from the course clone or from an uploaded `vessel_detector.pt`. The fresh CPU session loaded the model with its SHA-256 verified, downloaded the national inventory, and passed five dashboard checks.
 - **Done (Nov 15):** Rehearsed Halifax and Vancouver with live Sentinel-2 imagery. At confidence 0.55, the dashboard displayed 6 and 20 predictions respectively. PNG, CSV, GeoJSON and metadata passed the export checks for both runs. See [rehearsal results](results/nov23_rehearsal.json).
