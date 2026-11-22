@@ -91,6 +91,38 @@ class CanadaDashboardChecks(unittest.TestCase):
             self.assertTrue(controls['download_button'].disabled)
             controls['ports'].value=False
             self.assertEqual(controls['national_layer'].data['features'],[])
+            controls['project_button'].click()
+            self.assertEqual(controls['map'].zoom,3)
+            self.assertTrue(controls['download_button'].disabled)
+            self.assertEqual(controls['tabs'].value,'Analyse')
+            for preset in controls['preset'].options[1:]:
+                controls['preset'].value=preset
+                from ship_map import validate_bounds
+                validate_bounds([field.value for field in controls['fields']])
+
+    def test_saved_run_updates_analysis(self):
+        from ship_map import build_detection_app
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            (root/'data').mkdir()
+            (root/'results').mkdir()
+            stem='ships_test'
+            (root/f'results/{stem}.geojson').write_text(json.dumps({
+                'type':'FeatureCollection','features':[{
+                    'type':'Feature','geometry':{'type':'Point','coordinates':[-63.56,44.63]},
+                    'properties':{'detection_id':1,'confidence':.85}}]}))
+            (root/f'results/{stem}.json').write_text(json.dumps({
+                'acquired_utc':'2025-07-26T15:20:32Z','threshold':.55,
+                'bounds_wgs84':[-63.58,44.615,-63.545,44.64]}))
+            _,controls=build_detection_app(root,None,None,{})
+            controls['saved'].value=stem
+            self.assertIn('85%',controls['summary'].value)
+            self.assertIn('2025-07-26',controls['scene_info'].value)
+            self.assertIsNone(controls['state']['last'])
+            self.assertFalse(controls['download_button'].disabled)
+            controls['threshold'].value=.65
+            self.assertTrue(controls['download_button'].disabled)
+            self.assertNotIn('85%',controls['summary'].value)
 
 
 def run_checks(project):

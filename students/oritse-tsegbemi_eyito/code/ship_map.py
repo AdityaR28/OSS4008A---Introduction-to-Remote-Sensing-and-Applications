@@ -238,7 +238,7 @@ def build_detection_app(project, model, device, metrics):
                                                      'source_row_date':'2020-01-24','record_type':'reference'}})
     write_json(project/'data/halifax_port_reference.geojson',{'type':'FeatureCollection','features':reference_features})
     Map = geemap.Map(center=[58, -96], zoom=3, ee_initialize=False,
-                     draw_ctrl=False, height='550px')
+                     draw_ctrl=False, height='620px')
     Map.clear_layers()
     Map.add_basemap('Esri.WorldGrayCanvas')
     status, output = widgets.Output(), widgets.Output()
@@ -260,6 +260,24 @@ def build_detection_app(project, model, device, metrics):
     ports = widgets.Checkbox(value=True, description='Show port/marina references')
     count = widgets.HTML('<b>Ship detections:</b> not run')
     details = widgets.HTML('Click a predicted box to inspect its confidence.')
+    summary = widgets.HTML('<p class="sp-muted">Select an area or open a saved run to inspect ship predictions.</p>')
+    scene_info = widgets.HTML('<span class="sp-muted">No satellite scene selected</span>')
+
+    def update_summary(features, metadata):
+        scores = [float(item['properties']['confidence']) for item in features]
+        bars = []
+        for low, high in [(0, .6), (.6, .8), (.8, 1.000001)]:
+            amount = sum(low <= score < high for score in scores)
+            width = 100 * amount / max(len(scores), 1)
+            bars.append(f'<div class="sp-bar-row"><span>{low:.0%}–{min(high, 1):.0%}</span>'
+                        f'<span class="sp-track"><i style="width:{width:.1f}%"></i></span><b>{amount}</b></div>')
+        mean = f'{np.mean(scores):.0%}' if scores else '—'
+        summary.value = (f'<div class="sp-stats"><div><strong>{len(scores)}</strong><span>Predicted ships</span></div>'
+                         f'<div><strong>{mean}</strong><span>Mean confidence</span></div></div>'
+                         '<div class="sp-label">Prediction confidence</div>' + ''.join(bars) +
+                         '<p class="sp-muted">Model scores describe predictions. Canadian accuracy requires independent labels.</p>')
+        scene_info.value = (f'<b>{html.escape(metadata["acquired_utc"][:10])}</b> · Sentinel-2 · 10 m'
+                            f' · threshold {metadata.get("threshold", threshold.value):.0%}')
     state = {'last': None, 'layers': [], 'cache': OrderedDict(), 'busy': False, 'task': None}
 
     presets = {
@@ -345,6 +363,8 @@ def build_detection_app(project, model, device, metrics):
         download_button.disabled = True
         count.value = '<b>Ship detections:</b> not run for current settings'
         details.value = 'Click a predicted box to inspect its confidence.'
+        summary.value = '<p class="sp-muted">Run detection for this area to see the analysis.</p>'
+        scene_info.value = '<span class="sp-muted">No result for current settings</span>'
         with output:
             clear_output(wait=False)
 
@@ -364,6 +384,7 @@ def build_detection_app(project, model, device, metrics):
         with status:
             clear_output(wait=True)
             print('Loading the selected satellite observation...')
+        run_details.layout.display = ''
         try:
             if inference and model is None:
                 raise ValueError('Restore the preserved checkpoint before Detect ships. References and saved results remain available.')
@@ -398,6 +419,7 @@ def build_detection_app(project, model, device, metrics):
             Map.addLayer(visible, {'min':0,'max':1}, 'Selected Sentinel-2 observation')
             state['layers'].append(Map.layers[-1])
             metadata['map_layer_setup_seconds'] = time.perf_counter() - map_started
+            scene_info.value = f'<b>{html.escape(metadata["acquired_utc"][:10])}</b> · Sentinel-2 · 10 m'
             if inference:
                 started = time.perf_counter()
                 boxes, scores = detect_raster(model, device, rgb, valid, threshold.value)
@@ -408,7 +430,7 @@ def build_detection_app(project, model, device, metrics):
                                  'test_ap50': metrics.get('ap_50'), 'canadian_accuracy_measured': False,
                                  'run_utc': datetime.now(timezone.utc).isoformat(),
                                  'model_checkpoint_sha256': checksum(project/'results/models/vessel_detector.pt', 'sha256')})
-                layer = GeoJSON(data=result, name='Predicted ships', style={'color':'#ff3636','weight':2,'fillOpacity':0.1})
+                layer = GeoJSON(data=result, name='Predicted ships', style={'color':'#ff3636','weight':2,'fillOpacity':0.1,'bubblingMouseEvents':False})
                 def clicked(**event):
                     feature = event.get('feature', {})
                     prop = feature.get('properties', event.get('properties', {}))
@@ -420,6 +442,7 @@ def build_detection_app(project, model, device, metrics):
                 state['layers'].append(layer)
                 state['last'] = (result, metadata)
                 count.value = f'<b>Predicted ships:</b> {len(boxes)} | confidence ≥ {threshold.value:.2f}'
+                update_summary(result['features'], metadata)
                 with output:
                     clear_output(wait=True)
                     saved_stem = save_detection(project, rgb, boxes, scores, result, metadata)
@@ -439,7 +462,9 @@ def build_detection_app(project, model, device, metrics):
                 print('10 m imagery. Results are experimental; Canadian accuracy is not yet validated.')
                 if not inference:
                     print('Imagery loaded. Click Detect ships to run the model.')
+            run_details.layout.display = 'none'
         except Exception as error:
+            run_details.layout.display = ''
             with status:
                 clear_output(wait=True)
                 # Do not print signed download URLs or credential-bearing errors.
@@ -472,9 +497,15 @@ def build_detection_app(project, model, device, metrics):
     Map.add_control(draw)
 
     def map_clicked(**event):
-        if event.get('type') != 'click' or Map.zoom < 12 or not pick.value:
+        if event.get('type') != 'click':
             return
         lat, lon = event['coordinates']
+        if not pick.value:
+            details.value = f'Selected location | {lat:.5f}, {lon:.5f} | Enable Pick area on map to select a detection area.'
+            return
+        if Map.zoom < 12:
+            details.value = 'Zoom to level 12 or closer, then click to select a detection area.'
+            return
         dx = 0.009/math.cos(math.radians(lat))
         for field, value in zip(fields, [lon-dx,lat-0.009,lon+dx,lat+0.009]):
             field.value = value
@@ -519,7 +550,13 @@ def build_detection_app(project, model, device, metrics):
         stem=change['new']
         data=json.loads((project/'results'/f'{stem}.geojson').read_text())
         metadata=json.loads((project/'results'/f'{stem}.json').read_text())
-        layer=GeoJSON(data=data,name='Saved experimental predictions',style={'color':'#ff3636','weight':2,'fillOpacity':.1})
+        layer=GeoJSON(data=data,name='Saved experimental predictions',style={'color':'#ff3636','weight':2,'fillOpacity':.1,'bubblingMouseEvents':False})
+        def inspect_saved(**event):
+            prop = event.get('feature', {}).get('properties', event.get('properties', {}))
+            if 'confidence' in prop:
+                details.value = (f'Archived prediction #{prop.get("detection_id", "")} | ship | '
+                                 f'confidence {prop["confidence"]:.3f} | acquired {metadata["acquired_utc"]}')
+        layer.on_click(inspect_saved)
         Map.add_layer(layer)
         state['layers'].append(layer)
         # Keep last=None: archived output must not masquerade as current-settings inference.
@@ -527,6 +564,7 @@ def build_detection_app(project, model, device, metrics):
         download_button.disabled=False
         count.value=f'<b>Saved predictions:</b> {len(data["features"])} | '+html.escape(metadata['acquired_utc'])
         details.value='Archived run; dates, area and confidence come from its metadata, not current controls.'
+        update_summary(data['features'], metadata)
         bounds=metadata.get('bounds_wgs84')
         if bounds:
             Map.center=((bounds[1]+bounds[3])/2,(bounds[0]+bounds[2])/2)
@@ -539,19 +577,110 @@ def build_detection_app(project, model, device, metrics):
                     image.thumbnail((700,550))
                     display(image.copy())
     saved.observe(show_saved,names='value')
-    sidebar=widgets.VBox([widgets.HTML('<h4>Explore Canada</h4>'),preset,province,subtype,search,port_select,
-                          ports,reference_count,widgets.HTML('<h4>Ship detection</h4>'),start,end,threshold,cloud_max,
-                          widgets.HTML('End date is exclusive. Native 10 m input; small boats may be unresolved.'),
-                          *fields,widgets.HBox([preview,detect]),pick,auto,
-                          widgets.HTML('<h4>Results and exports</h4>'),saved,download,download_button],
-                         layout=widgets.Layout(width='340px',min_width='300px',padding='8px'))
-    main=widgets.VBox([widgets.HBox([canada,halifax]),count,details,status,Map,output],layout=widgets.Layout(flex='1'))
-    panel = widgets.VBox([widgets.HTML('<h3>Ships and ports in Canada</h3>'
-                         '<p>Experimental ship detector | Port and marina references | Canadian accuracy pending</p>'),
-                         widgets.HBox([sidebar,main],layout=widgets.Layout(width='100%',align_items='flex-start'))])
+    for widget in [preset, province, subtype, search, port_select, start, end, saved, download]:
+        widget.layout.width = '100%'
+        widget.style.description_width = '90px'
+    for field in fields:
+        field.layout.width = '100%'
+        field.style.description_width = '90px'
+    for widget in [threshold, cloud_max]:
+        widget.layout.width = '100%'
+        widget.style.description_width = '90px'
+    detect.button_style = 'primary'
+    detect.icon = 'search'
+    preview.icon = 'image'
+    download_button.icon = 'download'
+    canada.icon = 'globe'
+    halifax.icon = 'map-marker'
+    pick.layout.width = '100%'
+    auto.layout.width = '100%'
+    coordinate_toggle = widgets.ToggleButton(description='Area coordinates', icon='crosshairs')
+    coordinate_fields = widgets.VBox(fields, layout=widgets.Layout(display='none'))
+    coordinate_toggle.observe(
+        lambda change: setattr(coordinate_fields.layout, 'display', '' if change['new'] else 'none'),
+        names='value')
+    coordinates = widgets.VBox([coordinate_toggle, coordinate_fields])
+    analysis = widgets.VBox([
+        summary, preset, widgets.HTML('<div class="sp-label">Satellite observation</div>'),
+        start, end, threshold, cloud_max, coordinates,
+        widgets.HBox([preview, detect], layout=widgets.Layout(flex_flow='row wrap', gap='8px')),
+        pick, auto], layout=widgets.Layout(gap='8px'))
+    places = widgets.VBox([province, subtype, search, port_select, ports, reference_count],
+                           layout=widgets.Layout(gap='10px'))
+    exports = widgets.VBox([saved, download, download_button,
+                            widgets.HTML('<p class="sp-muted">Saved runs use their original acquisition date, area and confidence threshold.</p>'),
+                            output], layout=widgets.Layout(gap='12px'))
+    tabs = widgets.ToggleButtons(options=['Analyse', 'Ports', 'Results'], value='Analyse')
+    tabs.layout.width = '100%'
+    tabs.style.button_width = '88px'
+    sections = widgets.VBox([analysis])
+    def switch_section(change):
+        sections.children = ({'Analyse': analysis, 'Ports': places, 'Results': exports}[change['new']],)
+    tabs.observe(switch_section, names='value')
+    sidebar = widgets.VBox([widgets.HTML('<h3>Ship analysis</h3>'), tabs, sections],
+                            layout=widgets.Layout(width='330px', min_width='300px',
+                                                  max_height='710px', overflow='auto', padding='18px'))
+    sidebar.add_class('sp-sidebar')
+    scene_info.add_class('sp-scene')
+    details.add_class('sp-details')
+    run_details = widgets.VBox([count, status], layout=widgets.Layout(display='none'))
+    main = widgets.VBox([
+        widgets.HBox([canada, halifax], layout=widgets.Layout(gap='8px', flex_flow='row wrap')),
+        scene_info, Map, details,
+        run_details
+    ], layout=widgets.Layout(flex='1 1 330px', min_width='300px', padding='14px', gap='10px'))
+    project_button = widgets.Button(description='Ships and ports', icon='ship', button_style='primary',
+                                    layout=widgets.Layout(width='185px', height='42px'))
+    project_button.on_click(lambda _: (clear_results(), setattr(Map, 'center', (58,-96)), setattr(Map, 'zoom', 3)))
+    footer = widgets.HBox([widgets.HTML('<span class="sp-label">Project</span>'), project_button],
+                          layout=widgets.Layout(gap='16px', align_items='center', padding='12px 20px'))
+    footer.add_class('sp-footer')
+    css = widgets.HTML("""<style>
+    .sp-dashboard{background:#f2f5f6;border:1px solid #d4dfe2;border-radius:14px;
+      color:#162f3c;font-family:Inter,Arial,sans-serif;overflow:hidden}
+    .sp-dashboard h2,.sp-dashboard h3{color:#162f3c;margin:0}
+    .sp-dashboard h2{font-size:24px;font-weight:650}
+    .sp-dashboard h3{font-size:18px;margin-bottom:12px}
+    .sp-sidebar{background:white;border-right:1px solid #dce5e8}
+    .sp-dashboard .widget-tab>.p-TabBar .p-TabBar-tab.p-mod-current{border-bottom:3px solid #167a83}
+    .sp-dashboard .widget-button.mod-primary{background:#126d79;color:white;border:0;border-radius:6px}
+    .sp-dashboard .widget-button{border-radius:6px;min-height:32px}
+    .sp-dashboard .widget-button,.sp-dashboard .widget-toggle-button{
+      background:#e7eff1;color:#24414e;border:1px solid #d2dfe3}
+    .sp-dashboard .widget-toggle-button.mod-active{background:#126d79;color:white}
+    .sp-dashboard input,.sp-dashboard select{background:white!important;color:#24414e!important;border-color:#cbd9df!important}
+    .sp-dashboard .widget-readout{color:#405b68!important}
+    .sp-dashboard .widget-label{color:#405b68}
+    .sp-dashboard .widget-html-content{line-height:1.5;color:#24414e}
+    .sp-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 18px}
+    .sp-stats>div{background:#edf5f5;border:1px solid #d6e6e7;border-radius:9px;padding:12px}
+    .sp-stats strong{display:block;font-size:28px;line-height:1.2;color:#126d79}
+    .sp-stats span{display:block;font-size:11px;color:#47616d;margin-top:6px}
+    .sp-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#526e7a}
+    .sp-muted{color:#58717b;font-size:12px}
+    .sp-bar-row{display:grid;grid-template-columns:65px 1fr 20px;align-items:center;gap:9px;font-size:11px;margin:7px 0;color:#405b68}
+    .sp-track{background:#e7eef0;border-radius:5px;overflow:hidden;height:7px}
+    .sp-track i{display:block;background:#258b96;height:7px;border-radius:5px}
+    .sp-scene{font-size:12px;color:#4d6672}
+    .sp-details{background:white;border:1px solid #dce5e8;padding:9px;border-radius:6px;font-size:12px}
+    .sp-footer{background:#e8eff1;border-top:1px solid #d3dfe3}
+    .sp-dashboard .leaflet-container{border-radius:9px}
+    </style>""")
+    header = widgets.HBox([
+        widgets.HTML('<div class="sp-label">OSS4008A · Canada</div><h2>Ships and ports</h2>'),
+        widgets.HTML(f'<span class="sp-muted">{"Model loaded" if model is not None else "Load demo files to enable AI"}'
+                     ' · 10 m Sentinel-2</span>')
+    ], layout=widgets.Layout(justify_content='space-between', align_items='center', padding='18px 22px',
+                              flex_flow='row wrap'))
+    panel = widgets.VBox([css, header,
+                          widgets.HBox([sidebar, main], layout=widgets.Layout(width='100%', flex_flow='row wrap')),
+                          footer], layout=widgets.Layout(width='100%', max_width='1400px'))
+    panel.add_class('sp-dashboard')
     return panel, {'map':Map, 'run':run, 'state':state, 'fields':fields,
                    'threshold':threshold, 'go_halifax':go_halifax, 'auto':auto,
                    'draw_callback':drawn, 'port_layer':port_layer, 'ports':ports,
                    'pick':pick,'details':details,'preset':preset,'province':province,'subtype':subtype,
                    'search':search,'port_select':port_select,'national_layer':national_layer,
-                   'cloud_max':cloud_max,'saved':saved,'download_button':download_button}
+                   'cloud_max':cloud_max,'saved':saved,'download_button':download_button,
+                   'summary':summary,'scene_info':scene_info,'project_button':project_button,'tabs':tabs}
+
