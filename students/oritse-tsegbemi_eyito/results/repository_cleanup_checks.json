@@ -1,0 +1,28 @@
+{
+  "checked_date": "2026-11-21",
+  "environment": "Google Colab CPU",
+  "notebook_url": "https://colab.research.google.com/drive/1PjwIuiadVLer-czTqIYA8UOgtO3UQRNu#scrollTo=restore-and-dashboard",
+  "dashboard_checks": {
+    "passed": 8,
+    "failures": 0,
+    "errors": 0,
+    "log": "test_geographic_plan_keeps_halifax_together (test_canada_dashboard.CanadaDashboardChecks.test_geographic_plan_keeps_halifax_together) ... ok\ntest_reference_filter (test_canada_dashboard.CanadaDashboardChecks.test_reference_filter) ... ok\ntest_request_rejection_before_download (test_canada_dashboard.CanadaDashboardChecks.test_request_rejection_before_download) ... ok\ntest_review_gate (test_canada_dashboard.CanadaDashboardChecks.test_review_gate) ... ok\ntest_saved_run_updates_analysis (test_canada_dashboard.CanadaDashboardChecks.test_saved_run_updates_analysis) ... ok\ntest_scene_selection_reports_exhausted_candidates (test_canada_dashboard.CanadaDashboardChecks.test_scene_selection_reports_exhausted_candidates) ... ok\ntest_scene_selection_tries_next_candidate (test_canada_dashboard.CanadaDashboardChecks.test_scene_selection_tries_next_candidate) ... ok\ntest_widget_filters_and_stale_result (test_canada_dashboard.CanadaDashboardChecks.test_widget_filters_and_stale_result) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 22.116s\n\nOK\n\n"
+  },
+  "notebook02_module_saves": {
+    "protected_modules": 7,
+    "preserves_existing_files": true,
+    "creates_missing_modules": true,
+    "current_map_and_review_fallback": true
+  },
+  "demo_loader": {
+    "verified_manifest_entries": 18,
+    "pinned_commit": "5d84ee7e38af6158c1245a19f50dd277082bc9dd",
+    "checkpoint_loaded": true,
+    "saint_john_review_opened": true,
+    "saint_john_grid": [
+      326,
+      323
+    ],
+    "saint_john_annotation_status": "UNANNOTATED"
+  }
+}

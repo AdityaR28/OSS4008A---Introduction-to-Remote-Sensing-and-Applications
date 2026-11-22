@@ -20,5 +20,8 @@
       "confidence": 0.55,
       "results_stem": "ships_2025-08-12_f33c2c479429"
     }
-  ]
+  ],
+  "rehearsal_label": "Initial November 23 demo rehearsal (5 checks)",
+  "evidence_status": "historical",
+  "current_ui_report": "dashboard_ui_checks.json"
 }

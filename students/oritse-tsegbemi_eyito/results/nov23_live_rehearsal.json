@@ -71,5 +71,8 @@
     "scene": "COPERNICUS/S2_HARMONIZED/20250726T151649_20250726T151759_T20TMQ",
     "predictions": 6,
     "feature_type": "FeatureCollection"
-  }
+  },
+  "rehearsal_label": "Live November 23 demo rehearsal (7 checks)",
+  "evidence_status": "historical",
+  "current_ui_report": "dashboard_ui_checks.json"
 }

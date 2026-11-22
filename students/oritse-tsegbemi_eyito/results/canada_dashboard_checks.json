@@ -5,5 +5,8 @@
   "errors": 0,
   "passed": true,
   "log": "test_geographic_plan_keeps_halifax_together (test_canada_dashboard.CanadaDashboardChecks.test_geographic_plan_keeps_halifax_together) ... ok\ntest_reference_filter (test_canada_dashboard.CanadaDashboardChecks.test_reference_filter) ... ok\ntest_request_rejection_before_download (test_canada_dashboard.CanadaDashboardChecks.test_request_rejection_before_download) ... ok\ntest_review_gate (test_canada_dashboard.CanadaDashboardChecks.test_review_gate) ... ok\ntest_widget_filters_and_stale_result (test_canada_dashboard.CanadaDashboardChecks.test_widget_filters_and_stale_result) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.825s\n\nOK\n",
-  "scope": "Synthetic data, real widget construction and callbacks; no live EE inference or accuracy measurement."
+  "scope": "Synthetic data, real widget construction and callbacks; no live EE inference or accuracy measurement.",
+  "rehearsal_label": "Earlier national dashboard regression run (5 checks)",
+  "evidence_status": "historical",
+  "current_ui_report": "dashboard_ui_checks.json"
 }
