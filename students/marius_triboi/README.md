@@ -23,3 +23,10 @@ Planned: Sentinel-2 / Landsat for burn-scar annotation, NRCan fire database for 
 - Built yearly burned-area chart (2001-2023)
 - Built a Wildfires button and year slider (UI prototype)
 - Next: annotation or existing burn-scar dataset, model training, connect to dashboard
+
+
+### Nov 23, 2026 (Progress 3)
+- Built the full dashboard: AI assistant panel (left), interactive map with Wildfires button and year slider (right)
+- Assistant answers prompts such as "show wildfires in 2015", "which year had the most burned area?", "compare 2023 and 2015" and "show the trend", and drives the map and charts
+- Fixed Earth Engine timeouts (simplified border, parallel requests, 1 km sampling) and blocked map tiles (satellite basemap)
+- Next: train a burned-area detection model on annotated images, then connect to the shared dashboard
