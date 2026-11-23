@@ -23,8 +23,3 @@ Planned: Sentinel-2 / Landsat for burn-scar annotation, NRCan fire database for 
 - Built yearly burned-area chart (2001-2023)
 - Built a Wildfires button and year slider (UI prototype)
 - Next: annotation or existing burn-scar dataset, model training, connect to dashboard
-
-
-## Date Nov 8, 2026
-- Set up GitHub access and Colab workflow
-- Started Google Earth Engine setup for wildfire history project
