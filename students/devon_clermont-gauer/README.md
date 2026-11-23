@@ -1,6 +1,6 @@
 # Project 11: Water Bodies of Canada (Lakes, Rivers, Ponds)
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AdityaR28/OSS4008A---Introduction-to-Remote-Sensing-and-Applications/blob/main/students/YOUR-FOLDER/code/Dashboard.ipynb)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AdityaR28/OSS4008A---Introduction-to-Remote-Sensing-and-Applications/blob/main/students/devon_clermont-gauer/code/Dashboard.ipynb)
 
 **Course:** OSS4008A – Introduction to Remote Sensing and Applications
 **Student:** Devon Clermont-Gauer
@@ -85,6 +85,7 @@ Sentinel-2 image tiles paired with water masks, 256×256 pixels at 10 m (2.56 km
 
 **Full dataset (~372 MB):** [Google Drive folder](https://drive.google.com/drive/folders/1QlQR3KWzcUz68h5cVU4suzOqYILWnGtP?usp=sharing)
 Each tile is a GeoTIFF: `images/` hold Sentinel-2 bands B2, B3, B4, B8, B11 (blue, green, red, NIR, SWIR); `masks/` hold water masks (1 = water, 0 = not water). The dataset isn't committed to GitHub .
+
 **Trained model:** `unet_resnet34_best.pth` (~100 MB) is shared on [Google Drive](https://drive.google.com/file/d/1ZvIHmtM5tdOvZHpJC5JdmKNEVgkQbkL4/view?usp=sharing) because it exceeds the course's 50 MB file limit. The dashboard downloads it automatically.
 
 ## Data sources
@@ -128,8 +129,7 @@ Global datasets are used for imagery and labels because no Canadian source offer
 | 2026-11-16 | Wrote `water_ai.py`: runs the trained U-Net on Sentinel-2 imagery for a drawn box, replacing the Dynamic World placeholder so detection in the tool is done by AI. |
 | 2026-11-16 | AI detection now scales resolution with box size: full 10 m detail up to 200 km², coarser (up to 50 m) for boxes up to 5,000 km². A ~5,000 km² box takes about 18 seconds. |
 | 2026-11-17 | Simplified the dashboard to the base map, two reference layers (all water, rivers) and AI box detection; removed permanent/seasonal water layers; reference layers labelled as non-AI. |
-
-## Next steps
+| 2026-11-17 | Raised AI detection limits after the parallel-download speed-up: boxes up to 20,000 km² (previously 5,000 km²). Full 10 m detail now applies up to 400 km² (previously 200 km²); larger areas run at a coarser resolution, up to 60 m (previously 50 m), reported in the chat. A large scan takes about 5 seconds on a T4 GPU. |
 
 ## Next steps
 
