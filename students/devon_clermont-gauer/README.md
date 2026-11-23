@@ -130,6 +130,7 @@ Global datasets are used for imagery and labels because no Canadian source offer
 | 2026-11-16 | AI detection now scales resolution with box size: full 10 m detail up to 200 km², coarser (up to 50 m) for boxes up to 5,000 km². A ~5,000 km² box takes about 18 seconds. |
 | 2026-11-17 | Simplified the dashboard to the base map, two reference layers (all water, rivers) and AI box detection; removed permanent/seasonal water layers; reference layers labelled as non-AI. |
 | 2026-11-17 | Raised AI detection limits after the parallel-download speed-up: boxes up to 20,000 km² (previously 5,000 km²). Full 10 m detail now applies up to 400 km² (previously 200 km²); larger areas run at a coarser resolution, up to 60 m (previously 50 m), reported in the chat. A large scan takes about 5 seconds on a T4 GPU. |
+| 2026-11-23 | Dashboard: added Scan view (AI on the visible map area), grouped toolbar, and placeholder Only lakes / rivers / ponds buttons. Auto AI not yet working; Scan view covers it. |
 
 ## Next steps
 
