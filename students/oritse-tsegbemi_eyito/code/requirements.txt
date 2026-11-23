@@ -1,0 +1,15 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.9.1+cpu
+torchvision==0.24.1+cpu
+streamlit>=1.40,<2
+streamlit-folium>=0.24,<1
+folium>=0.19,<1
+requests>=2.32,<3
+pillow>=10,<13
+numpy>=1.26,<3
+pandas>=2.2,<4
+earthengine-api>=1.6,<2
+geemap>=0.35,<1
+rasterio>=1.4,<2
+pyproj>=3.6,<4
+ipywidgets>=7.7,<9
