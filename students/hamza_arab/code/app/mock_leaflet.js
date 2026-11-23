@@ -1,0 +1,10 @@
+(function(){
+class Emitter {constructor(){this.events={};this._map=null;this._added=false;} on(k,cb){(this.events[k]||(this.events[k]=[])).push(cb);return this;} emit(k,arg){(this.events[k]||[]).forEach(fn=>fn(arg));} addTo(map){this._map=map;this._added=true;if(map.addLayer)map.addLayer(this);return this;}}
+class TileLayer extends Emitter {constructor(url,opts){super();this.url=url;this.options=opts;}}
+class SimpleLayer extends Emitter {constructor(loc,options={}){super();this.loc=loc;this.options=options;this.children=[];} getLatLng(){return {lat:this.loc[0],lng:this.loc[1]};} getRadius(){return this.options.radius||25000;} setLatLng(c){this.loc=[c.lat,c.lng];return this;} setRadius(r){this.options.radius=r;return this;} clearLayers(){this.children=[];return this;} addLayer(layer){this.children.push(layer);return this;} bindPopup(){return this;} openPopup(){return this;}}
+class Map extends Emitter {constructor(){super();this.layers=new Set();this.zoom=11;} setView(c,z){this.center=c;this.zoom=z;return this;} flyTo(c,z){return this.setView(c,z);} getZoom(){return this.zoom;} hasLayer(l){return this.layers.has(l);} addLayer(l){this.layers.add(l);return this;} removeLayer(l){this.layers.delete(l);return this;} invalidateSize(){return this;} distance(a,b){const latA=Array.isArray(a)?a[0]:a.lat;const lonA=Array.isArray(a)?a[1]:a.lng;return Math.sqrt((latA-b[0])**2+(lonA-b[1])**2)*111000;}}
+window.L={map(){const m=new Map();window.__TEST_MAP=m;return m;},control:{zoom(){return {addTo(){return this;}}},layers(){return {addTo(){return this;}}}},tileLayer:(u,o)=>new TileLayer(u,o),TileLayer,featureGroup:()=>new SimpleLayer([0,0]),markerClusterGroup:()=>new SimpleLayer([0,0]),layerGroup:()=>new SimpleLayer([0,0]),circle:(xy,o)=>new SimpleLayer(xy,o),marker:(xy,o)=>new SimpleLayer(xy,o),divIcon:o=>o,latLng:(lat,lng)=>({lat,lng}),Draw:{Circle:class {constructor(map,opt){this.map=map;this.opt=opt;} enable(){window.__DRAW_TRIGGERED=true;}}}};
+window.__TEST_LAYERS=[];
+const orig=window.L.tileLayer;
+window.L.tileLayer=(u,o)=>{const l=orig(u,o);window.__TEST_LAYERS.push(l);return l;};
+})();
