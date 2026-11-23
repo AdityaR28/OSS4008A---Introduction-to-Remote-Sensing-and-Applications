@@ -1,208 +1,163 @@
-# Canadian Pipeline Network Mapping
+# Canadian Pipeline Network — Interactive Map with Local AI Chat
 
-A Python-based data processing and interactive mapping project for Canadian pipeline infrastructure. The project cleans and standardizes pipeline datasets, processes geographic information, and generates an interactive map to visualize pipeline networks across Canada.
+A Google Colab notebook that combines several Canadian pipeline datasets into one clean table and displays them on an interactive Mapbox map. A chat sidebar lets you filter the map in plain English (for example *"show oil pipelines in Alberta"* or *"the 5 longest pipelines"*). The chat is powered by an open Qwen model running locally on the Colab GPU, so no external AI API is called.
 
-The repository includes both standalone Python scripts and Google Colab notebooks, allowing the workflow to be run locally or in Google Colab.
+**File:** `Canadian_Pipeline_Map_Colab.ipynb`
 
-## Project Overview
+---
 
-The project is organized into three main stages:
+## What it does
 
-1. **Data Cleaning** – Reads, standardizes, and validates pipeline datasets, including column names, identifiers, and geographic information.
-2. **Pipeline Mapping** – Processes the cleaned geographic data and generates an interactive pipeline network map.
-3. **Complete Workflow** – Coordinates the cleaning and mapping stages through a single main script.
+1. **Cleans and merges** multiple pipeline datasets (CSV, TXT, Excel, GeoJSON, JSON) into a single standard schema and saves `Canadian_Pipelines_Clean.csv`.
+2. **Clips** every pipeline to Canada's border and greys out everything outside Canada.
+3. **Builds an interactive Mapbox page** with pipeline lines, click popups, a legend, zoom/fullscreen controls and a chat sidebar.
+4. **Runs a local language model** (Qwen2.5-3B-Instruct on GPU, 1.5B on CPU) that turns chat requests into map filters.
+5. **Serves everything from inside the notebook** and gives you a link to open the map in a new browser tab.
 
-## Repository Structure
+---
 
-```text
-.
-├── colab/
-│   ├── canadian_pipeline_data_cleaning.ipynb
-│   ├── canadian_pipeline_network_map.ipynb
-│   └── canadian_pipeline_complete_workflow.ipynb
-│
-├── data/
-│   ├── [pipeline dataset files]
-│   └── ...
-│
-├── clean_dataset.py
-├── pipeline_map.py
-├── main.py
-└── README.md
-```
+## Requirements
 
-**Note:** `Pipeline_AB.csv` is not included in the repository because of its large file size. The remaining datasets are stored in the `data/` directory.
-
-## Main Components
-
-### 1. `clean_dataset.py`
-
-Handles the preparation and standardization of the source pipeline datasets.
-
-Key functions include:
-
-- Reading supported source data files.
-- Standardizing column names using field aliases.
-- Parsing and validating geographic information.
-- Handling geometry and coordinate-related data.
-- Preserving source identifiers and relevant attributes.
-- Producing cleaned datasets for downstream mapping.
-
-### 2. `pipeline_map.py`
-
-Generates an interactive visualization of the Canadian pipeline network.
-
-Key functions include:
-
-- Loading cleaned pipeline data.
-- Converting geographic data into GeoJSON.
-- Retrieving and processing the Canada boundary.
-- Handling geographic masking.
-- Generating an interactive HTML map.
-- Supporting Mapbox-based map visualization.
-
-A valid Mapbox access token may be required, depending on the selected map configuration.
-
-### 3. `main.py`
-
-Acts as the main workflow orchestrator.
-
-It connects the cleaning and mapping modules, allowing the complete process to be executed through one entry point.
-
-The workflow is:
-
-```text
-Source Datasets
-      |
-      v
-clean_dataset.py
-      |
-      v
-Cleaned Pipeline Dataset
-      |
-      v
-pipeline_map.py
-      |
-      v
-Interactive Pipeline Map
-```
-
-## Google Colab Notebooks
-
-The `colab/` directory contains three notebooks designed to make the workflow easier to run, understand, and modify in Google Colab.
-
-| Notebook | Purpose |
+| Requirement | Details |
 |---|---|
-| `canadian_pipeline_data_cleaning.ipynb` | Runs the dataset cleaning and standardization process. |
-| `canadian_pipeline_network_map.ipynb` | Generates the interactive Canadian pipeline network map. |
-| `canadian_pipeline_complete_workflow.ipynb` | Runs the complete cleaning and mapping workflow. |
+| Google account | For Colab and Google Drive |
+| Colab runtime | **T4 GPU** (see below) |
+| Mapbox access token | **Required.** Free at <https://account.mapbox.com>. Use a **public** token (starts with `pk.`) |
+| Hugging Face token | **Optional.** Free at <https://huggingface.co/settings/tokens>. Gives authenticated, faster model downloads. The Qwen models are open and also download without it |
+| Datasets | The pipeline files, stored in Google Drive |
 
-Each notebook is organized into sections with explanations, code comments, configuration cells, and execution steps.
+---
 
-## Getting Started
+## How to run
 
-### Option 1: Run Locally
+### 1. Set the runtime to T4 GPU
 
-**1. Clone the repository**
+In Colab: **Runtime → Change runtime type → Hardware accelerator → T4 GPU → Save**.
 
-```bash
-git clone <YOUR_REPOSITORY_URL>
-cd <YOUR_REPOSITORY_NAME>
-```
+Without a GPU the notebook still works, but it falls back to the smaller 1.5B model on CPU, and chat replies will be slow.
 
-**2. Install the required Python dependencies**
+### 2. Add your tokens
 
-Install the packages required by the project and its scripts. Refer to the installation cells in the Colab notebooks for the dependency list.
+Open the **Secrets** panel (key icon in the left sidebar) and add:
 
-**3. Prepare the datasets**
+| Secret name | Value | Required |
+|---|---|---|
+| `MAPBOX_ACCESS_TOKEN` | your Mapbox public token | Yes |
+| `HF_TOKEN` | your Hugging Face token | No |
 
-Place the required source datasets inside the `data/` directory.
+Turn **Notebook access** ON for each secret.
 
-If you intend to run the complete workflow, make sure all expected input files are available, including `Pipeline_AB.csv`.
+The notebook reads the tokens from Colab Secrets first, then from existing environment variables, and exports them as the environment variables `MAPBOX_ACCESS_TOKEN` and `HF_TOKEN` (cell 1.5). The older secret name `MAPBOX_TOKEN` is also accepted.
 
-**4. Configure the Mapbox token**
-
-If your map configuration uses Mapbox, set your access token as an environment variable:
+If you would rather use environment variables directly, run this in a cell before cell 1.5:
 
 ```python
 import os
-
-os.environ["MAPBOX_TOKEN"] = "YOUR_MAPBOX_ACCESS_TOKEN"
+os.environ["MAPBOX_ACCESS_TOKEN"] = "pk.your_token_here"
+os.environ["HF_TOKEN"] = "hf_your_token_here"   # optional
 ```
 
-Do not commit your actual access token to GitHub.
+Do not paste real tokens into a notebook you plan to share.
 
-**5. Run the workflow**
+### 3. Put your datasets in Google Drive
 
-```bash
-python main.py
+By default the notebook expects this layout:
+
+```
+MyDrive/
+└── Pipelines/
+    ├── Pipeline_Canada.csv
+    ├── Pipeline_Canada2.geojson
+    ├── Pipeline_Segments_BC.csv
+    ├── Pipeline_AB.csv
+    └── Pipeline_NB.csv
 ```
 
-The workflow will execute the data cleaning and mapping stages using the configured input and output paths.
+Change `DATA_FOLDER` and the `file_paths` dictionary in cell **1.4** if your folder or file names differ. The dictionary keys are labels that end up in the `source_dataset` column.
 
-### Option 2: Run in Google Colab
+### 4. Run all cells
 
-1. Open the repository's `colab/` directory.
-2. Open `canadian_pipeline_complete_workflow.ipynb` in Google Colab.
-3. Upload or mount the required project files and datasets.
-4. Make sure the Python scripts are available in the project directory:
-   - `clean_dataset.py`
-   - `pipeline_map.py`
-5. Ensure the required datasets are available in the `data/` directory.
-6. Configure the Mapbox token if required.
-7. Run the notebook cells in order.
+**Runtime → Run all**, or run the sections in order. Colab will ask you to authorize Google Drive access the first time.
 
-The individual cleaning and mapping notebooks can also be used independently.
+- The first run downloads the Qwen model (about 1–3 minutes).
+- At the end of section **5.2**, click the link printed in the output to open the map in a new tab.
+- Keep the Colab runtime connected while you use the map; the map and chat run from the notebook.
 
-## Input Data
+---
 
-The project uses source datasets containing Canadian pipeline infrastructure information.
+## Notebook structure
 
-The input files are expected to be organized in the `data/` directory, following the file paths configured in the Python scripts.
+| Section | Contents |
+|---|---|
+| **1. Setup** | 1.1 install packages · 1.2 imports · 1.3 mount Drive · 1.4 data paths · 1.5 load tokens |
+| **2. Data cleaning** | 2.1 schema and column aliases · 2.2 file readers · 2.3 geometry helpers · 2.4 record helpers · 2.5 main cleaning function |
+| **3. Map builder** | 3.1 constants · 3.2 Canada boundary and clipping · 3.3 GeoJSON and outside-Canada mask · 3.4 HTML/JS template · 3.5 page generator |
+| **4. Local AI model** | 4.1 load Qwen · 4.2 chat function |
+| **5. Run** | 5.1 clean the datasets · 5.2 launch the map server |
 
-**Large dataset notice:** `Pipeline_AB.csv` is excluded from this GitHub repository because of its file size.
+---
 
-To reproduce the complete workflow:
+## How it works
 
-- Obtain `Pipeline_AB.csv` from the appropriate data source or project storage location.
-- Place it in the expected location under `data/`.
-- Confirm that the filename and path match the configuration in the scripts.
+### Data cleaning (section 2)
 
-The workflow may not produce complete results if a required input dataset is missing.
+For each dataset, `clean_pipeline_dataset()`:
 
-## Outputs
+1. Reads the file (CSV is tried as UTF-8, then cp1252, then latin1; malformed rows are skipped).
+2. Normalizes column names to lowercase snake_case.
+3. Maps source columns to the standard schema using the `ALIASES` table. The first matching alias wins, and fields with no match are left empty.
+4. Parses geometry from GeoJSON or WKT columns and stores it as WKT. Missing or invalid geometry becomes empty rather than causing an error. It also stores a representative latitude and longitude for each record.
+5. Saves all original attributes as JSON in `source_fields`, so no source information is lost.
+6. Drops rows that have no identifying information at all.
 
-Depending on the selected workflow and configuration, the project produces:
+Then it combines the datasets, converts numeric columns, removes duplicates (only where a source record ID exists, per dataset), trims whitespace, and writes `/content/data/Canadian_Pipelines_Clean.csv`.
 
-- Cleaned and standardized pipeline datasets.
-- Processed geographic data.
-- GeoJSON representations of pipeline features.
-- An interactive HTML map of the Canadian pipeline network.
+**Standard columns:** `pipeline_name`, `company`, `parent_company`, `province`, `location_description`, `from_location`, `to_location`, `commodity`, `pipeline_length_km`, `capacity`, `status`, `start_date`, `end_date`, `segment_number`, `licence_number`, `project_number`, `authority_type`, `data_source`, `latitude`, `longitude`, `geometry`, `source_dataset`, `source_record_id`, `source_fields`.
 
-The generated files are saved according to the output paths configured in the scripts and notebooks.
+### Map (section 3)
 
-## Configuration and Notes
+- The Canada boundary is downloaded from Natural Earth.
+- Each pipeline is tested against the boundary (with a small ~2 km tolerance). Pipelines fully inside are kept, ones crossing the border are trimmed, and ones fully outside are removed.
+- A world-sized polygon with Canada cut out is drawn in grey to mask everything outside Canada.
+- All data is embedded into one self-contained HTML page that uses Mapbox GL JS. Clicking a pipeline shows its company, province, commodity, length, capacity, status and from/to locations.
 
-- **File paths:** The scripts use configurable project and data paths. Check the configuration sections before running the workflow.
-- **Coordinate systems:** Geographic data should use the appropriate coordinate reference system for the intended mapping operations.
-- **Missing datasets:** Required input files must be supplied before running the full workflow.
-- **Mapbox:** Keep access tokens private and use environment variables rather than hard-coding credentials.
-- **Google Colab:** Upload the required Python scripts and datasets, or mount the appropriate Google Drive directory, before executing the notebooks.
+### AI chat (sections 3.4, 4 and 5.2)
 
-## Reproducibility
+1. You type a request in the sidebar, for example *"gas pipelines in British Columbia longer than 300 km"*.
+2. The page sends the recent conversation, the current filters and a system prompt to the notebook's `/chat` endpoint. The system prompt lists the provinces, commodities and statuses that actually exist in your data.
+3. The local Qwen model replies with **JSON only**. The answer is pre-filled with `{` to force this format.
+4. The page parses the JSON and applies the filters to the map (province, commodity, status, company, name, min/max length, or *top N longest*), then zooms to the matches and shows a short summary.
+5. Saying *"show all"* or clicking **Show all** resets the map.
 
-For consistent results:
+The model only controls map filters. It does not answer questions from its own knowledge, and if nothing matches, the map is left unchanged.
 
-1. Use the same source datasets across runs.
-2. Keep the expected folder structure intact.
-3. Use the same configuration and coordinate reference system.
-4. Ensure all required input files are available.
-5. Configure any required external service credentials.
+### Server
 
-## License
+Section 5.2 starts a small Python HTTP server on port `8765`:
 
-Add the applicable project license here before distributing or reusing the code.
+- `GET /` serves the map page
+- `POST /chat` runs the model (one request at a time)
 
-## Acknowledgements
+Colab exposes the port through `output.serve_kernel_port_as_window`. Re-running the cell just refreshes the page; the server keeps running.
 
-This project uses Python-based geospatial data processing and interactive mapping tools to support the exploration and visualization of Canadian pipeline infrastructure.
+---
+
+## Troubleshooting
+
+| Problem | Fix |
+|---|---|
+| `FileNotFoundError` for datasets | Update `DATA_FOLDER` / `file_paths` in cell 1.4 |
+| Mapbox token error or blank map | Check the `MAPBOX_ACCESS_TOKEN` secret, confirm notebook access is enabled, and use a valid public `pk.` token |
+| Chat is very slow | Make sure the runtime is **T4 GPU**, then restart and run all cells |
+| "Couldn't turn that into a map filter" | Rephrase with a province, commodity, company or length, e.g. *"show oil pipelines in Alberta"* |
+| Map link stopped working | The runtime disconnected; re-run section 5 |
+| Model download is slow or rate-limited | Add an `HF_TOKEN` secret |
+
+---
+
+## Notes and limits
+
+- The Mapbox token is embedded in the generated page, so use a public token and consider restricting it by URL in your Mapbox account.
+- Pipeline length is used as given in the source data; units are not converted, and the column is assumed to be kilometres.
+- Boundary data is simplified, so pipelines right at the border may be trimmed slightly differently than official boundaries would.
+- A 3B model can occasionally misread an unusual request. The filter bar above the chat shows exactly which filters were applied.
