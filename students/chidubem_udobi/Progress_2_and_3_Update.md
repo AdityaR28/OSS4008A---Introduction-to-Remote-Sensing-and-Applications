@@ -84,6 +84,33 @@ Wildland–urban interface risk classification is not yet implemented.
 - Integrate vegetation and land-cover information for WUI analysis.
 - Complete the final project report, user documentation and presentation materials.
 
+## Preliminary Visual Validation — November 23, 2026
+
+A qualitative visual inspection was conducted using the second Ottawa/Kanata test, which produced 60 candidate building detections at a confidence threshold of 0.45.
+
+The upper and lower portions of the selected residential area were examined to assess whether predicted bounding boxes corresponded to visible rooftops.
+
+### Observations
+
+- Many predicted bounding boxes overlapped recognizable building rooftops, demonstrating that the model can identify candidate structures in Canadian aerial imagery.
+- Several visible rooftops were not detected, indicating potential false negatives.
+- Some detections covered only portions of roofs rather than complete building footprints.
+- Some adjacent or overlapping detections may represent duplicate predictions.
+- A small number of predictions were visually ambiguous and require closer examination.
+
+### Interpretation
+
+The results demonstrate functional AI-assisted building identification, but the detections are not yet sufficiently validated for an overall accuracy claim.
+
+This preliminary assessment is qualitative and does not establish precision, recall, F1-score or mean average precision.
+
+### Recommended Improvements
+
+1. Create manually annotated ground-truth building labels for a representative sample of Canadian aerial imagery.
+2. Compare model predictions against those labels to calculate precision and recall.
+3. Improve duplicate filtering and bounding-box localization.
+4. Fine-tune the pretrained model using Canadian residential imagery.
+5. Integrate vegetation and land-cover information for future wildland–urban interface analysis.
 ## 8. Conclusion
 
 The Phase III milestone has been demonstrated through a functioning web interface with integrated AI inference, geographic selection, mapped building detections and downloadable results.
