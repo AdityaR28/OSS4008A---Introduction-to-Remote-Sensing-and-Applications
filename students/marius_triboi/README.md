@@ -30,3 +30,8 @@ Planned: Sentinel-2 / Landsat for burn-scar annotation, NRCan fire database for 
 - Assistant answers prompts such as "show wildfires in 2015", "which year had the most burned area?", "compare 2023 and 2015" and "show the trend", and drives the map and charts
 - Fixed Earth Engine timeouts (simplified border, parallel requests, 1 km sampling) and blocked map tiles (satellite basemap)
 - Next: train a burned-area detection model on annotated images, then connect to the shared dashboard
+
+
+## Date Nov 8, 2026
+- Set up GitHub access and Colab workflow
+- Started Google Earth Engine setup for wildfire history project
