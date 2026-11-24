@@ -24,7 +24,7 @@ LAKE, RIVER, POND = 1, 2, 3
 NAMES = {LAKE: 'lakes', RIVER: 'rivers', POND: 'ponds'}
 COLORS = {LAKE: (30, 110, 255),      # blue
           RIVER: (0, 229, 255),      # cyan
-          POND: (110, 255, 140)}     # green
+          POND: (255, 62, 200)}      # magenta: stands out from green terrain
 
 # Rules (tune in 04_water_classification.ipynb)
 POND_MAX_M2 = 20_000       # ponds are under 2 ha (20,000 m²)
