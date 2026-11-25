@@ -12,14 +12,16 @@ An interactive map that identifies lakes, rivers and ponds across Canada from Se
 
 | Part | Status |
 |---|---|
-| Dashboard UI (chat panel, map, reference layers, AI box detection) | Built |
+| Dashboard UI (chat panel, map, place labels, legend, grouped toolbar) | Built (Colab) |
 | Integration-ready module (`water_layers.py`) | Shared-UI entry point and reference filter controls |
 | Training dataset (14 regions, 665 tiles) | Exported and tiled |
 | Test-set corrections in labelme (40 tiles) | Done |
 | NDWI baseline | IoU 0.609 pooled, 0.468 averaged across regions |
 | U-Net training and evaluation | IoU 0.891 pooled, 0.840 averaged across regions |
-| AI detection in the dashboard (`water_ai.py`) | U-Net on a drawn box; parallel downloads, up to 20,000 km² |
-| Lake / river / pond classification | Final delivery |
+| AI detection in the dashboard (`water_ai.py`) | Scan view, drawn box and Auto AI; overlapping tiles, parallel downloads, up to 20,000 km² |
+| Lake / river / pond classification (`water_classify.py`) | Colour-coded results, counts in chat, Only lakes / rivers / ponds filters |
+| Search (provinces, places, areas of interest) | Planned (web app) |
+| Local web app (Streamlit) | Final delivery |
 
 ## Folder structure
 
