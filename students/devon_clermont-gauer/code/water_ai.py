@@ -4,7 +4,9 @@ Runs the trained U-Net on Sentinel-2 imagery for a user-selected area and
 returns a water mask, its map bounds, the water area and the resolution used.
 Small boxes run at full 10 m detail (as trained); larger boxes run at a coarser
 resolution so downloads stay a similar size (rougher: small water is missed).
-Image chunks are downloaded in parallel, and the model predicts several tiles at once.
+Image chunks are downloaded in parallel. The model predicts overlapping tiles that are
+blended together (no seams at tile edges), and holes inside water that are spectrally
+water (NDWI > 0) are filled, so the middle of large lakes isn't left with gaps.
 """
 import base64, io, json, math, time
 from concurrent.futures import ThreadPoolExecutor
@@ -13,12 +15,14 @@ import ee
 import torch
 import segmentation_models_pytorch as smp
 from PIL import Image
+from scipy.ndimage import binary_fill_holes
 from ipyleaflet import ImageOverlay
 
 BANDS = ['B2', 'B3', 'B4', 'B8', 'B11']        # same bands as training
 START, END = '2024-06-01', '2024-09-30'        # same summer window as training
 R = 6378137.0                                  # Earth radius used by web maps (Web Mercator)
 TILE = 256                                     # model input size, same as training
+STRIDE = 128                                   # tiles overlap by half, so every pixel is seen with surrounding context
 CHUNK = 512                                    # pixels per download request side
 WORKERS = 8                                    # download requests at once (tested: 10-12 gave no gain;
                                                # 12 exceeded the Earth Engine client's 10-connection pool)
@@ -87,21 +91,55 @@ def _fetch(image, x0, y_top, step, w, h):
     return out
 
 
-def _predict(img, batch=16):
-    """Run the U-Net over the image in 256x256 tiles (several at once); returns a water mask."""
-    _, h, w = img.shape
-    H, W = math.ceil(h / TILE) * TILE, math.ceil(w / TILE) * TILE
-    x = np.pad((img - _mean) / _std, ((0, 0), (0, H - h), (0, W - w)), mode='edge')
+def _window(size=TILE):
+    """Weights for blending overlapping tiles: high in the tile centre, low at its edges
+    (the model is least reliable at tile edges, where it has no surrounding context)."""
+    ramp = np.minimum(np.arange(size) + 1, size - np.arange(size)).astype(np.float32)
+    ramp = np.minimum(ramp / (size / 4), 1.0) * 0.9 + 0.1
+    return np.outer(ramp, ramp)
+
+
+def _tile_probs(x, predict_batch, batch=16):
+    """Water probability for a (5, H, W) array using overlapping tiles, blended with _window.
+    predict_batch: function taking (n, 5, TILE, TILE) and returning (n, TILE, TILE) probabilities."""
+    _, H, W = x.shape
+    weight = _window()
     prob = np.zeros((H, W), np.float32)
-    spots = [(r, c) for r in range(0, H, TILE) for c in range(0, W, TILE)]
-    with torch.no_grad():
-        for i in range(0, len(spots), batch):
-            group = spots[i:i + batch]
-            t = torch.from_numpy(np.stack([x[:, r:r + TILE, c:c + TILE] for r, c in group])).to(_device)
-            p = torch.sigmoid(_model(t))[:, 0].cpu().numpy()
-            for (r, c), tile in zip(group, p):
-                prob[r:r + TILE, c:c + TILE] = tile
-    water = prob[:h, :w] > 0.5
+    total = np.zeros((H, W), np.float32)
+    spots = [(r, c) for r in range(0, H - TILE + 1, STRIDE) for c in range(0, W - TILE + 1, STRIDE)]
+    for i in range(0, len(spots), batch):
+        group = spots[i:i + batch]
+        p = predict_batch(np.stack([x[:, r:r + TILE, c:c + TILE] for r, c in group]))
+        for (r, c), tile in zip(group, p):
+            prob[r:r + TILE, c:c + TILE] += tile * weight
+            total[r:r + TILE, c:c + TILE] += weight
+    return prob / np.maximum(total, 1e-6)
+
+
+def _predict(img):
+    """Run the U-Net over the image with overlapping tiles; returns a True/False water mask.
+    Afterwards, holes inside water that are spectrally water (NDWI > 0) are filled in;
+    real islands (NDWI < 0) stay land."""
+    _, h, w = img.shape
+    # Pad so overlapping tiles cover the whole image, with a margin of half a tile on every side
+    pad = STRIDE
+    H = math.ceil((h + 2 * pad - TILE) / STRIDE) * STRIDE + TILE
+    W = math.ceil((w + 2 * pad - TILE) / STRIDE) * STRIDE + TILE
+    x = np.pad((img - _mean) / _std, ((0, 0), (pad, H - h - pad), (pad, W - w - pad)), mode='reflect')
+
+    def predict_batch(tiles):
+        with torch.no_grad():
+            t = torch.from_numpy(np.ascontiguousarray(tiles)).to(_device)
+            return torch.sigmoid(_model(t))[:, 0].cpu().numpy()
+
+    prob = _tile_probs(x, predict_batch)[pad:pad + h, pad:pad + w]
+    water = prob > 0.5
+
+    # Fill holes inside water that look like water in the bands (NDWI = (green - NIR) / (green + NIR))
+    ndwi = (img[1] - img[3]) / (img[1] + img[3] + 1e-6)
+    holes = binary_fill_holes(water) & ~water
+    water |= holes & (ndwi > 0)
+
     water[(img == 0).all(axis=0)] = False          # no imagery -> not water
     return water
 

@@ -4,8 +4,9 @@ Project 11 (OSS4008A): water body classification.
 Takes the AI's water mask (True = water) and labels every separate water body as
 a lake, river or pond, using its size and shape:
 
-  - River: long and narrow. Measured by "elongation" = (centre-line length)^2 / area.
-           A round lake scores low (~1-8); a river scores high (>= 10).
+  - River: long and narrow. Measured by "elongation" = (centre-line length)^2 / area,
+           measured with islands filled in (a lake full of islands would otherwise get a
+           long, looping centre line and look like a river). Round lake ~1-8; river >= 10.
   - Pond:  compact (not a river) and smaller than 2 ha (Biggs et al., 2005).
   - Lake:  compact and 2 ha or larger.
 
@@ -18,6 +19,7 @@ Pure numpy + scikit-image: works the same in the Colab dashboard and the web app
 import numpy as np
 from skimage.measure import label
 from skimage.morphology import skeletonize
+from scipy.ndimage import binary_fill_holes
 
 # Class codes used in the class map (0 = not water / too small to classify)
 LAKE, RIVER, POND = 1, 2, 3
@@ -55,11 +57,19 @@ def classify_water(water, res):
         return np.zeros(water.shape, np.uint8), {**empty, 'partial': 0}
 
     # 2. Measure every body at once (bincount counts pixels per body number)
-    area_px = np.bincount(bodies.ravel(), minlength=n + 1)          # size of each body in pixels
-    centre_line = skeletonize(water)                                 # 1-pixel-wide centre lines
-    length_px = np.bincount(bodies[centre_line], minlength=n + 1)    # centre-line length per body
+    area_px = np.bincount(bodies.ravel(), minlength=n + 1)          # real water area per body
     area_m2 = area_px * res * res
-    elongation = length_px.astype(float) ** 2 / np.maximum(area_px, 1)
+
+    # Shape is measured on the outline with islands filled in, so island-filled lakes
+    # get a compact shape instead of a long centre line looping around every island
+    filled = binary_fill_holes(water)
+    outlines = label(filled, connectivity=2)
+    f_area = np.bincount(outlines.ravel())
+    f_len = np.bincount(outlines[skeletonize(filled)], minlength=len(f_area))
+    f_elong = f_len.astype(float) ** 2 / np.maximum(f_area, 1)
+    outline_of = np.zeros(n + 1, int)                                # which filled outline each body is in
+    outline_of[bodies[water]] = outlines[water]
+    elongation = f_elong[outline_of]
 
     # Bodies cut off by the edge of the scanned area (only partly visible)
     on_edge = np.zeros(n + 1, bool)
