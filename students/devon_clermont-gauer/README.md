@@ -64,8 +64,10 @@ students/devon_clermont-gauer/
 
 **Water detection rule:** water absorbs near-infrared (Sentinel-2 B8) and shortwave-infrared (B11) light, so it appears dark in those bands while land appears bright. The Normalized Difference Water Index, NDWI = (B3 − B8) / (B3 + B8), is positive over water (McFeeters, 1996). The U-Net learns this spectral pattern plus shape and context, which helps it reject look-alikes such as shadows, wet soil and asphalt.
 
-**Classification rules (after detection):**
-- **River:** long, narrow shape (low compactness = 4π × area / perimeter²)
+**Prediction:** the U-Net runs on overlapping 256 × 256 tiles, which are blended together (weighted towards each tile's centre) to avoid seams at tile edges. Gaps fully surrounded by detected water are filled if they are spectrally water (NDWI > 0); islands (NDWI < 0) remain land.
+
+**Classification rules (after detection, at 10–20 m resolution only):**
+- **River:** long, narrow shape. Elongation = (centre-line length)² / area ≥ 10, measured with islands filled in, so island-filled lakes aren't mistaken for rivers.
 - **Lake:** compact shape, area ≥ 2 ha
 - **Pond:** compact shape, area < 2 ha (Biggs et al., 2005)
 
@@ -103,12 +105,25 @@ Global datasets are used for imagery and labels because no Canadian source offer
 
 ## Known limitations
 
-- Water features smaller than ~10 m (narrow streams, very small ponds) are below the image resolution.
-- Water under tree canopy, very shallow or turbid water may be missed.
+**Detection**
+- Water features narrower than ~10 m (small streams, very small ponds) are below the image resolution; rivers only 2–3 pixels wide (20–30 m) are often partly missed.
+- Water under tree canopy, very shallow or turbid water, and dark vegetated channels may be missed.
+- Gaps can remain in large water bodies where the summer composite shows cloud shadow, sun glint or algae, since these look like land in the bands as well.
 - Persistent cloud reduces usable imagery in some northern regions.
-- Training labels come from Dynamic World (itself a model output) and contain some errors; the test set will be corrected by hand in labelme.
-- Some regions (Iqaluit, Fraser Delta, Toronto) include ocean or Great Lake water, which must be excluded when classifying lakes.
-- The test set is currently small (68 tiles, 2 regions); prairie and urban test regions will be added.
+- Training labels come from Dynamic World (itself a model output) and contain some errors; the model scores below Dynamic World on the test set (IoU 0.891 vs 0.929), partly because the corrected test masks were drafted from Dynamic World.
+- Urban rivers are the weakest case (Winnipeg test region, IoU 0.783).
+- The test set is small (40 hand-corrected tiles from 4 regions), so a few tiles can change a region's score noticeably.
+
+**Scale**
+- AI detection on areas larger than 400 km² runs at a coarser resolution (up to 60 m); water narrower than about three pixels (e.g. ~180 m wide at 60 m) may be missed, and accuracy at coarse resolution has not been formally evaluated (test scores apply at 10 m).
+- AI detection is limited to areas up to 20,000 km²; reference layers cover country-scale viewing.
+- Auto AI scans when a pan or zoom ends; Colab can't run timers, so there's no delay before scanning.
+
+**Classification**
+- Lakes, rivers and ponds are only classified at 10–20 m resolution (areas up to ~1,600 km²); coarser scans show all water.
+- Classification uses shape and size only: rivers flowing into lakes join them into one body, classified by its overall shape.
+- Ocean and Great Lake water (e.g. Iqaluit, Fraser Delta, Toronto) are labelled as lakes.
+- Water bodies cut off by the edge of the scanned area are flagged as partial; their type may be less reliable.
 
 ## Progress log
 
@@ -131,6 +146,8 @@ Global datasets are used for imagery and labels because no Canadian source offer
 | 2026-11-17 | Simplified the dashboard to the base map, two reference layers (all water, rivers) and AI box detection; removed permanent/seasonal water layers; reference layers labelled as non-AI. |
 | 2026-11-17 | Raised AI detection limits after the parallel-download speed-up: boxes up to 20,000 km² (previously 5,000 km²). Full 10 m detail now applies up to 400 km² (previously 200 km²); larger areas run at a coarser resolution, up to 60 m (previously 50 m), reported in the chat. A large scan takes about 5 seconds on a T4 GPU. |
 | 2026-11-23 | Dashboard: added Scan view (AI on the visible map area), grouped toolbar, and placeholder Only lakes / rivers / ponds buttons. Auto AI not yet working; Scan view covers it. |
+| 2026-11-25 | Fixed classification of island-filled lakes (shape measured with islands filled; previously labelled as rivers). AI prediction now uses overlapping, blended tiles to remove tile-edge seams, and fills interior gaps that are spectrally water (NDWI > 0). Ponds shown in magenta. |
+| 2026-11-25 | Auto AI now scans when a pan or zoom ends, and rescans when zooming in gives finer resolution. |
 
 ## Next steps
 
